@@ -6,13 +6,19 @@ public class PlayerStat : MonoBehaviour
 {
     public enum Status
     {
-        Normal, Cold, Die
+        idle = 1,
+        walk,
+        attack,
+        damaged,
+        die
     }
     public static Status status;
 
     [SerializeField] float hp;
     [SerializeField] float maxHp;
     [SerializeField] int money;
+
+    public bool isCold = false;
 
     // Callback Methods
     void Start()
@@ -26,13 +32,13 @@ public class PlayerStat : MonoBehaviour
     }
 
     // Public Methods
-    // °¡¸í
+    // ï¿½ï¿½ï¿½ï¿½
     public void AddHp(float _hp)
     {
         hp += _hp;
     }
 
-    // °¡¸í
+    // ï¿½ï¿½ï¿½ï¿½
     public void AddMoney(int _money)
     {
         money += _money;
