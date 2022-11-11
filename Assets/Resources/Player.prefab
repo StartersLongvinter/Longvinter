@@ -2042,7 +2042,7 @@ GameObject:
   - component: {fileID: -8792466399538702344}
   - component: {fileID: -1923840663785282116}
   - component: {fileID: -2713289005664936501}
-  - component: {fileID: -3416345026493231161}
+  - component: {fileID: -4273294463175981536}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2080,7 +2080,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: aec390efa2499c04ab50492929ef2bd8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -2175,13 +2175,13 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isWalk
-  - Type: 9
-    SynchronizeType: 1
-    Name: doAttack
+  - Type: 4
+    SynchronizeType: 0
+    Name: isAim
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
---- !u!114 &-3416345026493231161
+--- !u!114 &-4273294463175981536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
