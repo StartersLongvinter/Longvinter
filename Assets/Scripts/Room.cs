@@ -12,6 +12,8 @@ public class Room : MonoBehaviourPunCallbacks
     // [SerializeField] TMP_InputField roomPasswordInput;
     [SerializeField] Button roomJoinBtn;
 
+    [SerializeField] TextMeshProUGUI countPlayer;
+
     private string roomN = "";
 
     void Awake()
@@ -23,7 +25,7 @@ public class Room : MonoBehaviourPunCallbacks
         });
     }
 
-    public void OnSelectRoom() 
+    public void OnSelectRoom()
     {
         GameObject canvas = GameObject.Find("Canvas");
         canvas.transform.Find("PasswordPopPanel").gameObject.SetActive(true);
@@ -31,14 +33,20 @@ public class Room : MonoBehaviourPunCallbacks
         GameObject.Find("ConnectBtn").GetComponent<Button>().onClick.AddListener(ClickEnterRoom);
     }
 
-    public void ClickEnterRoom() 
+    public void ClickEnterRoom()
     {
-        NetworkManager.instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text);
+        bool isConnect = NetworkManager.instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text);
+
+        if (!isConnect)
+        {
+            // 창이 흔들리는 효과
+        }
     }
 
-    public void RoomInit(string name)
+    public void RoomInit(string name, int curPlayers, int maxPlayers)
     {
         roomName.text = name;
+        countPlayer.text = $"{curPlayers}/{maxPlayers}";
     }
 
     void Update()
