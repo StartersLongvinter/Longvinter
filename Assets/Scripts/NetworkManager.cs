@@ -99,7 +99,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+<<<<<<< Updated upstream
         Transform roomBox = GameObject.Find("RoomList").transform;
+=======
+        if (!isLobby) return;
+        Transform roomBox = GameObject.Find("Content").transform;
+>>>>>>> Stashed changes
 
         foreach (RoomInfo room in roomList)
         {
