@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
 using Photon.Pun;
+using TMPro;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
@@ -15,6 +16,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     private List<RoomInfo> rooms = new List<RoomInfo>();
     public string nickName = "";
+    bool isLobby = true;
 
     [SerializeField] Vector3 respawnPos = new Vector3(0, 0, 0);
     [SerializeField] GameObject roomPrefab;
@@ -30,14 +32,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void OnClickStart()
     {
-        nickName = GameObject.Find("NickNameInput").GetComponent<InputField>().text;
+        nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
 
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.JoinLobby();
+        isLobby = false;
+        PhotonNetwork.LoadLevel(2);
+    }
+
+    public void OnClickServer() 
+    {
+        nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
+        LoadLevel(1);
+        isLobby = true;
+    }
+
+    void LoadLevel(int i)
+    {
+        PhotonNetwork.JoinLobby();
+        PhotonNetwork.LoadLevel(i);   
+        isLobby = true;
     }
 
     public void OnClickCreate()
     {
-        string password = GameObject.Find("PassWordInput").GetComponent<InputField>().text;
+        string password = GameObject.Find("PassWordInput").GetComponent<TMP_InputField>().text;
         if (nickName == "")
         {
             PhotonNetwork.Disconnect();
@@ -59,7 +77,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void OnClickJoinRoom(string roomName, string password)
     {
-        nickName = GameObject.Find("NickNameInput").GetComponent<InputField>().text;
+        //nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
 
         foreach (RoomInfo room in rooms)
         {
@@ -70,7 +88,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 if (password == (string)room.CustomProperties["password"])
                 {
                     // PhotonNetwork.LocalPlayer.NickName = nickName;
-                    PhotonNetwork.LoadLevel(1);
+                    PhotonNetwork.LoadLevel(2);
                     PhotonNetwork.JoinRoom(roomName);
                     return;
                 }
@@ -82,7 +100,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinLobby();
+        
     }
 
     public override void OnJoinedLobby()
@@ -94,12 +112,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LocalPlayer.NickName = nickName;
         GameObject.Find("PasswordPanel").SetActive(false);
-        var player = PhotonNetwork.Instantiate("Player_MHS", respawnPos, Quaternion.identity);
+        var player = PhotonNetwork.Instantiate("Player", respawnPos, Quaternion.identity);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        Transform roomBox = GameObject.Find("RoomList").transform;
+        Transform roomBox = GameObject.Find("Content").transform;
 
         foreach (RoomInfo room in roomList)
         {

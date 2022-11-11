@@ -23,7 +23,7 @@ public class CharStat : MonoBehaviourPunCallbacks
     {
         nickname = name;
 
-        PlayerList.instance.players.Add(PhotonNetwork.PlayerList[PhotonNetwork.PlayerList.Length - 1]);
+        //PlayerList.instance.players.Add(PhotonNetwork.PlayerList[PhotonNetwork.PlayerList.Length - 1]);
     }
 
     void Update()
