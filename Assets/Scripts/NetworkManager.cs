@@ -33,24 +33,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void OnClickStart()
     {
         nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
+        isLobby = false;
 
         PhotonNetwork.JoinLobby();
-        isLobby = false;
-        PhotonNetwork.LoadLevel(2);
     }
 
-    public void OnClickServer() 
+    public void OnClickServer()
     {
         nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
-        LoadLevel(1);
         isLobby = true;
+        PhotonNetwork.JoinLobby();
     }
 
     void LoadLevel(int i)
     {
-        PhotonNetwork.JoinLobby();
-        PhotonNetwork.LoadLevel(i);   
-        isLobby = true;
+        PhotonNetwork.LoadLevel(i);
     }
 
     public void OnClickCreate()
@@ -65,20 +62,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 20;
-            roomOptions.CustomRoomProperties = new Hashtable() { { "roomName", nickName + "'s room" }, { "password", password } };
+            roomOptions.CustomRoomProperties = new Hashtable() { { "roomName", nickName + "'s room" }, { "password", password }, { "curPlayer", 0 } };
             // 방이름, 비밀번호 값을 로비에서도 받을 수 있도록 함 
-            string[] newPropertiesForLobby = new string[2];
+            string[] newPropertiesForLobby = new string[3];
             newPropertiesForLobby[0] = "roomName";
             newPropertiesForLobby[1] = "password";
+            newPropertiesForLobby[2] = "curPlayer";
             roomOptions.CustomRoomPropertiesForLobby = newPropertiesForLobby;
             PhotonNetwork.CreateRoom(nickName + "'s room", roomOptions);
         }
     }
 
-    public void OnClickJoinRoom(string roomName, string password)
+    public bool OnClickJoinRoom(string roomName, string password)
     {
         //nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
-
+        if (!PhotonNetwork.InLobby) return false;
         foreach (RoomInfo room in rooms)
         {
             Debug.Log($"roomName : {roomName} / {(string)room.CustomProperties["roomName"]}");
@@ -90,22 +88,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                     // PhotonNetwork.LocalPlayer.NickName = nickName;
                     PhotonNetwork.LoadLevel(2);
                     PhotonNetwork.JoinRoom(roomName);
-                    return;
+                    return true;
                 }
                 else break;
             }
         }
         Debug.Log("Can't enter " + roomName + " room");
+        return false;
     }
 
     public override void OnConnectedToMaster()
     {
-        
+
     }
 
     public override void OnJoinedLobby()
     {
-
+        Debug.Log("로비에 접속");
+        LoadLevel(isLobby ? 1 : 2);
     }
 
     public override void OnJoinedRoom()
@@ -113,10 +113,32 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.NickName = nickName;
         GameObject.Find("PasswordPanel").SetActive(false);
         var player = PhotonNetwork.Instantiate("Player", respawnPos, Quaternion.identity);
+
+        photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, 1);
+    }
+
+    public override void OnLeftRoom()
+    {
+        // onePlayerleft? 이걸로 해야지 함수가 실행됨 
+        photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, -1);
+    }
+
+    [PunRPC]
+    void RenewalCurPlayers(int i)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
+            cp["curPlayer"] = (int)cp["curPlayer"] + i;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(cp);
+            Debug.Log(cp["curPlayer"].ToString());
+        }
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        if (!isLobby) return;
+
         Transform roomBox = GameObject.Find("Content").transform;
 
         foreach (RoomInfo room in roomList)
@@ -132,7 +154,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             rooms.Add(room);
             GameObject newRoom = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
             newRoom.transform.parent = roomBox;
-            newRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"]);
+            newRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.MaxPlayers);
             newRoom.name = (string)room.CustomProperties["roomName"];
         }
     }
