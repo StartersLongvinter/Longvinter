@@ -19,6 +19,9 @@ public class PlayerMove : MonoBehaviour
     bool isAttackReady;
     [SerializeField] bool isAim; // 값 확인용 SerializeField, 확인하고 지워야 함
 
+
+
+
     // Callback Methods
     void Awake()
     {
@@ -59,9 +62,7 @@ public class PlayerMove : MonoBehaviour
     void Move()
     {
         moveDirection = new Vector3(hAxis, 0, vAxis).normalized;
-        //Vector3 tempDirection = new Vector3(0, playerRigidbody.velocity.y, 0);
 
-        //playerRigidbody.velocity = moveDirection * moveSpeed;
         playerRigidbody.velocity = new Vector3(moveDirection.x * moveSpeed, playerRigidbody.velocity.y, moveDirection.z * moveSpeed);
 
         playerAnimator.SetBool("isWalk", moveDirection != Vector3.zero);
@@ -85,7 +86,7 @@ public class PlayerMove : MonoBehaviour
         {
             // 발사
 
-            playerAnimator.SetTrigger("doAttack");
+            //playerAnimator.SetTrigger("doAttack");
 
             attackDelay = 0;
         }
@@ -93,9 +94,9 @@ public class PlayerMove : MonoBehaviour
 
     void Aim()
     {
-        if (isAim)
-        {
-            // 카메라 시점 변경
-        }
+        // 카메라 시점 변경
+
+        playerAnimator.SetBool("isAim", isAim);
+        
     }
 }
