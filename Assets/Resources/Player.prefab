@@ -2042,7 +2042,7 @@ GameObject:
   - component: {fileID: -8792466399538702344}
   - component: {fileID: -1923840663785282116}
   - component: {fileID: -2713289005664936501}
-  - component: {fileID: 436181188}
+  - component: {fileID: -4273294463175981536}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2181,9 +2181,7 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
-  - SynchronizeType: 0
-    LayerIndex: 1
---- !u!114 &436181188
+--- !u!114 &-4273294463175981536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
