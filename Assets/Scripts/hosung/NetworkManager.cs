@@ -52,7 +52,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void OnClickCreate()
     {
-        string password = GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text;
+        string password = GameObject.Find("PassWordInput").GetComponent<TMP_InputField>().text;
         if (nickName == "")
         {
             PhotonNetwork.Disconnect();

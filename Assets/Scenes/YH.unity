@@ -1136,7 +1136,7 @@ GameObject:
   - component: {fileID: 957199729}
   - component: {fileID: 957199728}
   m_Layer: 5
-  m_Name: PasswordInput
+  m_Name: PassWordInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
