@@ -30,11 +30,13 @@ public class Room : MonoBehaviourPunCallbacks
         GameObject canvas = GameObject.Find("Canvas");
         canvas.transform.Find("PasswordPopPanel").gameObject.SetActive(true);
 
+        GameObject.Find("ConnectBtn").GetComponent<Button>().onClick.RemoveAllListeners();
         GameObject.Find("ConnectBtn").GetComponent<Button>().onClick.AddListener(ClickEnterRoom);
     }
 
     public void ClickEnterRoom()
     {
+        Debug.Log("submit");
         bool isConnect = NetworkManager.instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text);
 
         if (!isConnect)
