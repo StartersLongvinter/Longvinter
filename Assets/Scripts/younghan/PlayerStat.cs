@@ -6,11 +6,11 @@ public class PlayerStat : MonoBehaviour
 {
     public enum Status
     {
-        idle = 1,
-        walk,
-        attack,
-        damaged,
-        die
+        Idle = 1,
+        Walk,
+        Attack,
+        Damaged,
+        Die
     }
     public static Status status;
 
@@ -20,7 +20,6 @@ public class PlayerStat : MonoBehaviour
 
     public bool isCold = false;
 
-    // Callback Methods
     void Start()
     {
         hp = maxHp;
@@ -31,14 +30,11 @@ public class PlayerStat : MonoBehaviour
         
     }
 
-    // Public Methods
-    // ����
     public void AddHp(float _hp)
     {
         hp += _hp;
     }
 
-    // ����
     public void AddMoney(int _money)
     {
         money += _money;
