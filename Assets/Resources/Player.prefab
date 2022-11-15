@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &352961826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 352961827}
+  m_Layer: 0
+  m_Name: Right Hand IK Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &352961827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352961826}
+  m_LocalRotation: {x: 0.042343967, y: -0.14917257, z: -0.5956084, w: 0.7881657}
+  m_LocalPosition: {x: 0.259, y: 0.474, z: 0.193}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6005344780012494997}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -6.37, y: -16.7, z: -73.22}
+--- !u!1 &1801474299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1801474300}
+  m_Layer: 0
+  m_Name: Left Hand IK Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1801474300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801474299}
+  m_LocalRotation: {x: 0.4351252, y: 0.16867672, z: 0.62247723, w: 0.62828046}
+  m_LocalPosition: {x: 0.106, y: 0.466, z: 0.625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6005344780012494997}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 19.68, y: 53.17, z: 99.39}
 --- !u!1 &22357118534985852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,6 +2105,7 @@ GameObject:
   - component: {fileID: -1923840663785282116}
   - component: {fileID: -2713289005664936501}
   - component: {fileID: -4273294463175981536}
+  - component: {fileID: 6611026546063274867}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2064,6 +2127,8 @@ Transform:
   m_Children:
   - {fileID: 1652516693487987433}
   - {fileID: 7588370764782807809}
+  - {fileID: 1801474300}
+  - {fileID: 352961827}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2138,6 +2203,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -1923840663785282116}
   - {fileID: -2713289005664936501}
+  - {fileID: 6611026546063274867}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2176,11 +2242,13 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: isWalk
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isAim
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
+  - SynchronizeType: 1
+    LayerIndex: 1
 --- !u!114 &-4273294463175981536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,8 +2262,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rate: 0.5
+  leftHandIkTarget: {fileID: 1801474300}
+  rightHandIkTarget: {fileID: 352961827}
+  attackRate: 0.5
   isAim: 0
+--- !u!114 &6611026546063274867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349114427959441967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9701ec5334b648e4bab751346b05f746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPlayerActorNumber: 0
+  hp: 0
+  maxHp: 0
+  money: 0
+  isCold: 0
 --- !u!1 &6365244325377983206
 GameObject:
   m_ObjectHideFlags: 0
