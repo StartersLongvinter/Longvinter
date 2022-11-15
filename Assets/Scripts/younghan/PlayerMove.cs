@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public class PlayerMove : MonoBehaviourPunCallbacks
+public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed;
     public Transform leftHandIkTarget;
@@ -22,25 +21,19 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     private bool doAttack;
     private bool isAttackReady;
-    [SerializeField] private bool isAim; // �� Ȯ�ο� SerializeField, Ȯ���ϰ� SerializeField ������ ��
+    [SerializeField] private bool isAim; // �� Ȯ�ο� SerializeField, Ȯ���ϰ� SerializeField ���� ��
+
 
     private float ikProgress;
     private float ikWeight;
 
-    private PlayerStat playerStat;
+
 
     #region Callback Methods
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-        // 플레이어 스탯 스크립트 가져오고 플레이어 정보 저장 
-        playerStat = GetComponent<PlayerStat>();
-        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
-    }
-
-    public void SetOwnerPlayerInfo()
-    {
 
     }
 
@@ -51,7 +44,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (!photonView.IsMine) return;
+
         GetInput();
         Aim();
         Attack();
@@ -59,7 +52,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
-        if (!photonView.IsMine) return;
+
         Move();
         Rotate();
     }
@@ -100,7 +93,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         transform.rotation = Quaternion.LookRotation(moveDirection);
     }
 
-    // ���� ������ �� �����ؾ� ��
+
     private void Attack()
     {
         attackDelay += Time.deltaTime;
@@ -108,7 +101,9 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
         if (isAim && doAttack && isAttackReady)
         {
+
             // �߻�
+
 
             //playerAnimator.SetTrigger("doAttack");
 
@@ -118,7 +113,9 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     private void Aim()
     {
-        // ī�޶� ���� ����
+
+        // ī�޶� ��� ����
+
 
         playerAnimator.SetBool("isAim", isAim);
     }
