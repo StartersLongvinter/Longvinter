@@ -2105,9 +2105,9 @@ GameObject:
   - component: {fileID: -8792466399538702344}
   - component: {fileID: -1923840663785282116}
   - component: {fileID: -2713289005664936501}
-  - component: {fileID: 7452046909505458399}
+  - component: {fileID: 456520160}
   m_Layer: 0
-  m_Name: Player_Y
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2245,7 +2245,7 @@ MonoBehaviour:
     LayerIndex: 0
   - SynchronizeType: 1
     LayerIndex: 1
---- !u!114 &7452046909505458399
+--- !u!114 &456520160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

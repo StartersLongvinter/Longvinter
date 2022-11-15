@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
 
         playerStat = GetComponent<PlayerStat>();
-        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
+        //playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
     }
 
     private void Start()
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!photonView.IsMine) return;
+        //if (!photonView.IsMine) return;
 
         GetInput();
         Aim();
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!photonView.IsMine) return;
+        //if (!photonView.IsMine) return;
 
         Move();
         Rotate();
