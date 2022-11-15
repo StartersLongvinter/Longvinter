@@ -21,25 +21,30 @@ public class PlayerMove : MonoBehaviour
 
     private bool doAttack;
     private bool isAttackReady;
-    [SerializeField] private bool isAim; // °ª È®ÀÎ¿ë SerializeField, È®ÀÎÇÏ°í SerializeField Áö¿ö¾ß ÇÔ
+    [SerializeField] private bool isAim; // ï¿½ï¿½ È®ï¿½Î¿ï¿½ SerializeField, È®ï¿½ï¿½ï¿½Ï°ï¿½ SerializeField ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+
 
     private float ikProgress;
     private float ikWeight;
+
+
 
     #region Callback Methods
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
+
     }
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
     {
+
         GetInput();
         Aim();
         Attack();
@@ -47,6 +52,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         Move();
         Rotate();
     }
@@ -87,7 +93,7 @@ public class PlayerMove : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(moveDirection);
     }
 
-    // ±ÙÁ¢ ¹«±âÀÏ ¶§ »ý°¢ÇØ¾ß ÇÔ
+
     private void Attack()
     {
         attackDelay += Time.deltaTime;
@@ -95,7 +101,9 @@ public class PlayerMove : MonoBehaviour
 
         if (isAim && doAttack && isAttackReady)
         {
-            // ¹ß»ç
+
+            // ï¿½ß»ï¿½
+
 
             //playerAnimator.SetTrigger("doAttack");
 
@@ -105,7 +113,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Aim()
     {
-        // Ä«¸Þ¶ó ½ÃÁ¡ º¯°æ
+
+        // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
 
         playerAnimator.SetBool("isAim", isAim);
     }

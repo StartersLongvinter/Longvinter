@@ -10,6 +10,7 @@ public class PlayerList : MonoBehaviour
     public static PlayerList instance { get { return Instance; } }
 
     public List<Player> players = new List<Player>();
+    public List<PlayerStat> playerStats = new List<PlayerStat>();
 
     void Awake()
     {

@@ -2203,6 +2203,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -1923840663785282116}
   - {fileID: -2713289005664936501}
+  - {fileID: 6611026546063274867}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2263,6 +2264,23 @@ MonoBehaviour:
   attackRate: 0.5
   isAiming: 0
   aimLookPoint: {x: 0, y: 0, z: 0}
+--- !u!114 &6611026546063274867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349114427959441967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9701ec5334b648e4bab751346b05f746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPlayerActorNumber: 0
+  hp: 0
+  maxHp: 0
+  money: 0
+  isCold: 0
 --- !u!1 &6365244325377983206
 GameObject:
   m_ObjectHideFlags: 0
