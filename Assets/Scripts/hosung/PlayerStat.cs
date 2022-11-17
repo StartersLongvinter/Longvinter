@@ -35,12 +35,12 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void AddPlayerStat()
     {
-        PlayerList.instance.playerStats.Add(this);
+        PlayerList.Instance.playerStats.Add(this);
     }
 
     void Update()
     {
-        
+
     }
 
     // Public Methods

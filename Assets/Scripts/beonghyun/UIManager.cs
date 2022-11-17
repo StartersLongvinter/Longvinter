@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
             return;
         }
         instance = this;
-        
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     
     private bool isTabPressed;
     private bool inventoryState;
-    
+ 
     void Start()
     {
         inventoryCloseBtn.onClick.AddListener((() =>
@@ -73,6 +73,7 @@ public class UIManager : MonoBehaviour
                 bagInventory.SetActive(false);
                 equipmentInventory.SetActive(false);
                 encyclopediaInventory.SetActive(false);
+
             }
         }
     }

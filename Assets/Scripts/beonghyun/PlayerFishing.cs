@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerFishing : MonoBehaviour
 {
     public float moveSpeed;
     public Transform leftHandIkTarget;
@@ -29,19 +29,25 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private float ikProgress;
     private float ikWeight;
+   
 
     public Vector3 aimLookPoint;
 
-    // ì¶”ê°€í•œ ë¶€ë¶„ 
-    [SerializeField] GameObject chatInput;
-
-    #region Callback Methods
+    //³¬½Ã°ü·Ã º¯¼ö
+    [SerializeField] float maxInteractableDistance = 7;
+    [SerializeField] GameObject pressEImage;
+    [SerializeField] GameObject successImage;
+    [SerializeField] TMP_Text fishName;
+    bool isFishing;
+    int eCount = 0;
+    Fish fish;
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
+
         playerStat = GetComponent<PlayerStat>();
-        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
+        //playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
     }
 
     private void Start()
@@ -51,16 +57,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (!photonView.IsMine || chatInput.activeSelf) return;
+        //if (!photonView.IsMine) return;
 
         GetInput();
         Aim();
         Attack();
+        Fishing();
+        ECount();
     }
 
     private void FixedUpdate()
     {
-        if (!photonView.IsMine || chatInput.activeSelf) return;
+        //if (!photonView.IsMine) return;
 
         Move();
         Rotate();
@@ -70,13 +78,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         AnimateAim();
     }
-    #endregion
 
-    #region Public Methods
-
-    #endregion
-
-    #region Private Methods
     private void GetInput()
     {
         horizontalAxis = Input.GetAxisRaw("Horizontal");
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     }
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½
+    // ±ÙÁ¢ ¹«±âÀÏ ¶§ »ý°¢ÇØ¾ß ÇÔ
     private void Attack()
     {
         attackDelay += Time.deltaTime;
@@ -128,7 +130,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if (isAiming && isAttackReady && doAttack)
         {
-            // ï¿½ß»ï¿½
+            // ¹ß»ç
 
             attackDelay = 0;
         }
@@ -136,7 +138,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Aim()
     {
-        // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+        // Ä«¸Þ¶ó ½ÃÁ¡ º¯°æ - Ä«¸Þ¶ó ÄÁÆ®·Ñ·¯¿¡¼­ Ã³¸®
 
     }
 
@@ -167,5 +169,90 @@ public class PlayerController : MonoBehaviourPunCallbacks
         playerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandIkTarget.rotation);
         playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIkTarget.rotation);
     }
-    #endregion
+
+    //raycast ÀÌ¿ë Æ¯Á¤ object¿Í hit µÇ¸é fishing ÇÔ¼ö È£Ãâ
+    private void Fishing()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //AI collider¿Í ºÎµúÇô¼­ Ã¼Å©°¡ ¾ÈµÇ´Â Çö»ó ¹ß»ýÇÔ raycastallÀ¸·Î °ËÃâ
+
+        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
+
+        foreach (var raycasthit in raycastHits)
+        {
+            float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
+
+            if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
+            {
+                Debug.Log("Fishing");
+                playerAnimator.SetTrigger("doFish");
+                fish = raycasthit.collider.GetComponent<Fish>();
+                StartCoroutine(CatchFish());
+            }
+
+            //else Debug.Log("Can't Fish");
+        }
+        //if (Physics.Raycast(ray, out RaycastHit hit,100) && doAttack)
+        //{
+        //        //Æ¯Á¤ °Å¸® ³»¿¡¼­¸¸ ÀÛµ¿ÇÏ°Ô ÇØ¾ßÇÔ
+
+        //    float fishingDistance = Vector3.Distance(hit.transform.position, transform.position);
+
+        //    if (hit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance)
+        //    {
+        //        Debug.Log("Fishing");
+        //        playerAnimator.SetTrigger("doFish");
+        //        fish = hit.collider.GetComponent<Fish>();
+        //        StartCoroutine(CatchFish());
+        //    }
+
+        //    else Debug.Log("Can't Fish");
+        // } 
+        
+    }
+
+    void ECount()
+    {
+        if (isFishing)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                eCount++;
+            }
+        }
+    }
+
+    IEnumerator CatchFish()
+    {
+        isFishing = true;
+        playerAnimator.SetBool("isFishing", isFishing);
+        eCount = 0;
+        yield return new WaitForSeconds(Random.Range(5,11));
+
+        // E Å°¸¦ ´©¸£¶ó´Â UI ³ª¿À°Ô ÇØ¾ßÇÔ
+        pressEImage.SetActive(true);
+        Debug.Log("Press E!");
+
+        //2ÃÊ Áö³ª¸é ÀÚµ¿À¸·Î UI ºñÈ°¼ºÈ­ ¸¸¾à ±× »çÀÌ 10¹ø ³Ñ°Ô Å¬¸¯Çß´Ù¸é ¼º°ø
+        yield return new WaitForSeconds(2);
+
+        if (eCount >= 10)
+        {
+            int fishNumber = Random.Range(0, fish.fishList.Length);
+            Debug.Log("Success! Caught " + fish.fishList[fishNumber]);
+            fishName.text = fish.fishList[fishNumber];
+            successImage.SetActive(true);
+        }
+
+        else Debug.Log("Fail");
+
+        pressEImage.SetActive(false);
+
+        isFishing = false;
+        playerAnimator.SetBool("isFishing", isFishing);
+
+        yield return new WaitForSeconds(3);
+        successImage.SetActive(false);
+    }
 }
