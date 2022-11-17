@@ -2106,6 +2106,7 @@ GameObject:
   - component: {fileID: -1923840663785282116}
   - component: {fileID: -2713289005664936501}
   - component: {fileID: 5444816142457934325}
+  - component: {fileID: 5920189579899312232}
   - component: {fileID: 2197202771869358759}
   - component: {fileID: 3358144872006913121}
   m_Layer: 0
@@ -2205,7 +2206,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -1923840663785282116}
   - {fileID: -2713289005664936501}
-  - {fileID: 3358144872006913121}
+  - {fileID: 5920189579899312232}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2266,6 +2267,23 @@ MonoBehaviour:
   reverse: 0
   currentDistance: 0
   currentClampedDistance: 0
+--- !u!114 &5920189579899312232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349114427959441967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b2b5741692646e393bd46a6e279485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerPlayerActorNumber: 0
+  hp: 0
+  maxHp: 90
+  money: 0
+  isCold: 0
 --- !u!114 &2197202771869358759
 MonoBehaviour:
   m_ObjectHideFlags: 0

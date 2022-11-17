@@ -16,7 +16,7 @@ public class ButtonAnimations : MonoBehaviour
 
     private void Awake()
     {
-        
+
     }
 
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class ButtonAnimations : MonoBehaviour
     {
         currentColor = button.GetComponent<Image>().color;
         Color wrongColor = new Color(255, 89, 79);
-        
+
         button.onClick.AddListener((() =>
         {
             if (inputField.text.Equals(String.Empty))
@@ -54,13 +54,13 @@ public class ButtonAnimations : MonoBehaviour
                         switch (gameObject.name)
                         {
                             case "StartBtn":
-                                NetworkManager.instance.OnClickStart();
+                                NetworkManager.Instance.OnClickStart();
                                 break;
-                            
+
                             case "ConnectServerBtn":
-                                NetworkManager.instance.OnClickServer();
+                                NetworkManager.Instance.OnClickServer();
                                 break;
-                            
+
                             case "ConnectBtn":
                                 //NetworkManager.instance.OnClickCreate();
                                 break;
