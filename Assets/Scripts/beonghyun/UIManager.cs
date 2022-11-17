@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-
+    
     private void Awake()
     {
         if (instance != null)
@@ -18,18 +19,22 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    [SerializeField] private GameObject inventoryScreen;
+    [SerializeField] private GameObject bagInventory;
+    [SerializeField] private GameObject equipmentInventory;
+    [SerializeField] private GameObject encyclopediaInventory;
     [SerializeField] private Button inventoryCloseBtn;
-
+    
     private bool isTabPressed;
     private bool inventoryState;
-
+ 
     void Start()
     {
         inventoryCloseBtn.onClick.AddListener((() =>
         {
             inventoryState = false;
-            inventoryScreen.SetActive(false);
+            bagInventory.SetActive(false);
+            equipmentInventory.SetActive(false);
+            encyclopediaInventory.SetActive(false);
         }));
     }
 
@@ -38,7 +43,7 @@ public class UIManager : MonoBehaviour
     {
         KeyInput();
 
-        Open(inventoryScreen);
+        Open(bagInventory);
 
         CloseInventory();
     }
@@ -51,9 +56,11 @@ public class UIManager : MonoBehaviour
     void Open(GameObject ui)
     {
         if (isTabPressed)
+        {
+            isTabPressed = false;
             inventoryState = !inventoryState;
-
-        ui.SetActive(inventoryState);
+            ui.SetActive(inventoryState);
+        }
     }
 
     void CloseInventory()
@@ -63,7 +70,10 @@ public class UIManager : MonoBehaviour
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 inventoryState = false;
-                inventoryScreen.SetActive(false);
+                bagInventory.SetActive(false);
+                equipmentInventory.SetActive(false);
+                encyclopediaInventory.SetActive(false);
+
             }
         }
     }
