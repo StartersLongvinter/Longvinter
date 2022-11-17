@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;
-    public Vector3 targetPosition;
-    public Vector3 offset;
+    public Transform Player
+    {
+        set { player = value; }
+    }
+    public PlayerController PlayerController
+    {
+        set { playerController = value; }
+    }
 
-
-    public PlayerController playerController;
+    [SerializeField] float aimMaxDistance;
+    [SerializeField] float smoothDampTime;
+    private Transform player;
+    private PlayerController playerController;
+    private Vector3 targetPosition;
+    private Vector3 offset;
+    private Vector3 velocity;
 
     void Start()
     {
@@ -18,24 +28,21 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
-        //if (playerController.isAiming)
-        //{
-        //    Vector3 dir = (playerController.lookPoint - target.position).normalized;
-        //    dir = new Vector3(dir.x, 0, dir.z);
+        if (playerController.IsAiming)
+        {
+            Vector3 direction = (playerController.AimLookPoint - player.position).normalized;
+            direction = new Vector3(direction.x, 0, direction.z);
 
-        //    float distance = Mathf.Clamp();
+            float distance = Vector3.Distance(player.position, playerController.AimLookPoint);
+            float clampDistance = Mathf.Clamp(distance, 0f, aimMaxDistance);
 
-        //    targetPosition = dir * distance;
-        //}
-        //else
-        //{
-        //    targetPosition = target.position;
-        //}
+            targetPosition = player.position + direction * clampDistance;
+        }
+        else
+        {
+            targetPosition = player.position;
+        }
 
-        //float dist = Vector3.Distance(target.position, transform.position);
-
-        //transform.position = targetPosition + offset;
-        transform.position = target.position + offset;
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition + offset, ref velocity, smoothDampTime);
     }
-
 }

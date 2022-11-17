@@ -9,11 +9,11 @@ public class NavMeshTest : MonoBehaviour
     [SerializeField] Transform[] target;
     NavMeshAgent agent;
     Animator anim;
-    GameObject playerPrefab;
+    //GameObject playerPrefab;
     GameObject nearPlayer;
     
     List<GameObject> playerDistanceList = new List<GameObject>();
-    Dictionary<GameObject, float> myDict = new Dictionary<GameObject, float>();
+    //Dictionary<GameObject, float> myDict = new Dictionary<GameObject, float>();
     //GameObject[] playerList;
 
     Vector3 nextPos;
@@ -31,7 +31,7 @@ public class NavMeshTest : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         //  StartCoroutine(SetTarget());
-        nearPlayer = playerPrefab = GameObject.Find("Player");
+        //nearPlayer = playerPrefab = GameObject.Find("Player");
         nearDistance = 3f;
         targetNumber = 0;
         //playerDistanceList = GameObject.FindGameObjectsWithTag("Player").ToList();
@@ -53,13 +53,13 @@ public class NavMeshTest : MonoBehaviour
             anim.SetBool("Run", false);
         }
 
-        if (agent.speed==1)
+        if (agent.speed==1.5f)
         {
             anim.SetBool("Run", false);
             anim.SetBool("Walk", true);
         }
 
-        if (agent.speed==2)
+        if (agent.speed==3)
         {
             anim.SetBool("Run", true);
             anim.SetBool("Walk", false);
@@ -135,7 +135,7 @@ public class NavMeshTest : MonoBehaviour
             //사람이 있던 곳으로 다시 돌아가는 것 방지
             targetNumber = Random.Range(0, target.Length);
 
-            agent.speed = 2;
+            agent.speed = 3;
 
             Vector3 newDir = new Vector3(transform.position.x - nearPlayer.transform.position.x, 0, transform.position.z - nearPlayer.transform.position.z).normalized;
             /*(transform.position - playerPrefab.transform.position).normalized;*/
@@ -150,7 +150,7 @@ public class NavMeshTest : MonoBehaviour
         {
             if (isCoroutine) return;
 
-            agent.speed = 1;
+            agent.speed = 1.5f;
 
             int originalTargetNumber = targetNumber;
 
