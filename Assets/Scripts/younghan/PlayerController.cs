@@ -1,44 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     public float moveSpeed;
     public Transform leftHandIkTarget;
     public Transform rightHandIkTarget;
-
-    private PlayerStat playerStat;
+    public Vector3 AimLookPoint
+    {
+        get { return aimLookPoint; }
+    }
+    public bool IsAiming
+    {
+        get { return isAiming; }
+    }
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
+    private PlayerStat playerStat;
     private float horizontalAxis;
     private float verticalAxis;
     private Vector3 moveDirection;
-
+    private Vector3 aimLookPoint;
 
     private float attackDelay;
     [SerializeField] private float attackRate = 0.5f;
 
     private bool doAttack;
     private bool isAttackReady;
-    public bool isAiming;
+    private bool isAiming;
 
     private float ikProgress;
     private float ikWeight;
 
     public Vector3 aimLookPoint;
 
+    // ì¶”ê°€í•œ ë¶€ë¶„ 
+    [SerializeField] GameObject chatInput;
+
     #region Callback Methods
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-
         playerStat = GetComponent<PlayerStat>();
-        //playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
+
+        Camera.main.GetComponent<CameraController>().Player = this.transform;
+        Camera.main.GetComponent<CameraController>().PlayerController = this;
+
+        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
     }
 
     private void Start()
@@ -48,7 +62,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //if (!photonView.IsMine) return;
+
+        if (!photonView.IsMine || chatInput.activeSelf) return;
 
         GetInput();
         Aim();
@@ -57,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (!photonView.IsMine) return;
+        if (!photonView.IsMine || chatInput.activeSelf) return;
 
         Move();
         Rotate();
@@ -114,10 +129,10 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
-        
+
     }
 
-    // ±ÙÁ¢ ¹«±âÀÏ ¶§ »ý°¢ÇØ¾ß ÇÔ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½
     private void Attack()
     {
         attackDelay += Time.deltaTime;
@@ -125,7 +140,7 @@ public class PlayerController : MonoBehaviour
 
         if (isAiming && isAttackReady && doAttack)
         {
-            // ¹ß»ç
+            // ï¿½ß»ï¿½
 
             attackDelay = 0;
         }
@@ -133,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
     private void Aim()
     {
-        // Ä«¸Þ¶ó ½ÃÁ¡ º¯°æ - Ä«¸Þ¶ó ÄÁÆ®·Ñ·¯¿¡¼­ Ã³¸®
+        // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 
     }
 
