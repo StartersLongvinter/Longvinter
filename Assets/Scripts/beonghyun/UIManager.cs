@@ -15,7 +15,6 @@ public class UIManager : MonoBehaviour
             return;
         }
         instance = this;
-
         DontDestroyOnLoad(gameObject);
     }
 
@@ -32,6 +31,7 @@ public class UIManager : MonoBehaviour
         inventoryCloseBtn.onClick.AddListener((() =>
         {
             inventoryState = false;
+
             bagInventory.SetActive(false);
             equipmentInventory.SetActive(false);
             encyclopediaInventory.SetActive(false);

@@ -10,22 +10,29 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public float moveSpeed;
     public Transform leftHandIkTarget;
     public Transform rightHandIkTarget;
-
-    private PlayerStat playerStat;
+    public Vector3 AimLookPoint
+    {
+        get { return aimLookPoint; }
+    }
+    public bool IsAiming
+    {
+        get { return isAiming; }
+    }
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
+    private PlayerStat playerStat;
     private float horizontalAxis;
     private float verticalAxis;
     private Vector3 moveDirection;
-
+    private Vector3 aimLookPoint;
 
     private float attackDelay;
     [SerializeField] private float attackRate = 0.5f;
 
     private bool doAttack;
     private bool isAttackReady;
-    public bool isAiming;
+    private bool isAiming;
 
     private float ikProgress;
     private float ikWeight;
@@ -41,6 +48,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerStat = GetComponent<PlayerStat>();
+
+        Camera.main.GetComponent<CameraController>().Player = this.transform;
+        Camera.main.GetComponent<CameraController>().PlayerController = this;
+
         playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
     }
 
@@ -51,6 +62,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+
         if (!photonView.IsMine || chatInput.activeSelf) return;
 
         GetInput();
