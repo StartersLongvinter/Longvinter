@@ -1,30 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-
+    
     private void Awake()
     {
+        if (instance != null)
+        {
+            return;
+        }
         instance = this;
+        
+        DontDestroyOnLoad(gameObject);
     }
 
-    [SerializeField] GameObject inventoryScreen;
-    bool pressTab;
-    public bool inventoryState;
-
-    //GraphicRaycaster graphicRaycaster;
-    //PointerEventData pointerEventData;
-    //EventSystem eventSystem;
-
-    // Start is called before the first frame update
+    [SerializeField] private GameObject bagInventory;
+    [SerializeField] private GameObject equipmentInventory;
+    [SerializeField] private GameObject encyclopediaInventory;
+    [SerializeField] private Button inventoryCloseBtn;
+    
+    private bool isTabPressed;
+    private bool inventoryState;
+    
     void Start()
     {
-        inventoryState = false;
-        //graphicRaycaster = GameObject.Find("Canvas").GetComponent<GraphicRaycaster>();
+        inventoryCloseBtn.onClick.AddListener((() =>
+        {
+            inventoryState = false;
+            bagInventory.SetActive(false);
+            equipmentInventory.SetActive(false);
+            encyclopediaInventory.SetActive(false);
+        }));
     }
 
     // Update is called once per frame
@@ -32,47 +43,37 @@ public class UIManager : MonoBehaviour
     {
         KeyInput();
 
-        Open(inventoryScreen);
+        Open(bagInventory);
 
-        //Exitpoint();
+        CloseInventory();
     }
 
     void KeyInput()
     {
-        pressTab = Input.GetKeyDown(KeyCode.Tab);
+        isTabPressed = Input.GetKeyDown(KeyCode.Tab);
     }
 
     void Open(GameObject ui)
     {
-        if (pressTab)
+        if (isTabPressed)
+        {
+            isTabPressed = false;
             inventoryState = !inventoryState;
-
-        ui.SetActive(inventoryState);
+            ui.SetActive(inventoryState);
+        }
     }
 
-    //void Exitpoint()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        pointerEventData = new PointerEventData(eventSystem);
-
-    //        pointerEventData.position = Input.mousePosition;
-
-    //        List<RaycastResult> results = new List<RaycastResult>();
-
-    //        graphicRaycaster.Raycast(pointerEventData, results);
-
-    //        //if (results[0].gameObject.layer == 6)
-    //        //{
-    //        //    inventoryScreen.SetActive(false);
-    //        //}
-    //        foreach (RaycastResult result in results)
-    //        {
-    //            if (result.gameObject.layer == 6)
-    //            {
-    //                inventoryScreen.SetActive(false);
-    //            }
-    //        }
-    //    }
-    //}
+    void CloseInventory()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                inventoryState = false;
+                bagInventory.SetActive(false);
+                equipmentInventory.SetActive(false);
+                encyclopediaInventory.SetActive(false);
+            }
+        }
+    }
 }

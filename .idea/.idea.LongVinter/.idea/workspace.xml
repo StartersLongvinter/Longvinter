@@ -3,11 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player_MHS.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player_MHS.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LobbyScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LobbyScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ItemScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ItemScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/YH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/YH.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Rounded40px@4x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Rounded40px@4x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/check.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/close.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/door-open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/door-open.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/magnifying-glass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/magnifying-glass.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/menu.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/multiple-users.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/multiple-users.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/padlock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/padlock.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/settings.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/settings.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +34,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ButtonAnimations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/EncyclopediaAnimatinos.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/InventoryAnimations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Item.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ItemSlot.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5ddb5fa70dfe40d2818192400111b9ec2aa00/d9/0f67b62a/Tween.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -58,10 +82,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="7927">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="7927" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -78,6 +102,8 @@
       <option name="presentableId" value="Default" />
       <updated>1668069699585</updated>
       <workItem from="1668135572396" duration="67000" />
+      <workItem from="1668505849194" duration="1933000" />
+      <workItem from="1668648223742" duration="16831000" />
     </task>
     <servers />
   </component>
@@ -85,6 +111,7 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -99,5 +126,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs</url>
+          <line>28</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" initialLine="28" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="768" />
+            </startOffsets>
+            <endOffsets>
+              <option value="789" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
