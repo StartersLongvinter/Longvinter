@@ -1,44 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     public float moveSpeed;
     public Transform leftHandIkTarget;
     public Transform rightHandIkTarget;
-
-    private PlayerStat playerStat;
+    public Vector3 AimLookPoint
+    {
+        get { return aimLookPoint; }
+    }
+    public bool IsAiming
+    {
+        get { return isAiming; }
+    }
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
+    private PlayerStat playerStat;
     private float horizontalAxis;
     private float verticalAxis;
     private Vector3 moveDirection;
-
+    private Vector3 aimLookPoint;
 
     private float attackDelay;
     [SerializeField] private float attackRate = 0.5f;
 
     private bool doAttack;
     private bool isAttackReady;
-    public bool isAiming;
+    private bool isAiming;
 
     private float ikProgress;
     private float ikWeight;
-
-    public Vector3 aimLookPoint;
 
     #region Callback Methods
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-
         playerStat = GetComponent<PlayerStat>();
         //playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
+
+        Camera.main.GetComponent<CameraController>().Player = this.transform;
+        Camera.main.GetComponent<CameraController>().PlayerController = this;
     }
 
     private void Start()
@@ -48,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //if (!photonView.IsMine) return;
+        if (!photonView.IsMine) return;
 
         GetInput();
         Aim();
@@ -57,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (!photonView.IsMine) return;
+        if (!photonView.IsMine) return;
 
         Move();
         Rotate();
