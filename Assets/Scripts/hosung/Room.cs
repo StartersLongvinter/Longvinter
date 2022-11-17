@@ -37,7 +37,7 @@ public class Room : MonoBehaviourPunCallbacks
     public void ClickEnterRoom()
     {
         Debug.Log("submit");
-        bool isConnect = NetworkManager.instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text);
+        bool isConnect = NetworkManager.Instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text);
 
         if (!isConnect)
         {

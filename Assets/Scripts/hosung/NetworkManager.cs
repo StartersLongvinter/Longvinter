@@ -10,12 +10,12 @@ using System.Linq;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    private static NetworkManager Instance;
-    public static NetworkManager instance
+    private static NetworkManager instance;
+    public static NetworkManager Instance
     {
-        get { return Instance; }
+        get { return instance; }
     }
-    private List<RoomInfo> rooms = new List<RoomInfo>();
+    public List<RoomInfo> rooms = new List<RoomInfo>();
     public string nickName = "";
     bool isLobby = true;
 
@@ -24,7 +24,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (instance == null) instance = this;
 
         DontDestroyOnLoad(this.gameObject);
 
@@ -117,7 +117,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LocalPlayer.NickName = nickName;
         //GameObject.Find("PasswordPanel").SetActive(false);
-        var player = PhotonNetwork.Instantiate("Player", respawnPos, Quaternion.identity);
+        var player = PhotonNetwork.Instantiate("Player_HS", respawnPos, Quaternion.identity);
 
         photonView.RPC("RenewalPlayerList", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, true);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, 1);
@@ -129,24 +129,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, -1);
     }
 
+    public override void OnLeftRoom()
+    {
+        isLobby = true;
+        LoadLevel(0);
+    }
+
     [PunRPC]
     void RenewalPlayerList(int playerActorNumber, bool isJoin)
     {
         if (isJoin)
         {
-            PlayerList.instance.players.Clear();
-            PlayerList.instance.players = PhotonNetwork.PlayerList.ToList();
-            
-            foreach (Player p in PlayerList.instance.players)
+            PlayerList.Instance.players.Clear();
+            PlayerList.Instance.players = PhotonNetwork.PlayerList.ToList();
+
+            foreach (Player p in PlayerList.Instance.players)
                 Debug.Log(p.NickName + " " + p.ActorNumber);
         }
         else
         {
-            PlayerList.instance.players.RemoveAll(x => x.ActorNumber == playerActorNumber);
-            PlayerList.instance.playerStats.RemoveAll(x => x.ownerPlayerActorNumber == playerActorNumber);
+            PlayerList.Instance.players.RemoveAll(x => x.ActorNumber == playerActorNumber);
+            PlayerList.Instance.playerStats.RemoveAll(x => x.ownerPlayerActorNumber == playerActorNumber);
         }
     }
-  
+
     [PunRPC]
     void RenewalCurPlayers(int curPlayerNumber)
     {
@@ -161,18 +167,28 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        RenewalRoomList(roomList);
+    }
+
+    public void RenewalRoomList(List<RoomInfo> roomList)
+    {
         if (!isLobby) return;
 
         Transform roomBox = GameObject.Find("Content").transform;
 
         foreach (RoomInfo room in roomList)
         {
-            if (rooms.Contains(room)) return;
+            if (rooms.Contains(room))
+            {
+                GameObject thisRoom = roomBox.Find((string)room.CustomProperties["roomName"]).gameObject;
+                thisRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.CustomProperties["maxPlayers"]);
+                break;
+            }
             if (room.RemovedFromList)
             {
                 Destroy(roomBox.Find((string)room.CustomProperties["roomName"]));
                 rooms.Remove(room);
-                return;
+                break;
             }
 
             rooms.Add(room);
@@ -181,6 +197,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             newRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.CustomProperties["maxPlayers"]);
             newRoom.name = (string)room.CustomProperties["roomName"];
         }
+    }
+
+    // public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
+    // {
+    // photonView.RPC("", RpcTarget.AllViaServer)
+    // }
+
+    [PunRPC]
+    public void Kicked(int _actorNumber)
+    {
+        PlayerList.Instance.playerStats.RemoveAll(x => x.ownerPlayerActorNumber == _actorNumber);
+        PlayerList.Instance.players.RemoveAll(x => x.ActorNumber == _actorNumber);
+
+        if (_actorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+            PhotonNetwork.LeaveRoom();
     }
 
     void Update()
