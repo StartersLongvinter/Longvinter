@@ -13,10 +13,12 @@ public class CreateRoomBtn : MonoBehaviour
     [SerializeField] Toggle lockToggle;
     [SerializeField] TMP_InputField inputPassword;
     [SerializeField] Button multiplayButton;
+    [SerializeField] Button playerListButton;
+    [SerializeField] GameObject multiplayPanel;
 
     void Awake()
     {
-        
+
     }
 
     public void CreateRoom()
@@ -24,7 +26,10 @@ public class CreateRoomBtn : MonoBehaviour
         string password = inputPassword.text;
         int maxPlayercount = Mathf.RoundToInt(maxPlayerSlider.value);
         bool isPVP = pvpToggle.isOn;
-        NetworkManager.instance.OnClickCreate(maxPlayercount, isPVP, password);
+        NetworkManager.Instance.OnClickCreate(maxPlayercount, isPVP, password);
+
+        multiplayPanel.SetActive(false);
+        multiplayButton.gameObject.SetActive(false);
     }
 
     void Update()
@@ -35,6 +40,7 @@ public class CreateRoomBtn : MonoBehaviour
         if (PhotonNetwork.InRoom && (int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"] != 1)
         {
             multiplayButton.gameObject.SetActive(false);
+            playerListButton.gameObject.SetActive(true);
             this.gameObject.SetActive(false);
         }
     }
