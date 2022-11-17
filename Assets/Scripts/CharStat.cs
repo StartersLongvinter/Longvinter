@@ -14,7 +14,7 @@ public class CharStat : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             localPlayer = this;
-            photonView.RPC("SetName", RpcTarget.AllBuffered, NetworkManager.instance.nickName);
+            photonView.RPC("SetName", RpcTarget.AllBuffered, NetworkManager.Instance.nickName);
         }
     }
 
