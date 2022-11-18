@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LobbyScene.unity
     guid: 9a05f77b3956442ab9b10b66eedcb105
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/YH_HS.unity
+    guid: 00a2f0b64827c46e4bdcea4dec9e9621
+  - enabled: 1
     path: Assets/Scenes/YH.unity
     guid: 5aae0290a24c2d04098b1ad6d4234a52
   - enabled: 0
