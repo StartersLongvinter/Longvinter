@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6256459909385873495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -111,7 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c5bad5962f79848956132e09c7adb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 70
-  damage: 50
-  explosionRadius: 0
   impactEffect: {fileID: 6622622917043726941, guid: 1f0b6e20a07c3524d8e9f9f03a096d1e, type: 3}
