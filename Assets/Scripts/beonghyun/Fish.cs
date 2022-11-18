@@ -10,6 +10,8 @@ public class Fish : MonoBehaviour
         "Redfish", "Salmon Shark", "Black Grouper", "Misty Grouper",
         "Stingray", "Swordfish","Tuna"};
 
+    public Sprite[] fishSpriteList;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -1,70 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class TurretController : MonoBehaviour
+public class TurretController : MonoBehaviourPun
 {
-    private string enemyTag = "Enemy";//!pv.IsMine
+    public GameObject bulletPrefab;
+    public Transform rotatePart;
+    public Transform firePoint;
+
+    private string playerTag = "Player";//!pv.IsMine
     private float range = 30f;
     private Transform target;
     private Enemy targetEnemy;
-    public bool useLaser=false;
-    public GameObject bulletPrefab;
-    public float fireRate = 1f;
-    public float fireTimeLimit = 0f;
-
-    public int damage = 10;
-    public float slowAmount = 0.5f;
-
-    public LineRenderer lineRenderer;
-    public ParticleSystem impactEffect;
-
-    public Transform rotatePart;
-    public float turnSpeed = 10f;
-    public Transform firePoint;
+    private float fireRate = 1f;
+    private float fireTimeLimit = 0f;
 
     private void Start()
     {
+        StartCoroutine(RotateTurret());
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
     private void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
         float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
-        foreach(GameObject enmey in enemies)
+        GameObject nearestPlayer = null;
+        foreach (GameObject player in players)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enmey.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            /*if (PhotonNetwork.MasterClient.ActorNumber == player.GetComponent<PlayerStat>().ownerPlayerActorNumber)
+                break;*/
+            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            if (distanceToPlayer < shortestDistance)
             {
-                shortestDistance= distanceToEnemy;
-                nearestEnemy = enmey;
+                shortestDistance = distanceToPlayer;
+                nearestPlayer = player;
             }
         }
-        if(nearestEnemy!=null && shortestDistance <= range)
+        if (nearestPlayer != null && shortestDistance <= range &&!nearestPlayer.GetComponent<Enemy>().isChanged)
         {
-            target = nearestEnemy.transform;
-            targetEnemy = nearestEnemy.GetComponent<Enemy>();
+            target = nearestPlayer.transform;
+            targetEnemy = nearestPlayer.GetComponent<Enemy>();
+            Enemy.originalColor = nearestPlayer.GetComponentInChildren<SkinnedMeshRenderer>().material.color;
         }
         else
-        {
             target = null;
-        }
     }
 
     private void Update()
     {
         if (target == null)
-        {
-            if (useLaser)
-            {
-                if (lineRenderer.enabled)
-                {
-                    lineRenderer.enabled = false;
-                    impactEffect.Stop();
-                }
-            }return;
-        }
+            return;
+
         LockOnTarget();
 
         if (fireTimeLimit <= 0f)
@@ -77,15 +64,14 @@ public class TurretController : MonoBehaviour
 
     void LockOnTarget()
     {
-        Vector3 dir = target.position - firePoint.position;
-        Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = Quaternion.Lerp(firePoint.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-        rotatePart.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        StopCoroutine(RotateTurret());
+        rotatePart.transform.LookAt(new Vector3(target.position.x, rotatePart.position.y, target.position.z));
+        rotatePart.transform.Rotate(0, -90, 0);
     }
 
     void Shoot()
     {
-        GameObject firedBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject firedBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Bullet bullet = firedBullet.GetComponent<Bullet>();
         if (bullet != null)
             bullet.Seek(target);
@@ -93,8 +79,22 @@ public class TurretController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color= Color.red;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
-        /*Gizmos.DrawLine(target.position , firePoint.position);*/
+    }
+
+    IEnumerator RotateTurret()
+    {
+        float duration = 9f;
+        float speed = 5f;
+        while (true)
+        {
+            for(float time=0; time<duration; time += Time.fixedDeltaTime)
+            {
+                rotatePart.transform.Rotate(Vector3.up, speed * Time.fixedDeltaTime);
+                yield return null;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

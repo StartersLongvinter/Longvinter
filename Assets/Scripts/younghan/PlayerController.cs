@@ -37,9 +37,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private float ikProgress;
     private float ikWeight;
 
-    public Vector3 aimLookPoint;
-
-    // ì¶”ê???•œ ë¶?ë¶? 
     [SerializeField] GameObject chatInput;
 
     #region Callback Methods
