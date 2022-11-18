@@ -8,7 +8,6 @@ using Photon.Pun;
 public class PlayerController : MonoBehaviourPunCallbacks
 {
     public float moveSpeed;
-    public Weapon weapon;
     public Transform leftHandIkTarget;
     public Transform rightHandIkTarget;
     public Vector3 AimLookPoint
@@ -38,6 +37,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private float ikProgress;
     private float ikWeight;
 
+    public Vector3 aimLookPoint;
+
+    // 추�???�� �?�? 
     [SerializeField] GameObject chatInput;
 
     #region Callback Methods
@@ -60,6 +62,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+
         if (!photonView.IsMine || chatInput.activeSelf) return;
 
         GetInput();
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void OnAnimatorIK()
     {
-        AnimateRangeAim();
+        AnimateAim();
     }
     #endregion
 
@@ -129,6 +132,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     }
 
+    // ���� ������ �� �����ؾ� ��
     private void Attack()
     {
         attackDelay += Time.deltaTime;
@@ -136,9 +140,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         if (isAiming && isAttackReady && doAttack)
         {
-            Debug.Log("Attack");
-
-            playerAnimator.SetTrigger("doMeleeAttack");
+            // �߻�
 
             attackDelay = 0;
         }
@@ -146,19 +148,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Aim()
     {
-        if (isAiming && weapon.type == Weapon.Type.Melee)
-        {
-            playerAnimator.SetBool("isMeleeAttackAim", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("isMeleeAttackAim", false);
-        }
+        // ī�޶� ���� ���� - ī�޶� ��Ʈ�ѷ����� ó��
+
     }
 
-    private void AnimateRangeAim()
+    private void AnimateAim()
     {
-        if (isAiming && weapon.type == Weapon.Type.Range)
+        if (isAiming)
         {
             float progressSpeed = (ikProgress < 0.3f) ? 1f : 2f;
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
