@@ -3,28 +3,28 @@
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ItemScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ItemScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/Sci Fi Assets/Simple SciFi Gun Turret Set/Additional Assets/Main Camera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imports/Sci Fi Assets/Simple SciFi Gun Turret Set/Additional Assets/Main Camera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/Suriyun_PspspsCat/URP_Upgrade/URP_Upgrade Pspsps Cat.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Perch.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Perch.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Pike.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Pike.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player_HS.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player_HS.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LobbyScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LobbyScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/YH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/YH.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/InventoryAnimations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/InventoryAnimations.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/Item.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Rounded40px@4x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Rounded40px@4x.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/check.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/check.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/close.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/door-open.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/door-open.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/magnifying-glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/magnifying-glass.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/menu.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/menu.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/multiple-users.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/multiple-users.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/padlock.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/padlock.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/settings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/settings.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Perch.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Perch.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Pike.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Pike.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/younghan/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/younghan/CameraController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/younghan/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/younghan/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,11 +34,15 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ButtonAnimations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Encyclopedia.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/EncyclopediaAnimatinos.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/InventoryAnimations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Item.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ItemSlot.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/LobbyPanelCloseBtn.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/NotificationAnimations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerContorller_JDH.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5ddb5fa70dfe40d2818192400111b9ec2aa00/d9/0f67b62a/Tween.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -82,10 +86,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="7927">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1919">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="7927" />
+      <option name="pid" value="1919" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -103,7 +107,8 @@
       <updated>1668069699585</updated>
       <workItem from="1668135572396" duration="67000" />
       <workItem from="1668505849194" duration="1933000" />
-      <workItem from="1668648223742" duration="16831000" />
+      <workItem from="1668648223742" duration="32590000" />
+      <workItem from="1668752525670" duration="4173000" />
     </task>
     <servers />
   </component>
@@ -131,17 +136,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs</url>
-          <line>28</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" initialLine="28" containingFunctionPresentation="method 'Update'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs</url>
+          <line>38</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" initialLine="38" containingFunctionPresentation="method 'Update'">
             <startOffsets>
-              <option value="768" />
+              <option value="1017" />
             </startOffsets>
             <endOffsets>
-              <option value="789" />
+              <option value="1048" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
