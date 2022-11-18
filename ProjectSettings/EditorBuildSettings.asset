@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YH.unity
     guid: 5aae0290a24c2d04098b1ad6d4234a52
+  - enabled: 0
+    path: Assets/Scenes/Turret.unity
+    guid: 31948b845a91dc149b0530cee991f18a
+  - enabled: 1
+    path: Assets/Scenes/YH_JJ.unity
+    guid: 5fb38669e9b0d1a48a472085a3670774
   m_configObjects: {}
