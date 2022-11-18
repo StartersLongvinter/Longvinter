@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Pike
   m_EditorClassIdentifier: 
   itemName: Pike
+  itemKorName: "\uB18D\uC5B4"
+  itemExplain: "(\uC77C\uBC18 \uD0C0\uC785) \uBE75\uAC00\uB8E8\uC640 \uC798 \uC5B4\uC6B8\uB9B0\uB2E4."
   itemType: 0
   itemClassify: 0
   itemPrefab: {fileID: 5223685251508337091, guid: ad4436b7c34244357891975fbbe38509, type: 3}

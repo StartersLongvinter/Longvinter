@@ -117,7 +117,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LocalPlayer.NickName = nickName;
         //GameObject.Find("PasswordPanel").SetActive(false);
-        var player = PhotonNetwork.Instantiate("Player_HS", respawnPos, Quaternion.identity);
+        var player = PhotonNetwork.Instantiate("Player", respawnPos, Quaternion.identity);
 
         photonView.RPC("RenewalPlayerList", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, true);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, 1);
