@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private float ikProgress;
     private float ikWeight;
 
-    public Vector3 aimLookPoint;
 
     // 추가한 부분 
     [SerializeField] GameObject chatInput;

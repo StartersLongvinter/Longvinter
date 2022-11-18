@@ -28,6 +28,7 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (player == null) return;
         if (playerController.IsAiming)
         {
             Vector3 direction = (playerController.AimLookPoint - player.position).normalized;
