@@ -29,13 +29,20 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     void Awake()
     {
         hp = maxHp;
-        photonView.RPC("AddPlayerStat", RpcTarget.AllBuffered);
+        if (photonView.IsMine) photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
-    void AddPlayerStat()
+    void AddPlayerStatAndCharacter()
     {
         PlayerList.Instance.playerStats.Add(this);
+        PlayerList.Instance.playerCharacters.Add(this.gameObject);
+        PlayerList.Instance.playersWithActorNumber.Add(photonView.Owner.ActorNumber, this.gameObject);
+
+        foreach (GameObject player in PlayerList.Instance.playersWithActorNumber.Values)
+        {
+            Debug.Log(player.GetPhotonView().Owner.NickName);
+        }
     }
 
     void Update()

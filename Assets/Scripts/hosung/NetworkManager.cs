@@ -13,19 +13,34 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private static NetworkManager instance;
     public static NetworkManager Instance
     {
-        get { return instance; }
+        get
+        {
+            if (instance == null)
+            {
+                GameObject obj;
+                obj = GameObject.Find("NetworkManager");
+                if (obj == null)
+                {
+                    obj = new GameObject("NetworkManager");
+                    instance = obj.AddComponent<NetworkManager>();
+                }
+                else
+                {
+                    instance = obj.GetComponent<NetworkManager>();
+                }
+            }
+            return instance;
+        }
     }
     public List<RoomInfo> rooms = new List<RoomInfo>();
     public string nickName = "";
     bool isLobby = true;
 
-    [SerializeField] Vector3 respawnPos = new Vector3(0, 0, 0);
-    [SerializeField] GameObject roomPrefab;
+    Vector3 respawnPos = new Vector3(0, 0, 0);
+    GameObject roomPrefab;
 
     void Awake()
     {
-        if (instance == null) instance = this;
-
         DontDestroyOnLoad(this.gameObject);
 
         PhotonNetwork.ConnectUsingSettings();
