@@ -35,28 +35,12 @@ public class PlayerFishing : MonoBehaviour
 
     //ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] float maxInteractableDistance = 7;
-<<<<<<< HEAD
-    //[SerializeField] GameObject pressEImage;
-    //[SerializeField] GameObject successImage;
-    //[SerializeField] TMP_Text fishName;
-    [SerializeField] 
-=======
-<<<<<<< Updated upstream
     [SerializeField] GameObject pressEImage;
     [SerializeField] GameObject successImage;
     [SerializeField] TMP_Text fishName;
-=======
-    //[SerializeField] GameObject pressEImage;
-    //[SerializeField] GameObject successImage;
-    //[SerializeField] TMP_Text fishName;
-    [SerializeField]
->>>>>>> Stashed changes
->>>>>>> hosung
     bool isFishing;
-    public bool eImageActivate;
-    public bool isSuccessState;
     int eCount = 0;
-    public Fish fish;
+    Fish fish;
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -105,21 +89,17 @@ public class PlayerFishing : MonoBehaviour
 
     private void Move()
     {
-        if (!isFishing)
-        {
-            moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
-            float currentMoveSpeed = isAiming ? moveSpeed * 0.4f : moveSpeed;
+        moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
+        float currentMoveSpeed = isAiming ? moveSpeed * 0.4f : moveSpeed;
 
-            playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
+        playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
 
-            playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
-
-        }
+        playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
     }
 
     private void Rotate()
     {
-        if (isAiming && !isFishing)
+        if (isAiming)
         {
             Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -148,7 +128,7 @@ public class PlayerFishing : MonoBehaviour
         attackDelay += Time.deltaTime;
         isAttackReady = attackRate < attackDelay;
 
-        if (isAiming && isAttackReady && doAttack && !isFishing)
+        if (isAiming && isAttackReady && doAttack)
         {
             // ï¿½ß»ï¿½
 
@@ -164,40 +144,35 @@ public class PlayerFishing : MonoBehaviour
 
     private void AnimateAim()
     {
-        if (!isFishing)
+        if (isAiming)
         {
-            if (isAiming)
-            {
-                float progressSpeed = (ikProgress < 0.3f) ? 1f : 2f;
-                ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
-            }
-            else
-            {
-                float progressSpeed = (ikProgress < 0.3f) ? 1f : 2f;
-                ikProgress = Mathf.Clamp(ikProgress - Time.deltaTime * progressSpeed, 0f, 0.5f);
-            }
-
-            ikWeight = Mathf.Lerp(0f, 1f, ikProgress);
-
-            playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
-            playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
-
-            playerAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, ikWeight);
-            playerAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand, ikWeight);
-
-            playerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandIkTarget.position);
-            playerAnimator.SetIKPosition(AvatarIKGoal.RightHand, rightHandIkTarget.position);
-
-            playerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandIkTarget.rotation);
-            playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIkTarget.rotation);
+            float progressSpeed = (ikProgress < 0.3f) ? 1f : 2f;
+            ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         }
+        else
+        {
+            float progressSpeed = (ikProgress < 0.3f) ? 1f : 2f;
+            ikProgress = Mathf.Clamp(ikProgress - Time.deltaTime * progressSpeed, 0f, 0.5f);
+        }
+
+        ikWeight = Mathf.Lerp(0f, 1f, ikProgress);
+
+        playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
+        playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
+
+        playerAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, ikWeight);
+        playerAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand, ikWeight);
+
+        playerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandIkTarget.position);
+        playerAnimator.SetIKPosition(AvatarIKGoal.RightHand, rightHandIkTarget.position);
+
+        playerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandIkTarget.rotation);
+        playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIkTarget.rotation);
     }
 
     //raycast ï¿½Ì¿ï¿½ Æ¯ï¿½ï¿½ objectï¿½ï¿½ hit ï¿½Ç¸ï¿½ fishing ï¿½Ô¼ï¿½ È£ï¿½ï¿½
     private void Fishing()
     {
-        if (moveDirection != Vector3.zero || isFishing) return;
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         //AI colliderï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ ï¿½ÈµÇ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ raycastallï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
@@ -211,30 +186,35 @@ public class PlayerFishing : MonoBehaviour
             if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
             {
                 Debug.Log("Fishing");
-<<<<<<< HEAD
-
-                //³¬½ÃÇÒ¶§ fishingpoint¸¦ ¹Ù¶óº¸°í ÀÖ¾î¾ß ÇÔ
-                transform.LookAt(raycasthit.collider.transform.position);
-
-=======
-<<<<<<< Updated upstream
-=======
-
-                //ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ fishingpointï¿½ï¿½ ï¿½Ù¶óº¸°ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½ï¿½
-                transform.LookAt(raycasthit.collider.transform.position);
-
->>>>>>> Stashed changes
->>>>>>> hosung
                 playerAnimator.SetTrigger("doFish");
                 fish = raycasthit.collider.GetComponent<Fish>();
                 StartCoroutine(CatchFish());
             }
+
+            //else Debug.Log("Can't Fish");
         }
+        //if (Physics.Raycast(ray, out RaycastHit hit,100) && doAttack)
+        //{
+        //        //Æ¯ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½ï¿½Ï°ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½
+
+        //    float fishingDistance = Vector3.Distance(hit.transform.position, transform.position);
+
+        //    if (hit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance)
+        //    {
+        //        Debug.Log("Fishing");
+        //        playerAnimator.SetTrigger("doFish");
+        //        fish = hit.collider.GetComponent<Fish>();
+        //        StartCoroutine(CatchFish());
+        //    }
+
+        //    else Debug.Log("Can't Fish");
+        // } 
+
     }
 
     void ECount()
     {
-        if (eImageActivate)
+        if (isFishing)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -246,78 +226,33 @@ public class PlayerFishing : MonoBehaviour
     IEnumerator CatchFish()
     {
         isFishing = true;
-        playerAnimator.SetBool("isFishing", true);
+        playerAnimator.SetBool("isFishing", isFishing);
         eCount = 0;
-<<<<<<< Updated upstream
-        yield return new WaitForSeconds(Random.Range(5,11));
-        eImageActivate = true;
-
-<<<<<<< HEAD
-        // E Å°¸¦ ´©¸£¶ó´Â UI ³ª¿À°Ô ÇØ¾ßÇÔ UIManager¿¡¼­ ½ÇÇà
-        
-=======
-        // E Å°¸¦ ´©¸£¶ó´Â UI ³ª¿À°Ô ÇØ¾ßÇÔ
-        pressEImage.SetActive(true);
-=======
         yield return new WaitForSeconds(Random.Range(5, 11));
-        eImageActivate = true;
 
-        // E Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½ UIManagerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-
->>>>>>> Stashed changes
->>>>>>> hosung
+        // E Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½
+        pressEImage.SetActive(true);
         Debug.Log("Press E!");
 
         //2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½ ï¿½Ñ°ï¿½ Å¬ï¿½ï¿½ï¿½ß´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(2);
 
-        eImageActivate = false;
-
         if (eCount >= 10)
         {
-<<<<<<< HEAD
-            isSuccessState = true;
-
-            UIManager_BH.instance.OpenSuccessImage();
-            
-=======
-<<<<<<< Updated upstream
             int fishNumber = Random.Range(0, fish.fishList.Length);
             Debug.Log("Success! Caught " + fish.fishList[fishNumber]);
             fishName.text = fish.fishList[fishNumber];
             successImage.SetActive(true);
->>>>>>> hosung
         }
 
         else Debug.Log("Fail");
-      
-        playerAnimator.SetBool("isFishing", false);
+
+        pressEImage.SetActive(false);
+
+        isFishing = false;
+        playerAnimator.SetBool("isFishing", isFishing);
 
         yield return new WaitForSeconds(3);
-<<<<<<< HEAD
-        
-        isSuccessState = false;
-        isFishing = false;
-        UIManager_BH.instance.OpenSuccessImage();
-=======
         successImage.SetActive(false);
-=======
-            isSuccessState = true;
-
-            // UIManager_BH.instance.OpenSuccessImage();
-
-        }
-
-        else Debug.Log("Fail");
-
-        playerAnimator.SetBool("isFishing", false);
-
-        yield return new WaitForSeconds(3);
-
-        isSuccessState = false;
-        isFishing = false;
-        // UIManager_BH.instance.OpenSuccessImage();
->>>>>>> Stashed changes
->>>>>>> hosung
     }
 }
