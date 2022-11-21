@@ -14,10 +14,6 @@ public class Enemy : MonoBehaviour
 
 	private bool isDead = false;
 
-	public static Color originalColor;
-	private SkinnedMeshRenderer renderer;
-	public bool isChanged = false;
-
 	void Start ()
 	{
 		health = startHealth;
@@ -25,14 +21,12 @@ public class Enemy : MonoBehaviour
 
 	public void TakeDamage (float amount)
 	{
-		renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-
-		StartCoroutine(ResetColor());
-
 		health -= amount;
 
 		if (health <= 0 && !isDead)
+		{
 			Die();
+		}
 	}
 
 	void Die ()
@@ -41,17 +35,5 @@ public class Enemy : MonoBehaviour
 		Debug.Log("Dead");
 
 		//Destroy(gameObject);
-	}
-
-	IEnumerator ResetColor()
-	{
-		isChanged = true;
-		renderer.material.color = Color.white;
-		yield return new WaitForSeconds(0.05f);
-		renderer.material.color = Color.red;
-		yield return new WaitForSeconds(0.08f);
-		renderer.material.color = originalColor;
-		yield return null;
-		isChanged = false;
 	}
 }

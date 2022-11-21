@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5223685251508337095}
   - component: {fileID: 5223685251508337094}
   - component: {fileID: 5223685251508337093}
-  - component: {fileID: -7250606688188885592}
   m_Layer: 5
   m_Name: Perch
   m_TagString: Untagged
@@ -103,16 +102,3 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &-7250606688188885592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5223685251508337091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9952638096f346cbaebe2ce2caa3cff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 9b29a4ab3e4e64ec6aba0fde3028a02d, type: 2}

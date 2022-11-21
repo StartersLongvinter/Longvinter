@@ -30,6 +30,6 @@ public class Chat : MonoBehaviour
 
     void Update()
     {
-
+        transform.parent.rotation = Quaternion.Euler(rotationValue * Camera.main.transform.rotation.x, 0, 0);
     }
 }
