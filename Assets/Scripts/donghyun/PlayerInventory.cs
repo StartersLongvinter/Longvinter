@@ -24,14 +24,13 @@ public class PlayerInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentItemList < itemList.Count && itemList.Count <= MAXITEM && !isItemUpdated)
+        if (currentItemList < itemList.Count && itemList.Count < MAXITEM && !isItemUpdated)
         {
             isItemUpdated = true;
             currentItemList++;
 
             GameObject item;
 
-            //잡은 아이템이 Food이면 bagInventory에 들어가도록
             if (itemList[itemList.Count - 1].itType == ItemData.ItemType.Food)
             {
                 for (int i = 0; i < bagInventory.Length; i++)
@@ -39,10 +38,10 @@ public class PlayerInventory : MonoBehaviour
                     if (bagInventory[i].transform.childCount == 0)
                     {
                         item = Instantiate(itemList[itemList.Count - 1].itPrefab, bagInventory[i].transform);
-                        item.transform.localScale = new Vector3(1, 1, 1);
-                        item.GetComponent<RectTransform>().sizeDelta = new Vector2(90, 90);
-                        item.GetComponent<RectTransform>().anchoredPosition = new Vector3(45, 45, 0);
+                        item.GetComponent<RectTransform>().position =
+                            bagInventory[i].GetComponent<RectTransform>().position;
 
+                        item.GetComponent<RectTransform>().sizeDelta = new Vector2(90, 90);
                         break;
                     }
                 }

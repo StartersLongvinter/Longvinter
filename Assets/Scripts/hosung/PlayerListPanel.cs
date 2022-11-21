@@ -46,8 +46,7 @@ public class PlayerListPanel : MonoBehaviourPunCallbacks
 
         foreach (Player _player in PlayerList.Instance.players)
         {
-            var playerList = Instantiate(playerListPrefab, playerListPrefab.transform.position, Quaternion.identity);
-            playerList.transform.SetParent(playerlistBox, false);
+            var playerList = Instantiate(playerListPrefab, playerListPrefab.transform.position, Quaternion.identity, playerlistBox);
             playerList.GetComponentInChildren<Text>().text = _player.NickName;
             playerList.GetComponent<Button>().onClick.AddListener(() =>
             {

@@ -11,8 +11,6 @@ public class PlayerList : MonoBehaviour
 
     public List<Player> players = new List<Player>();
     public List<PlayerStat> playerStats = new List<PlayerStat>();
-    public List<GameObject> playerCharacters = new List<GameObject>();
-    public Dictionary<int, GameObject> playersWithActorNumber = new Dictionary<int, GameObject>();
 
     void Awake()
     {
