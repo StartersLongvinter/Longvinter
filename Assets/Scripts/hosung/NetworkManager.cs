@@ -142,6 +142,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         photonView.RPC("RenewalPlayerList", RpcTarget.All, otherPlayer.ActorNumber, false);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, -1);
+        photonView.RPC("RemovePlayerInList", RpcTarget.All, otherPlayer.ActorNumber);
     }
 
     public override void OnLeftRoom()
@@ -222,11 +223,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void Kicked(int _actorNumber)
     {
-        PlayerList.Instance.playerStats.RemoveAll(x => x.ownerPlayerActorNumber == _actorNumber);
-        PlayerList.Instance.players.RemoveAll(x => x.ActorNumber == _actorNumber);
-
         if (_actorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
             PhotonNetwork.LeaveRoom();
+    }
+
+    [PunRPC]
+    public void RemovePlayerInList(int _actorNumber)
+    {
+        PlayerList.Instance.playerStats.RemoveAll(x => x.ownerPlayerActorNumber == _actorNumber);
+        PlayerList.Instance.players.RemoveAll(x => x.ActorNumber == _actorNumber);
+        PlayerList.Instance.playerCharacters.RemoveAll(x => x.GetComponent<PlayerStat>().ownerPlayerActorNumber == _actorNumber);
+        PlayerList.Instance.playersWithActorNumber.Remove(_actorNumber);
     }
 
     void Update()

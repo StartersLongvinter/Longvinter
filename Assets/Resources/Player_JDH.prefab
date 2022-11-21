@@ -2106,7 +2106,6 @@ GameObject:
   - component: {fileID: -1923840663785282116}
   - component: {fileID: -2713289005664936501}
   - component: {fileID: 5444816142457934325}
-  - component: {fileID: 2197202771869358759}
   m_Layer: 0
   m_Name: Player_JDH
   m_TagString: Player
@@ -2241,6 +2240,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: isWalking
+  - Type: 9
+    SynchronizeType: 0
+    Name: doFish
+  - Type: 4
+    SynchronizeType: 0
+    Name: isFishing
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -2264,24 +2269,6 @@ MonoBehaviour:
   reverse: 0
   currentDistance: 3.3333335
   currentClampedDistance: 0
---- !u!114 &2197202771869358759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6349114427959441967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25d4925ca32b1b5449afcaca53f02a19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  leftHandIkTarget: {fileID: 1801474300}
-  rightHandIkTarget: {fileID: 352961827}
-  attackRate: 0.5
-  isAiming: 0
-  aimLookPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &6365244325377983206
 GameObject:
   m_ObjectHideFlags: 0
