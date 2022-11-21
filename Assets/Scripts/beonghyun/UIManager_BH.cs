@@ -83,7 +83,7 @@ public class UIManager_BH : MonoBehaviour
         pressEImage.SetActive(player.eImageActivate);
     }
 
-    //¹°°í±â ÀÌ¸§°ú ½ºÇÁ¶óÀÌÆ®´Â fishnumber¶ó´Â random int °ªÀ» ³Ö¾î¼­ °áÁ¤
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ fishnumberï¿½ï¿½ï¿½ random int ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾î¼­ ï¿½ï¿½ï¿½ï¿½
     public void OpenSuccessImage()
     {
         successImage.SetActive(player.isSuccessState);
