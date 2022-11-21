@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" afterDir="false" />
-    </list>
+    <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,7 +83,7 @@
       <workItem from="1668135572396" duration="67000" />
       <workItem from="1668505849194" duration="1933000" />
       <workItem from="1668648223742" duration="32590000" />
-      <workItem from="1668752525670" duration="6047000" />
+      <workItem from="1668752525670" duration="6129000" />
     </task>
     <servers />
   </component>
@@ -109,6 +106,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
