@@ -1959,6 +1959,7 @@ MonoBehaviour:
   chatInput: {fileID: 346935213676141253}
   chatPrefab: {fileID: 6671883248550508411, guid: feebb38e7f7804d019f4e3f3161142da, type: 3}
   playerPosition: {fileID: 6005344780012494997}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &6436774764496062002
 MonoBehaviour:
   m_ObjectHideFlags: 0

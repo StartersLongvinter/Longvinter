@@ -29,15 +29,22 @@ public class PlayerFishing : MonoBehaviour
 
     private float ikProgress;
     private float ikWeight;
-   
+
 
     public Vector3 aimLookPoint;
 
-    //³¬½Ã°ü·Ã º¯¼ö
+    //ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] float maxInteractableDistance = 7;
+<<<<<<< Updated upstream
     [SerializeField] GameObject pressEImage;
     [SerializeField] GameObject successImage;
     [SerializeField] TMP_Text fishName;
+=======
+    //[SerializeField] GameObject pressEImage;
+    //[SerializeField] GameObject successImage;
+    //[SerializeField] TMP_Text fishName;
+    [SerializeField]
+>>>>>>> Stashed changes
     bool isFishing;
     int eCount = 0;
     Fish fish;
@@ -122,7 +129,7 @@ public class PlayerFishing : MonoBehaviour
 
     }
 
-    // ±ÙÁ¢ ¹«±âÀÏ ¶§ »ý°¢ÇØ¾ß ÇÔ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½
     private void Attack()
     {
         attackDelay += Time.deltaTime;
@@ -130,7 +137,7 @@ public class PlayerFishing : MonoBehaviour
 
         if (isAiming && isAttackReady && doAttack)
         {
-            // ¹ß»ç
+            // ï¿½ß»ï¿½
 
             attackDelay = 0;
         }
@@ -138,7 +145,7 @@ public class PlayerFishing : MonoBehaviour
 
     private void Aim()
     {
-        // Ä«¸Þ¶ó ½ÃÁ¡ º¯°æ - Ä«¸Þ¶ó ÄÁÆ®·Ñ·¯¿¡¼­ Ã³¸®
+        // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 
     }
 
@@ -170,12 +177,12 @@ public class PlayerFishing : MonoBehaviour
         playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIkTarget.rotation);
     }
 
-    //raycast ÀÌ¿ë Æ¯Á¤ object¿Í hit µÇ¸é fishing ÇÔ¼ö È£Ãâ
+    //raycast ï¿½Ì¿ï¿½ Æ¯ï¿½ï¿½ objectï¿½ï¿½ hit ï¿½Ç¸ï¿½ fishing ï¿½Ô¼ï¿½ È£ï¿½ï¿½
     private void Fishing()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        //AI collider¿Í ºÎµúÇô¼­ Ã¼Å©°¡ ¾ÈµÇ´Â Çö»ó ¹ß»ýÇÔ raycastallÀ¸·Î °ËÃâ
+        //AI colliderï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ ï¿½ÈµÇ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ raycastallï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
 
@@ -186,6 +193,13 @@ public class PlayerFishing : MonoBehaviour
             if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
             {
                 Debug.Log("Fishing");
+<<<<<<< Updated upstream
+=======
+
+                //ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ fishingpointï¿½ï¿½ ï¿½Ù¶óº¸°ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½ï¿½
+                transform.LookAt(raycasthit.collider.transform.position);
+
+>>>>>>> Stashed changes
                 playerAnimator.SetTrigger("doFish");
                 fish = raycasthit.collider.GetComponent<Fish>();
                 StartCoroutine(CatchFish());
@@ -228,17 +242,26 @@ public class PlayerFishing : MonoBehaviour
         isFishing = true;
         playerAnimator.SetBool("isFishing", isFishing);
         eCount = 0;
+<<<<<<< Updated upstream
         yield return new WaitForSeconds(Random.Range(5,11));
 
         // E Å°¸¦ ´©¸£¶ó´Â UI ³ª¿À°Ô ÇØ¾ßÇÔ
         pressEImage.SetActive(true);
+=======
+        yield return new WaitForSeconds(Random.Range(5, 11));
+        eImageActivate = true;
+
+        // E Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½ UIManagerï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+>>>>>>> Stashed changes
         Debug.Log("Press E!");
 
-        //2ÃÊ Áö³ª¸é ÀÚµ¿À¸·Î UI ºñÈ°¼ºÈ­ ¸¸¾à ±× »çÀÌ 10¹ø ³Ñ°Ô Å¬¸¯Çß´Ù¸é ¼º°ø
+        //2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½ ï¿½Ñ°ï¿½ Å¬ï¿½ï¿½ï¿½ß´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(2);
 
         if (eCount >= 10)
         {
+<<<<<<< Updated upstream
             int fishNumber = Random.Range(0, fish.fishList.Length);
             Debug.Log("Success! Caught " + fish.fishList[fishNumber]);
             fishName.text = fish.fishList[fishNumber];
@@ -254,5 +277,22 @@ public class PlayerFishing : MonoBehaviour
 
         yield return new WaitForSeconds(3);
         successImage.SetActive(false);
+=======
+            isSuccessState = true;
+
+            // UIManager_BH.instance.OpenSuccessImage();
+
+        }
+
+        else Debug.Log("Fail");
+
+        playerAnimator.SetBool("isFishing", false);
+
+        yield return new WaitForSeconds(3);
+
+        isSuccessState = false;
+        isFishing = false;
+        // UIManager_BH.instance.OpenSuccessImage();
+>>>>>>> Stashed changes
     }
 }
