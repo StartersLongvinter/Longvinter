@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
-using Random = UnityEngine.Random;
-
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 public class PlayerFishing : MonoBehaviour
@@ -23,7 +19,6 @@ public class PlayerFishing : MonoBehaviour
     [SerializeField] private float attackRate = 0.5f;
     private bool doAttack;
     private bool isAttackReady;
-    private bool isPressedSpace;
     public bool isAiming;
     private float ikProgress;
     private float ikWeight;
@@ -38,10 +33,7 @@ public class PlayerFishing : MonoBehaviour
     public bool eImageActivate;
     public bool isSuccessState;
     int eCount = 0;
-    public ItemData[] fish;
-
-
-    private float timer = 0f;
+    public Fish fish;
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -60,17 +52,6 @@ public class PlayerFishing : MonoBehaviour
         Attack();
         Fishing();
         ECount();
-
-        if (isPressedSpace)
-        {
-            timer += Time.deltaTime;
-        }
-
-        if (timer > 0.3f)
-        {
-            timer = 0f;
-            isPressedSpace = false;
-        }
     }
     private void FixedUpdate()
     {
@@ -87,17 +68,7 @@ public class PlayerFishing : MonoBehaviour
         horizontalAxis = Input.GetAxisRaw("Horizontal");
         verticalAxis = Input.GetAxisRaw("Vertical");
         isAiming = Input.GetButton("Fire2");
-        //doAttack = Input.GetButtonDown("Fire1");
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isPressedSpace = true;
-        }
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            doAttack = true;
-        }
+        doAttack = Input.GetButtonDown("Fire1");
     }
     private void Move()
     {
@@ -185,63 +156,11 @@ public class PlayerFishing : MonoBehaviour
                 //낚시할때 fishingpoint를 바라보고 있어야 함
                 transform.LookAt(raycasthit.collider.transform.position);
                 playerAnimator.SetTrigger("doFish");
-                fish = raycasthit.collider.GetComponent<Fish>().fishList;
+                fish = raycasthit.collider.GetComponent<Fish>();
                 StartCoroutine(CatchFish());
             }
         }
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Item")
-        {
-            Debug.Log("stay");
-            if (isPressedSpace)
-            {
-                isPressedSpace = false;
-                Debug.Log("ispress space");
-                if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM)
-                {
-                    Debug.Log(other.gameObject.name);
-                    GetComponent<Encyclopedia>().itemData = other.GetComponent<Item>().item;
-                    GetComponent<Encyclopedia>().GainItem();
-                    GetComponent<PlayerInventory>().itemList.Add(other.GetComponent<Item>().item);
-                    Destroy(other.gameObject);
-                }
-                else
-                {
-                    Debug.Log("인벤토리 가득참");
-                }
-            }
-            else if (doAttack)
-            {
-                doAttack = false;
-                Debug.Log("is press click");
-                RaycastHit[] hits;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                
-                hits = Physics.RaycastAll(ray);
-                
-                var distinctHits = hits.DistinctBy(x => x.collider.name);
-                
-                foreach (var hit in distinctHits)
-                {
-                    if (hit.collider.tag == "Item")
-                    {
-                        if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM)
-                        {
-                            Debug.Log(other.gameObject.name);
-                            GetComponent<Encyclopedia>().itemData = other.GetComponent<Item>().item;
-                            GetComponent<Encyclopedia>().GainItem();
-                            GetComponent<PlayerInventory>().itemList.Add(other.GetComponent<Item>().item);
-                            Destroy(other.gameObject);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     void ECount()
     {
         if (eImageActivate)
@@ -274,5 +193,6 @@ public class PlayerFishing : MonoBehaviour
         yield return new WaitForSeconds(3);
         isSuccessState = false;
         isFishing = false;
+        UIManager_BH.instance.OpenSuccessImage();
     }
 }

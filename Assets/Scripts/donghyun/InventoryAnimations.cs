@@ -6,26 +6,27 @@ using UnityEngine;
 
 public class InventoryAnimations : MonoBehaviour
 {
-    private Sequence initDot;
-    private Sequence enableDot;
-    private Sequence disableDot;
-    
+    private Sequence Dot;
     private void Awake()
     {
+        transform.localScale = new Vector3(0, 0, 0);
+        Dot = DOTween.Sequence();
         
+        Dot.Prepend(transform.DOLocalMove(Vector3.right * -100f, 0.5f));
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        initDot = DOTween.Sequence();
-
-        transform.localScale = new Vector3(0, 0, 0);
-        
-        initDot
-            .SetAutoKill(false)
-            .SetLink(gameObject, LinkBehaviour.RestartOnEnable)
-            .Append(transform.DOLocalMove(Vector3.right * -100f, 0.5f))
-            .Join(transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f))
+            Dot
+            .Prepend(transform.DOScale(new Vector3(0f, 0f, 0f), 0.01f))
+            .Append(transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f))
             .Join(transform.DOLocalMove(Vector3.right * 500f, 0.5f));
+    }
+
+    private void OnDisable()
+    {
+            Dot
+            .Prepend(transform.DOLocalMove(new Vector3(0, 0, 0), 0.5f))
+            .Join(transform.DOScale(new Vector3(0f, 0f, 0f), 0.1f));
     }
 }

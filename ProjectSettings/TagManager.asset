@@ -6,7 +6,6 @@ TagManager:
   tags:
   - ItemSlot
   - Item
-  - BagPanelGrid
   layers:
   - Default
   - TransparentFX
@@ -15,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Exit
-  - Area
+  - 
   - 
   - 
   - 
