@@ -29,15 +29,14 @@ public class UIManager_BH : MonoBehaviour
 
     //Fishing
     [SerializeField] GameObject pressEImage;
-    [SerializeField] GameObject successImage;
-    [SerializeField] TMP_Text fishName;
+    [SerializeField] Text fishName;
     [SerializeField] Image fishImage;
     PlayerFishing player;
-    Fish fish;
+    ItemData[] fish;
 
     void Start()
     {
-        player = GameObject.Find("Player_BH").GetComponent<PlayerFishing>();
+        player = GetComponent<PlayerFishing>();
 
         inventoryCloseBtn.onClick.AddListener((() =>
         {
@@ -47,7 +46,6 @@ public class UIManager_BH : MonoBehaviour
             equipmentInventory.SetActive(false);
             encyclopediaInventory.SetActive(false);
             pressEImage.SetActive(false);
-            successImage.SetActive(false);
         }));
     }
 
@@ -58,7 +56,6 @@ public class UIManager_BH : MonoBehaviour
 
         Open(bagInventory);
         OpenEImage();
-        //OpenSuccessImage();
 
         CloseInventory();
     }
@@ -86,13 +83,21 @@ public class UIManager_BH : MonoBehaviour
     //������ �̸��� ��������Ʈ�� fishnumber��� random int ���� �־ ����
     public void OpenSuccessImage()
     {
-        successImage.SetActive(player.isSuccessState);
         fish = player.fish;
 
-        int fishNumber = Random.Range(0, fish.fishList.Length);
-        Debug.Log("Success! Caught " + fish.fishList[fishNumber]);
-        fishName.text = fish.fishList[fishNumber];
-        fishImage.sprite = fish.fishSpriteList[fishNumber];
+        int fishNumber = Random.Range(0, fish.Length);
+        Debug.Log("Success! Caught " + fish[fishNumber]);
+        
+        if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM)
+        {
+            GetComponent<Encyclopedia>().itemData = fish[fishNumber];
+            GetComponent<Encyclopedia>().GainItem();
+            GetComponent<PlayerInventory>().itemList.Add(fish[fishNumber]);
+        }
+        else
+        {
+            Debug.Log("인벤토리 가득참");
+        }
     }
 
     void CloseInventory()
@@ -105,7 +110,6 @@ public class UIManager_BH : MonoBehaviour
                 bagInventory.SetActive(false);
                 equipmentInventory.SetActive(false);
                 encyclopediaInventory.SetActive(false);
-
             }
         }
     }

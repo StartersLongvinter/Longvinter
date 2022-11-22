@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="" />
-=======
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player_BH.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player_BH.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player_JDH.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player_JDH.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/AIFishingScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/AIFishingScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Plants/3744538.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Plants/3744538.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/Fish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/Fish.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/PlayerFishing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/PlayerFishing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager_BH.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager_BH.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Encyclopedia.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/Encyclopedia.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EncyclopediaAnimatinos.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EncyclopediaAnimatinos.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/InventoryAnimations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/InventoryAnimations.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
->>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Desktop/Longvinter/Assets/Scripts/beonghyun/PlayerFishing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Desktop/Longvinter/Assets/Scripts/beonghyun/UIManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ButtonAnimations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Encyclopedia.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/EncyclopediaAnimatinos.cs" root0="FORCE_HIGHLIGHTING" />
@@ -24,10 +31,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Item.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ItemSlot.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ItemToolTip.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/LobbyPanelCloseBtn.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/NotificationAnimations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerContorller_JDH.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/96/5d2e749e/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5ddb5fa70dfe40d2818192400111b9ec2aa00/d9/0f67b62a/Tween.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -70,10 +79,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="33970">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="33970" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -92,12 +101,9 @@
       <workItem from="1668135572396" duration="67000" />
       <workItem from="1668505849194" duration="1933000" />
       <workItem from="1668648223742" duration="32590000" />
-<<<<<<< Updated upstream
-      <workItem from="1668752525670" duration="6129000" />
-=======
       <workItem from="1668752525670" duration="4173000" />
-      <workItem from="1669016328246" duration="360000" />
->>>>>>> Stashed changes
+      <workItem from="1669016328246" duration="2114000" />
+      <workItem from="1669077666497" duration="19843000" />
     </task>
     <servers />
   </component>
@@ -120,7 +126,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
