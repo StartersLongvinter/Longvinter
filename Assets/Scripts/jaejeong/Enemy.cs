@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
 		StartCoroutine(ResetColor());
 
 		health -= amount;
+		Debug.Log(health);
 
 		if (health <= 0 && !isDead)
 			Die();
@@ -45,6 +46,7 @@ public class Enemy : MonoBehaviour
 
 	IEnumerator ResetColor()
 	{
+		originalColor = renderer.material.color;
 		isChanged = true;
 		renderer.material.color = Color.white;
 		yield return new WaitForSeconds(0.05f);

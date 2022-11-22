@@ -83,7 +83,7 @@ public class TurretController : MonoBehaviourPun
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    IEnumerator RotateTurret()
+    public IEnumerator RotateTurret()
     {
         float duration = 9f;
         float speed = 5f;
@@ -97,4 +97,10 @@ public class TurretController : MonoBehaviourPun
             yield return new WaitForSeconds(0.5f);
         }
     }
+
+/*    private void OnTriggerStay(Collider other)
+    {
+        //집이랑 Turret 범위 겹치면 공격 가능
+        //집 범위에서 총들면 공격 가능
+    }*/
 }
