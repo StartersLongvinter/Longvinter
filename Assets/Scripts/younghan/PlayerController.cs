@@ -8,6 +8,7 @@ using Photon.Pun;
 public class PlayerController : MonoBehaviourPunCallbacks
 {
     public float moveSpeed;
+    public Weapon weapon;
     public Transform leftHandIkTarget;
     public Transform rightHandIkTarget;
     public Vector3 AimLookPoint
@@ -22,13 +23,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
     private PlayerStat playerStat;
+
     private float horizontalAxis;
     private float verticalAxis;
     private Vector3 moveDirection;
     private Vector3 aimLookPoint;
-
     private float attackDelay;
-    [SerializeField] private float attackRate = 0.5f;
 
     private bool doAttack;
     private bool isAttackReady;
@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-
         if (!photonView.IsMine || chatInput.activeSelf) return;
 
         GetInput();
@@ -121,23 +120,32 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
         else
         {
-            if (moveDirection == Vector3.zero)
-                return;
+            if (moveDirection == Vector3.zero) return;
 
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
 
     }
 
-    // ���� ������ �� �����ؾ� ��
     private void Attack()
     {
+        if (weapon == null) return;
+
         attackDelay += Time.deltaTime;
-        isAttackReady = attackRate < attackDelay;
+        isAttackReady = weapon.attackRate < attackDelay;
 
         if (isAiming && isAttackReady && doAttack)
         {
-            // �߻�
+            if (weapon.type == Weapon.Type.Range)
+            {
+                weapon.Fire();
+            }
+            else if (weapon.type == Weapon.Type.Melee1)
+            {
+                weapon.Swing();
+
+                playerAnimator.SetTrigger("doMeleeAttack");
+            }
 
             attackDelay = 0;
         }
@@ -145,20 +153,28 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     private void Aim()
     {
-        // ī�޶� ���� ���� - ī�޶� ��Ʈ�ѷ����� ó��
+        if (weapon == null) return;
 
+        if (isAiming && weapon.type == Weapon.Type.Melee1)
+        {
+            playerAnimator.SetBool("isMeleeAttackAim", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("isMeleeAttackAim", false);
+        }
     }
 
     private void AnimateAim()
     {
-        if (isAiming)
+        float progressSpeed = Mathf.Lerp(1f, 3f, ikProgress);
+
+        if (isAiming && weapon.type == Weapon.Type.Range || weapon.type == Weapon.Type.Melee2)
         {
-            float progressSpeed = (ikProgress < 0.3f) ? 1f : 2f;
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         }
         else
         {
-            float progressSpeed = (ikProgress < 0.3f) ? 1f : 2f;
             ikProgress = Mathf.Clamp(ikProgress - Time.deltaTime * progressSpeed, 0f, 0.5f);
         }
 

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public enum Type { Melee, Range }
-    public enum AttackMode { Single, Auto }
+    // Melee1 - Axe / Melee2 - Chain saw / Range - Gun
+    public enum Type { Melee1, Melee2, Range }
+    //public enum AttackMode { Single, Auto }
 
     public Type type;
-    public AttackMode attackMode;
+    //public AttackMode attackMode;
     public float damage;
-    public float rate;
+    public float attackRate;
+    public Transform firePoint;
+    public Transform muzzleFlashPoint;
+    public GameObject bulletPrefab;
+    public GameObject muzzleFlashVfxPrefab;
 
     void Start()
     {
@@ -21,4 +26,40 @@ public class Weapon : MonoBehaviour
     {
         
     }
+
+    public void Fire()
+    {
+        if (bulletPrefab != null)
+        {
+            GameObject bulletInstance = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+            bulletInstance.GetComponent<Bullet_Temp>().Damage = this.damage;
+        }
+
+        if (muzzleFlashVfxPrefab != null)
+        {
+            GameObject muzzleFlashVfxInstance = Instantiate(muzzleFlashVfxPrefab, muzzleFlashPoint.position, muzzleFlashPoint.rotation);
+            ParticleSystem muzzleFlashParticle = muzzleFlashVfxInstance.GetComponent<ParticleSystem>();
+
+            if (muzzleFlashParticle != null)
+            {
+                Destroy(muzzleFlashVfxInstance, muzzleFlashParticle.main.duration);
+            }
+            else
+            {
+                ParticleSystem muzzleFlashParticleChild = muzzleFlashVfxInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+
+                Destroy(muzzleFlashVfxInstance, muzzleFlashParticleChild.main.duration);
+            }
+        }
+    }
+
+    public void Swing()
+    {
+        Debug.Log("Swing");
+    }
+
+    public virtual void Attack() { }
+
+
 }
