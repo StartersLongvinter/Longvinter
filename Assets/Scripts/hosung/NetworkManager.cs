@@ -35,6 +35,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public List<RoomInfo> rooms = new List<RoomInfo>();
     public string nickName = "";
     bool isLobby = true;
+    public string playerPrefabName;
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
     GameObject roomPrefab;
@@ -132,7 +133,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LocalPlayer.NickName = nickName;
         //GameObject.Find("PasswordPanel").SetActive(false);
-        var player = PhotonNetwork.Instantiate("Player", respawnPos, Quaternion.identity);
+        var player = PhotonNetwork.Instantiate(playerPrefabName, respawnPos, Quaternion.identity);
 
         photonView.RPC("RenewalPlayerList", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, true);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, 1);
