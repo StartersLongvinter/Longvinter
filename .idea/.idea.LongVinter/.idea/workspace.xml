@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="" />
-=======
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Plants/3744538.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Plants/3744538.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Turret.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Turret.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/YH 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/YH 1.unity" afterDir="false" />
     </list>
->>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/Desktop/Longvinter/Assets/Scripts/beonghyun/PlayerFishing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Desktop/Longvinter/Assets/Scripts/beonghyun/UIManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ButtonAnimations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Encyclopedia.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/EncyclopediaAnimatinos.cs" root0="FORCE_HIGHLIGHTING" />
@@ -92,12 +92,9 @@
       <workItem from="1668135572396" duration="67000" />
       <workItem from="1668505849194" duration="1933000" />
       <workItem from="1668648223742" duration="32590000" />
-<<<<<<< Updated upstream
-      <workItem from="1668752525670" duration="6129000" />
-=======
       <workItem from="1668752525670" duration="4173000" />
-      <workItem from="1669016328246" duration="360000" />
->>>>>>> Stashed changes
+      <workItem from="1669016328246" duration="2114000" />
+      <workItem from="1669077666497" duration="986000" />
     </task>
     <servers />
   </component>
@@ -120,7 +117,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
