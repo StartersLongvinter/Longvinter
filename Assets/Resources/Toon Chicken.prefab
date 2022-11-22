@@ -483,7 +483,7 @@ Transform:
   m_GameObject: {fileID: 6297776878160505521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.64, y: 0, z: -0.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6301103395879875893}
@@ -524,10 +524,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.38
+  m_Radius: 0.29
   m_Height: 0
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!195 &6296764728032190217
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -541,7 +541,7 @@ NavMeshAgent:
   m_Speed: 0
   m_Acceleration: 1
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 540
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -562,12 +562,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d63926329645ab6488b3a509de9a0416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 100
+  agent: {fileID: 6296764728032190217}
+  anim: {fileID: 6212225031969149325}
+  nearPlayer: {fileID: 0}
   target:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  nearDistance: 3
+  - {fileID: 0}
+  - {fileID: 0}
+  nearDistance: 7
   moveAmount: 3
 --- !u!136 &4847248579875208429
 CapsuleCollider:

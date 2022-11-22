@@ -4,14 +4,14 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NavMeshTest : MonoBehaviour
+public class NavMeshTest : LivingEntity
 {
     [SerializeField] Transform[] target;
-    NavMeshAgent agent;
-    Animator anim;
-    GameObject nearPlayer;
+    //NavMeshAgent agent;
+    //Animator anim;
+    //GameObject nearPlayer;
     
-    List<GameObject> playerDistanceList = new List<GameObject>();
+    //List<GameObject> playerDistanceList = new List<GameObject>();
 
     Vector3 nextPos;
     
@@ -25,10 +25,10 @@ public class NavMeshTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+        //agent = GetComponent<NavMeshAgent>();
+        //anim = GetComponent<Animator>();
         
-        targetNumber = 0;
+        //targetNumber = 0;
     }
 
     // Update is called once per frame
@@ -36,6 +36,11 @@ public class NavMeshTest : MonoBehaviour
     {
         SetDestination();
         AnimParams();
+
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    HitByPlayer();
+        //}
     }
 
     void AnimParams()
@@ -63,38 +68,38 @@ public class NavMeshTest : MonoBehaviour
 
     //제일 가까이 있는 player를 nearPlayer로 지정
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerDistanceList.Add(other.gameObject);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        playerDistanceList.Add(other.gameObject);
+    //    }
+    //}
 
-    private void OnTriggerStay(Collider other)
-    {
-        float minDistance = float.MaxValue;
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    float minDistance = float.MaxValue;
 
-        foreach (var player in playerDistanceList)
-        {
-            float distance = Vector3.Distance(player.transform.position, transform.position);
+    //    foreach (var player in playerDistanceList)
+    //    {
+    //        float distance = Vector3.Distance(player.transform.position, transform.position);
 
-            if (minDistance > distance)
-            {
-                minDistance = distance;
-                nearPlayer = player;
-            }
-        }
-    }
+    //        if (minDistance > distance)
+    //        {
+    //            minDistance = distance;
+    //            nearPlayer = player;
+    //        }
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerDistanceList.Remove(other.gameObject);
-            //myDict.Remove(other.gameObject);
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        playerDistanceList.Remove(other.gameObject);
+    //        //myDict.Remove(other.gameObject);
+    //    }
+    //}
 
     void SetDestination()
     {
