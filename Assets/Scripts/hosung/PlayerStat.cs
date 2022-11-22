@@ -5,6 +5,12 @@ using Photon.Pun;
 
 public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
 {
+    private static PlayerStat localPlayer;
+    public static PlayerStat LocalPlayer
+    {
+        get { return localPlayer; }
+    }
+
     // 나중에 플레이어 actornumber로 플레이어 판별 등을 할 예정 
     [Header("OwnerPlayerInfo")]
     public int ownerPlayerActorNumber;
@@ -29,7 +35,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     void Awake()
     {
         hp = maxHp;
-        if (photonView.IsMine) photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
+        if (photonView.IsMine)
+        {
+            localPlayer = this;
+            photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
+        }
     }
 
     [PunRPC]
