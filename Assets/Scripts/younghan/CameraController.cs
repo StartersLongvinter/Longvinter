@@ -28,19 +28,32 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player == null) return;
+        Follow();
+    }
+
+    private void Follow()
+    {
+        if (player == null || playerController == null) return;
+
+        Vector3 tempVector3 = new Vector3(transform.position.x - offset.x, player.position.y, transform.position.z - offset.z);
+        float tempDistance = Vector3.Distance(player.position, tempVector3);
+
         if (playerController.IsAiming)
         {
-            Vector3 direction = (playerController.AimLookPoint - player.position).normalized;
-            direction = new Vector3(direction.x, 0, direction.z);
+            //smoothDampTime = Mathf.Lerp(0.2f, 0.1f, tempDistance / aimMaxDistance);
 
             float distance = Vector3.Distance(player.position, playerController.AimLookPoint);
             float clampDistance = Mathf.Clamp(distance, 0f, aimMaxDistance);
+
+            Vector3 direction = (playerController.AimLookPoint - player.position).normalized;
+            direction = new Vector3(direction.x, 0, direction.z);
 
             targetPosition = player.position + direction * clampDistance;
         }
         else
         {
+            //smoothDampTime = Mathf.Lerp(0.07f, 0.2f, tempDistance / aimMaxDistance);
+
             targetPosition = player.position;
         }
 
