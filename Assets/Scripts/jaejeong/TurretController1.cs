@@ -5,16 +5,12 @@ using UnityEngine;
 public class TurretController1 : MonoBehaviour
 {
     public Transform rotatePart;
-    //public Transform firePoint;
 
-    private string playerTag = "Player";//!pv.IsMine
-    private float range = 30f;
-    private Transform target;
-    private Enemy targetEnemy;
     private float fireRate = 1f;
     private float fireTimeLimit = 0f;
     private List<GameObject> list = new List<GameObject>();
     private int damage = 10;
+    private bool isfire=false;
     private void Start()
     {
         StartCoroutine(RotateTurret());
@@ -23,15 +19,10 @@ public class TurretController1 : MonoBehaviour
     {
         if (list.Count==0)
             return;
-        if (fireTimeLimit <= 0f)
+        if (fireTimeLimit <= 0f&&!isfire)
         {
+            isfire=true;
             fireTimeLimit = 1f / fireRate;
-
-            foreach(var i in list)
-            {
-                Enemy enemy = i.GetComponent<Enemy>();
-                enemy.TakeDamage(damage);
-            }
         }
         fireTimeLimit -= Time.deltaTime;
     }
@@ -49,9 +40,21 @@ public class TurretController1 : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         list.Add(other.gameObject);
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (isfire)
+        {
+            foreach (var i in list)
+            {
+                Enemy enemy = i.GetComponent<Enemy>();
+                enemy.TakeDamage(damage);
+            }
+            isfire=false;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
