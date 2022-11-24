@@ -112,6 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c5bad5962f79848956132e09c7adb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ImpactVfxPrefab: {fileID: 3213101676908087617, guid: c24712fe9b4e34e43a6601f53ffe48de, type: 3}
+  speed: 0
+  damage: 0
   impactEffect: {fileID: 6622622917043726941, guid: 1f0b6e20a07c3524d8e9f9f03a096d1e, type: 3}
 --- !u!54 &5597442059091094535
 Rigidbody:

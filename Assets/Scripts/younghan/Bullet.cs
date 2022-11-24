@@ -2,33 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Temp : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
 	public float Damage
     {
 		set { damage = value; }
     }
+	public Vector3 Direction
+    {
+		set { direction = value; }
+    }
 
-	private Rigidbody bulletRigidbody;
+	protected Rigidbody bulletRigidbody;
 	[SerializeField] private GameObject ImpactVfxPrefab;
-	[SerializeField] private float speed;
+	[SerializeField] protected float speed;
 	private Vector3 direction;
-	[SerializeField] private float damage; // SerializeFiled for check, Don't set
+	[SerializeField] protected float damage;
+	//[SerializeField] private float speed;
+	//private Vector3 direction;
+	//[SerializeField] private float damage; // SerializeFiled for check, Don't set
 	private bool isCollided;
 
-	private void Start()
+	protected virtual void Start()
     {
 		bulletRigidbody = GetComponent<Rigidbody>();
-
-		direction = GameObject.FindGameObjectWithTag("Player").transform.forward;
-    }
+	}
 
     private void FixedUpdate()
     {
 		bulletRigidbody.velocity = direction * speed;
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.tag != "Bullet" && !isCollided)
 		{

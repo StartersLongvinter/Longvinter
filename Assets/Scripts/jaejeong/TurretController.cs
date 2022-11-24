@@ -3,41 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class TurretController : MonoBehaviourPun
+public class TurretController : Turret
 {
     public GameObject bulletPrefab;
-    public Transform rotatePart;
     public Transform firePoint;
+    public Transform turretTransform;
 
-    private string playerTag = "Player";//!pv.IsMine
-    private float range = 30f;
+    [SerializeField] private float range = 30f;
+
+    private string playerTag = "Player";
+
     private Transform target;
     private Enemy targetEnemy;
-    private float fireRate = 1f;
-    private float fireTimeLimit = 0f;
 
-    private void Start()
+    [SerializeField]
+    private bool inOtherHome;
+
+    protected override void Start()
     {
-        StartCoroutine(RotateTurret());
+        base.Start();
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
-    private void UpdateTarget()
+    private void UpdateTarget() //Turret범위
     {
+        if (firePoint == null)
+            return;
         GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestPlayer = null;
         foreach (GameObject player in players)
         {
-            /*if (PhotonNetwork.MasterClient.ActorNumber == player.GetComponent<PlayerStat>().ownerPlayerActorNumber)
-                break;*/
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            if (PhotonNetwork.MasterClient.ActorNumber == player.GetComponent<PlayerStat>().ownerPlayerActorNumber)
+                break;
+            float distanceToPlayer = Vector3.Distance(turretTransform.transform.position, player.transform.position);
             if (distanceToPlayer < shortestDistance)
             {
                 shortestDistance = distanceToPlayer;
                 nearestPlayer = player;
             }
         }
-        if (nearestPlayer != null && shortestDistance <= range &&!nearestPlayer.GetComponent<Enemy>().isChanged)
+        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged) //집터 상관x, 포탑 사거리 안, 무기 상관 x
         {
             target = nearestPlayer.transform;
             targetEnemy = nearestPlayer.GetComponent<Enemy>();
@@ -49,12 +54,17 @@ public class TurretController : MonoBehaviourPun
 
     private void Update()
     {
-        if (target == null)
+        if (target == null||firePoint==null)
+            return;
+
+        attack = target.GetComponent<PlayerController>().IsAiming;
+
+        if (!inOtherHome && !attack)
             return;
 
         LockOnTarget();
 
-        if (fireTimeLimit <= 0f)
+        if (fireTimeLimit <= 0f && inOtherHome || fireTimeLimit <= 0f&&attack&&!inOtherHome)
         {
             Shoot();
             fireTimeLimit = 1f / fireRate;
@@ -71,8 +81,11 @@ public class TurretController : MonoBehaviourPun
 
     void Shoot()
     {
-        GameObject firedBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Bullet bullet = firedBullet.GetComponent<Bullet>();
+        GameObject firedBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 90, 0)));
+        TurretBullet bullet = firedBullet.GetComponent<TurretBullet>();
+
+        bullet.Direction = firePoint.right;
+        
         if (bullet != null)
             bullet.Seek(target);
     }
@@ -83,24 +96,18 @@ public class TurretController : MonoBehaviourPun
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    public IEnumerator RotateTurret()
+    private void OnTriggerEnter(Collider other)
     {
-        float duration = 9f;
-        float speed = 5f;
-        while (true)
-        {
-            for(float time=0; time<duration; time += Time.fixedDeltaTime)
-            {
-                rotatePart.transform.Rotate(Vector3.up, speed * Time.fixedDeltaTime);
-                yield return null;
-            }
-            yield return new WaitForSeconds(0.5f);
-        }
+        if (other.gameObject.tag == "Player")
+            inOtherHome = true;
     }
 
-/*    private void OnTriggerStay(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        //집이랑 Turret 범위 겹치면 공격 가능
-        //집 범위에서 총들면 공격 가능
-    }*/
+        if (other.gameObject.tag == "Player")
+            inOtherHome = false;
+    }
 }
+//포탑 사거리 안 && 집터 에 있으면 무기 상관 없이 공격 가능
+//집 터 밖 && 포탑 사거리 안 && 무기 들면 공격 가능
+//Turret 범위 안에서 총안들면 공격x
