@@ -2477,7 +2477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nickName: 
   playerPrefabName: Player
-  roomPrefab: {fileID: 0}
+  roomPrefab: {fileID: 5161857643047110011, guid: 8a53112d8bac945f7944e16bed2a5f3d, type: 3}
 --- !u!4 &2052626788
 Transform:
   m_ObjectHideFlags: 0
