@@ -23,11 +23,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         damaged,
         die
     }
-    public static Status status;
+    public Status status;
 
-    [SerializeField] float hp;
-    [SerializeField] float maxHp = 90f;
-    [SerializeField] int money;
+    public float hp;
+    public float maxHp = 90f;
+    public int money;
 
     public bool isCold = false;
 

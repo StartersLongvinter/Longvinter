@@ -4857,7 +4857,7 @@ GameObject:
   - component: {fileID: 9076992130396448206}
   - component: {fileID: 9023010118084909428}
   - component: {fileID: 8943202224624562908}
-  - component: {fileID: -6261875183147377191}
+  - component: {fileID: -1755428691574209594}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -4911,7 +4911,7 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6261875183147377191
+--- !u!114 &-1755428691574209594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4920,7 +4920,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9078441727759166900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae2d70aa48111748b27b2f4fff0f7bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 09c5bad5962f79848956132e09c7adb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ImpactVfxPrefab: {fileID: 3213101676908087617, guid: c24712fe9b4e34e43a6601f53ffe48de, type: 3}

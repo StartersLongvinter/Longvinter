@@ -7,21 +7,9 @@ public class Enemy : MonoBehaviour
 	[HideInInspector]
 	public float speed;
 
-	public float startHealth = 100;
-	private float health;
-
-	public GameObject deathEffect;
-
-	private bool isDead = false;
-
 	public static Color originalColor;
 	private SkinnedMeshRenderer renderer;
 	public bool isChanged = false;
-
-	void Start ()
-	{
-		health = startHealth;
-	}
 
 	public void TakeDamage (float amount)
 	{
@@ -29,19 +17,17 @@ public class Enemy : MonoBehaviour
 
 		StartCoroutine(ResetColor());
 
-		health -= amount;
-		Debug.Log(health);
+		PlayerStat.LocalPlayer.hp -= amount;
+		Debug.Log(PlayerStat.LocalPlayer.hp);
 
-		if (health <= 0 && !isDead)
+		if (PlayerStat.LocalPlayer.hp <= 0 && PlayerStat.LocalPlayer.status != PlayerStat.Status.die)
 			Die();
 	}
 
 	void Die ()
 	{
-		isDead = true;
+		PlayerStat.LocalPlayer.status = PlayerStat.Status.die;
 		Debug.Log("Dead");
-
-		//Destroy(gameObject);
 	}
 
 	IEnumerator ResetColor()
