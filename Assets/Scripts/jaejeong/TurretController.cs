@@ -16,8 +16,7 @@ public class TurretController : Turret
     private Transform target;
     private Enemy targetEnemy;
 
-    [SerializeField]
-    private bool inOtherHome;
+    public GroundTrigger trigger;
 
     protected override void Start()
     {
@@ -33,8 +32,6 @@ public class TurretController : Turret
         GameObject nearestPlayer = null;
         foreach (GameObject player in players)
         {
-            if (PhotonNetwork.MasterClient.ActorNumber == player.GetComponent<PlayerStat>().ownerPlayerActorNumber)
-                break;
             float distanceToPlayer = Vector3.Distance(turretTransform.transform.position, player.transform.position);
             if (distanceToPlayer < shortestDistance)
             {
@@ -42,6 +39,8 @@ public class TurretController : Turret
                 nearestPlayer = player;
             }
         }
+        if (shortestDistance > range)
+            trigger.inOtherHome = false;
         if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged) //집터 상관x, 포탑 사거리 안, 무기 상관 x
         {
             target = nearestPlayer.transform;
@@ -59,12 +58,14 @@ public class TurretController : Turret
 
         attack = target.GetComponent<PlayerController>().IsAiming;
 
-        if (!inOtherHome && !attack)
+        Debug.Log(trigger.inOtherHome + " " + attack);
+
+        if (!trigger.inOtherHome && !attack)
             return;
 
         LockOnTarget();
 
-        if (fireTimeLimit <= 0f && inOtherHome || fireTimeLimit <= 0f&&attack&&!inOtherHome)
+        if (fireTimeLimit <= 0f && trigger.inOtherHome || fireTimeLimit <= 0f&&attack&&!trigger.inOtherHome)
         {
             Shoot();
             fireTimeLimit = 1f / fireRate;
@@ -94,18 +95,6 @@ public class TurretController : Turret
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-            inOtherHome = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-            inOtherHome = false;
     }
 }
 //포탑 사거리 안 && 집터 에 있으면 무기 상관 없이 공격 가능

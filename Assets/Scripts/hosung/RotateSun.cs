@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
-public class RotateSun : MonoBehaviour
+public class RotateSun : MonoBehaviourPun
 {
     [Range(0, 23)] public float curTime = 1;
     public string curRealTime;
@@ -21,15 +22,17 @@ public class RotateSun : MonoBehaviour
         nightDirectionalLight.GetComponent<Light>().color = nightColor;
     }
 
-    void Update()
+    [PunRPC]
+    public void SetTime(float _curTime, float _curSeconds)
     {
-        if (curSeconds >= oneHourPerSeconds)
-        {
-            curTime = curTime == 23 ? 0 : curTime + 1;
-            curSeconds = 0;
-        }
-        curSeconds += Time.deltaTime;
+        curTime = _curTime;
+        curSeconds = _curSeconds;
 
+        SetAngleAndColor();
+    }
+
+    void SetAngleAndColor()
+    {
         // float _lightDir = curTime < 23 ? (180 / 23) * (curTime + 1 + (curSeconds == 0 ? 0 : curSeconds / oneHourPerSeconds)) : 180f + 180f * (curSeconds == 0 ? 0 : curSeconds / oneHourPerSeconds);
         float _lightDir = (360 / 24) * (curTime + (curSeconds == 0 ? 0 : curSeconds / oneHourPerSeconds));
 
@@ -42,5 +45,19 @@ public class RotateSun : MonoBehaviour
 
         curRealTime = $"{(int)curTime}시 {Mathf.RoundToInt((curSeconds / oneHourPerSeconds) * 60)}분";
         if (timeText != null) timeText.text = curRealTime;
+    }
+
+    void Update()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (curSeconds >= oneHourPerSeconds)
+            {
+                curTime = curTime == 23 ? 0 : curTime + 1;
+                curSeconds = 0;
+            }
+            curSeconds += Time.deltaTime;
+            photonView.RPC("SetTime", RpcTarget.AllViaServer, curTime, curSeconds);
+        }
     }
 }
