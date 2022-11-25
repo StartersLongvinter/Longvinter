@@ -6,8 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler,
-    IPointerClickHandler
+public class ItemDrag : MonoBehaviour, IPointerClickHandler
 {
     private RectTransform rect;
     private CanvasGroup canvasGroup;
@@ -42,38 +41,6 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        previousPos = transform.parent;
-
-        canvasGroup.alpha = 0.5f;
-        canvasGroup.blocksRaycasts = false;
-
-        transform.SetParent(transform.parent.parent);
-        transform.SetAsLastSibling();
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        rect.position = eventData.position;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        canvasGroup.alpha = 1f;
-        canvasGroup.blocksRaycasts = true;
-
-        if (transform.parent.tag != "ItemSlot")
-        {
-            transform.SetParent(previousPos);
-            rect.position = previousPos.GetComponent<RectTransform>().position;
-        }
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-    }
-
     private void InputEquipItem(GameObject item)
     {
         GameObject itemInEquip;
@@ -104,10 +71,10 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 if (bagInven[i].transform.childCount == 0)
                 {
-                    itemInEquip.transform.SetParent(bagInven[i].transform);
-                    itemInEquip.transform.localScale = new Vector3(1, 1, 1);
-                    itemInEquip.GetComponent<RectTransform>().sizeDelta = new Vector2(90, 90);
-                    itemInEquip.GetComponent<RectTransform>().anchoredPosition = new Vector3(45, 45, 0);
+                    gameObject.transform.SetParent(bagInven[i].transform);
+                    transform.localScale = new Vector3(1, 1, 1);
+                    GetComponent<RectTransform>().sizeDelta = new Vector2(90, 90);
+                    GetComponent<RectTransform>().anchoredPosition = new Vector3(45, 45, 0);
                     break;
                 }
             }
@@ -131,10 +98,10 @@ public class ItemDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 if (equipInven[i].transform.childCount == 0)
                 {
-                    item.transform.SetParent(equipInven[i].transform);
-                    item.transform.localScale = new Vector3(1, 1, 1);
-                    item.GetComponent<RectTransform>().sizeDelta = new Vector2(90, 90);
-                    item.GetComponent<RectTransform>().anchoredPosition = new Vector3(45, 45, 0);
+                    gameObject.transform.SetParent(equipInven[i].transform);
+                    transform.localScale = new Vector3(1, 1, 1);
+                    GetComponent<RectTransform>().sizeDelta = new Vector2(90, 90);
+                    GetComponent<RectTransform>().anchoredPosition = new Vector3(45, 45, 0);
                     break;
                 }
             }

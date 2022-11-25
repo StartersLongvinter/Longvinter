@@ -2,67 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feather.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feather/HazelHenNormal.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feather/HazelHenNormal.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feather/HazelHenScruffy.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Feather/HazelHenScruffy.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/ArcticChar.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/ArcticChar.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/AtlanticCod.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/AtlanticCod.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/BlackGrouper.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/BlackGrouper.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/CatFish.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/CatFish.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Haddoc.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Haddoc.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/MistyGrouper.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/MistyGrouper.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Perch.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Perch.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Pike.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Pike.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/RainbowTrout.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/RainbowTrout.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/RedFish.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/RedFish.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Salmon.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Salmon.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/SalmonShark.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/SalmonShark.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Stingray.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Stingray.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/SwordFish.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/SwordFish.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Trout.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Trout.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Tuna.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/Tuna.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/WhiteFish.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Fish/WhiteFish.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Plant.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Plant/CloudBerry.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Plant/CloudBerry.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Plant/Mez.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Plant/Mez.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player_DH.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player_DH.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/AIFishingScene.unity.orig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/AIFishingScene.unity.orig.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Turret.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Turret.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/PlayerFishing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/PlayerFishing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager_BH.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager_BH.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemToolTip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemToolTip.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerContorller_JDH.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerContorller_JDH.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +104,7 @@
       <workItem from="1668752525670" duration="4173000" />
       <workItem from="1669016328246" duration="2114000" />
       <workItem from="1669077666497" duration="40492000" />
-      <workItem from="1669193934992" duration="23552000" />
+      <workItem from="1669193934992" duration="23564000" />
     </task>
     <servers />
   </component>
