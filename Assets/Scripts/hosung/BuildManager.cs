@@ -11,7 +11,7 @@ public enum BuildType
     other,
     countIndex // don¡¯t set this type! This type only use to check enum¡¯s length.
 }
-public class BuildManager : MonoBehaviour
+public class BuildManager : MonoBehaviourPun
 {
     BuildType buildType = BuildType.none;
     public Vector3 mousePosition;
@@ -28,6 +28,8 @@ public class BuildManager : MonoBehaviour
     }
     public void SetBuildType(int buildtypeNumber)
     {
+        if (PhotonNetwork.LocalPlayer.ActorNumber != PlayerStat.LocalPlayer.ownerPlayerActorNumber)
+            return;
         buildType = (BuildType)buildtypeNumber;
         buildPrefabName = buildPrefabNameList[(int)buildType];
         buildObject = Instantiate(buildObjectPrefab[(buildtypeNumber)], Vector3.zero, Quaternion.identity);
@@ -35,7 +37,7 @@ public class BuildManager : MonoBehaviour
     bool CheckBuildPosition(Vector3 _mousePosition)
     {
         if (myHomeArea == null)
-            foreach (GameObject area in buildArea) if (area.name == "MyHomeArea") myHomeArea = area;
+            foreach (GameObject area in buildArea) if (area.name == PhotonNetwork.LocalPlayer.NickName+ "HomeArea") myHomeArea = area;
         if (buildType == BuildType.turret)
         {
             if (myHomeArea == null || Vector3.Distance(PlayerStat.LocalPlayer.gameObject.transform.position, _mousePosition) > 4f)
@@ -88,12 +90,16 @@ public class BuildManager : MonoBehaviour
         if (buildType != BuildType.none && canBuild && Input.GetMouseButtonDown(0))
         {
             var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
-            TurretController turretController=myHomeArea.GetComponent<TurretController>();
+            newTurret.transform.SetParent(myHomeArea.transform);
+
+            myHomeArea.GetComponent<GroundTrigger>().myTurret = newTurret.GetComponent<TurretController>();
+            newTurret.GetComponent<TurretController>().trigger = myHomeArea.GetComponent<GroundTrigger>();
+/*            TurretController turretController=myHomeArea.GetComponent<TurretController>();
             turretController.turretTransform = newTurret.transform;
             turretController.rotatePart = newTurret.transform.GetChild(0).GetChild(1).GetChild(0);
             turretController.firePoint = turretController.rotatePart.GetChild(0).GetChild(0).GetChild(0);
 
-            myHomeArea.GetComponent<TurretController>().StartCoroutine("RotateTurret");
+            myHomeArea.GetComponent<TurretController>().StartCoroutine("RotateTurret");*/
 
 
             buildType = BuildType.none;
