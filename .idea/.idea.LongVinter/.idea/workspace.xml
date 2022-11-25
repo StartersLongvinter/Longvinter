@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +105,7 @@
       <workItem from="1668752525670" duration="4173000" />
       <workItem from="1669016328246" duration="2114000" />
       <workItem from="1669077666497" duration="40492000" />
-      <workItem from="1669193934992" duration="23564000" />
+      <workItem from="1669193934992" duration="24486000" />
     </task>
     <servers />
   </component>
