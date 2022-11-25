@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1514235737949385884}
   - component: {fileID: 1514235737949385885}
   - component: {fileID: 1514235737949385881}
+  - component: {fileID: -6487677266702463582}
   m_Layer: 0
   m_Name: FishingPoint
   m_TagString: Untagged
@@ -111,24 +112,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a5f6198d82bdd4cac25b3061e63863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pv: {fileID: -6487677266702463582}
   fishList:
-  - {fileID: 11400000, guid: c3476d327ce4e4a489db2688abdf2b18, type: 2}
-  - {fileID: 11400000, guid: f9c8cda3658f64e7397a7996615b1e1b, type: 2}
-  - {fileID: 11400000, guid: 50d4720d296044ffd8ff9cae00a6d783, type: 2}
-  - {fileID: 11400000, guid: ac542c58aa85f41dd9e5955e480ae0b5, type: 2}
-  - {fileID: 11400000, guid: 027978476d70f411e82a059212ec38ff, type: 2}
-  - {fileID: 11400000, guid: 1ff2de4e698cb478685de963365fc8f9, type: 2}
-  - {fileID: 11400000, guid: 9b29a4ab3e4e64ec6aba0fde3028a02d, type: 2}
-  - {fileID: 11400000, guid: dc645f28042ab468894ff306d9d3f47e, type: 2}
-  - {fileID: 11400000, guid: 1d95684da4d234b7caf447faf8380b5c, type: 2}
-  - {fileID: 11400000, guid: 48352abdfcbde4ef483b8d1eda1838f7, type: 2}
-  - {fileID: 11400000, guid: 025476ad902694f64a6308632e27bb34, type: 2}
-  - {fileID: 11400000, guid: 2d78ecbbffa2848af9bdec4ca73f8f4f, type: 2}
-  - {fileID: 11400000, guid: 1f500339638d6471282c589c5e7f87db, type: 2}
-  - {fileID: 11400000, guid: ec7ef6eddf7da48a1a53541e7f40b061, type: 2}
-  - {fileID: 11400000, guid: b38dbc5961e21498f82cb577c7467d01, type: 2}
-  - {fileID: 11400000, guid: 840b956cba19f4c58b90c7e730b33767, type: 2}
-  - {fileID: 11400000, guid: 35fcb06d8ea794dcfaebaf794d441fa0, type: 2}
+  - {fileID: 5223685251508337091, guid: 2da07ba54bdf64ea08d96a97d832f6f9, type: 3}
+  - {fileID: 5223685251508337091, guid: 79bb6ee0b6ee3431883ebdcc4297f1b4, type: 3}
+  - {fileID: 5223685251508337091, guid: 9c6bdd61292c8474f8cd3cc5553ae2d8, type: 3}
+  - {fileID: 5223685251508337091, guid: 377ec3de0e8cb47838b8fa98447c97db, type: 3}
+  - {fileID: 5223685251508337091, guid: 6c344ae7fc8f8447ca42eee6868db0d5, type: 3}
+  - {fileID: 5223685251508337091, guid: 006cf2cb9d08e41bb961438ab28ef75f, type: 3}
+  - {fileID: 5223685251508337091, guid: 246cec8324f434db580fd3de570e3cde, type: 3}
+  - {fileID: 5223685251508337091, guid: ad4436b7c34244357891975fbbe38509, type: 3}
+  - {fileID: 5223685251508337091, guid: e9cb0311364b846e39211211f0c3e676, type: 3}
+  - {fileID: 5223685251508337091, guid: 52db1cd8b238e4e49809e6acd52953a0, type: 3}
+  - {fileID: 5223685251508337091, guid: 0f461641053d4438990f364593779fc9, type: 3}
+  - {fileID: 5223685251508337091, guid: 15164d89acd5440c39777197d54a4112, type: 3}
+  - {fileID: 5223685251508337091, guid: d7b5e2d81783b473184fef7caa5ca642, type: 3}
+  - {fileID: 5223685251508337091, guid: 911f719bbff1d452da70df0142d4177d, type: 3}
+  - {fileID: 5223685251508337091, guid: 1d00a7083988b4249bc7900ff8201639, type: 3}
+  - {fileID: 5223685251508337091, guid: 24dae20c20f074469a599db5f4660551, type: 3}
+  - {fileID: 5223685251508337091, guid: 0dd3b7e684bbd40268c9ec1a9627e4bf, type: 3}
+  isOccupied: 0
+--- !u!114 &-6487677266702463582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514235737949386082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1514235738408374713
 GameObject:
   m_ObjectHideFlags: 0

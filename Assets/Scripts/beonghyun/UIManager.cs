@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -32,7 +33,6 @@ public class UIManager : MonoBehaviourPun
     [SerializeField] Text fishName;
     [SerializeField] Image fishImage;
     PlayerController player;
-    ItemData[] fish;
  
     void Start()
     {
@@ -83,17 +83,16 @@ public class UIManager : MonoBehaviourPun
     }
     
     //������ �̸��� ��������Ʈ�� fishnumber��� random int ���� �־ ����
-    public void OpenSuccessImage()
+    public void OpenSuccessImage(GameObject fish)
     {
-        fish = player.fish;
-
-        int fishNumber = Random.Range(0, fish.Length);
-        Debug.Log("Success! Caught " + fish[fishNumber]);
-        
         if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM)
         {
-            GetComponent<Encyclopedia>().itemData = fish[fishNumber];
+            GetComponent<Encyclopedia>().itemData = fish.GetComponent<Item>().item;
             GetComponent<Encyclopedia>().GainItem();
+
+            GameObject temp = Instantiate(fish);
+            
+            GetComponent<PlayerInventory>().AddItem(temp);
             //GetComponent<PlayerInventory>().itemList.Add(fish[fishNumber]);
         }
         else

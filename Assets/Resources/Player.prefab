@@ -15324,7 +15324,6 @@ MonoBehaviour:
   isFishing: 0
   eImageActivate: 0
   isSuccessState: 0
-  fish: []
 --- !u!114 &7221896422927409961
 MonoBehaviour:
   m_ObjectHideFlags: 0

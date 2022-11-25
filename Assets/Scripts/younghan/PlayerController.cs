@@ -49,7 +49,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public bool eImageActivate;
     public bool isSuccessState;
     int eCount = 0;
-    public ItemData[] fish;
+    
+    GameObject fish;
     
     private float timer = 0f;
 
@@ -245,16 +246,23 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
             if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
             {
-                Debug.Log("Fishing");
-                //낚시할때 fishingpoint를 바라보고 있어야 함
-                transform.LookAt(raycasthit.collider.transform.position);
-                playerAnimator.SetTrigger("doFish");
-                fish = raycasthit.collider.GetComponent<Fish>().fishList;
-                StartCoroutine(CatchFish());
+                if (raycasthit.collider.GetComponent<FishingPoint>().isOccupied)
+                {
+                    Debug.Log("다른사람이 낚시중입니다.");
+                }
+                else
+                {
+                    Debug.Log("Fishing");
+                    //낚시할때 fishingpoint를 바라보고 있어야 함
+                    transform.LookAt(new Vector3(raycasthit.collider.transform.position.x , transform.position.y, raycasthit.collider.transform.position.z));
+                    playerAnimator.SetTrigger("doFish");
+                    fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
+                    StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
+                }
             }
         }
     }
-    
+
     void ECount()
     {
         if (eImageActivate)
@@ -378,7 +386,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     }
     #endregion
 
-    IEnumerator CatchFish()
+    IEnumerator CatchFish(FishingPoint point)
     {
         isFishing = true;
         playerAnimator.SetBool("isFishing", true);
@@ -393,9 +401,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (eCount >= 10)
         {
             isSuccessState = true;
-            UIManager.instance.OpenSuccessImage();
+            UIManager.instance.OpenSuccessImage(fish);
+            point.IsFinished();
         }
-        else Debug.Log("Fail");
+        else
+        {
+            Debug.Log("Fail");
+            point.IsFinished();
+        }
         playerAnimator.SetBool("isFishing", false);
         yield return new WaitForSeconds(3);
         isSuccessState = false;

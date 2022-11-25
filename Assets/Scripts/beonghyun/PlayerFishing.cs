@@ -182,7 +182,7 @@ public class PlayerFishing : MonoBehaviour
                 //낚시할때 fishingpoint를 바라보고 있어야 함
                 transform.LookAt(raycasthit.collider.transform.position);
                 playerAnimator.SetTrigger("doFish");
-                fish = raycasthit.collider.GetComponent<Fish>().fishList;
+                //fish = raycasthit.collider.GetComponent<Fish>().fishList;
                 StartCoroutine(CatchFish());
             }
         }

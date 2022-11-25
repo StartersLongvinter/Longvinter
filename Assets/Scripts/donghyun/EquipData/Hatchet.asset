@@ -15,9 +15,10 @@ MonoBehaviour:
   equipmentClassify: 0
   equipmentArea: 1
   equipmentAnim: 0
-  equipmentPrefab: {fileID: 5223685251508337091, guid: 28efce72b221a40629081c6dbab9d2ae, type: 3}
-  equipmentImage: {fileID: 21300000, guid: ba22a43e6d0814f6c95ec01d723a858c, type: 3}
+  equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 28efce72b221a40629081c6dbab9d2ae, type: 3}
+  equipmentPrefab: {fileID: 0}
   weaponDamage: 4
   weaponAttackRate: 0
+  ammoCount: 0
   equipmentKorName: "\uC190\uB3C4\uB07C"
   isAuto: 0
