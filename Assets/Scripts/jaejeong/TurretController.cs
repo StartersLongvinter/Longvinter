@@ -73,8 +73,8 @@ public class TurretController : MonoBehaviourPun
     {
         GameObject firedBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Bullet bullet = firedBullet.GetComponent<Bullet>();
-        if (bullet != null)
-            bullet.Seek(target);
+        //if (bullet != null)
+        //    bullet.Seek(target);
     }
 
     private void OnDrawGizmos()

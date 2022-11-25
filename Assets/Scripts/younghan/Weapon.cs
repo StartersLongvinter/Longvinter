@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
         {
             GameObject bulletInstance = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
-            bulletInstance.GetComponent<Bullet_Temp>().Damage = this.damage;
+            bulletInstance.GetComponent<Bullet>().Damage = this.damage;
         }
 
         if (muzzleFlashVfxPrefab != null)
