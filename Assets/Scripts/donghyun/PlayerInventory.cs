@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviourPun
 {
     public int MAXITEM = 16;
     
@@ -94,7 +95,7 @@ public class PlayerInventory : MonoBehaviour
             inventoryCount = itemList.Count;
         }
         
-        Destroy(go);
+        go.GetComponent<Item>().CallDestroyGameObject();
     }
 
     //가방에서 장비를 눌렀을 경우 장비창으로 장비가 넘어가게 되는데 이때 가방속 아이템들을 위치를 당겨주는 함수

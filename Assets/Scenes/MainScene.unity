@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 67566227}
   - component: {fileID: 67566226}
   - component: {fileID: 67566225}
+  - component: {fileID: 67566231}
   m_Layer: 0
   m_Name: ShotGun
   m_TagString: Equipment
@@ -540,6 +541,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67566223}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &67566231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67566223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 6
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &69029963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,6 +1197,33 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 71c88db6a52754fb69656f43f4dd3f38, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
+--- !u!1 &178698221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5051484039065906673, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
+  m_PrefabInstance: {fileID: 178698220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &178698222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178698221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 10
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &205996723 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 922786315, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
@@ -2306,6 +2356,33 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0240698f3a2c746c48baa4b95e2549bd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
+--- !u!1 &460607600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5051484039065906673, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
+  m_PrefabInstance: {fileID: 460607599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &460607601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460607600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 9
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &470087924
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,6 +3729,7 @@ GameObject:
   - component: {fileID: 685320137}
   - component: {fileID: 685320136}
   - component: {fileID: 685320135}
+  - component: {fileID: 685320141}
   m_Layer: 0
   m_Name: SemiRifle
   m_TagString: Equipment
@@ -3780,6 +3858,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685320133}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &685320141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685320133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 7
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &698258125
 GameObject:
   m_ObjectHideFlags: 0
@@ -4234,6 +4334,7 @@ GameObject:
   - component: {fileID: 730558852}
   - component: {fileID: 730558851}
   - component: {fileID: 730558850}
+  - component: {fileID: 730558853}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -4337,6 +4438,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+--- !u!114 &730558853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730558849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 5
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &761272780
 GameObject:
   m_ObjectHideFlags: 0
@@ -6297,6 +6420,7 @@ GameObject:
   - component: {fileID: 1446705777}
   - component: {fileID: 1446705776}
   - component: {fileID: 1446705775}
+  - component: {fileID: 1446705781}
   m_Layer: 0
   m_Name: ChainSaw
   m_TagString: Equipment
@@ -6425,6 +6549,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446705773}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1446705781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446705773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 8
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1468530083
 GameObject:
   m_ObjectHideFlags: 0
@@ -9628,7 +9774,7 @@ MonoBehaviour:
   firePoint: {fileID: 0}
   turretTransform: {fileID: 0}
   range: 10
-  inOtherHome: 0
+  trigger: {fileID: 0}
 --- !u!135 &2123504562
 SphereCollider:
   m_ObjectHideFlags: 0
