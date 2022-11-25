@@ -7,6 +7,8 @@ TagManager:
   - ItemSlot
   - Item
   - BagPanelGrid
+  - Bison
+  - InstalledObject
   layers:
   - Default
   - TransparentFX

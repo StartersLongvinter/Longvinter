@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Temp : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
 	public float Damage
-    {
+	{
 		set { damage = value; }
-    }
+	}
 
 	private Rigidbody bulletRigidbody;
 	[SerializeField] private GameObject ImpactVfxPrefab;
@@ -17,18 +17,18 @@ public class Bullet_Temp : MonoBehaviour
 	private bool isCollided;
 
 	private void Start()
-    {
+	{
 		bulletRigidbody = GetComponent<Rigidbody>();
 
 		direction = GameObject.FindGameObjectWithTag("Player").transform.forward;
-    }
+	}
 
-    private void FixedUpdate()
-    {
+	private void FixedUpdate()
+	{
 		bulletRigidbody.velocity = direction * speed;
 	}
 
-    private void OnCollisionEnter(Collision collision)
+	private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.tag != "Bullet" && !isCollided)
 		{
@@ -39,20 +39,20 @@ public class Bullet_Temp : MonoBehaviour
 			ContactPoint contactPoint = collision.contacts[0];
 			Vector3 impactPosition = contactPoint.point;
 			Quaternion impactRotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
-			
+
 			if (ImpactVfxPrefab != null)
 			{
 				GameObject ImpactVfxInstance = Instantiate(ImpactVfxPrefab, impactPosition, impactRotation);
 				ParticleSystem impactParticle = ImpactVfxInstance.GetComponent<ParticleSystem>();
-				
+
 				if (impactParticle != null)
 				{
 					Destroy(ImpactVfxInstance, impactParticle.main.duration);
 				}
 				else
-                {
+				{
 					ParticleSystem impactParticleChild = ImpactVfxInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
-					
+
 					Destroy(ImpactVfxInstance, impactParticleChild.main.duration);
 				}
 			}
@@ -82,7 +82,7 @@ public class Bullet_Temp : MonoBehaviour
 				yield return new WaitForSeconds(0.01f);
 
 				transform.GetChild(0).localScale -= new Vector3(0.1f, 0.1f, 0.1f);
-				
+
 				for (int i = 0; i < transformList.Count; i++)
 				{
 					transformList[i].localScale -= new Vector3(0.1f, 0.1f, 0.1f);
