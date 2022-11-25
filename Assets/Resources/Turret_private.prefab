@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 2909241283207979408}
   - component: {fileID: 2905251074971978532}
   - component: {fileID: 2905251074409028175}
+  - component: {fileID: -4817542743552829778}
   m_Layer: 0
   m_Name: Turret_private
   m_TagString: Untagged
@@ -522,6 +523,28 @@ CapsuleCollider:
   m_Height: 16.2692
   m_Direction: 1
   m_Center: {x: 1, y: 2, z: 0}
+--- !u!114 &-4817542743552829778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905397856149912250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caef596b73514144690c7a2db0221ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotatePart: {fileID: 2909241285055505042}
+  fireRate: 1
+  fireTimeLimit: 0
+  isfire: 0
+  attack: 0
+  bulletPrefab: {fileID: 9078441727759166900, guid: 3d866b77fce0ca244a4933df0aa04f33, type: 3}
+  firePoint: {fileID: 2905251075596339026}
+  turretTransform: {fileID: 2909241283207979408}
+  range: 30
+  trigger: {fileID: 0}
 --- !u!1 &2905397856255711920
 GameObject:
   m_ObjectHideFlags: 0
