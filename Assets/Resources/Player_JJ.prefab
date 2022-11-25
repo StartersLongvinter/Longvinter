@@ -2503,6 +2503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerPlayerActorNumber: 0
+  status: 0
   hp: 0
   maxHp: 90
   money: 0
@@ -2537,8 +2538,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  startHealth: 100
-  deathEffect: {fileID: 6622622917043726941, guid: 1f0b6e20a07c3524d8e9f9f03a096d1e, type: 3}
   isChanged: 0
 --- !u!114 &4709948622270406386
 MonoBehaviour:
