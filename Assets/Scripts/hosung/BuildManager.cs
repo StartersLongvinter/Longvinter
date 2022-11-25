@@ -92,8 +92,8 @@ public class BuildManager : MonoBehaviourPun
             var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
             newTurret.transform.SetParent(myHomeArea.transform);
 
-            myHomeArea.GetComponent<GroundTrigger>().myTurret = newTurret.GetComponent<TurretController>();
-            newTurret.GetComponent<TurretController>().trigger = myHomeArea.GetComponent<GroundTrigger>();
+            newTurret.GetComponent<TurretController>().photonView.RPC("Init", RpcTarget.All);
+
 /*            TurretController turretController=myHomeArea.GetComponent<TurretController>();
             turretController.turretTransform = newTurret.transform;
             turretController.rotatePart = newTurret.transform.GetChild(0).GetChild(1).GetChild(0);
