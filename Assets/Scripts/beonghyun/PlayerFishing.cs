@@ -193,20 +193,18 @@ public class PlayerFishing : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Item")
+        if (other.tag.Equals("Item"))
         {
-            Debug.Log("stay");
             if (isPressedSpace)
             {
                 isPressedSpace = false;
-                Debug.Log("ispress space");
-                if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM)
+                if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM - 1)
                 {
                     Debug.Log(other.gameObject.name);
                     GetComponent<Encyclopedia>().itemData = other.GetComponent<Item>().item;
                     GetComponent<Encyclopedia>().GainItem();
-                    GetComponent<PlayerInventory>().itemList.Add(other.GetComponent<Item>().item);
-                    Destroy(other.gameObject);
+                    GetComponent<PlayerInventory>().AddItem(other.gameObject);
+                    //GetComponent<PlayerInventory>().itemList.Add(other.gameObject);
                 }
                 else
                 {
@@ -216,7 +214,6 @@ public class PlayerFishing : MonoBehaviour
             else if (doAttack)
             {
                 doAttack = false;
-                Debug.Log("is press click");
                 RaycastHit[] hits;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 
@@ -226,15 +223,59 @@ public class PlayerFishing : MonoBehaviour
                 
                 foreach (var hit in distinctHits)
                 {
-                    if (hit.collider.tag == "Item")
+                    if (hit.collider.tag.Equals("Item"))
                     {
-                        if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM)
+                        if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM - 1)
                         {
                             Debug.Log(other.gameObject.name);
                             GetComponent<Encyclopedia>().itemData = other.GetComponent<Item>().item;
                             GetComponent<Encyclopedia>().GainItem();
-                            GetComponent<PlayerInventory>().itemList.Add(other.GetComponent<Item>().item);
-                            Destroy(other.gameObject);
+                            GetComponent<PlayerInventory>().AddItem(other.gameObject);
+                        }
+                        else
+                        {
+                            Debug.Log("인벤토리 가득참");
+                        }
+                    }
+                }
+            }
+        }
+        else if (other.tag.Equals("Equipment"))
+        {
+            if (isPressedSpace)
+            {
+                isPressedSpace = false;
+                if (GetComponent<PlayerInventory>().inventoryCount <= GetComponent<PlayerInventory>().MAXITEM - 1)
+                {
+                    GetComponent<PlayerInventory>().AddItem(other.gameObject);
+                }
+                else
+                {
+                    Debug.Log("인벤토리 가득참");
+                }
+            }
+
+            if (doAttack)
+            {
+                doAttack = false;
+                RaycastHit[] hits;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                hits = Physics.RaycastAll(ray);
+
+                var distinctHits = hits.DistinctBy(x => x.collider.name);
+
+                foreach (var hit in distinctHits)
+                {
+                    if (hit.collider.tag.Equals("Equipment"))
+                    {
+                        if (GetComponent<PlayerInventory>().inventoryCount <= GetComponent<PlayerInventory>().MAXITEM - 1)
+                        {
+                            GetComponent<PlayerInventory>().AddItem(other.gameObject);
+                        }
+                        else
+                        {
+                            Debug.Log("인벤토리 가득참");
                         }
                     }
                 }

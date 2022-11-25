@@ -7,14 +7,14 @@ public class ItemData : ScriptableObject
 {
     public enum ItemType
     {
-        Food = 0, Weapon, Equipment, Tool
+        Item = 0, Weapon, Equipment, Tool
     }
     
     public enum ItemClassify
     {
         Fish, Feather, Plant
     }
-
+    
     [SerializeField] private string itemName; //아이템 이름
     [SerializeField] private string itemKorName;
     [SerializeField] private string itemExplain;
@@ -31,7 +31,7 @@ public class ItemData : ScriptableObject
     public string itExplan => itemExplain;
     public ItemType itType => itemType;
     public ItemClassify itClassify => itemClassify;
-
+    
     public GameObject itPrefab => itemPrefab;
     public Sprite itImage => itemImage;
 }

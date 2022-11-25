@@ -92,7 +92,7 @@ public class UIManager_BH : MonoBehaviour
         {
             GetComponent<Encyclopedia>().itemData = fish[fishNumber];
             GetComponent<Encyclopedia>().GainItem();
-            GetComponent<PlayerInventory>().itemList.Add(fish[fishNumber]);
+            //GetComponent<PlayerInventory>().itemList.Add(fish[fishNumber]);
         }
         else
         {
