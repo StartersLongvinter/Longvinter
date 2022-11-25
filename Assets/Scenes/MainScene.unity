@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366753, g: 0.48427093, b: 0.5645238, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4234,6 +4234,7 @@ GameObject:
   - component: {fileID: 730558852}
   - component: {fileID: 730558851}
   - component: {fileID: 730558850}
+  - component: {fileID: 730558853}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -4337,6 +4338,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+--- !u!114 &730558853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730558849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 5
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &761272780
 GameObject:
   m_ObjectHideFlags: 0
@@ -9628,7 +9651,7 @@ MonoBehaviour:
   firePoint: {fileID: 0}
   turretTransform: {fileID: 0}
   range: 10
-  inOtherHome: 0
+  trigger: {fileID: 0}
 --- !u!135 &2123504562
 SphereCollider:
   m_ObjectHideFlags: 0

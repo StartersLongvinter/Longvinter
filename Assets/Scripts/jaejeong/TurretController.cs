@@ -21,8 +21,16 @@ public class TurretController : Turret
     protected override void Start()
     {
         base.Start();
+    }
+
+    [PunRPC]
+    public void Init()
+    {
+        trigger = GameObject.Find(photonView.Owner.NickName + "HomeArea").GetComponent<GroundTrigger>();
+        trigger.myTurret = this;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
+
     private void UpdateTarget() //Turret¹üÀ§
     {
         if (firePoint == null)

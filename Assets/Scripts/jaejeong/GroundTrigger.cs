@@ -8,7 +8,7 @@ public class GroundTrigger : MonoBehaviourPun//, IPunObservable //¶¥
     public TurretController myTurret;
     public bool inOtherHome=false; //private turret
 
-    /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
@@ -18,7 +18,7 @@ public class GroundTrigger : MonoBehaviourPun//, IPunObservable //¶¥
         {
             this.inOtherHome = (bool)stream.ReceiveNext();
         }
-    }*/
+    }
 
     private void Awake() //change later~~~?~~?~?~?~?~
     {
