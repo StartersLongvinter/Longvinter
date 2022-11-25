@@ -5,7 +5,7 @@ using Photon.Pun;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 {
     public float moveSpeed;
     public Weapon weapon;
@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     [SerializeField] GameObject chatInput;
 
+    public bool testbool;
+
     #region Callback Methods
     private void Awake()
     {
@@ -46,8 +48,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
         playerAnimator = GetComponent<Animator>();
         playerStat = GetComponent<PlayerStat>();
 
-        Camera.main.GetComponent<CameraController>().Player = this.transform;
-        Camera.main.GetComponent<CameraController>().PlayerController = this;
+        if (photonView.IsMine)
+        {
+            Camera.main.GetComponent<CameraController>().Player = this.transform;
+            Camera.main.GetComponent<CameraController>().PlayerController = this;
+        }
 
         playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
     }
@@ -81,7 +86,17 @@ public class PlayerController : MonoBehaviourPunCallbacks
     #endregion
 
     #region Public Methods
-
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext((bool)isAiming);
+        }
+        else
+        {
+            isAiming = (bool)stream.ReceiveNext();
+        }
+    }
     #endregion
 
     #region Private Methods
@@ -90,6 +105,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         horizontalAxis = Input.GetAxisRaw("Horizontal");
         verticalAxis = Input.GetAxisRaw("Vertical");
         isAiming = Input.GetButton("Fire2");
+        photonView.RPC("SetIsAiming", RpcTarget.Others, isAiming);
         doAttack = Input.GetButtonDown("Fire1");
     }
 
@@ -124,7 +140,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
-
     }
 
     private void Attack()
@@ -191,6 +206,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         playerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandIkTarget.rotation);
         playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIkTarget.rotation);
+    }
+
+    [PunRPC]
+    private void SetIsAiming(bool _isAiming)
+    {
+        isAiming = _isAiming;
     }
     #endregion
 }
