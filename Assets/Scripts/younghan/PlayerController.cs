@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     #region Callback Methods
     private void Awake()
     {
-        this.gameObject.name = PhotonNetwork.LocalPlayer.NickName;
+        this.gameObject.name = photonView.Owner.NickName;
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerStat = GetComponent<PlayerStat>();
