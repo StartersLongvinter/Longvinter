@@ -38,7 +38,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public string playerPrefabName;
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
-    GameObject roomPrefab;
+    [SerializeField] GameObject roomPrefab;
 
     void Awake()
     {
