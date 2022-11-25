@@ -87,17 +87,17 @@ public class PlayerFishing : MonoBehaviour
         horizontalAxis = Input.GetAxisRaw("Horizontal");
         verticalAxis = Input.GetAxisRaw("Vertical");
         isAiming = Input.GetButton("Fire2");
-        //doAttack = Input.GetButtonDown("Fire1");
+        doAttack = Input.GetButtonDown("Fire1");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isPressedSpace = true;
         }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            doAttack = true;
-        }
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    doAttack = true;
+        //}
     }
     private void Move()
     {

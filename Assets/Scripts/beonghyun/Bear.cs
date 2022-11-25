@@ -4,14 +4,14 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Bear : MonoBehaviour
+public class Bear : LivingEntity
 {
     [SerializeField] Transform[] target;
-    NavMeshAgent agent;
-    Animator anim;
-    GameObject nearPlayer;
+    //NavMeshAgent agent;
+    //Animator anim;
+    //GameObject nearPlayer;
 
-    List<GameObject> playerDistanceList = new List<GameObject>();
+    //List<GameObject> playerDistanceList = new List<GameObject>();
 
     Vector3 nextPos;
 
@@ -64,41 +64,67 @@ public class Bear : MonoBehaviour
 
     //제일 가까이 있는 player를 nearPlayer로 지정
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerDistanceList.Add(other.gameObject);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        playerDistanceList.Add(other.gameObject);
+    //    }
+    //}
 
-    private void OnTriggerStay(Collider other)
-    {
-        float minDistance = float.MaxValue;
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    float minDistance = float.MaxValue;
 
-        foreach (var player in playerDistanceList)
-        {
-            float distance = Vector3.Distance(player.transform.position, transform.position);
+    //    foreach (var player in playerDistanceList)
+    //    {
+    //        float distance = Vector3.Distance(player.transform.position, transform.position);
 
-            if (minDistance > distance)
-            {
-                minDistance = distance;
-                nearPlayer = player;
-            }
-        }
-    }
+    //        if (minDistance > distance)
+    //        {
+    //            minDistance = distance;
+    //            nearPlayer = player;
+    //        }
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerDistanceList.Remove(other.gameObject);
-            //myDict.Remove(other.gameObject);
-        }
-    }
-
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        playerDistanceList.Remove(other.gameObject);
+    //        //myDict.Remove(other.gameObject);
+    //    }
+    //}
     void SetDestination()
     {
+        if (nearPlayer==null)
+        {
+            if (isCoroutine) return;
+
+            agent.speed = 1.5f;
+
+            nextPos = target[targetNumber].position;
+
+            float _distance = Vector3.Distance(transform.position, nextPos);
+
+            agent.destination = nextPos;
+
+            if (_distance < 1)
+            {
+                int newTargetNumber = Random.Range(0, target.Length);
+
+                targetNumber = newTargetNumber;
+
+                string[] states = { "Eat", "Sit", "Sleep" };
+
+                int i = Random.Range(0, 3);
+
+                StartCoroutine(IdleState(states[i]));
+            }
+
+            return;
+        }
 
         float distance = Vector3.Distance(nearPlayer.transform.position, transform.position);
 
