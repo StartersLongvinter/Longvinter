@@ -1012,7 +1012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &359768829
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1451,6 +1451,7 @@ MonoBehaviour:
   buildObjectColors:
   - {r: 0.023584902, g: 1, b: 0.29288298, a: 0.5019608}
   - {r: 1, g: 0, b: 0, a: 0.5019608}
+  buildPrefabNameList: []
 --- !u!4 &451903425
 Transform:
   m_ObjectHideFlags: 0
@@ -2517,16 +2518,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 705507993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 999f08881f2674bf2a30f9796b14157c, type: 3}
+  m_Script: {fileID: 11500000, guid: 869590e298eb6438d840c3cb07e90753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curTime: 21
+  curTime: 1
   curRealTime: 
   oneHourPerSeconds: 10
   directionalLight: {fileID: 705507993}
   nightDirectionalLight: {fileID: 1748365710}
   timeText: {fileID: 1148613338}
-  nightColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+  nightColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &709877533
 GameObject:
   m_ObjectHideFlags: 0
