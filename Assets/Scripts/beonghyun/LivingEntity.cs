@@ -8,16 +8,23 @@ public class LivingEntity : MonoBehaviour
     //[SerializeField] Transform[] target;
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
+    
+    [SerializeField] Material hitEffect1;
+    [SerializeField] Material hitEffect2;
     //[SerializeField] float nearDistance;
     //[SerializeField] float moveAmount;
 
     //float damageAmount=1;
     //int targetNumber;
+    Material startMat;
     public NavMeshAgent agent;
     public Animator anim;
-    SkinnedMeshRenderer meshes;
+    SkinnedMeshRenderer mesh;
     public GameObject nearPlayer;
+    //public GameObject nearAnimal;
     List<GameObject> playerDistanceList = new List<GameObject>();
+    public List<GameObject> nearAnimals = new List<GameObject>();
+    public bool isAttacked;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +35,10 @@ public class LivingEntity : MonoBehaviour
         //targetNumber = 0;
         maxHealth = 100;
         currentHealth = 100;
-        meshes = GetComponentInChildren<SkinnedMeshRenderer>();
-        InvokeRepeating("HitByPlayer", 2, 2);
+        mesh = GetComponentInChildren<SkinnedMeshRenderer>();
+        startMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
+        //InvokeRepeating("HitByPlayer", 2, 2);
+        nearAnimals.Add(this.gameObject);
     }
 
     // Update is called once per frame
@@ -45,6 +54,12 @@ public class LivingEntity : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerDistanceList.Add(other.gameObject);
+        }
+
+        if (other.gameObject.tag == "Bison" && !nearAnimals.Contains(other.gameObject) && this.gameObject.tag=="Bison")
+        {
+            Debug.Log("Bison");
+            nearAnimals.Add(other.gameObject);
         }
     }
 
@@ -71,6 +86,11 @@ public class LivingEntity : MonoBehaviour
             playerDistanceList.Remove(other.gameObject);
             //myDict.Remove(other.gameObject);
         }
+
+        if (other.gameObject.tag == "Bison")
+        {
+            nearAnimals.Remove(other.gameObject);
+        }
     }
 
     public void HitByPlayer()
@@ -82,19 +102,21 @@ public class LivingEntity : MonoBehaviour
 
     IEnumerator OnDamage()
     {
-
-        meshes.material.color = Color.red;
-        transform.localScale += new Vector3(0.3f,0.3f,0.3f);
+        isAttacked = true;
+        mesh.material = hitEffect1; 
+        
+        transform.localScale += new Vector3(0.1f,0.1f,0.1f);
         yield return new WaitForSeconds(0.1f);
 
-        meshes.material.color = Color.blue;
-        transform.localScale -= new Vector3(0.3f,0.3f,0.3f);
+        mesh.material = hitEffect2;
+
+        transform.localScale -= new Vector3(0.1f,0.1f,0.1f);
         yield return new WaitForSeconds(0.1f);
 
 
         if (currentHealth > 0)
         {
-            meshes.material.color = Color.white;
+            mesh.material = startMat;
         }
 
         else
@@ -108,6 +130,8 @@ public class LivingEntity : MonoBehaviour
 
         }
 
+        yield return new WaitForSeconds(4f);
+        isAttacked = false;
 
     }
 

@@ -1938,6 +1938,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b605b0e5990f3b43bc2679e7874c43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 500
+  currentHealth: 500
+  hitEffect1: {fileID: 2100000, guid: 7ebb1886fb7d6ed4096b2afe154309ad, type: 2}
+  hitEffect2: {fileID: 2100000, guid: de1d74c120cbfc043b2e2ccc96330826, type: 2}
+  agent: {fileID: 0}
+  anim: {fileID: 0}
+  nearPlayer: {fileID: 0}
+  nearAnimals: []
+  isAttacked: 0
   target:
   - {fileID: 0}
   - {fileID: 0}
@@ -1975,13 +1984,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7643404080586978724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5097bc52b1d2c6d448d8278853780ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 500
   currentHealth: 500
+  hitEffect1: {fileID: 2100000, guid: 7ebb1886fb7d6ed4096b2afe154309ad, type: 2}
+  hitEffect2: {fileID: 2100000, guid: de1d74c120cbfc043b2e2ccc96330826, type: 2}
+  agent: {fileID: 0}
+  anim: {fileID: 0}
+  nearPlayer: {fileID: 0}
+  nearAnimals: []
+  isAttacked: 0
 --- !u!1 &7738090386133088510
 GameObject:
   m_ObjectHideFlags: 0
