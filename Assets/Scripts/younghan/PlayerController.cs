@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
@@ -33,17 +34,30 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool doAttack;
     private bool isAttackReady;
     private bool isAiming;
+    private bool isPressedSpace;
+
 
     private float ikProgress;
     private float ikWeight;
 
     [SerializeField] GameObject chatInput;
+    
+    //낚시관련 변수
+    [SerializeField] float maxInteractableDistance = 7;
+    [SerializeField]
+    bool isFishing;
+    public bool eImageActivate;
+    public bool isSuccessState;
+    int eCount = 0;
+    public ItemData[] fish;
+    
+    private float timer = 0f;
 
-    public bool testbool;
 
     #region Callback Methods
     private void Awake()
     {
+        this.gameObject.name = PhotonNetwork.LocalPlayer.NickName;
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerStat = GetComponent<PlayerStat>();
@@ -54,7 +68,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             Camera.main.GetComponent<CameraController>().PlayerController = this;
         }
 
-        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
+        //playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
     }
 
     private void Start()
@@ -69,6 +83,19 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         GetInput();
         Aim();
         Attack();
+        Fishing();
+        ECount();
+
+        if (isPressedSpace)
+        {
+            timer += Time.deltaTime;
+        }
+
+        if (timer > 0.3f)
+        {
+            timer = 0f;
+            isPressedSpace = false;
+        }
     }
 
     private void FixedUpdate()
@@ -82,6 +109,98 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private void OnAnimatorIK()
     {
         AnimateAim();
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag.Equals("Item"))
+        {
+            if (isPressedSpace)
+            {
+                isPressedSpace = false;
+                if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM - 1)
+                {
+                    Debug.Log(other.gameObject.name);
+                    GetComponent<Encyclopedia>().itemData = other.GetComponent<Item>().item;
+                    GetComponent<Encyclopedia>().GainItem();
+                    GetComponent<PlayerInventory>().AddItem(other.gameObject);
+                    //GetComponent<PlayerInventory>().itemList.Add(other.gameObject);
+                }
+                else
+                {
+                    Debug.Log("인벤토리 가득참");
+                }
+            }
+            else if (doAttack)
+            {
+                doAttack = false;
+                RaycastHit[] hits;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                
+                hits = Physics.RaycastAll(ray);
+                
+                var distinctHits = hits.DistinctBy(x => x.collider.name);
+                
+                foreach (var hit in distinctHits)
+                {
+                    if (hit.collider.tag.Equals("Item"))
+                    {
+                        if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM - 1)
+                        {
+                            Debug.Log(other.gameObject.name);
+                            GetComponent<Encyclopedia>().itemData = other.GetComponent<Item>().item;
+                            GetComponent<Encyclopedia>().GainItem();
+                            GetComponent<PlayerInventory>().AddItem(other.gameObject);
+                        }
+                        else
+                        {
+                            Debug.Log("인벤토리 가득참");
+                        }
+                    }
+                }
+            }
+        }
+        else if (other.tag.Equals("Equipment"))
+        {
+            if (isPressedSpace)
+            {
+                isPressedSpace = false;
+                if (GetComponent<PlayerInventory>().inventoryCount <= GetComponent<PlayerInventory>().MAXITEM - 1)
+                {
+                    GetComponent<PlayerInventory>().AddItem(other.gameObject);
+                }
+                else
+                {
+                    Debug.Log("인벤토리 가득참");
+                }
+            }
+
+            if (doAttack)
+            {
+                doAttack = false;
+                RaycastHit[] hits;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                hits = Physics.RaycastAll(ray);
+
+                var distinctHits = hits.DistinctBy(x => x.collider.name);
+
+                foreach (var hit in distinctHits)
+                {
+                    if (hit.collider.tag.Equals("Equipment"))
+                    {
+                        if (GetComponent<PlayerInventory>().inventoryCount <= GetComponent<PlayerInventory>().MAXITEM - 1)
+                        {
+                            GetComponent<PlayerInventory>().AddItem(other.gameObject);
+                        }
+                        else
+                        {
+                            Debug.Log("인벤토리 가득참");
+                        }
+                    }
+                }
+            }
+        }
     }
     #endregion
 
@@ -107,21 +226,60 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         isAiming = Input.GetButton("Fire2");
         photonView.RPC("SetIsAiming", RpcTarget.Others, isAiming);
         doAttack = Input.GetButtonDown("Fire1");
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isPressedSpace = true;
+        }
+    }
+    
+    //raycast 이용 특정 object와 hit 되면 fishing 함수 호출
+    private void Fishing()
+    {
+        if (moveDirection != Vector3.zero || isFishing) return;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //AI collider와 부딪혀서 체크가 안되는 현상 발생함 raycastall으로 검출
+        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
+        foreach (var raycasthit in raycastHits)
+        {
+            float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
+            if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
+            {
+                Debug.Log("Fishing");
+                //낚시할때 fishingpoint를 바라보고 있어야 함
+                transform.LookAt(raycasthit.collider.transform.position);
+                playerAnimator.SetTrigger("doFish");
+                fish = raycasthit.collider.GetComponent<Fish>().fishList;
+                StartCoroutine(CatchFish());
+            }
+        }
+    }
+    
+    void ECount()
+    {
+        if (eImageActivate)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                eCount++;
+            }
+        }
     }
 
     private void Move()
     {
-        moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
-        float currentMoveSpeed = isAiming ? moveSpeed * 0.4f : moveSpeed;
-
-        playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
-
-        playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
+        if (!isFishing)
+        {
+            moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
+            float currentMoveSpeed = isAiming ? moveSpeed * 0.4f : moveSpeed;
+            playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
+            playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
+        }
     }
 
     private void Rotate()
     {
-        if (isAiming)
+        if (isAiming && !isFishing)
         {
             Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -182,6 +340,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void AnimateAim()
     {
+        if (isFishing)
+        {
+            return;
+        }
+        
         float progressSpeed = Mathf.Lerp(1f, 3f, ikProgress);
 
         if (isAiming && weapon.type == Weapon.Type.Range || weapon.type == Weapon.Type.Melee2)
@@ -214,4 +377,28 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         isAiming = _isAiming;
     }
     #endregion
+
+    IEnumerator CatchFish()
+    {
+        isFishing = true;
+        playerAnimator.SetBool("isFishing", true);
+        eCount = 0;
+        yield return new WaitForSeconds(Random.Range(5, 11));
+        eImageActivate = true;
+        // E 키를 누르라는 UI 나오게 해야함 UIManager에서 실행
+        Debug.Log("Press E!");
+        //2초 지나면 자동으로 UI 비활성화 만약 그 사이 10번 넘게 클릭했다면 성공
+        yield return new WaitForSeconds(2);
+        eImageActivate = false;
+        if (eCount >= 10)
+        {
+            isSuccessState = true;
+            UIManager.instance.OpenSuccessImage();
+        }
+        else Debug.Log("Fail");
+        playerAnimator.SetBool("isFishing", false);
+        yield return new WaitForSeconds(3);
+        isSuccessState = false;
+        isFishing = false;
+    }
 }

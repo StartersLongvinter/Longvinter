@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,7 +30,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
     private void Start()
     {
         //플레이어 이름이 변경되면 반드시 바꿔줘야함.
-        player = GameObject.Find("Player_DH");
+        player = GameObject.Find(PhotonNetwork.LocalPlayer.NickName);
 
         bagInven = new GameObject[canvas.transform.GetChild(1).GetChild(0).GetChild(0).childCount];
         equipInven = new GameObject[canvas.transform.GetChild(2).GetChild(0).GetChild(0).childCount];

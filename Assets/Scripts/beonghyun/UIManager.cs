@@ -25,9 +25,18 @@ public class UIManager : MonoBehaviour
     
     private bool isTabPressed;
     private bool inventoryState;
+    
+    //Fishing
+    [SerializeField] GameObject pressEImage;
+    [SerializeField] Text fishName;
+    [SerializeField] Image fishImage;
+    PlayerController player;
+    ItemData[] fish;
  
     void Start()
     {
+        player = GetComponent<PlayerController>();
+        
         inventoryCloseBtn.onClick.AddListener((() =>
         {
             inventoryState = false;
@@ -35,6 +44,7 @@ public class UIManager : MonoBehaviour
             bagInventory.SetActive(false);
             equipmentInventory.SetActive(false);
             encyclopediaInventory.SetActive(false);
+            pressEImage.SetActive(false);
         }));
     }
 
@@ -44,7 +54,8 @@ public class UIManager : MonoBehaviour
         KeyInput();
 
         Open(bagInventory);
-
+        OpenEImage();
+        
         CloseInventory();
     }
 
@@ -60,6 +71,31 @@ public class UIManager : MonoBehaviour
             isTabPressed = false;
             inventoryState = !inventoryState;
             ui.SetActive(inventoryState);
+        }
+    }
+    
+    void OpenEImage()
+    {
+        pressEImage.SetActive(player.eImageActivate);
+    }
+    
+    //������ �̸��� ��������Ʈ�� fishnumber��� random int ���� �־ ����
+    public void OpenSuccessImage()
+    {
+        fish = player.fish;
+
+        int fishNumber = Random.Range(0, fish.Length);
+        Debug.Log("Success! Caught " + fish[fishNumber]);
+        
+        if (GetComponent<PlayerInventory>().itemList.Count <= GetComponent<PlayerInventory>().MAXITEM)
+        {
+            GetComponent<Encyclopedia>().itemData = fish[fishNumber];
+            GetComponent<Encyclopedia>().GainItem();
+            //GetComponent<PlayerInventory>().itemList.Add(fish[fishNumber]);
+        }
+        else
+        {
+            Debug.Log("인벤토리 가득참");
         }
     }
 

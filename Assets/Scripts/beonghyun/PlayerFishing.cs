@@ -30,9 +30,6 @@ public class PlayerFishing : MonoBehaviour
     public Vector3 aimLookPoint;
     //낚시관련 변수
     [SerializeField] float maxInteractableDistance = 7;
-    //[SerializeField] GameObject pressEImage;
-    //[SerializeField] GameObject successImage;
-    //[SerializeField] TMP_Text fishName;
     [SerializeField]
     bool isFishing;
     public bool eImageActivate;

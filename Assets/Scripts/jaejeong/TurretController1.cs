@@ -21,7 +21,10 @@ public class TurretController1 : Turret
 
     private void OnTriggerEnter(Collider other)
     {
-        playerList.Add(other.gameObject);
+        if (other.tag == "Player")
+        {
+            playerList.Add(other.gameObject);
+        }
     }
     private void OnTriggerStay(Collider other)
     {
