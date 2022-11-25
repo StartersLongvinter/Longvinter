@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Chat : MonoBehaviour
 {
-    Animator chatAnimator;
+    public Animator chatAnimator;
     public float rotationValue = 1f;
+    public bool isChat = true;
 
     void Awake()
     {
@@ -14,6 +15,7 @@ public class Chat : MonoBehaviour
 
     public void TurnOffChat()
     {
+        if (!isChat) return;
         StartCoroutine(FadeOutChat());
     }
 
