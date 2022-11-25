@@ -4920,9 +4920,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9078441727759166900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae2d70aa48111748b27b2f4fff0f7bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 999f08881f2674bf2a30f9796b14157c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ImpactVfxPrefab: {fileID: 3213101676908087617, guid: c24712fe9b4e34e43a6601f53ffe48de, type: 3}
   speed: 10
-  damage: 10
+  damage: 0

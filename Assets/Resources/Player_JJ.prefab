@@ -2452,6 +2452,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 9099604741108442757}
   - {fileID: 5273102019895548753}
+  - {fileID: -4765186700457183708}
   - {fileID: 4709948622270406386}
   sceneViewId: 0
   InstantiationId: 0
@@ -2525,6 +2526,7 @@ MonoBehaviour:
   leftHandIkTarget: {fileID: 8456114499573782015}
   rightHandIkTarget: {fileID: 5426894538559998124}
   chatInput: {fileID: 7042290307377904792}
+  testbool: 0
 --- !u!114 &531876967192930716
 MonoBehaviour:
   m_ObjectHideFlags: 0
