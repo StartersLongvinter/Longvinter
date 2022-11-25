@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviourPun
 {
     public static UIManager instance;
     
@@ -51,6 +52,8 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine) return;
+        
         KeyInput();
 
         Open(bagInventory);
