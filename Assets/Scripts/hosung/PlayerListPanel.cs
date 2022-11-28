@@ -77,7 +77,7 @@ public class PlayerListPanel : MonoBehaviourPunCallbacks
         string password = passwordInput.text;
         int maxPlayercount = Mathf.RoundToInt(maxPlayerSlider.value);
         bool isPVP = PVPtoggle.isOn;
-        NetworkManager.Instance.OnClickCreate(maxPlayercount, isPVP, password);
+        NetworkManager.Instance.OnClickCreate(PhotonNetwork.LocalPlayer.NickName, maxPlayercount, isPVP, password);
 
         this.gameObject.SetActive(false);
     }

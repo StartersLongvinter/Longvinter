@@ -12,6 +12,7 @@ public class LobbyPanelCloseBtn : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() =>
         {
             SceneManager.LoadScene(0);
+            NetworkManager.Instance.rooms.Clear();
         });
     }
 }

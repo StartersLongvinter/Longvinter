@@ -37,7 +37,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public List<RoomInfo> rooms = new List<RoomInfo>();
     public string nickName = "";
-    bool isLobby = true;
+    bool isLobby = false;
     public string playerPrefabName;
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
@@ -45,15 +45,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (NetworkManager.instance != null) Destroy(this.gameObject);
     }
 
     public void Init(string _playerName, GameObject _roomPrefab)
     {
-        if (PhotonNetwork.InLobby) return;
+        if (isLobby) return;
 
         playerPrefabName = _playerName;
         roomPrefab = _roomPrefab;
+        DontDestroyOnLoad(this.gameObject);
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -77,13 +78,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel(i);
     }
 
-    public void OnClickCreate(int maxPlayer, bool isPVP, string password)
+    public void OnClickCreate(string name, int maxPlayer, bool isPVP, string password)
     {
+        rooms.RemoveAll(t => (string)t.CustomProperties["roomName"] == name + "'s room");
+
         Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
         cp["maxPlayers"] = maxPlayer;
         cp["isPVP"] = isPVP;
         cp["password"] = password;
         PhotonNetwork.CurrentRoom.SetCustomProperties(cp);
+
+        rooms.Add(PhotonNetwork.CurrentRoom);
     }
 
     public bool OnClickJoinRoom(string roomName, string password)
@@ -94,6 +99,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         foreach (RoomInfo room in rooms)
         {
             Debug.Log($"roomName : {roomName} / {(string)room.CustomProperties["roomName"]}");
+            Debug.Log($"room Max : {(int)room.CustomProperties["maxPlayers"]}, cur : {(int)room.CustomProperties["curPlayer"]}");
             if (((string)room.CustomProperties["roomName"] == roomName) && ((int)room.CustomProperties["maxPlayers"] > (int)room.CustomProperties["curPlayer"]))
             {
                 Debug.Log($"roomName : {password} / {(string)room.CustomProperties["password"]}");
@@ -187,10 +193,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            // Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
+            // cp["curPlayer"] = (int)cp["curPlayer"] + curPlayerNumber;
+            // PhotonNetwork.CurrentRoom.SetCustomProperties(cp);
+            // Debug.Log(cp["curPlayer"].ToString());
             Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
             cp["curPlayer"] = (int)cp["curPlayer"] + curPlayerNumber;
             PhotonNetwork.CurrentRoom.SetCustomProperties(cp);
-            Debug.Log(cp["curPlayer"].ToString());
         }
     }
 
@@ -201,7 +210,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void RenewalRoomList(List<RoomInfo> roomList)
     {
-        if (!isLobby) return;
+        if (!isLobby || this.gameObject.scene.name == "LoginScene") return;
 
         Transform roomBox = GameObject.Find("Content").transform;
 

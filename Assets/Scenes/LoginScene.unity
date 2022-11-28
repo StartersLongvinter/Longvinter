@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &35055598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefabName: Player
   roomPrefab: {fileID: 5161857643047110011, guid: 8a53112d8bac945f7944e16bed2a5f3d, type: 3}
+  networkManagerObject: {fileID: 35055597}
 --- !u!4 &243231924
 Transform:
   m_ObjectHideFlags: 0

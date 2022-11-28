@@ -26,7 +26,7 @@ public class CreateRoomBtn : MonoBehaviour
         string password = inputPassword.text;
         int maxPlayercount = Mathf.RoundToInt(maxPlayerSlider.value);
         bool isPVP = pvpToggle.isOn;
-        NetworkManager.Instance.OnClickCreate(maxPlayercount, isPVP, password);
+        NetworkManager.Instance.OnClickCreate(PhotonNetwork.LocalPlayer.NickName, maxPlayercount, isPVP, password);
 
         multiplayPanel.SetActive(false);
         multiplayButton.gameObject.SetActive(false);
