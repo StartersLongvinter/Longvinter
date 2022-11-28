@@ -32,14 +32,14 @@ public class Enemy : MonoBehaviour
 
 	IEnumerator ResetColor()
 	{
-		originalColor = renderer.material.color;
-		isChanged = true;
-		renderer.material.color = Color.white;
-		yield return new WaitForSeconds(0.05f);
-		renderer.material.color = Color.red;
-		yield return new WaitForSeconds(0.08f);
-		renderer.material.color = originalColor;
-		yield return null;
-		isChanged = false;
+		if (renderer.material.color != Color.red) {
+			originalColor = renderer.material.color;
+			isChanged = true;
+			renderer.material.color = Color.red;
+			yield return new WaitForSeconds(0.08f);
+			renderer.material.color = originalColor;
+			yield return null;
+			isChanged = false;
+		}
 	}
 }

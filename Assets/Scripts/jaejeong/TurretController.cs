@@ -40,10 +40,9 @@ public class TurretController : Turret
         GameObject nearestPlayer = null;
         foreach (GameObject player in players)
         {
-            if (player.name == photonView.Owner.NickName) continue;
-
+            if (photonView.Owner.NickName == player.name)
+                continue;
             float distanceToPlayer = Vector3.Distance(turretTransform.transform.position, player.transform.position);
-
             if (distanceToPlayer < shortestDistance)
             {
                 shortestDistance = distanceToPlayer;
@@ -68,8 +67,6 @@ public class TurretController : Turret
             return;
 
         attack = target.GetComponent<PlayerController>().IsAiming;
-
-        Debug.Log(trigger.inOtherHome + " " + attack);
 
         if (!trigger.inOtherHome && !attack)
             return;

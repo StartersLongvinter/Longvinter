@@ -28,7 +28,7 @@ public class GroundTrigger : MonoBehaviourPun, IPunObservable //¶¥
 
     private void OnTriggerStay(Collider other)
     {
-        if ((other.gameObject.name != photonView.Owner.NickName) && myTurret != null && other.gameObject.tag == "Player")
+        if ((other.gameObject.name!= photonView.Owner.NickName) && myTurret!=null && other.gameObject.tag == "Player")
             inOtherHome = true;
     }
 
