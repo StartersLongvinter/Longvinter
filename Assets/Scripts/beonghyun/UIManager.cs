@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviourPun
     [SerializeField] private GameObject bagInventory;
     [SerializeField] private GameObject equipmentInventory;
     [SerializeField] private GameObject encyclopediaInventory;
+    [SerializeField] private GameObject toolTip;
     [SerializeField] private Button inventoryCloseBtn;
     
     private bool isTabPressed;
@@ -56,7 +57,7 @@ public class UIManager : MonoBehaviourPun
         
         KeyInput();
 
-        Open(bagInventory);
+        Open(bagInventory, equipmentInventory);
         OpenEImage();
         
         CloseInventory();
@@ -67,13 +68,24 @@ public class UIManager : MonoBehaviourPun
         isTabPressed = Input.GetKeyDown(KeyCode.Tab);
     }
 
-    void Open(GameObject ui)
+    void Open(GameObject bag, GameObject equipment)
     {
         if (isTabPressed)
         {
             isTabPressed = false;
+
+            if (inventoryState)
+            {
+                bag.SetActive(false);
+                equipment.SetActive(false);
+                toolTip.SetActive(false);
+            }
+            else
+            {
+                bag.SetActive(true);
+            }
+            
             inventoryState = !inventoryState;
-            ui.SetActive(inventoryState);
         }
     }
     
@@ -93,7 +105,6 @@ public class UIManager : MonoBehaviourPun
             GameObject temp = Instantiate(fish);
             
             GetComponent<PlayerInventory>().AddItem(temp);
-            //GetComponent<PlayerInventory>().itemList.Add(fish[fishNumber]);
         }
         else
         {
@@ -111,7 +122,7 @@ public class UIManager : MonoBehaviourPun
                 bagInventory.SetActive(false);
                 equipmentInventory.SetActive(false);
                 encyclopediaInventory.SetActive(false);
-
+                toolTip.SetActive(false);
             }
         }
     }

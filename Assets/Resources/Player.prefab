@@ -8622,7 +8622,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -197, y: 316}
-  m_SizeDelta: {x: 96, y: 53.999992}
+  m_SizeDelta: {x: 96, y: 74.99994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1556032680
 CanvasRenderer:
@@ -15347,6 +15347,7 @@ MonoBehaviour:
   bagInventory: {fileID: 189727976}
   equipmentInventory: {fileID: 486655372}
   encyclopediaInventory: {fileID: 317712997}
+  toolTip: {fileID: 2135308564}
   inventoryCloseBtn: {fileID: 1851531554}
   pressEImage: {fileID: 1228521184}
   fishName: {fileID: 1439386944}

@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
                 Vector3 bulletDirectionOffset = Vector3.zero;
                 if (accuracy != 100)
                 {
-                    float errorRate = 1 - (accuracy / 100);
+                    float errorRate = 1 - (accuracy / 100f);
 
                     for (int j = 0; j < 2; j++)
                     {
