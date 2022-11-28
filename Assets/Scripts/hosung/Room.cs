@@ -14,6 +14,9 @@ public class Room : MonoBehaviourPunCallbacks
 
     [SerializeField] TextMeshProUGUI countPlayer;
 
+    public string password = "";
+    public int maxPlayers = 1;
+
     private string roomN = "";
 
     void Awake()
@@ -37,7 +40,7 @@ public class Room : MonoBehaviourPunCallbacks
     public void ClickEnterRoom()
     {
         Debug.Log("submit");
-        bool isConnect = NetworkManager.Instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text);
+        bool isConnect = NetworkManager.Instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text, maxPlayers, password);
 
         if (!isConnect)
         {
@@ -45,9 +48,11 @@ public class Room : MonoBehaviourPunCallbacks
         }
     }
 
-    public void RoomInit(string name, int curPlayers, int maxPlayers)
+    public void RoomInit(string name, int curPlayers, int _maxPlayers, string _password)
     {
         roomName.text = name;
+        maxPlayers = _maxPlayers;
+        password = _password;
         countPlayer.text = $"{curPlayers}/{maxPlayers}";
     }
 

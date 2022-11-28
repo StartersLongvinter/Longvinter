@@ -50,12 +50,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void Init(string _playerName, GameObject _roomPrefab)
     {
-        if (isLobby) return;
-
-        playerPrefabName = _playerName;
-        roomPrefab = _roomPrefab;
-        DontDestroyOnLoad(this.gameObject);
-        PhotonNetwork.ConnectUsingSettings();
+        if (!isLobby)
+        {
+            playerPrefabName = _playerName;
+            roomPrefab = _roomPrefab;
+            DontDestroyOnLoad(this.gameObject);
+            PhotonNetwork.ConnectUsingSettings();
+        }
+        isLobby = false;
     }
 
     public void OnClickStart()
@@ -91,7 +93,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         rooms.Add(PhotonNetwork.CurrentRoom);
     }
 
-    public bool OnClickJoinRoom(string roomName, string password)
+    public bool OnClickJoinRoom(string roomName, string password, int _maxPlayers, string _realPassword)
     {
         //nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
         Debug.Log("checkInfo");
@@ -100,10 +102,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             Debug.Log($"roomName : {roomName} / {(string)room.CustomProperties["roomName"]}");
             Debug.Log($"room Max : {(int)room.CustomProperties["maxPlayers"]}, cur : {(int)room.CustomProperties["curPlayer"]}");
-            if (((string)room.CustomProperties["roomName"] == roomName) && ((int)room.CustomProperties["maxPlayers"] > (int)room.CustomProperties["curPlayer"]))
+            if (((string)room.CustomProperties["roomName"] == roomName) && (_maxPlayers > (int)room.CustomProperties["curPlayer"]))
             {
                 Debug.Log($"roomName : {password} / {(string)room.CustomProperties["password"]}");
-                if (password == (string)room.CustomProperties["password"])
+                if (password == _realPassword)
                 {
                     // PhotonNetwork.LocalPlayer.NickName = nickName;
                     PhotonNetwork.LoadLevel(2);
@@ -159,6 +161,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        Destroy(GameObject.Find(otherPlayer.NickName + "HomeArea"));
         photonView.RPC("RenewalPlayerList", RpcTarget.All, otherPlayer.ActorNumber, false);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, -1);
         photonView.RPC("RemovePlayerInList", RpcTarget.All, otherPlayer.ActorNumber);
@@ -166,7 +169,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        isLobby = true;
         LoadLevel(0);
     }
 
@@ -216,24 +218,27 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         foreach (RoomInfo room in roomList)
         {
-            if (rooms.Contains(room))
-            {
-                GameObject thisRoom = roomBox.Find((string)room.CustomProperties["roomName"]).gameObject;
-                thisRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.CustomProperties["maxPlayers"]);
-                break;
-            }
+            Debug.Log($"{room.CustomProperties["roomName"]}, {room.CustomProperties["curPlayer"]}, {room.CustomProperties["maxPlayers"]}, {room.CustomProperties["password"]}");
             if (room.RemovedFromList)
             {
-                Destroy(roomBox.Find((string)room.CustomProperties["roomName"]));
+                Destroy(roomBox.Find((string)room.CustomProperties["roomName"]).gameObject);
                 rooms.Remove(room);
                 break;
             }
-
-            rooms.Add(room);
-            GameObject newRoom = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
-            newRoom.transform.parent = roomBox;
-            newRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.CustomProperties["maxPlayers"]);
-            newRoom.name = (string)room.CustomProperties["roomName"];
+            if (rooms.Contains(room))
+            {
+                GameObject thisRoom = roomBox.Find((string)room.CustomProperties["roomName"]).gameObject;
+                thisRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.CustomProperties["maxPlayers"], (string)room.CustomProperties["password"]);
+                break;
+            }
+            else
+            {
+                rooms.Add(room);
+                GameObject newRoom = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
+                newRoom.transform.parent = roomBox;
+                newRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.CustomProperties["maxPlayers"], (string)room.CustomProperties["password"] == null ? "" : (string)room.CustomProperties["password"]);
+                newRoom.name = (string)room.CustomProperties["roomName"];
+            }
         }
     }
 
