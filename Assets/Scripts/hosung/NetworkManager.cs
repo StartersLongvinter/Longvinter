@@ -22,10 +22,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 if (obj == null)
                 {
                     obj = new GameObject("NetworkManager");
+                    // obj.GetComponent<PhotonView>().TransferOwnership()
+                    obj.AddComponent<PhotonView>();
                     instance = obj.AddComponent<NetworkManager>();
                 }
                 else
                 {
+                    obj.AddComponent<NetworkManager>();
                     instance = obj.GetComponent<NetworkManager>();
                 }
             }
@@ -142,9 +145,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //GameObject.Find("PasswordPanel").SetActive(false);
         var player = PhotonNetwork.Instantiate(playerPrefabName, respawnPos, Quaternion.identity);
 
-        int myActorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-        Debug.Log(myActorNumber);
-        photonView.RPC("RenewalPlayerList", RpcTarget.All, myActorNumber);
+        int _actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+        photonView.RPC("RenewalPlayerList", RpcTarget.All, _actorNumber, true);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, 1);
     }
 
