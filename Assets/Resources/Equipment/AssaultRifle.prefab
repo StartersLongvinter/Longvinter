@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 6820124255753872660}
   - component: {fileID: 5356893255180904104}
   m_Layer: 0
-  m_Name: Gun2
+  m_Name: AssaultRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,8 +550,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  damage: 10
+  damage: 4
   attackRate: 0.5
+  accuracy: 95
+  bulletCountPerFire: 1
   firePoint: {fileID: 347420750538285944}
   muzzleFlashPoint: {fileID: 1740828815435906571}
   bulletPrefab: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}

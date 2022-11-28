@@ -22,3 +22,4 @@ MonoBehaviour:
   ammoCount: 0
   equipmentKorName: "\uC804\uAE30\uD1B1"
   isAuto: 0
+  equipmentIndex: 2

@@ -33,7 +33,7 @@ public class EquipmentData : ScriptableObject
     [SerializeField] private int ammoCount;
     [SerializeField] private string equipmentKorName;
     [SerializeField] private bool isAuto;
-
+    [SerializeField] private int equipmentIndex;
     
 
     public EquipmentClassify emClassify => equipmentClassify;
@@ -50,4 +50,6 @@ public class EquipmentData : ScriptableObject
     
     public string emKorName => equipmentKorName;
     public bool auto => isAuto;
+
+    public int emIndex => equipmentIndex;
 }

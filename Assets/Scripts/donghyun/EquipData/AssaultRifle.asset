@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e00f73891bbc47e983f251f87ccda19, type: 3}
-  m_Name: SMG
+  m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   equipmentClassify: 1
   equipmentArea: 1
   equipmentAnim: 1
-  equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 5aece1fb4739642c0b9daf53b38d849b, type: 3}
-  equipmentPrefab: {fileID: 9208583577907150833, guid: c924ee38e0d5bc942ae54180ee69fe03, type: 3}
-  weaponDamage: 6
+  equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 86c72943111a24ac7b1f74b21e3fe272, type: 3}
+  equipmentPrefab: {fileID: 6842304810045061740, guid: 71e31974552183345a5037a3965d1701, type: 3}
+  weaponDamage: 4
   weaponAttackRate: 0
   ammoCount: 0
-  equipmentKorName: "\uAE30\uAD00\uB2E8\uCD1D"
+  equipmentKorName: "\uB3CC\uACA9\uC18C\uCD1D"
   isAuto: 1
+  equipmentIndex: 4

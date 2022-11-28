@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 8890547217566519145}
   - component: {fileID: 6376503601390822562}
   m_Layer: 0
-  m_Name: Gun1
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  damage: 10
+  damage: 3
   attackRate: 0.5
   accuracy: 90
   bulletCountPerFire: 6

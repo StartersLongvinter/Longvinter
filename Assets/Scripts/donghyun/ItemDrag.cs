@@ -68,6 +68,10 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().equipmentList.Remove(itemInEquip);
             player.GetComponent<PlayerInventory>().itemList.Add(itemInEquip);
 
+            player.GetComponent<PlayerInventory>().equipPosition.transform.GetChild(itemInEquip.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
+            //player.GetComponent<PlayerController>().weapon = null;
+            //player.GetComponent<PlayerController>().temp = null;
+
             for (int i = 0; i < bagInven.Length; i++)
             {
                 if (bagInven[i].transform.childCount == 0)
@@ -95,6 +99,10 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().itemList.Remove(item);
             player.GetComponent<PlayerInventory>().equipmentList.Add(item);
 
+            player.GetComponent<PlayerInventory>().equipPosition.transform.GetChild(item.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(true);
+            player.GetComponent<PlayerController>().temp = player.GetComponent<PlayerInventory>().handPosition.transform.GetChild(item.GetComponent<Item>().equipment.emIndex).gameObject;
+            player.GetComponent<PlayerController>().weapon = player.GetComponent<PlayerInventory>().handPosition.transform.GetChild(item.GetComponent<Item>().equipment.emIndex).GetComponent<Weapon>();
+
             for (int i = 0; i < equipInven.Length; i++)
             {
                 if (equipInven[i].transform.childCount == 0)
@@ -121,6 +129,10 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             //현재 가방에 있으므로 누르면 장비창으로 넘어가야함
             player.GetComponent<PlayerInventory>().itemList.Remove(gameObject);
             player.GetComponent<PlayerInventory>().equipmentList.Add(gameObject);
+
+            player.GetComponent<PlayerInventory>().equipPosition.transform.GetChild(gameObject.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(true);
+            player.GetComponent<PlayerController>().temp = player.GetComponent<PlayerInventory>().handPosition.transform.GetChild(gameObject.GetComponent<Item>().equipment.emIndex).gameObject;
+            player.GetComponent<PlayerController>().weapon = player.GetComponent<PlayerInventory>().handPosition.transform.GetChild(gameObject.GetComponent<Item>().equipment.emIndex).GetComponent<Weapon>();
 
             for (int i = 0; i < equipInven.Length; i++)
             {
@@ -157,6 +169,11 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
 
         player.GetComponent<PlayerInventory>().equipmentList.Remove(go);
         player.GetComponent<PlayerInventory>().itemList.Add(go);
+        player.GetComponent<PlayerInventory>().equipPosition.transform.GetChild(go.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
+        player.GetComponent<PlayerController>().weapon = null;
+
+        player.GetComponent<PlayerController>().temp = null;
+
         player.GetComponent<PlayerInventory>().updateBagInventory();
         player.GetComponent<PlayerInventory>().updateEquipInventory();
 

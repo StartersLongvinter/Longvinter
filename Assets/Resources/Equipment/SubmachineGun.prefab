@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 9196002707446915087}
   - component: {fileID: -7265034434658435760}
   m_Layer: 0
-  m_Name: Gun3
+  m_Name: SubmachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,8 +414,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  damage: 10
+  damage: 6
   attackRate: 0.5
+  accuracy: 90
+  bulletCountPerFire: 1
   firePoint: {fileID: 441536954541331477}
   muzzleFlashPoint: {fileID: 1048963753858483009}
   bulletPrefab: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
