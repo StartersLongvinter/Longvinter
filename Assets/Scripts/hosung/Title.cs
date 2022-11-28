@@ -11,7 +11,7 @@ public class Title : MonoBehaviourPun
 
     void Awake()
     {
-        if (!PhotonNetwork.InLobby)
+        if (!PhotonNetwork.InLobby && !PhotonNetwork.InRoom)
             networkManagerObject.SetActive(true);
         NetworkManager.Instance.Init(playerPrefabName, roomPrefab);
     }

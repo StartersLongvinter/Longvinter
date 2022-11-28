@@ -37,7 +37,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public List<RoomInfo> rooms = new List<RoomInfo>();
     public string nickName = "";
-    bool isLobby = false;
+    public bool isLobby = false;
     public string playerPrefabName;
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
@@ -100,8 +100,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.InLobby) return false;
         foreach (RoomInfo room in rooms)
         {
-            Debug.Log($"roomName : {roomName} / {(string)room.CustomProperties["roomName"]}");
-            Debug.Log($"room Max : {(int)room.CustomProperties["maxPlayers"]}, cur : {(int)room.CustomProperties["curPlayer"]}");
+            // Debug.Log($"roomName : {roomName} / {(string)room.CustomProperties["roomName"]}");
+            // Debug.Log($"room Max : {(int)room.CustomProperties["maxPlayers"]}, cur : {(int)room.CustomProperties["curPlayer"]}");
             if (((string)room.CustomProperties["roomName"] == roomName) && (_maxPlayers > (int)room.CustomProperties["curPlayer"]))
             {
                 Debug.Log($"roomName : {password} / {(string)room.CustomProperties["password"]}");
@@ -169,7 +169,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        LoadLevel(0);
+        isLobby = true;
+        rooms.Clear();
+        PhotonNetwork.JoinLobby();
     }
 
     [PunRPC]
