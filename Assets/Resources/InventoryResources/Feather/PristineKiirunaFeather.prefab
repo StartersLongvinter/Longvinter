@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5223685251508337093}
   - component: {fileID: -4098169120553372954}
   m_Layer: 5
-  m_Name: HazelHenScruffy
+  m_Name: PristineKiirunaFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e1d7ed6458cd447a381d56e6dc1dc244, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 670e8ab5ce6214ed792dfbd5225d3098, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fefe54e6a1048fa97fa990520bd655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bagInven: []
+  equipInven: []
 --- !u!225 &5223685251508337093
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -115,4 +117,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9952638096f346cbaebe2ce2caa3cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 71c88db6a52754fb69656f43f4dd3f38, type: 2}
+  item: {fileID: 11400000, guid: cd2559f95a60a406a8b9a8e40086846d, type: 2}
+  equipment: {fileID: 0}

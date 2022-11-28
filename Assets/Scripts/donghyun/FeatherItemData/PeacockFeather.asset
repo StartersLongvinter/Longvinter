@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
-  m_Name: HazelHenScruffy
+  m_Name: PeacockFeather
   m_EditorClassIdentifier: 
-  itemName: HazelHenScruffy
+  itemName: PeacockFeather
+  itemKorName: "\uACF5\uC791\uC0C8 \uAE43\uD138"
   itemExplain: 
   itemType: 0
   itemClassify: 1
   itemPrefab: {fileID: 5223685251508337091, guid: 0cb2df607b091430a965e5f0c7ae6820, type: 3}
-  itemImage: {fileID: 21300000, guid: e1d7ed6458cd447a381d56e6dc1dc244, type: 3}
+  itemImage: {fileID: 21300000, guid: 4f0eeeece09be49b19bd79137ed24421, type: 3}

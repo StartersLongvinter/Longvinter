@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5223685251508337095}
   - component: {fileID: 5223685251508337094}
   - component: {fileID: 5223685251508337093}
-  - component: {fileID: 6496023943889007315}
+  - component: {fileID: -4098169120553372954}
   m_Layer: 5
-  m_Name: HazelHenNormal
+  m_Name: PristinePeacockFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 40f4a21c80e3441d485c5e0a75bef91d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbfdc0b46587a45acb50cbd33946e48a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fefe54e6a1048fa97fa990520bd655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bagInven: []
+  equipInven: []
 --- !u!225 &5223685251508337093
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -103,7 +105,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &6496023943889007315
+--- !u!114 &-4098169120553372954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,4 +117,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9952638096f346cbaebe2ce2caa3cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 0240698f3a2c746c48baa4b95e2549bd, type: 2}
+  item: {fileID: 11400000, guid: 857420fd001d74cf18c755a4fcaa7d4a, type: 2}
+  equipment: {fileID: 0}
