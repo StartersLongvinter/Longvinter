@@ -157,7 +157,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         isLobby = false;
-        PhotonNetwork.LocalPlayer.NickName = nickName;
+        bool _sameName = false;
+        foreach (Player _player in PhotonNetwork.PlayerList)
+        {
+            if (nickName == _player.NickName)
+            {
+                _sameName = true;
+                break;
+            }
+        }
+        if (_sameName) PhotonNetwork.LocalPlayer.NickName = nickName + "2";
+        else PhotonNetwork.LocalPlayer.NickName = nickName;
         //GameObject.Find("PasswordPanel").SetActive(false);
         var player = PhotonNetwork.Instantiate(playerPrefabName, respawnPos, Quaternion.identity);
         PhotonNetwork.Instantiate("HomeArea", new Vector3(Random.Range(-100f, 100f), 0, Random.Range(-100f, 100f)), Quaternion.identity);
