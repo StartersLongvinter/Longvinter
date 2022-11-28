@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5223685251508337093}
   - component: {fileID: 324667985539753907}
   m_Layer: 5
-  m_Name: SemiRifle
+  m_Name: SubmachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a5d265b39de694ae2b69ed5c9f863254, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7ea29b8c710a4860850e0f22153eeff, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -93,7 +93,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bagInven: []
   equipInven: []
-  isInBag: 1
 --- !u!225 &5223685251508337093
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -119,4 +118,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  equipment: {fileID: 11400000, guid: 98dfcb0e13587463ab843bc7803f31b7, type: 2}
+  equipment: {fileID: 11400000, guid: f39070e814136458ebd481e117bf6cfd, type: 2}

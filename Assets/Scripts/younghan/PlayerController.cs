@@ -15,6 +15,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public Vector3 AimLookPoint { get { return aimLookPoint; } }
     public bool IsAiming { get { return isAiming; } }
 
+
+    public GameObject temp;
+
+    public GameObject bag;
+    public GameObject hand;
+
+
+
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
     private PlayerStat playerStat;
@@ -45,9 +53,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     // End Fishing
 
     private float timer = 0f;
-
-    // For test
-    public bool testbool;
 
     #region Callback Methods
     private void Awake()
@@ -91,6 +96,24 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             timer = 0f;
             isPressedSpace = false;
         }
+
+        if(temp != null)
+        {
+            if (isAiming)
+            {
+                bag.transform.GetChild(temp.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
+                hand.transform.GetChild(temp.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(true);
+
+            }
+            else
+            {
+                bag.transform.GetChild(temp.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(true);
+                hand.transform.GetChild(temp.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
+            }
+        }
+        
+
+
     }
 
     private void FixedUpdate()
@@ -342,10 +365,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void AnimateAim()
     {
-        if (isFishing)
-        {
-            return;
-        }
+        if (isFishing) return;
         
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
         

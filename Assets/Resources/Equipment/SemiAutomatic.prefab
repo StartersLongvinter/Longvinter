@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 6330600271768583764}
   - component: {fileID: -2083653136925415175}
   m_Layer: 0
-  m_Name: Gun4
+  m_Name: SemiAutomatic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,8 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  damage: 10
+  damage: 8
   attackRate: 0.5
+  accuracy: 98
+  bulletCountPerFire: 1
   firePoint: {fileID: 1007895287953913030}
   muzzleFlashPoint: {fileID: 5691112236692952880}
   bulletPrefab: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
