@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class GroundTrigger : MonoBehaviourPun, IPunObservable //¶¥
+public class GroundTrigger : MonoBehaviourPun, IPunObservable //ï¿½ï¿½
 {
     public TurretController myTurret;
-    public bool inOtherHome=false; //private turret
+    public bool inOtherHome = false; //private turret
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -22,13 +22,13 @@ public class GroundTrigger : MonoBehaviourPun, IPunObservable //¶¥
 
     private void Awake() //change later~~~?~~?~?~?~?~
     {
-        this.gameObject.name = photonView.Owner.NickName+"HomeArea";
+        this.gameObject.name = photonView.Owner.NickName + "HomeArea";
         //myTurret.trigger = this;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if ((other.gameObject.name!= photonView.Owner.NickName) && myTurret!=null && other.gameObject.tag == "Player")
+        if ((other.gameObject.name != photonView.Owner.NickName) && myTurret != null && other.gameObject.tag == "Player")
             inOtherHome = true;
     }
 
