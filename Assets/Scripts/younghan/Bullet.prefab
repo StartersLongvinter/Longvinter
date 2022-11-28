@@ -4860,7 +4860,7 @@ GameObject:
   - component: {fileID: -6261875183147377191}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4905,7 +4905,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9078441727759166900}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.1
   m_Height: 2.5
@@ -4923,6 +4923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999f08881f2674bf2a30f9796b14157c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   ImpactVfxPrefab: {fileID: 3213101676908087617, guid: c24712fe9b4e34e43a6601f53ffe48de, type: 3}
   speed: 10
-  damage: 0

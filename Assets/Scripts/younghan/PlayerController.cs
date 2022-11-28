@@ -12,14 +12,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public Weapon weapon;
     public Transform leftHandIkTarget;
     public Transform rightHandIkTarget;
-    public Vector3 AimLookPoint
-    {
-        get { return aimLookPoint; }
-    }
-    public bool IsAiming
-    {
-        get { return isAiming; }
-    }
+    public Vector3 AimLookPoint { get { return aimLookPoint; } }
+    public bool IsAiming { get { return isAiming; } }
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
@@ -36,24 +30,24 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool isAiming;
     private bool isPressedSpace;
 
-
     private float ikProgress;
     private float ikWeight;
 
     [SerializeField] GameObject chatInput;
-    
-    //낚시관련 변수
+
+    // Fishing
+    private GameObject fish;
     [SerializeField] float maxInteractableDistance = 7;
-    [SerializeField]
-    bool isFishing;
+    private bool isFishing; // YH - Delete SerializeFiled
+    private bool isSuccessState; // YH - Change public -> private
     public bool eImageActivate;
-    public bool isSuccessState;
-    int eCount = 0;
-    
-    GameObject fish;
-    
+    private int eCount = 0;
+    // End Fishing
+
     private float timer = 0f;
 
+    // For test
+    public bool testbool;
 
     #region Callback Methods
     private void Awake()
@@ -248,7 +242,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (raycasthit.collider.GetComponent<FishingPoint>().isOccupied)
                 {
-                    Debug.Log("다른사람이 낚시중입니다.");
+                    Debug.Log("다른 사람이 낚시 중입니다.");
                 }
                 else
                 {
@@ -263,7 +257,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    void ECount()
+    private void ECount()
     {
         if (eImageActivate)
         {
@@ -335,7 +329,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private void Aim()
     {
         if (weapon == null) return;
-
+        
         if (isAiming && weapon.type == Weapon.Type.Melee1)
         {
             playerAnimator.SetBool("isMeleeAttackAim", true);
@@ -353,8 +347,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             return;
         }
         
-        float progressSpeed = Mathf.Lerp(1f, 3f, ikProgress);
-
+        float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
+        
         if (isAiming && weapon.type == Weapon.Type.Range || weapon.type == Weapon.Type.Melee2)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
@@ -384,7 +378,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         isAiming = _isAiming;
     }
-    #endregion
 
     IEnumerator CatchFish(FishingPoint point)
     {
@@ -414,4 +407,5 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         isSuccessState = false;
         isFishing = false;
     }
+    #endregion
 }

@@ -248,6 +248,8 @@ MonoBehaviour:
   type: 2
   damage: 10
   attackRate: 0.5
+  accuracy: 100
+  bulletCountPerFire: 6
   firePoint: {fileID: 2344124764354205181}
   muzzleFlashPoint: {fileID: 7783207388263291169}
   bulletPrefab: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}

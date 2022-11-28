@@ -3,25 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/FishingPoint.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/FishingPoint.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/EncyclopediaNoti.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/EncyclopediaNoti.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/Fish.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/Fish.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/PlayerFishing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/PlayerFishing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Ammo100.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Ammo100.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Ammo25.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Ammo25.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Ammo50.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Ammo50.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Chainsaw.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Chainsaw.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Hatchet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Hatchet.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Rifle.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/Rifle.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/SMG.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/SMG.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/SemiRifle.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/SemiRifle.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/ShotGun.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipData/ShotGun.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipmentData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/EquipmentData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/younghan/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/younghan/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LobbyScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LobbyScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LoginScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LoginScene.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +116,7 @@
       <workItem from="1668752525670" duration="4173000" />
       <workItem from="1669016328246" duration="2114000" />
       <workItem from="1669077666497" duration="40492000" />
-      <workItem from="1669193934992" duration="39371000" />
+      <workItem from="1669193934992" duration="42529000" />
     </task>
     <servers />
   </component>
