@@ -543,8 +543,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 9078441727759166900, guid: 3d866b77fce0ca244a4933df0aa04f33, type: 3}
   firePoint: {fileID: 2905251075596339026}
   turretTransform: {fileID: 2909241283207979408}
-  range: 10
   trigger: {fileID: 0}
+  range: 10
 --- !u!1 &2905397856255711920
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,9 +33,9 @@ public class TurretController1 : Turret
         {
             foreach (var i in playerList)
             {
-                if (!PlayerList.Instance.playerCharacters.Contains(other.gameObject))
+                if (!PlayerList.Instance.playerCharacters.Contains(i))
                 {
-                    playerList.Remove(other.gameObject);
+                    playerList.Remove(i);
                     return;
                 }
                 if (i.GetComponent<PlayerController>().IsAiming)
