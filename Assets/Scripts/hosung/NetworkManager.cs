@@ -38,6 +38,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public List<RoomInfo> rooms = new List<RoomInfo>();
     public string nickName = "";
     public bool isLobby = false;
+    bool returnLobby = false;
     public string playerPrefabName;
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
@@ -121,11 +122,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-
+        if (returnLobby)
+        {
+            isLobby = true;
+            rooms.Clear();
+            PhotonNetwork.JoinLobby();
+        }
     }
 
     public override void OnJoinedLobby()
     {
+        returnLobby = false;
         Debug.Log("로비에 접속");
         LoadLevel(isLobby ? 1 : 2);
         if (!isLobby) CreateSinglePlayRoom(false, "");
@@ -149,6 +156,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        isLobby = false;
         PhotonNetwork.LocalPlayer.NickName = nickName;
         //GameObject.Find("PasswordPanel").SetActive(false);
         var player = PhotonNetwork.Instantiate(playerPrefabName, respawnPos, Quaternion.identity);
@@ -169,9 +177,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        isLobby = true;
-        rooms.Clear();
-        PhotonNetwork.JoinLobby();
+        returnLobby = true;
     }
 
     [PunRPC]
