@@ -43,7 +43,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
 
+    public void Init(string _playerName, GameObject _roomPrefab)
+    {
+        if (PhotonNetwork.InLobby) return;
+
+        playerPrefabName = _playerName;
+        roomPrefab = _roomPrefab;
         PhotonNetwork.ConnectUsingSettings();
     }
 
