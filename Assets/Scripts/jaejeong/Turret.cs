@@ -14,7 +14,7 @@ public class Turret : MonoBehaviourPun
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        StartCoroutine(RotateTurret());
+        //StartCoroutine(RotateTurret());
     }
 
     public IEnumerator RotateTurret()

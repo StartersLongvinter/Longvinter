@@ -43,7 +43,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
 
+    public void Init(string _playerName, GameObject _roomPrefab)
+    {
+        if (PhotonNetwork.InLobby) return;
+
+        playerPrefabName = _playerName;
+        roomPrefab = _roomPrefab;
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -135,7 +142,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //GameObject.Find("PasswordPanel").SetActive(false);
         var player = PhotonNetwork.Instantiate(playerPrefabName, respawnPos, Quaternion.identity);
 
-        photonView.RPC("RenewalPlayerList", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, true);
+        int myActorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+        Debug.Log(myActorNumber);
+        photonView.RPC("RenewalPlayerList", RpcTarget.All, myActorNumber);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, 1);
     }
 
@@ -153,7 +162,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void RenewalPlayerList(int playerActorNumber, bool isJoin)
+    void RenewalPlayerList(int playerActorNumber, bool isJoin = true)
     {
         if (isJoin)
         {

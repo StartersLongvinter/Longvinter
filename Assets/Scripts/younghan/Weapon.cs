@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     public float attackRate;
 
     [Header("Range")]
-    [SerializeField] [Range(0, 100)] private int accuracy = 100;
+    [SerializeField][Range(0, 100)] private int accuracy = 100;
     [SerializeField] private int bulletCountPerFire = 1;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform muzzleFlashPoint;
