@@ -15,11 +15,12 @@ public class Enemy : MonoBehaviourPun
     [PunRPC]
 	public void TakeDamage (float amount)
 	{
-		if (!photonView.IsMine)
-			return;
 		renderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
 		StartCoroutine(ResetColor());
+
+		if (!photonView.IsMine)
+			return;
 
 		PlayerStat.LocalPlayer.hp -= amount;
 

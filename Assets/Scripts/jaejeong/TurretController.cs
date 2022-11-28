@@ -8,6 +8,7 @@ public class TurretController : Turret
     public GameObject bulletPrefab;
     public Transform firePoint;
     public Transform turretTransform;
+    public GroundTrigger trigger;
 
     [SerializeField] private float range = 30f;
 
@@ -16,11 +17,13 @@ public class TurretController : Turret
     private Transform target;
     private Enemy targetEnemy;
 
-    public GroundTrigger trigger;
+    private string turretOwner = "";
+
 
     protected override void Start()
     {
         base.Start();
+        turretOwner = photonView.Owner.NickName;
     }
 
     [PunRPC]
@@ -92,7 +95,7 @@ public class TurretController : Turret
     {
         GameObject firedBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 90, 0)));
         TurretBullet bullet = firedBullet.GetComponent<TurretBullet>();
-
+        bullet.name = photonView.Owner.NickName+"Bullet";
         bullet.Direction = firePoint.right;
         
         if (bullet != null)

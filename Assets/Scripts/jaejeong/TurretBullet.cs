@@ -48,8 +48,7 @@ public class TurretBullet : Bullet
     protected override void OnCollisionEnter(Collision collision)
     {
 		base.OnCollisionEnter(collision);
-		Debug.Log(collision.gameObject.tag);
-		if (collision.gameObject.tag == "Player")
+		if (collision.gameObject.tag == "Player"&&(collision.gameObject.name + "Bullet" !=this.gameObject.name))
 		{
 			HitTarget();
 			return;
