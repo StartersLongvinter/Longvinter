@@ -40,7 +40,10 @@ public class TurretController : Turret
         GameObject nearestPlayer = null;
         foreach (GameObject player in players)
         {
+            if (player.name == photonView.Owner.NickName) continue;
+
             float distanceToPlayer = Vector3.Distance(turretTransform.transform.position, player.transform.position);
+
             if (distanceToPlayer < shortestDistance)
             {
                 shortestDistance = distanceToPlayer;

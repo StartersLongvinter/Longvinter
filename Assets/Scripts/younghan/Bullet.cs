@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-	public float Damage
-    {
-		set { damage = value; }
-    }
-	public Vector3 Direction
-    {
-		set { direction = value; }
-    }
+    public float Damage { set { damage = value; } }
+    public Vector3 Direction { set { direction = value; } }
 
 	protected Rigidbody bulletRigidbody;
-	[SerializeField] private GameObject ImpactVfxPrefab;
-	[SerializeField] protected float speed;
-	private Vector3 direction;
 	[SerializeField] protected float damage;
-	//[SerializeField] private float speed;
-	//private Vector3 direction;
-	//[SerializeField] private float damage; // SerializeFiled for check, Don't set
+
+	[SerializeField] private GameObject ImpactVfxPrefab;
+	[SerializeField] private float speed;
+	private Vector3 direction;
 	private bool isCollided;
 
 	protected virtual void Start()
     {
 		bulletRigidbody = GetComponent<Rigidbody>();
+
+		transform.rotation = Quaternion.LookRotation(direction);
 	}
 
     private void FixedUpdate()
     {
 		bulletRigidbody.velocity = direction * speed;
 	}
+
+    
 
     protected virtual void OnCollisionEnter(Collision collision)
 	{

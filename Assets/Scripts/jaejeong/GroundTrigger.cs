@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class GroundTrigger : MonoBehaviourPun//, IPunObservable //¶¥
+public class GroundTrigger : MonoBehaviourPun, IPunObservable //¶¥
 {
     public TurretController myTurret;
     public bool inOtherHome=false; //private turret
@@ -28,11 +28,7 @@ public class GroundTrigger : MonoBehaviourPun//, IPunObservable //¶¥
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Trigger Enter ¤Ð¤Ð");
-        Debug.Log(other.gameObject.name != photonView.Owner.NickName);
-        Debug.Log(myTurret != null);
-        Debug.Log(other.name);
-        if ((other.gameObject.name!= photonView.Owner.NickName) && myTurret!=null)
+        if ((other.gameObject.name != photonView.Owner.NickName) && myTurret != null && other.gameObject.tag == "Player")
             inOtherHome = true;
     }
 
