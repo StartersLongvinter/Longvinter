@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     public float attackRate;
 
     [Header("Range")]
-    [SerializeField] [Range(0, 100)] private int accuracy = 100;
+    [SerializeField][Range(0, 100)] private int accuracy = 100;
     [SerializeField] private int bulletCountPerFire = 1;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform muzzleFlashPoint;
@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
                 Vector3 bulletDirectionOffset = Vector3.zero;
                 if (accuracy != 100)
                 {
-                    float errorRate = 1 - (accuracy / 100);
+                    float errorRate = 1 - (accuracy / 100f);
 
                     for (int j = 0; j < 2; j++)
                     {
