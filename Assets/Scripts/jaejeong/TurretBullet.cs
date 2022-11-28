@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class TurretBullet : Bullet
 {
@@ -40,7 +41,8 @@ public class TurretBullet : Bullet
 	{
 		Enemy e = enemy.GetComponent<Enemy>();
 		if (e != null)
-			e.TakeDamage(damage);
+			enemy.GetComponent<PhotonView>().RPC(nameof(e.TakeDamage), RpcTarget.All, damage);
+		//e.TakeDamage(damage);
 	}
 
     protected override void OnCollisionEnter(Collision collision)

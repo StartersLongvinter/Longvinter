@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class TurretController1 : Turret
 {
     private List<GameObject> playerList = new List<GameObject>();
-    private int damage = 10;
+    private float damage = 10;
 
     private void Update()
     {
@@ -32,8 +33,17 @@ public class TurretController1 : Turret
         {
             foreach (var i in playerList)
             {
-                Enemy enemy = i.GetComponent<Enemy>();
-                enemy.TakeDamage(damage);
+                if (!PlayerList.Instance.playerCharacters.Contains(other.gameObject))
+                {
+                    playerList.Remove(other.gameObject);
+                    return;
+                }
+                if (i.GetComponent<PlayerController>().IsAiming)
+                {
+                    Enemy enemy = i.GetComponent<Enemy>();
+                    //enemy.TakeDamage(damage);
+                    i.GetComponent<PhotonView>().RPC(nameof(enemy.TakeDamage), RpcTarget.All, damage);
+                }
             }
             isfire=false;
         }

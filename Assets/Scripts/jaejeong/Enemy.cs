@@ -12,9 +12,11 @@ public class Enemy : MonoBehaviourPun
 	private SkinnedMeshRenderer renderer;
 	public bool isChanged = false;
 
+    [PunRPC]
 	public void TakeDamage (float amount)
 	{
-
+		if (!photonView.IsMine)
+			return;
 		renderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
 		StartCoroutine(ResetColor());
@@ -39,8 +41,8 @@ public class Enemy : MonoBehaviourPun
 			renderer.material.color = Color.red;
 			yield return new WaitForSeconds(0.08f);
 			renderer.material.color = originalColor;
-			yield return null;
 			isChanged = false;
 		}
+		yield return null;
 	}
 }
