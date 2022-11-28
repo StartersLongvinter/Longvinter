@@ -2084,7 +2084,7 @@ GameObject:
   - component: {fileID: 411465912}
   - component: {fileID: 411465914}
   - component: {fileID: 411465913}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4359,7 +4359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869590e298eb6438d840c3cb07e90753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curTime: 1
+  curTime: 10
   curRealTime: 
   oneHourPerSeconds: 10
   directionalLight: {fileID: 730558849}
