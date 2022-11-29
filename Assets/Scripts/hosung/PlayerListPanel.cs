@@ -34,8 +34,8 @@ public class PlayerListPanel : MonoBehaviourPunCallbacks
             Destroy(_listChild);
         }
 
-        playerCount.text = $"{(int)PhotonNetwork.CurrentRoom.CustomProperties["curPlayer"]} / {(int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"]}";
         maxPlayerSlider.value = (int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"];
+        playerCount.text = $"{(int)PhotonNetwork.CurrentRoom.CustomProperties["curPlayer"]} / {maxPlayerSlider.value}";
         PVPtoggle.isOn = (bool)PhotonNetwork.CurrentRoom.CustomProperties["isPVP"];
         passwordInput.text = (string)PhotonNetwork.CurrentRoom.CustomProperties["password"];
 
@@ -84,6 +84,6 @@ public class PlayerListPanel : MonoBehaviourPunCallbacks
 
     void Update()
     {
-
+        playerCount.text = $"{(int)PhotonNetwork.CurrentRoom.CustomProperties["curPlayer"]} / {maxPlayerSlider.value}";
     }
 }

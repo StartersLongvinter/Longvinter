@@ -175,6 +175,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         int _actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
         photonView.RPC("RenewalPlayerList", RpcTarget.All, _actorNumber, true);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, 1);
+
+        GameObject.Find("ShotdownBtn").GetComponent<Button>().onClick.AddListener(() =>
+        {
+            photonView.RPC("Kicked", RpcTarget.All, _actorNumber);
+        });
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
