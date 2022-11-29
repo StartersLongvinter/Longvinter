@@ -15114,12 +15114,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  weapon: {fileID: 6376503601741455074}
   leftHandIkTarget: {fileID: 1801474300}
   rightHandIkTarget: {fileID: 352961827}
-  temp: {fileID: 0}
-  bag: {fileID: 1808210215687871902}
-  hand: {fileID: 1361699022210841201}
+  bagEquipPoint: {fileID: 1289362320322663942}
+  handEquipPoint: {fileID: 3591319954121043913}
+  weaponData: {fileID: 0}
   chatInput: {fileID: 346654853340184980}
   maxInteractableDistance: 7
   eImageActivate: 0
@@ -15297,16 +15296,6 @@ MonoBehaviour:
   encyclopedia: []
   itemList: []
   equipmentList: []
-  bagEquipments:
-  - {fileID: 6842304810045061740, guid: 71e31974552183345a5037a3965d1701, type: 3}
-  - {fileID: 6475506819363716150, guid: cadbe94fba9c22a4daa70079f6399bb2, type: 3}
-  - {fileID: 6566111318819359598, guid: 2a6059b00a725ea4991b730b1ca8b099, type: 3}
-  - {fileID: 1187256942610154619, guid: f576b6ff1f463c74cb523c53a8d7d624, type: 3}
-  - {fileID: 6307312540054753438, guid: bf45f6c59832a924abfa299888314ea1, type: 3}
-  - {fileID: 8876904348198145699, guid: 95510d299b7545e4c9c33e93153e075a, type: 3}
-  - {fileID: 9208583577907150833, guid: c924ee38e0d5bc942ae54180ee69fe03, type: 3}
-  equipPosition: {fileID: 1808210215687871902}
-  handPosition: {fileID: 1361699022210841201}
   inventoryCount: 0
 --- !u!114 &1388196509
 MonoBehaviour:
@@ -17136,11 +17125,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8588304930413234103, guid: 1e12ffeab6a6cf34aa4f7b8f8452f330, type: 3}
   m_PrefabInstance: {fileID: 7407143643542147505}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1808210215687871902 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9210838129505831983, guid: 1e12ffeab6a6cf34aa4f7b8f8452f330, type: 3}
-  m_PrefabInstance: {fileID: 7407143643542147505}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7830224794639912952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17309,11 +17293,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: e2779e2c3b2494029b8e6b33d3e68f2c, type: 2}
---- !u!1 &1361699022210841201 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7417505930873569392, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
-  m_PrefabInstance: {fileID: 8364869320564357633}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3591319954121043913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5026881587130996168, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
@@ -17357,17 +17336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: 98dfcb0e13587463ab843bc7803f31b7, type: 2}
---- !u!114 &6376503601741455074 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3199834396609832163, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
-  m_PrefabInstance: {fileID: 8364869320564357633}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876904348346676451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb87228843632b47bd45cb27a759823, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6475506819324493712 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3298996090987709841, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}

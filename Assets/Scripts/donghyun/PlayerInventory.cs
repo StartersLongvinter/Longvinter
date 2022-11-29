@@ -14,10 +14,6 @@ public class PlayerInventory : MonoBehaviourPun
     public List<GameObject> itemList = new List<GameObject>();
     public List<GameObject> equipmentList = new List<GameObject>();
 
-    public GameObject[] bagEquipments;
-    public GameObject equipPosition;
-    public GameObject handPosition;
-
     public int inventoryCount = 0;
 
     private bool isItemUpdated;

@@ -93,7 +93,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bagInven: []
   equipInven: []
-  isInBag: 1
 --- !u!225 &5223685251508337093
 CanvasGroup:
   m_ObjectHideFlags: 0
