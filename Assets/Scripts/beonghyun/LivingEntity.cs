@@ -5,26 +5,24 @@ using UnityEngine.AI;
 
 public class LivingEntity : MonoBehaviour
 {
-    //[SerializeField] Transform[] target;
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
     
     [SerializeField] Material hitEffect1;
     [SerializeField] Material hitEffect2;
-    //[SerializeField] float nearDistance;
-    //[SerializeField] float moveAmount;
-
-    //float damageAmount=1;
-    //int targetNumber;
+   
     Material startMat;
     public NavMeshAgent agent;
     public Animator anim;
     SkinnedMeshRenderer mesh;
     public GameObject nearPlayer;
-    //public GameObject nearAnimal;
+    
     List<GameObject> playerDistanceList = new List<GameObject>();
     public List<GameObject> nearAnimals = new List<GameObject>();
     public bool isAttacked;
+
+    Vector3 currentPosition;
+    Vector3 latePosition;
 
     // Start is called before the first frame update
     void Start()
@@ -32,19 +30,40 @@ public class LivingEntity : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
 
-        //targetNumber = 0;
         maxHealth = 100;
         currentHealth = 100;
         mesh = GetComponentInChildren<SkinnedMeshRenderer>();
         startMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
-        //InvokeRepeating("HitByPlayer", 2, 2);
+        
         nearAnimals.Add(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //HitByPlayer();
+        currentPosition = transform.position;
+    }
+
+    //private void LateUpdate()
+    //{
+    //    latePosition = transform.position;
+    //}
+
+    public bool isStopped()
+    {
+        float timer = 0;
+
+        while (currentPosition==latePosition)
+        {
+            timer += Time.deltaTime;
+
+            if (timer>5)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //제일 가까이 있는 player를 nearPlayer로 지정
@@ -84,7 +103,6 @@ public class LivingEntity : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerDistanceList.Remove(other.gameObject);
-            //myDict.Remove(other.gameObject);
         }
 
         if (other.gameObject.tag == "Bison")
@@ -98,42 +116,28 @@ public class LivingEntity : MonoBehaviour
         StartCoroutine(OnDamage());
     }
 
-
-
     IEnumerator OnDamage()
     {
         isAttacked = true;
         mesh.material = hitEffect1; 
-        
         transform.localScale += new Vector3(0.1f,0.1f,0.1f);
+
         yield return new WaitForSeconds(0.1f);
 
         mesh.material = hitEffect2;
-
         transform.localScale -= new Vector3(0.1f,0.1f,0.1f);
-        yield return new WaitForSeconds(0.1f);
 
+        yield return new WaitForSeconds(0.1f);
 
         if (currentHealth > 0)
         {
             mesh.material = startMat;
         }
-
         else
         {
-            //foreach (MeshRenderer mesh in meshes)
-            //{
-            //    mesh.material.color = Color.gray;
-            //}
-
             Destroy(gameObject);
-
         }
-
         yield return new WaitForSeconds(4f);
         isAttacked = false;
-
     }
-
-
 }

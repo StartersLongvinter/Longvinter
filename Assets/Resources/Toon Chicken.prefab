@@ -465,8 +465,8 @@ GameObject:
   - component: {fileID: 6212225031969149325}
   - component: {fileID: 6296764728032190221}
   - component: {fileID: 6296764728032190217}
-  - component: {fileID: 6296764728032190222}
   - component: {fileID: 4847248579875208429}
+  - component: {fileID: 7543147963986045323}
   m_Layer: 0
   m_Name: Toon Chicken
   m_TagString: Untagged
@@ -550,32 +550,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &6296764728032190222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6297776878160505521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63926329645ab6488b3a509de9a0416, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
-  agent: {fileID: 6296764728032190217}
-  anim: {fileID: 6212225031969149325}
-  nearPlayer: {fileID: 0}
-  target:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  nearDistance: 7
-  moveAmount: 3
 --- !u!136 &4847248579875208429
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -590,6 +564,30 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7543147963986045323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6297776878160505521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6f56557e1292c479f1872d4359cbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  currentHealth: 50
+  hitEffect1: {fileID: 2100000, guid: 7ebb1886fb7d6ed4096b2afe154309ad, type: 2}
+  hitEffect2: {fileID: 2100000, guid: de1d74c120cbfc043b2e2ccc96330826, type: 2}
+  agent: {fileID: 6296764728032190217}
+  anim: {fileID: 6212225031969149325}
+  nearPlayer: {fileID: 0}
+  nearAnimals: []
+  isAttacked: 0
+  target: []
+  nearDistance: 0
+  moveAmount: 0
 --- !u!1 &6297831283169261643
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5223685251508337094}
   - component: {fileID: 5223685251508337093}
   - component: {fileID: -7672754636283100586}
+  - component: {fileID: 8138716589917738501}
   m_Layer: 5
   m_Name: Trout
   m_TagString: Untagged
@@ -91,6 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fefe54e6a1048fa97fa990520bd655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bagInven: []
+  equipInven: []
 --- !u!225 &5223685251508337093
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -116,3 +119,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: b38dbc5961e21498f82cb577c7467d01, type: 2}
+  equipment: {fileID: 0}
+--- !u!114 &8138716589917738501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223685251508337091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
