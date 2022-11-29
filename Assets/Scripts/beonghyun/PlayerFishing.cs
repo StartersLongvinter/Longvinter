@@ -305,7 +305,7 @@ public class PlayerFishing : MonoBehaviour
         if (eCount >= 10)
         {
             isSuccessState = true;
-            UIManager_BH.instance.OpenSuccessImage();
+            //UIManager_BH.instance.OpenSuccessImage();
         }
         else Debug.Log("Fail");
         playerAnimator.SetBool("isFishing", false);

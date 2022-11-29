@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a5f6198d82bdd4cac25b3061e63863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pv: {fileID: -6487677266702463582}
   fishList:
   - {fileID: 5223685251508337091, guid: 2da07ba54bdf64ea08d96a97d832f6f9, type: 3}
   - {fileID: 5223685251508337091, guid: 79bb6ee0b6ee3431883ebdcc4297f1b4, type: 3}
