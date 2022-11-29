@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8828034033834832765}
   - component: {fileID: 2609983626227422274}
   - component: {fileID: 64239163631818093}
+  - component: {fileID: 2355675438227568252}
   m_Layer: 0
   m_Name: SM_SolarPanel_Large_Solar_Big_Base
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2355675438227568252
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4888538798193545243}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5918512261060185742, guid: e6b196e887fdb45798c5c7b5ddb7c3c5, type: 3}
 --- !u!1 &5084617563395895124
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +109,7 @@ GameObject:
   - component: {fileID: 7359048569603372027}
   - component: {fileID: 1811489114594280778}
   - component: {fileID: 1176279559327001830}
+  - component: {fileID: 7237069228001833838}
   m_Layer: 0
   m_Name: SM_SolarPanel_Large_Solar_Big_Panel
   m_TagString: Untagged
@@ -166,6 +182,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7237069228001833838
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084617563395895124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2400153503869228773, guid: e6b196e887fdb45798c5c7b5ddb7c3c5, type: 3}
 --- !u!1 &7135646017907336476
 GameObject:
   m_ObjectHideFlags: 0

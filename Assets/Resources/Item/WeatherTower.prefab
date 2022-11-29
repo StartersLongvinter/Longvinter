@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3360612678664184671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3690708236883541446}
@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6611313676834608779}
   - component: {fileID: 6358794711100286213}
   - component: {fileID: 7920704997495709718}
+  - component: {fileID: 1248410426389592704}
   m_Layer: 0
   m_Name: SM_WeatherTower01__CenterPilar
   m_TagString: Untagged
@@ -117,6 +118,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1248410426389592704
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5648793731031378503}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -405169932913491632, guid: e1eb04950f79f4cb7b639662e524b1da, type: 3}
 --- !u!1 &6356451986211961795
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +143,7 @@ GameObject:
   - component: {fileID: 7172692222117382460}
   - component: {fileID: 3043763552947349022}
   - component: {fileID: 1408096202788240576}
+  - component: {fileID: 5377688351581556492}
   m_Layer: 0
   m_Name: SM_WeatherTower01__Inside
   m_TagString: Untagged
@@ -200,6 +216,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5377688351581556492
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356451986211961795}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3582335596591142639, guid: e1eb04950f79f4cb7b639662e524b1da, type: 3}
 --- !u!1 &7208897103732911927
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +241,7 @@ GameObject:
   - component: {fileID: 3690708236883541446}
   - component: {fileID: 8774071723032838484}
   - component: {fileID: 3302213832958779924}
+  - component: {fileID: 5049194875921988756}
   m_Layer: 0
   m_Name: SM_WeatherTower01__Base
   m_TagString: Untagged
@@ -283,3 +314,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5049194875921988756
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7208897103732911927}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2218176748260934646, guid: e1eb04950f79f4cb7b639662e524b1da, type: 3}
