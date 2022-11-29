@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private float timer = 0f;
 
+    // hoseong
+    public bool isBuilding = false;
+
     #region Callback Methods
     private void Awake()
     {
@@ -97,7 +100,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             isPressedSpace = false;
         }
 
-        if(temp != null)
+        if (temp != null)
         {
             if (isAiming)
             {
@@ -111,7 +114,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 hand.transform.GetChild(temp.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
             }
         }
-        
+
 
 
     }
@@ -128,7 +131,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         AnimateAim();
     }
-    
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag.Equals("Item"))
@@ -154,11 +157,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 doAttack = false;
                 RaycastHit[] hits;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                
+
                 hits = Physics.RaycastAll(ray);
-                
+
                 var distinctHits = hits.DistinctBy(x => x.collider.name);
-                
+
                 foreach (var hit in distinctHits)
                 {
                     if (hit.collider.tag.Equals("Item"))
@@ -241,16 +244,20 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         horizontalAxis = Input.GetAxisRaw("Horizontal");
         verticalAxis = Input.GetAxisRaw("Vertical");
-        isAiming = Input.GetButton("Fire2");
         photonView.RPC("SetIsAiming", RpcTarget.Others, isAiming);
-        doAttack = Input.GetButtonDown("Fire1");
-        
+
+        if (!isBuilding)
+        {
+            isAiming = Input.GetButton("Fire2");
+            doAttack = Input.GetButtonDown("Fire1");
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isPressedSpace = true;
         }
     }
-    
+
     //raycast 이용 특정 object와 hit 되면 fishing 함수 호출
     private void Fishing()
     {
@@ -271,7 +278,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     Debug.Log("Fishing");
                     //낚시할때 fishingpoint를 바라보고 있어야 함
-                    transform.LookAt(new Vector3(raycasthit.collider.transform.position.x , transform.position.y, raycasthit.collider.transform.position.z));
+                    transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
                     playerAnimator.SetTrigger("doFish");
                     fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
                     StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
@@ -352,7 +359,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private void Aim()
     {
         if (weapon == null) return;
-        
+
         if (isAiming && weapon.type == Weapon.Type.Melee1)
         {
             playerAnimator.SetBool("isMeleeAttackAim", true);
@@ -366,9 +373,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private void AnimateAim()
     {
         if (isFishing) return;
-        
+
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
-        
+
         if (isAiming && weapon.type == Weapon.Type.Range || weapon.type == Weapon.Type.Melee2)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
