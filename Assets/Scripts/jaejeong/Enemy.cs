@@ -13,24 +13,28 @@ public class Enemy : MonoBehaviourPun
 	public bool isChanged = false;
 
     [PunRPC]
-	public void TakeDamage (float amount)
-	{
-		renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+    public void ChangePlayersColor(float damage)
+    {
+        renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        StartCoroutine(ResetColor());
+        if (photonView.IsMine)
+            photonView.RPC("TakeDamage", RpcTarget.All, damage);
+    }
 
-		StartCoroutine(ResetColor());
+    [PunRPC]
+    public void TakeDamage(float amount)
+    {
+        PlayerStat.LocalPlayer.hp -= amount;
 
-		if (!photonView.IsMine)
-			return;
+        if (PlayerStat.LocalPlayer.hp <= 0 && PlayerStat.LocalPlayer.status != PlayerStat.Status.die)
+            photonView.RPC("Die",RpcTarget.All);
+    }
 
-		PlayerStat.LocalPlayer.hp -= amount;
-
-		if (PlayerStat.LocalPlayer.hp <= 0 && PlayerStat.LocalPlayer.status != PlayerStat.Status.die)
-			Die();
-	}
-
+	[PunRPC]
 	void Die ()
 	{
-		PlayerStat.LocalPlayer.status = PlayerStat.Status.die;
+		GetComponent<PlayerStat>().status = PlayerStat.Status.die;
+		this.gameObject.layer = 8;
 		Debug.Log("Dead");
 	}
 

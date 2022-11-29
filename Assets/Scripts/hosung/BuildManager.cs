@@ -131,8 +131,6 @@ public class BuildManager : MonoBehaviourPun
             {
                 var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
                 newTurret.transform.SetParent(myHomeArea.transform);
-
-                newTurret.GetComponent<TurretController>().photonView.RPC("Init", RpcTarget.All);
             }
 
             if (buildType == BuildType.house)
@@ -141,13 +139,6 @@ public class BuildManager : MonoBehaviourPun
                 var newHomeArea = PhotonNetwork.Instantiate(homeAreaPrefabName, buildObject.transform.position, buildObject.transform.rotation);
                 homeAreas.Add(newHomeArea.gameObject);
             }
-
-            /*            TurretController turretController=myHomeArea.GetComponent<TurretController>();
-                        turretController.turretTransform = newTurret.transform;
-                        turretController.rotatePart = newTurret.transform.GetChild(0).GetChild(1).GetChild(0);
-                        turretController.firePoint = turretController.rotatePart.GetChild(0).GetChild(0).GetChild(0);
-
-                        myHomeArea.GetComponent<TurretController>().StartCoroutine("RotateTurret");*/
             PlayerStat.LocalPlayer.gameObject.GetComponent<PlayerController>().isBuilding = false;
 
             buildType = BuildType.none;

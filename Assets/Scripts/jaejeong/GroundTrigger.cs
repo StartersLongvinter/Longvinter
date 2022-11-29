@@ -23,7 +23,6 @@ public class GroundTrigger : MonoBehaviourPun, IPunObservable //��
     private void Awake() //change later~~~?~~?~?~?~?~
     {
         this.gameObject.name = photonView.Owner.NickName + "HomeArea";
-        //myTurret.trigger = this;
     }
 
     private void OnTriggerStay(Collider other)

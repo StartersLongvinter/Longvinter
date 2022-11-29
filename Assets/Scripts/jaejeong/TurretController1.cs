@@ -36,13 +36,13 @@ public class TurretController1 : Turret
                 if (!PlayerList.Instance.playerCharacters.Contains(i))
                 {
                     playerList.Remove(i);
-                    return;
+                    continue;
                 }
                 if (i.GetComponent<PlayerController>().IsAiming)
                 {
                     Enemy enemy = i.GetComponent<Enemy>();
-                    //enemy.TakeDamage(damage);
-                    i.GetComponent<PhotonView>().RPC(nameof(enemy.TakeDamage), RpcTarget.All, damage);
+                    if (i.GetComponent<PhotonView>().IsMine)
+                        i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
                 }
             }
             isfire=false;

@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviourPun
 {
     public float Damage { set { damage = value; } }
     public Vector3 Direction { set { direction = value; } }
@@ -15,11 +17,15 @@ public class Bullet : MonoBehaviour
 	private Vector3 direction;
 	private bool isCollided;
 
+	Player hitplayer;
+
 	protected virtual void Start()
     {
 		bulletRigidbody = GetComponent<Rigidbody>();
 
 		transform.rotation = Quaternion.LookRotation(direction);
+
+		Destroy(gameObject, 5f);
 	}
 
     private void FixedUpdate()
@@ -27,15 +33,42 @@ public class Bullet : MonoBehaviour
 		bulletRigidbody.velocity = direction * speed;
 	}
 
-    
-
-    protected virtual void OnCollisionEnter(Collision collision)
+	[PunRPC]
+	void Shoot(float x, float y, float z)
 	{
+		Bullet bullet = GetComponent<Bullet>();
+		this.gameObject.name = photonView.Owner.NickName + "Bullet";
+		Vector3 firePoint = new Vector3((float)x, (float)y, (float)z);
+		bullet.direction = firePoint;
+
+		Debug.Log(bullet.name);
+	}
+
+	[PunRPC]
+	void HasDamage(int actorNumber)
+	{
+		Transform enemy = PlayerList.Instance.playersWithActorNumber[actorNumber].transform;
+		Enemy e = enemy.GetComponent<Enemy>();
+		if (e != null && enemy.GetComponent<PhotonView>().IsMine)
+			enemy.GetComponent<PhotonView>().RPC(nameof(e.ChangePlayersColor), RpcTarget.All, damage);
+	}
+
+	protected virtual void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.tag == "Player" && (collision.gameObject.name + "Bullet" != this.gameObject.name))
+		{
+			if (collision.gameObject.GetComponent<PhotonView>().IsMine)
+			{
+				this.GetComponent<PhotonView>().RPC("HasDamage", RpcTarget.All, collision.gameObject.GetComponent<PhotonView>().Owner.ActorNumber);
+			}
+		}
+
 		if (collision.gameObject.tag != "Bullet" && !isCollided)
 		{
+			hitplayer = collision.gameObject.GetComponent<PhotonView>().Owner;
 			isCollided = true;
 			speed = 0;
-			bulletRigidbody.isKinematic = true;
+			GetComponent<Rigidbody>().isKinematic = true;
 
 			ContactPoint contactPoint = collision.contacts[0];
 			Vector3 impactPosition = contactPoint.point;
@@ -58,12 +91,12 @@ public class Bullet : MonoBehaviour
 				}
 			}
 
-			//if (shotSFX != null && GetComponent<AudioSource>())
-			//{
-			//	GetComponent<AudioSource>().PlayOneShot(hitSFX);
-			//}
+            //if (shotSFX != null && GetComponent<AudioSource>())
+            //{
+            //	GetComponent<AudioSource>().PlayOneShot(hitSFX);
+            //}
 
-			StartCoroutine(DestroyParticle(0f));
+            StartCoroutine(DestroyParticle(0f));
 		}
 	}
 

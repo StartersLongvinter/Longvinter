@@ -57,6 +57,17 @@ MonoBehaviour:
   - DestroyGameObject
   - Init
   - TakeDamage
+  - Shoot
+  - LockOnTarget
+  - RepeatInvoke
+  - ChangePlayersColor
+  - Damage
+  - Seek
+  - HitTarget
+  - ChangeTarget
+  - ChangeTargets
+  - HasDamage
+  - Die
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

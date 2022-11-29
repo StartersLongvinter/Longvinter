@@ -10,39 +10,47 @@ public class TurretBullet : Bullet
 	private Transform target;
 	private Vector3 targetPosition;
 
-	public void Seek (Transform _target)
-	{
-		target = _target;
+    //[PunRPC]
+    public void Seek(Transform _target)
+    {
+		Debug.Log(target.name+"¤Ì¤Ì");
+		target = _target; 
 		targetPosition = target.position;
-	}
+    }
 
     protected override void Start()
     {
 		bulletRigidbody = GetComponent<Rigidbody>();
 	}
 
-    // Update is called once per frame
+/*    // Update is called once per frame
     void Update () {
 
-		if (target == null)
+		if (target == null&&PhotonNetwork.IsMasterClient)
 		{
-			Destroy(gameObject);
+			//Destroy(gameObject);
+			PhotonNetwork.Destroy(gameObject);
 			return;
 		}
-	}
+	}*/
 
-    void HitTarget ()
+	[PunRPC]
+	void HitTarget ()
 	{
-		Damage(target);
-		Destroy(gameObject);
+			Damage(target);
+		/*if (target.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer)
+			target.GetComponent<PhotonView>().RPC("Damage", RpcTarget.All, target);*/
+		//Destroy(gameObject);
+		PhotonNetwork.Destroy(gameObject);
 	}
 
+    
 	void Damage (Transform enemy)
 	{
 		Enemy e = enemy.GetComponent<Enemy>();
-		if (e != null)
-			enemy.GetComponent<PhotonView>().RPC(nameof(e.TakeDamage), RpcTarget.All, damage);
-		//e.TakeDamage(damage);
+		if (e != null && enemy.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer)
+			enemy.GetComponent<PhotonView>().RPC(nameof(e.ChangePlayersColor), RpcTarget.All, damage);
+			//e.TakeDamage(damage);
 	}
 
     protected override void OnCollisionEnter(Collision collision)
@@ -50,8 +58,12 @@ public class TurretBullet : Bullet
 		base.OnCollisionEnter(collision);
 		if (collision.gameObject.tag == "Player"&&(collision.gameObject.name + "Bullet" !=this.gameObject.name))
 		{
-			HitTarget();
-			return;
+			if (target.GetComponent<PhotonView>().Owner == PhotonNetwork.LocalPlayer)
+			{
+				//HitTarget();
+				this.GetComponent<PhotonView>().RPC("HitTarget", RpcTarget.All);
+				return;
+			}
 		}
     }
 }

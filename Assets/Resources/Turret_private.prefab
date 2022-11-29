@@ -540,7 +540,7 @@ MonoBehaviour:
   fireTimeLimit: 0
   isfire: 0
   attack: 0
-  bulletPrefab: {fileID: 9078441727759166900, guid: 7255d59dbd856f74f9e21d6a984a6b0d, type: 3}
+  bulletPrefab: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
   firePoint: {fileID: 2905251075596339026}
   turretTransform: {fileID: 2909241283207979408}
   trigger: {fileID: 0}
