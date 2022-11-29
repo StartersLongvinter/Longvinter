@@ -40,30 +40,30 @@ public class Bullet : MonoBehaviour
 			ContactPoint contactPoint = collision.contacts[0];
 			Vector3 impactPosition = contactPoint.point;
 			Quaternion impactRotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
-			
-			if (ImpactVfxPrefab != null)
-			{
-				GameObject ImpactVfxInstance = Instantiate(ImpactVfxPrefab, impactPosition, impactRotation);
-				ParticleSystem impactParticle = ImpactVfxInstance.GetComponent<ParticleSystem>();
-				
-				if (impactParticle != null)
-				{
-					Destroy(ImpactVfxInstance, impactParticle.main.duration);
-				}
-				else
+
+            if (ImpactVfxPrefab != null)
+            {
+                GameObject ImpactVfxInstance = Instantiate(ImpactVfxPrefab, impactPosition, impactRotation);
+                ParticleSystem impactParticle = ImpactVfxInstance.GetComponent<ParticleSystem>();
+
+                if (impactParticle != null)
                 {
-					ParticleSystem impactParticleChild = ImpactVfxInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
-					
-					Destroy(ImpactVfxInstance, impactParticleChild.main.duration);
-				}
-			}
+                    Destroy(ImpactVfxInstance, impactParticle.main.duration);
+                }
+                else
+                {
+                    ParticleSystem impactParticleChild = ImpactVfxInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
 
-			//if (shotSFX != null && GetComponent<AudioSource>())
-			//{
-			//	GetComponent<AudioSource>().PlayOneShot(hitSFX);
-			//}
+                    Destroy(ImpactVfxInstance, impactParticleChild.main.duration);
+                }
+            }
 
-			StartCoroutine(DestroyParticle(0f));
+            //if (shotSFX != null && GetComponent<AudioSource>())
+            //{
+            //	GetComponent<AudioSource>().PlayOneShot(hitSFX);
+            //}
+
+            StartCoroutine(DestroyParticle(0f));
 		}
 	}
 

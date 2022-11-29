@@ -29,7 +29,6 @@ public class Weapon : MonoBehaviour
             for (int i = 0; i < bulletCountPerFire; i++)
             {
                 GameObject bulletInstance = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                bulletInstance.name = i.ToString();
 
                 Vector3 bulletDirectionOffset = Vector3.zero;
                 if (accuracy != 100)

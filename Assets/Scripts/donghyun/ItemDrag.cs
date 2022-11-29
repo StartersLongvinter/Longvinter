@@ -68,9 +68,8 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().equipmentList.Remove(itemInEquip);
             player.GetComponent<PlayerInventory>().itemList.Add(itemInEquip);
 
-            player.GetComponent<PlayerInventory>().equipPosition.transform.GetChild(itemInEquip.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
-            //player.GetComponent<PlayerController>().weapon = null;
-            //player.GetComponent<PlayerController>().temp = null;
+            player.GetComponent<PlayerController>().bagEquipPoint.transform.GetChild(itemInEquip.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
+            player.GetComponent<PlayerController>().weaponData = null;
 
             for (int i = 0; i < bagInven.Length; i++)
             {
@@ -99,9 +98,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().itemList.Remove(item);
             player.GetComponent<PlayerInventory>().equipmentList.Add(item);
 
-            player.GetComponent<PlayerInventory>().equipPosition.transform.GetChild(item.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(true);
-            player.GetComponent<PlayerController>().temp = player.GetComponent<PlayerInventory>().handPosition.transform.GetChild(item.GetComponent<Item>().equipment.emIndex).gameObject;
-            player.GetComponent<PlayerController>().weapon = player.GetComponent<PlayerInventory>().handPosition.transform.GetChild(item.GetComponent<Item>().equipment.emIndex).GetComponent<Weapon>();
+            player.GetComponent<PlayerController>().weaponData = gameObject.GetComponent<Item>().equipment;
 
             for (int i = 0; i < equipInven.Length; i++)
             {
@@ -130,9 +127,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().itemList.Remove(gameObject);
             player.GetComponent<PlayerInventory>().equipmentList.Add(gameObject);
 
-            player.GetComponent<PlayerInventory>().equipPosition.transform.GetChild(gameObject.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(true);
-            player.GetComponent<PlayerController>().temp = player.GetComponent<PlayerInventory>().handPosition.transform.GetChild(gameObject.GetComponent<Item>().equipment.emIndex).gameObject;
-            player.GetComponent<PlayerController>().weapon = player.GetComponent<PlayerInventory>().handPosition.transform.GetChild(gameObject.GetComponent<Item>().equipment.emIndex).GetComponent<Weapon>();
+            player.GetComponent<PlayerController>().weaponData = gameObject.GetComponent<Item>().equipment;
 
             for (int i = 0; i < equipInven.Length; i++)
             {
@@ -169,10 +164,9 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
 
         player.GetComponent<PlayerInventory>().equipmentList.Remove(go);
         player.GetComponent<PlayerInventory>().itemList.Add(go);
-        player.GetComponent<PlayerInventory>().equipPosition.transform.GetChild(go.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
-        player.GetComponent<PlayerController>().weapon = null;
 
-        player.GetComponent<PlayerController>().temp = null;
+        player.GetComponent<PlayerController>().bagEquipPoint.transform.GetChild(go.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
+        player.GetComponent<PlayerController>().weaponData = null;
 
         player.GetComponent<PlayerInventory>().updateBagInventory();
         player.GetComponent<PlayerInventory>().updateEquipInventory();
