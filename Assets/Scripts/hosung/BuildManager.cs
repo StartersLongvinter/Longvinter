@@ -20,12 +20,18 @@ public class BuildManager : MonoBehaviourPun
     public bool canBuild = true;
     GameObject[] buildArea;
     [SerializeField] Color[] buildObjectColors;
+    List<GameObject> myHomeAreas = new List<GameObject>();
     GameObject myHomeArea;
     string buildPrefabName = "";
     [SerializeField] string[] buildPrefabNameList;
+    List<GameObject> homeAreas = new List<GameObject>();
+    [SerializeField] string homeAreaPrefabName;
+
     void Awake()
     {
+
     }
+
     public void SetBuildType(int buildtypeNumber)
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber != PlayerStat.LocalPlayer.ownerPlayerActorNumber)
@@ -39,16 +45,45 @@ public class BuildManager : MonoBehaviourPun
     bool CheckBuildPosition(Vector3 _mousePosition)
     {
         if (myHomeArea == null)
-            foreach (GameObject area in buildArea) if (area.name == PhotonNetwork.LocalPlayer.NickName + "HomeArea") myHomeArea = area;
+            foreach (GameObject area in buildArea) if (area.name == PhotonNetwork.LocalPlayer.NickName + "HomeArea") myHomeAreas.Add(area);
         if (buildType == BuildType.turret)
         {
-            if (myHomeArea == null || Vector3.Distance(PlayerStat.LocalPlayer.gameObject.transform.position, _mousePosition) > 4f)
+            if (myHomeAreas.Count <= 0 || Vector3.Distance(PlayerStat.LocalPlayer.gameObject.transform.position, _mousePosition) > 4f)
             {
                 buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
             }
+            float _d = 1000f;
+            foreach (GameObject _homeArea in myHomeAreas)
+            {
+                float _thisHomeDistance = Vector3.Distance(PlayerStat.LocalPlayer.transform.position, _homeArea.transform.position);
+                if (_d >= _thisHomeDistance)
+                {
+                    _d = _thisHomeDistance;
+                    myHomeArea = _homeArea;
+                }
+            }
             float _distance = Vector3.Distance(myHomeArea.transform.position, _mousePosition);
+            Debug.Log(_distance);
             if (_distance > (myHomeArea.transform.lossyScale.x * 0.5f) - buildObject.transform.localScale.x * 0.5f)
+            {
+                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
+                return false;
+            }
+        }
+        if (buildType == BuildType.house && homeAreas.Count > 0)
+        {
+            float _distance = 1000f;
+            float homeAreaRadius = -1f;
+            foreach (GameObject home in homeAreas)
+            {
+                if (homeAreaRadius == -1f) homeAreaRadius = home.transform.lossyScale.x;
+                float _d = Vector3.Distance(home.transform.position, _mousePosition);
+                if (_distance > _d)
+                    _distance = _d;
+            }
+            Debug.Log(_distance);
+            if (_distance <= homeAreaRadius)
             {
                 buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
@@ -92,10 +127,20 @@ public class BuildManager : MonoBehaviourPun
     {
         if (buildType != BuildType.none && canBuild && Input.GetButtonDown("Fire1"))
         {
-            var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
-            newTurret.transform.SetParent(myHomeArea.transform);
+            if (buildType == BuildType.turret)
+            {
+                var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
+                newTurret.transform.SetParent(myHomeArea.transform);
 
-            newTurret.GetComponent<TurretController>().photonView.RPC("Init", RpcTarget.All);
+                newTurret.GetComponent<TurretController>().photonView.RPC("Init", RpcTarget.All);
+            }
+
+            if (buildType == BuildType.house)
+            {
+                var newHouse = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
+                var newHomeArea = PhotonNetwork.Instantiate(homeAreaPrefabName, buildObject.transform.position, buildObject.transform.rotation);
+                homeAreas.Add(newHomeArea.gameObject);
+            }
 
             /*            TurretController turretController=myHomeArea.GetComponent<TurretController>();
                         turretController.turretTransform = newTurret.transform;
