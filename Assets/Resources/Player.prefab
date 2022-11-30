@@ -15141,6 +15141,7 @@ MonoBehaviour:
   maxHp: 90
   money: 0
   isCold: 0
+  autoDamageValue: 1
 --- !u!114 &-2713289005664936501
 MonoBehaviour:
   m_ObjectHideFlags: 0
