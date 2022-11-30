@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 596405350424499156}
   - component: {fileID: 4605212183490387057}
   - component: {fileID: 1733313411253414075}
+  - component: {fileID: 2919206142435583438}
   m_Layer: 0
   m_Name: SaunaOutsideRed
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2919206142435583438
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219844244788054382}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5805810003258724987, guid: a0756611d88014cb88d6f368aeb63d93, type: 3}

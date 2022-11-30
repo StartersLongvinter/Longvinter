@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6294601674316886803}
   - component: {fileID: 3909480363879553753}
   - component: {fileID: 5555231175931817063}
+  - component: {fileID: 728490401719015921}
   m_Layer: 0
   m_Name: SM_SolarPanel_Small_SM_Solar_Small_Panel
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &728490401719015921
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037903136787099111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2055854565172821759, guid: c85c3a3377ef54af2b596ffb3e63fd66, type: 3}
 --- !u!1 &3058237857751027869
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +142,7 @@ GameObject:
   - component: {fileID: 3806454707736981611}
   - component: {fileID: 4740373922180789503}
   - component: {fileID: 1204255898076994600}
+  - component: {fileID: 6810504550460998833}
   m_Layer: 0
   m_Name: SM_SolarPanel_Small_SM_Solar_Small_Base
   m_TagString: Untagged
@@ -199,3 +215,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6810504550460998833
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151062171511524315}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3783373706198869344, guid: c85c3a3377ef54af2b596ffb3e63fd66, type: 3}

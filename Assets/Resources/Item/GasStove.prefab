@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 454511071948811320}
   - component: {fileID: 3594265011850224541}
   - component: {fileID: 1586836852569167703}
+  - component: {fileID: -5028018867302495189}
   m_Layer: 0
   m_Name: GasStove
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-5028018867302495189
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938278993424938626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7110729014889164354, guid: fee0ecd955c0e454193f166ade0c826e, type: 3}

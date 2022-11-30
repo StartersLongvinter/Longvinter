@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         verticalAxis = Input.GetAxisRaw("Vertical");
         photonView.RPC("SetIsAiming", RpcTarget.Others, isAiming);
 
-        if (!isBuilding)
+        if (weaponData != null || !isBuilding)
         {
             isAiming = Input.GetButton("Fire2");
             doAttack = Input.GetButtonDown("Fire1");

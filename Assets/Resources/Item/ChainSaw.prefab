@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3332690683717575585}
   - component: {fileID: 1868926851304549380}
   - component: {fileID: 4470724609018337486}
+  - component: {fileID: -8950169296150377778}
   m_Layer: 0
   m_Name: ChainSaw
   m_TagString: Untagged
@@ -86,3 +87,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-8950169296150377778
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669447280008706331}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7029531919713087591, guid: fbe9d0af3991547c0888d566629ef982, type: 3}

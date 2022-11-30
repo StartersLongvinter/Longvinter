@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5787129797787554931}
   - component: {fileID: 7493946310517300182}
   - component: {fileID: 4619337790799965980}
+  - component: {fileID: -4289911861563038401}
   m_Layer: 0
   m_Name: SaunaInside
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-4289911861563038401
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6565073218624081609}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8168290429557839972, guid: 1ec124020c0a04d9e855a4c7b04bc9e2, type: 3}
