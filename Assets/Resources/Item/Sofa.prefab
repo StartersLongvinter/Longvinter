@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5736344329386385961}
   - component: {fileID: 8661633002895961484}
   - component: {fileID: 6904222852853602630}
+  - component: {fileID: -2353549916037570347}
   m_Layer: 0
   m_Name: Sofa
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-2353549916037570347
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4958540614923106451}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8657325589228817663, guid: 9c0455600f34641e0912b1e6f21e5c2d, type: 3}

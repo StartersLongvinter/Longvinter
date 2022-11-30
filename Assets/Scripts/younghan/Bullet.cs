@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviourPun
 
 		if (collision.gameObject.tag != "Bullet" && !isCollided)
 		{
-			hitplayer = collision.gameObject.GetComponent<PhotonView>().Owner;
+			//hitplayer = collision.gameObject.GetComponent<PhotonView>().Owner;
 			isCollided = true;
 			speed = 0;
 			GetComponent<Rigidbody>().isKinematic = true;

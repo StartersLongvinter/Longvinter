@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6998470258178766150}
   - component: {fileID: 7745085834371418653}
   - component: {fileID: 2523560946442934256}
+  - component: {fileID: 5084077117425591522}
   m_Layer: 0
   m_Name: SM_WeatherStation__Windspeed
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5084077117425591522
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118338731334523164}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1333009071023838393, guid: 01d22a4dfe9264f47ad011b68feeea0b, type: 3}
 --- !u!1 &1141289198882817134
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +142,7 @@ GameObject:
   - component: {fileID: 7058069960253560035}
   - component: {fileID: 845047843450201984}
   - component: {fileID: 611041245714595578}
+  - component: {fileID: 7255068499562570467}
   m_Layer: 0
   m_Name: SM_WeatherStation__Base
   m_TagString: Untagged
@@ -199,3 +215,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7255068499562570467
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2832997064559173682}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7229860080536491984, guid: 01d22a4dfe9264f47ad011b68feeea0b, type: 3}
