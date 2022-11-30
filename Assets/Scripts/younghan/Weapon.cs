@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviourPun
 {
     // Melee1 - Axe / Melee2 - Chain saw / Range - Gun
     public enum Type { Melee1, Melee2, Range }
@@ -28,7 +29,7 @@ public class Weapon : MonoBehaviour
         {
             for (int i = 0; i < bulletCountPerFire; i++)
             {
-                GameObject bulletInstance = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                var bulletInstance = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation);
 
                 Vector3 bulletDirectionOffset = Vector3.zero;
                 if (accuracy != 100)
@@ -57,8 +58,10 @@ public class Weapon : MonoBehaviour
                     }
                 }
 
-                bulletInstance.GetComponent<Bullet>().Direction = firePoint.forward + bulletDirectionOffset;
-                bulletInstance.GetComponent<Bullet>().Damage = this.damage;
+                // bulletInstance.GetComponent<Bullet>().Direction = firePoint.forward + bulletDirectionOffset;
+                // bulletInstance.GetComponent<Bullet>().Damage = this.damage;
+                if (photonView.IsMine)
+                    bulletInstance.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.forward.x, firePoint.forward.y, firePoint.forward.z, this.damage, bulletDirectionOffset.x, bulletDirectionOffset.y, bulletDirectionOffset.z);
             }
         }
 

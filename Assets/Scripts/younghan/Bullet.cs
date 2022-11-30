@@ -34,12 +34,13 @@ public class Bullet : MonoBehaviourPun
     }
 
     [PunRPC]
-    void Shoot(float x, float y, float z)
+    void Shoot(float x, float y, float z, float _damage = 10f, float _offsetX = 0f, float _offsetY = 0f, float _offsetZ = 0f)
     {
         Bullet bullet = GetComponent<Bullet>();
         this.gameObject.name = photonView.Owner.NickName + "Bullet";
         Vector3 firePoint = new Vector3((float)x, (float)y, (float)z);
-        bullet.direction = firePoint;
+        bullet.direction = firePoint + new Vector3(_offsetX, _offsetY, _offsetZ);
+        bullet.damage = _damage;
 
         Debug.Log(bullet.name);
     }

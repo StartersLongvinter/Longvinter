@@ -19,12 +19,11 @@ public class Enemy : MonoBehaviourPun
         if (photonView.IsMine)
         {
             PlayerStat.LocalPlayer.currentHPAnimator.SetTrigger("isDamaged");
-            photonView.RPC("TakeDamage", RpcTarget.All, damage);
+            TakeDamage(damage);
         }
         StartCoroutine(ResetColor());
     }
 
-    [PunRPC]
     public void TakeDamage(float amount)
     {
         PlayerStat.LocalPlayer.hp -= amount;

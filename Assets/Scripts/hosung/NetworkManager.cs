@@ -40,12 +40,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public bool isLobby = false;
     bool returnLobby = false;
     public string playerPrefabName;
+    public string currentVersion = "";
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
     [SerializeField] GameObject roomPrefab;
 
     void Awake()
     {
+        currentVersion = Application.version;
         if (NetworkManager.instance != null) Destroy(this.gameObject);
     }
 
@@ -59,6 +61,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
         }
         isLobby = false;
+    }
+
+    public void SendWarningText(string message)
+    {
+        Text warningText = GameObject.Find("WarningText").GetComponent<Text>();
+        if (warningText == null) return;
+        warningText.text = message;
+        warningText.GetComponent<WarningText>().isStart = true;
     }
 
     public void OnClickStart()
@@ -98,6 +108,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         //nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
         Debug.Log("checkInfo");
+        SendWarningText("[Error] Please check room info!");
         if (!PhotonNetwork.InLobby) return false;
         foreach (RoomInfo room in rooms)
         {
@@ -106,6 +117,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             if (((string)room.CustomProperties["roomName"] == roomName) && (_maxPlayers > (int)room.CustomProperties["curPlayer"]))
             {
                 Debug.Log($"roomName : {password} / {(string)room.CustomProperties["password"]}");
+                if (currentVersion != (string)room.CustomProperties["version"])
+                {
+                    Debug.Log("[Error] version error!!");
+                    SendWarningText("[Error] version error!!");
+                    return false;
+                }
                 if (password == _realPassword)
                 {
                     // PhotonNetwork.LocalPlayer.NickName = nickName;
@@ -117,6 +134,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             }
         }
         Debug.Log("Can't enter " + roomName + " room");
+        SendWarningText("[Error] Can't enter " + roomName + " room");
         return false;
     }
 
@@ -143,14 +161,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 20;
-        roomOptions.CustomRoomProperties = new Hashtable() { { "maxPlayers", 1 }, { "roomName", nickName + "'s room" }, { "password", password }, { "curPlayer", 0 }, { "isPVP", isPVP } };
+        roomOptions.CustomRoomProperties = new Hashtable() { { "maxPlayers", 1 }, { "roomName", nickName + "'s room" }, { "password", password }, { "curPlayer", 0 }, { "isPVP", isPVP }, { "version", currentVersion } };
         // 방이름, 비밀번호 값을 로비에서도 받을 수 있도록 함 
-        string[] newPropertiesForLobby = new string[5];
+        string[] newPropertiesForLobby = new string[6];
         newPropertiesForLobby[0] = "roomName";
         newPropertiesForLobby[1] = "password";
         newPropertiesForLobby[2] = "curPlayer";
         newPropertiesForLobby[3] = "isPVP";
         newPropertiesForLobby[4] = "maxPlayers";
+        newPropertiesForLobby[5] = "version";
         roomOptions.CustomRoomPropertiesForLobby = newPropertiesForLobby;
         PhotonNetwork.CreateRoom(nickName + "'s room", roomOptions);
     }
