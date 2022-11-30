@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 67566225}
   - component: {fileID: 67566231}
   m_Layer: 0
-  m_Name: ShotGun
+  m_Name: Shotgun
   m_TagString: Equipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1369,7 +1369,7 @@ PrefabInstance:
       objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 5051484039065906673, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
       propertyPath: m_Name
-      value: HazelHenScruffy
+      value: HazelHenScruffyFeather
       objectReference: {fileID: 0}
     - target: {fileID: 5051484039065906673, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
       propertyPath: m_IsActive
@@ -1386,7 +1386,7 @@ PrefabInstance:
     - target: {fileID: 8244427566627058246, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 71c88db6a52754fb69656f43f4dd3f38, type: 2}
+      objectReference: {fileID: 11400000, guid: 65c85cb056a2a490c90f7e6f2a279ba2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
 --- !u!1 &178698221 stripped
@@ -2528,7 +2528,7 @@ PrefabInstance:
       objectReference: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 5051484039065906673, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
       propertyPath: m_Name
-      value: HazelHenNormal
+      value: PristineHazelHenFeather
       objectReference: {fileID: 0}
     - target: {fileID: 5051484039065906673, guid: 60d16794396014f0099a3dab90f1f6a4, type: 3}
       propertyPath: m_IsActive
@@ -3928,7 +3928,7 @@ GameObject:
   - component: {fileID: 685320135}
   - component: {fileID: 685320141}
   m_Layer: 0
-  m_Name: SemiRifle
+  m_Name: SemiAutomatic
   m_TagString: Equipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6758,6 +6758,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2959212687230408814, guid: f2534b4ca511d48e09b1191c2ce7b4c7, type: 3}
+      propertyPath: sceneViewId
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3856793128432250465, guid: f2534b4ca511d48e09b1191c2ce7b4c7, type: 3}
+      propertyPath: sceneViewId
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969738048359414920, guid: f2534b4ca511d48e09b1191c2ce7b4c7, type: 3}
+      propertyPath: sceneViewId
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8812362789500005800, guid: f2534b4ca511d48e09b1191c2ce7b4c7, type: 3}
+      propertyPath: sceneViewId
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026572673438753099, guid: f2534b4ca511d48e09b1191c2ce7b4c7, type: 3}
+      propertyPath: sceneViewId
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2534b4ca511d48e09b1191c2ce7b4c7, type: 3}
 --- !u!1 &1406796314
@@ -6912,7 +6932,7 @@ GameObject:
   - component: {fileID: 1446705775}
   - component: {fileID: 1446705781}
   m_Layer: 0
-  m_Name: ChainSaw
+  m_Name: Chainsaw
   m_TagString: Equipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
