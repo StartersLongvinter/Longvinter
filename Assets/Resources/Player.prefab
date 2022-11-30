@@ -14956,12 +14956,13 @@ GameObject:
   - component: {fileID: 5444816142457934325}
   - component: {fileID: 5879694380349709949}
   - component: {fileID: 7221896422927409961}
-  - component: {fileID: -2713289005664936501}
   - component: {fileID: 1388196506}
   - component: {fileID: 1388196507}
   - component: {fileID: 1388196508}
   - component: {fileID: 1388196509}
   - component: {fileID: 1388196510}
+  - component: {fileID: 2103775182863587402}
+  - component: {fileID: -2713289005664936501}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -15063,6 +15064,7 @@ MonoBehaviour:
   - {fileID: -1923840663785282116}
   - {fileID: 5879694380349709949}
   - {fileID: 7221896422927409961}
+  - {fileID: 2103775182863587402}
   - {fileID: -2713289005664936501}
   sceneViewId: 0
   InstantiationId: 0
@@ -15141,41 +15143,6 @@ MonoBehaviour:
   maxHp: 90
   money: 0
   isCold: 0
---- !u!114 &-2713289005664936501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6349114427959441967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: isWalking
-  - Type: 9
-    SynchronizeType: 1
-    Name: doFish
-  - Type: 4
-    SynchronizeType: 1
-    Name: isFishing
-  - Type: 4
-    SynchronizeType: 1
-    Name: isMeleeAttackAim
-  - Type: 9
-    SynchronizeType: 1
-    Name: doMeleeAttack
-  m_SynchronizeLayers:
-  - SynchronizeType: 1
-    LayerIndex: 0
-  - SynchronizeType: 1
-    LayerIndex: 1
 --- !u!114 &1388196506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15337,6 +15304,57 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0c1c883d86f34d81a3d0569912f406c, type: 2}
   - {fileID: 11400000, guid: eff7f6f39df8d454e8bafd91d36991e1, type: 2}
   ammoText: {fileID: 1353504474}
+--- !u!114 &2103775182863587402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349114427959441967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &-2713289005664936501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349114427959441967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: isWalking
+  - Type: 9
+    SynchronizeType: 1
+    Name: doFish
+  - Type: 4
+    SynchronizeType: 1
+    Name: isFishing
+  - Type: 4
+    SynchronizeType: 1
+    Name: isMeleeAttackAim
+  - Type: 9
+    SynchronizeType: 1
+    Name: doMeleeAttack
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
+  - SynchronizeType: 1
+    LayerIndex: 1
 --- !u!1 &6365244325377983206
 GameObject:
   m_ObjectHideFlags: 0
