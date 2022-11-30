@@ -9,87 +9,87 @@ public class Bullet : MonoBehaviourPun
     public float Damage { set { damage = value; } }
     public Vector3 Direction { set { direction = value; } }
 
-	protected Rigidbody bulletRigidbody;
-	[SerializeField] protected float damage;
+    protected Rigidbody bulletRigidbody;
+    [SerializeField] protected float damage;
 
-	[SerializeField] private GameObject ImpactVfxPrefab;
-	[SerializeField] private float speed;
-	private Vector3 direction;
-	private bool isCollided;
+    [SerializeField] private GameObject ImpactVfxPrefab;
+    [SerializeField] private float speed;
+    private Vector3 direction;
+    private bool isCollided;
 
-	Player hitplayer;
+    Player hitplayer;
 
-	protected virtual void Start()
+    protected virtual void Start()
     {
-		bulletRigidbody = GetComponent<Rigidbody>();
+        bulletRigidbody = GetComponent<Rigidbody>();
 
-		transform.rotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.LookRotation(direction);
 
-		Destroy(gameObject, 5f);
-	}
+        Destroy(gameObject, 5f);
+    }
 
     private void FixedUpdate()
     {
-		bulletRigidbody.velocity = direction * speed;
-	}
+        bulletRigidbody.velocity = direction * speed;
+    }
 
-	[PunRPC]
-	void Shoot(float x, float y, float z)
-	{
-		Bullet bullet = GetComponent<Bullet>();
-		this.gameObject.name = photonView.Owner.NickName + "Bullet";
-		Vector3 firePoint = new Vector3((float)x, (float)y, (float)z);
-		bullet.direction = firePoint;
+    [PunRPC]
+    void Shoot(float x, float y, float z)
+    {
+        Bullet bullet = GetComponent<Bullet>();
+        this.gameObject.name = photonView.Owner.NickName + "Bullet";
+        Vector3 firePoint = new Vector3((float)x, (float)y, (float)z);
+        bullet.direction = firePoint;
 
-		Debug.Log(bullet.name);
-	}
+        Debug.Log(bullet.name);
+    }
 
-	[PunRPC]
-	void HasDamage(int actorNumber)
-	{
-		Transform enemy = PlayerList.Instance.playersWithActorNumber[actorNumber].transform;
-		Enemy e = enemy.GetComponent<Enemy>();
-		if (e != null && enemy.GetComponent<PhotonView>().IsMine)
-			enemy.GetComponent<PhotonView>().RPC(nameof(e.ChangePlayersColor), RpcTarget.All, damage);
-	}
+    [PunRPC]
+    void HasDamage(int actorNumber)
+    {
+        Transform enemy = PlayerList.Instance.playersWithActorNumber[actorNumber].transform;
+        Enemy e = enemy.GetComponent<Enemy>();
+        if (e != null && enemy.GetComponent<PhotonView>().IsMine)
+            enemy.GetComponent<PhotonView>().RPC(nameof(e.ChangePlayersColor), RpcTarget.All, damage);
+    }
 
-	protected virtual void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.tag == "Player" && (collision.gameObject.name + "Bullet" != this.gameObject.name))
-		{
-			if (collision.gameObject.GetComponent<PhotonView>().IsMine)
-			{
-				this.GetComponent<PhotonView>().RPC("HasDamage", RpcTarget.All, collision.gameObject.GetComponent<PhotonView>().Owner.ActorNumber);
-			}
-		}
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" && (collision.gameObject.name + "Bullet" != this.gameObject.name))
+        {
+            if (collision.gameObject.GetComponent<PhotonView>().IsMine)
+            {
+                this.GetComponent<PhotonView>().RPC("HasDamage", RpcTarget.All, collision.gameObject.GetComponent<PhotonView>().Owner.ActorNumber);
+            }
+        }
 
-		if (collision.gameObject.tag != "Bullet" && !isCollided)
-		{
-			//hitplayer = collision.gameObject.GetComponent<PhotonView>().Owner;
-			isCollided = true;
-			speed = 0;
-			GetComponent<Rigidbody>().isKinematic = true;
+        if (collision.gameObject.tag != "Bullet" && !isCollided)
+        {
+            //hitplayer = collision.gameObject.GetComponent<PhotonView>().Owner;
+            isCollided = true;
+            speed = 0;
+            GetComponent<Rigidbody>().isKinematic = true;
 
-			ContactPoint contactPoint = collision.contacts[0];
-			Vector3 impactPosition = contactPoint.point;
-			Quaternion impactRotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
-			
-			if (ImpactVfxPrefab != null)
-			{
-				GameObject ImpactVfxInstance = Instantiate(ImpactVfxPrefab, impactPosition, impactRotation);
-				ParticleSystem impactParticle = ImpactVfxInstance.GetComponent<ParticleSystem>();
-				
-				if (impactParticle != null)
-				{
-					Destroy(ImpactVfxInstance, impactParticle.main.duration);
-				}
-				else
+            ContactPoint contactPoint = collision.contacts[0];
+            Vector3 impactPosition = contactPoint.point;
+            Quaternion impactRotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
+
+            if (ImpactVfxPrefab != null)
+            {
+                GameObject ImpactVfxInstance = Instantiate(ImpactVfxPrefab, impactPosition, impactRotation);
+                ParticleSystem impactParticle = ImpactVfxInstance.GetComponent<ParticleSystem>();
+
+                if (impactParticle != null)
                 {
-					ParticleSystem impactParticleChild = ImpactVfxInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
-					
-					Destroy(ImpactVfxInstance, impactParticleChild.main.duration);
-				}
-			}
+                    Destroy(ImpactVfxInstance, impactParticle.main.duration);
+                }
+                else
+                {
+                    ParticleSystem impactParticleChild = ImpactVfxInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+
+                    Destroy(ImpactVfxInstance, impactParticleChild.main.duration);
+                }
+            }
 
             //if (shotSFX != null && GetComponent<AudioSource>())
             //{
@@ -97,35 +97,35 @@ public class Bullet : MonoBehaviourPun
             //}
 
             StartCoroutine(DestroyParticle(0f));
-		}
-	}
+        }
+    }
 
-	public IEnumerator DestroyParticle(float waitTime)
-	{
-		if (transform.childCount > 0 && waitTime != 0)
-		{
-			List<Transform> transformList = new List<Transform>();
+    public IEnumerator DestroyParticle(float waitTime)
+    {
+        if (transform.childCount > 0 && waitTime != 0)
+        {
+            List<Transform> transformList = new List<Transform>();
 
-			foreach (Transform t in transform.GetChild(0).transform)
-			{
-				transformList.Add(t);
-			}
+            foreach (Transform t in transform.GetChild(0).transform)
+            {
+                transformList.Add(t);
+            }
 
-			while (transform.GetChild(0).localScale.x > 0)
-			{
-				yield return new WaitForSeconds(0.01f);
+            while (transform.GetChild(0).localScale.x > 0)
+            {
+                yield return new WaitForSeconds(0.01f);
 
-				transform.GetChild(0).localScale -= new Vector3(0.1f, 0.1f, 0.1f);
-				
-				for (int i = 0; i < transformList.Count; i++)
-				{
-					transformList[i].localScale -= new Vector3(0.1f, 0.1f, 0.1f);
-				}
-			}
-		}
+                transform.GetChild(0).localScale -= new Vector3(0.1f, 0.1f, 0.1f);
 
-		yield return new WaitForSeconds(waitTime);
+                for (int i = 0; i < transformList.Count; i++)
+                {
+                    transformList[i].localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+                }
+            }
+        }
 
-		Destroy(gameObject);
-	}
+        yield return new WaitForSeconds(waitTime);
+
+        Destroy(gameObject);
+    }
 }

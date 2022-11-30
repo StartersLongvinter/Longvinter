@@ -5,20 +5,23 @@ using Photon.Pun;
 
 public class Enemy : MonoBehaviourPun
 {
-	[HideInInspector]
-	public float speed;
+    [HideInInspector]
+    public float speed;
 
-	public static Color originalColor;
-	private SkinnedMeshRenderer renderer;
-	public bool isChanged = false;
+    public static Color originalColor;
+    private SkinnedMeshRenderer renderer;
+    public bool isChanged = false;
 
     [PunRPC]
     public void ChangePlayersColor(float damage)
     {
         renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        StartCoroutine(ResetColor());
         if (photonView.IsMine)
+        {
+            PlayerStat.LocalPlayer.currentHPAnimator.SetTrigger("isDamaged");
             photonView.RPC("TakeDamage", RpcTarget.All, damage);
+        }
+        StartCoroutine(ResetColor());
     }
 
     [PunRPC]
@@ -27,27 +30,28 @@ public class Enemy : MonoBehaviourPun
         PlayerStat.LocalPlayer.hp -= amount;
 
         if (PlayerStat.LocalPlayer.hp <= 0 && PlayerStat.LocalPlayer.status != PlayerStat.Status.die)
-            photonView.RPC("Die",RpcTarget.All);
+            photonView.RPC("Die", RpcTarget.All);
     }
 
-	[PunRPC]
-	void Die ()
-	{
-		GetComponent<PlayerStat>().status = PlayerStat.Status.die;
-		this.gameObject.layer = 8;
-		Debug.Log("Dead");
-	}
+    [PunRPC]
+    void Die()
+    {
+        GetComponent<PlayerStat>().status = PlayerStat.Status.die;
+        this.gameObject.layer = 8;
+        Debug.Log("Dead");
+    }
 
-	IEnumerator ResetColor()
-	{
-		if (renderer.material.color != Color.red) {
-			originalColor = renderer.material.color;
-			isChanged = true;
-			renderer.material.color = Color.red;
-			yield return new WaitForSeconds(0.08f);
-			renderer.material.color = originalColor;
-			isChanged = false;
-		}
-		yield return null;
-	}
+    IEnumerator ResetColor()
+    {
+        if (renderer.material.color != Color.red)
+        {
+            originalColor = renderer.material.color;
+            isChanged = true;
+            renderer.material.color = Color.red;
+            yield return new WaitForSeconds(0.08f);
+            renderer.material.color = originalColor;
+            isChanged = false;
+        }
+        yield return null;
+    }
 }
