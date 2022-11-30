@@ -52,7 +52,10 @@ public class BuildManager : MonoBehaviourPun
     bool CheckBuildPosition(Vector3 _mousePosition)
     {
         if (myHomeArea == null)
-            foreach (GameObject area in buildArea) if (area.name == PhotonNetwork.LocalPlayer.NickName + "HomeArea") myHomeAreas.Add(area);
+            foreach (GameObject area in buildArea)
+            {
+                if (area.name == PhotonNetwork.LocalPlayer.NickName + "HomeArea" && !myHomeAreas.Contains(area)) myHomeAreas.Add(area);
+            }
         if (buildType == BuildType.turret)
         {
             if (myHomeAreas.Count <= 0 || Vector3.Distance(PlayerStat.LocalPlayer.gameObject.transform.position, _mousePosition) > 4f)
@@ -158,6 +161,7 @@ public class BuildManager : MonoBehaviourPun
             buildType = BuildType.none;
             Destroy(buildObject);
             buildObject = null;
+            myHomeArea = null;
             foreach (GameObject area in buildArea) area.GetComponent<MeshRenderer>().enabled = false;
         }
         if (buildType != BuildType.none && Input.GetButtonDown("Fire2"))
@@ -167,6 +171,7 @@ public class BuildManager : MonoBehaviourPun
             buildType = BuildType.none;
             Destroy(buildObject);
             buildObject = null;
+            myHomeArea = null;
             foreach (GameObject area in buildArea) area.GetComponent<MeshRenderer>().enabled = false;
         }
     }
