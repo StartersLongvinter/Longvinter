@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8962325206352867890}
   - component: {fileID: 5462664996313775511}
   - component: {fileID: 7794534234318621021}
+  - component: {fileID: 506106637030656120}
   m_Layer: 0
   m_Name: MobileGenerator
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &506106637030656120
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8587031773735643272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8724661267312878657, guid: 2837166df96a04782832acef58ab30d6, type: 3}

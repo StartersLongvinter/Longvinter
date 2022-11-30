@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6770245421445935472}
   - component: {fileID: 7663831076635213525}
   - component: {fileID: 5602357589441514015}
+  - component: {fileID: 2277984698671039744}
   m_Layer: 0
   m_Name: CarvePumkin6
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2277984698671039744
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250836835112561610}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -573427477942402889, guid: 1d1382960b7d040a2a6048fc23158ee5, type: 3}
