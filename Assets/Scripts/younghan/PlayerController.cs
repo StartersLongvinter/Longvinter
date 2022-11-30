@@ -249,8 +249,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (weaponData != null && !isBuilding)
         {
             isAiming = Input.GetButton("Fire2");
-            doAttack = Input.GetButtonDown("Fire1");
         }
+        
+        doAttack = Input.GetButtonDown("Fire1");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
