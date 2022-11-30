@@ -51,13 +51,17 @@ public class RotateSun : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            if (curSeconds >= oneHourPerSeconds)
+            float newTime = 0;
+            float newSeconds = 0;
+            newSeconds = curSeconds + Time.deltaTime;
+            // curSeconds += Time.deltaTime;
+            if (newSeconds >= oneHourPerSeconds)
             {
-                curTime = curTime == 23 ? 0 : curTime + 1;
-                curSeconds = 0;
+                newTime = curTime >= 23 ? 0 : curTime + 1;
+                newSeconds = 0;
             }
-            curSeconds += Time.deltaTime;
-            photonView.RPC("SetTime", RpcTarget.AllViaServer, curTime, curSeconds);
+
+            photonView.RPC("SetTime", RpcTarget.AllViaServer, newTime, newSeconds);
         }
     }
 }

@@ -38,6 +38,11 @@ public class BuildManager : MonoBehaviourPun
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber != PlayerStat.LocalPlayer.ownerPlayerActorNumber)
             return;
+
+        buildType = BuildType.none;
+        Destroy(buildObject);
+        buildObject = null;
+
         buildType = (BuildType)buildtypeNumber;
         buildPrefabName = buildPrefabNameList[(int)buildType];
         buildObject = Instantiate(buildObjectPrefab[(buildtypeNumber)], Vector3.zero, Quaternion.identity);
@@ -73,8 +78,13 @@ public class BuildManager : MonoBehaviourPun
                 return false;
             }
         }
-        else if (buildType == BuildType.house && homeAreas.Count > 0)
+        else if (buildType == BuildType.house)
         {
+            if (Vector3.Distance(PlayerStat.LocalPlayer.gameObject.transform.position, _mousePosition) > 4f)
+            {
+                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
+                return false;
+            }
             float _distance = 1000f;
             float homeAreaRadius = -1f;
             foreach (GameObject home in buildArea)
