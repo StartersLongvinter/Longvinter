@@ -15114,15 +15114,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  leftHandIkTarget: {fileID: 1801474300}
-  rightHandIkTarget: {fileID: 352961827}
+  weaponData: {fileID: 0}
   bagEquipPoint: {fileID: 1289362320322663942}
   handEquipPoint: {fileID: 3591319954121043913}
-  weaponData: {fileID: 0}
+  leftHandIkTarget: {fileID: 1801474300}
+  rightHandIkTarget: {fileID: 352961827}
+  isBuilding: 0
   chatInput: {fileID: 346654853340184980}
   maxInteractableDistance: 7
   eImageActivate: 0
-  isBuilding: 0
 --- !u!114 &7221896422927409961
 MonoBehaviour:
   m_ObjectHideFlags: 0
