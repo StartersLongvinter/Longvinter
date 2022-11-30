@@ -15,10 +15,18 @@ public class CreateRoomBtn : MonoBehaviour
     [SerializeField] Button multiplayButton;
     [SerializeField] Button playerListButton;
     [SerializeField] GameObject multiplayPanel;
+    [SerializeField] Button createRoomButton;
+
+    private bool isChanged = false;
 
     void Awake()
     {
+        maxPlayerSlider.onValueChanged.AddListener(delegate { isChanged = true; });
+    }
 
+    private void OnEnable()
+    {
+        isChanged = false;
     }
 
     public void CreateRoom()
@@ -34,6 +42,8 @@ public class CreateRoomBtn : MonoBehaviour
 
     void Update()
     {
+        createRoomButton.interactable = isChanged;
+
         inputPassword.interactable = lockToggle.isOn;
         maxPlayerValue.text = Mathf.RoundToInt(maxPlayerSlider.value).ToString();
 
