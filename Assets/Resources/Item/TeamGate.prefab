@@ -98,6 +98,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f02a64e72115451c9820d096bba1e84, type: 3}
+--- !u!1 &6233162658313707739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f02a64e72115451c9820d096bba1e84, type: 3}
+  m_PrefabInstance: {fileID: 6503705528534408586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &7398525706465922958
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233162658313707739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6971781137357727071, guid: 7f02a64e72115451c9820d096bba1e84, type: 3}
 --- !u!4 &6758624055906335329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f02a64e72115451c9820d096bba1e84, type: 3}
@@ -168,6 +187,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cc8831be85934ce2b0d69e24f62f0d7, type: 3}
+--- !u!1 &6233162657806927184 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8cc8831be85934ce2b0d69e24f62f0d7, type: 3}
+  m_PrefabInstance: {fileID: 6503705529100204033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &5766768227119302431
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233162657806927184}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6516083112661967799, guid: 8cc8831be85934ce2b0d69e24f62f0d7, type: 3}
 --- !u!4 &6758624055382745066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8cc8831be85934ce2b0d69e24f62f0d7, type: 3}

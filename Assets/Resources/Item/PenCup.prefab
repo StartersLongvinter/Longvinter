@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2330556291701412339}
   - component: {fileID: 1727155798240730710}
   - component: {fileID: 3466892403816131228}
+  - component: {fileID: 7432239257387683685}
   m_Layer: 0
   m_Name: PenCup
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7432239257387683685
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3106388860919761737}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1375894471436323749, guid: 10247b52eba3d4606a3fede949758f5d, type: 3}

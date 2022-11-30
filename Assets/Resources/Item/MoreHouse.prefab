@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1778334059860070733}
   - component: {fileID: 671050089349037979}
   - component: {fileID: 5797121730259440211}
+  - component: {fileID: 2934143065922366197}
   m_Layer: 0
   m_Name: SM_MoreHouse__Bottom
   m_TagString: Untagged
@@ -116,6 +117,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2934143065922366197
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121253533886145312}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5674157680040267892, guid: 14a25ef78be174219842783dd896d03c, type: 3}
 --- !u!1 &8245229763391026759
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +142,7 @@ GameObject:
   - component: {fileID: 3427628755220007802}
   - component: {fileID: 4999315090056917141}
   - component: {fileID: 8053523054304760211}
+  - component: {fileID: 4201397856744759705}
   m_Layer: 0
   m_Name: SM_MoreHouse__Top
   m_TagString: Untagged
@@ -200,3 +216,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4201397856744759705
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8245229763391026759}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6469940368813187584, guid: 14a25ef78be174219842783dd896d03c, type: 3}
