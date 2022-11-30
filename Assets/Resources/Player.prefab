@@ -2060,7 +2060,7 @@ GameObject:
   - component: {fileID: 377307669}
   - component: {fileID: 377307668}
   m_Layer: 5
-  m_Name: Peacock
+  m_Name: PeacockFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2799,7 +2799,7 @@ GameObject:
   - component: {fileID: 555029370}
   - component: {fileID: 555029369}
   m_Layer: 5
-  m_Name: CapercailliePristine
+  m_Name: PristineCapercaillieFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4825,7 +4825,7 @@ GameObject:
   - component: {fileID: 1018130424}
   - component: {fileID: 1018130423}
   m_Layer: 5
-  m_Name: HazelHenScruffy
+  m_Name: HazelHenScruffyFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5096,7 +5096,7 @@ GameObject:
   - component: {fileID: 1086248997}
   - component: {fileID: 1086248996}
   m_Layer: 5
-  m_Name: KiirunaPristine
+  m_Name: PristineKiirunaFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5834,7 +5834,7 @@ GameObject:
   - component: {fileID: 1228535004}
   - component: {fileID: 1228535003}
   m_Layer: 5
-  m_Name: Kiiruna
+  m_Name: KiirunaFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9524,7 +9524,7 @@ GameObject:
   - component: {fileID: 1741346807}
   - component: {fileID: 1741346806}
   m_Layer: 5
-  m_Name: HazelHenNormal
+  m_Name: PristineHazelHenFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9600,7 +9600,7 @@ GameObject:
   - component: {fileID: 1762221233}
   - component: {fileID: 1762221232}
   m_Layer: 5
-  m_Name: Capercaillie
+  m_Name: CapercaillieFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9803,7 +9803,7 @@ GameObject:
   - component: {fileID: 1786128664}
   - component: {fileID: 1786128663}
   m_Layer: 5
-  m_Name: PeacockPristine
+  m_Name: PristinePeacockFeather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15144,6 +15144,9 @@ MonoBehaviour:
   money: 0
   isCold: 0
   autoDamageValue: 1
+  normalColor: {r: 1, g: 0.8520418, b: 0, a: 1}
+  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  currentHPAnimator: {fileID: 0}
 --- !u!114 &1388196506
 MonoBehaviour:
   m_ObjectHideFlags: 0

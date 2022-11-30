@@ -17,5 +17,5 @@ MonoBehaviour:
   itemExplain: 
   itemType: 0
   itemClassify: 1
-  itemPrefab: {fileID: 5223685251508337091, guid: 0cb2df607b091430a965e5f0c7ae6820, type: 3}
+  itemPrefab: {fileID: 5223685251508337091, guid: d575f891e10c24ebf92dfafd1590a419, type: 3}
   itemImage: {fileID: 21300000, guid: 670e8ab5ce6214ed792dfbd5225d3098, type: 3}
