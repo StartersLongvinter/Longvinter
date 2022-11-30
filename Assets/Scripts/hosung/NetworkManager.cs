@@ -132,6 +132,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
+        PhotonNetwork.IsMessageQueueRunning = false;
         returnLobby = false;
         Debug.Log("로비에 접속");
         LoadLevel(isLobby ? 1 : 2);
@@ -156,6 +157,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        PhotonNetwork.IsMessageQueueRunning = true;
         isLobby = false;
         bool _sameName = false;
         foreach (Player _player in PhotonNetwork.PlayerList)
