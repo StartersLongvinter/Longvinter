@@ -34,10 +34,18 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     public float autoDamageValue = 1f;
     float damagedTime = 3f;
     float startTime = 0f;
+    [SerializeField]
+    private Color normalColor;
+    [SerializeField]
+    private Color warningColor;
+    private Image currentHPImage;
+    public Animator currentHPAnimator;
 
     // Callback Methods
     void Awake()
     {
+        currentHPImage = GameObject.Find("HPvalue").GetComponent<Image>();
+        currentHPAnimator = GameObject.Find("MaskImage").GetComponent<Animator>();
         hp = maxHp;
         if (photonView.IsMine)
         {
@@ -71,14 +79,15 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
             startTime = 0f;
         }
 
-        if (hp < 0)
+        if (hp < 30)
         {
-            hp = 0;
-            status = Status.die;
+            currentHPImage.color = warningColor;
         }
+        else
+            currentHPImage.color = normalColor;
 
         float _hpValue = hp / 90f;
-        GameObject.Find("HPvalue").GetComponent<Image>().fillAmount = _hpValue;
+        currentHPImage.fillAmount = _hpValue;
     }
 
     // Public Methods
@@ -88,6 +97,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     public void AddHp(float _hp)
     {
         hp += _hp;
+        if (hp < 0)
+        {
+            hp = 0;
+            status = Status.die;
+        }
     }
 
     // ����
@@ -104,12 +118,14 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(hp);
             stream.SendNext(maxHp);
             stream.SendNext(money);
+            stream.SendNext((int)status);
         }
         else
         {
             hp = (float)stream.ReceiveNext();
             maxHp = (float)stream.ReceiveNext();
             money = (int)stream.ReceiveNext();
+            status = (Status)(int)stream.ReceiveNext();
         }
     }
 }
