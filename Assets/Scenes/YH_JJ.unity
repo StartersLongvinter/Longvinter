@@ -4415,5 +4415,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map_Jaejeong
       objectReference: {fileID: 0}
+    - target: {fileID: 8788425067992862240, guid: bb97cab06dc16c64ca2e97cdc15f22ed, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86080a783905b5740ad2b81f63a2c650, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb97cab06dc16c64ca2e97cdc15f22ed, type: 3}
