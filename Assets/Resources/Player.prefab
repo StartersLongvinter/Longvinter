@@ -15144,6 +15144,9 @@ MonoBehaviour:
   money: 0
   isCold: 0
   autoDamageValue: 1
+  normalColor: {r: 1, g: 0.8520418, b: 0, a: 1}
+  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  currentHPAnimator: {fileID: 0}
 --- !u!114 &1388196506
 MonoBehaviour:
   m_ObjectHideFlags: 0
