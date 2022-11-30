@@ -39,17 +39,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject chatInput;
 
     // Fishing
+    [HideInInspector] public bool eImageActivate;
     private GameObject fish;
     [SerializeField] float maxInteractableDistance = 7;
-    private bool isFishing; // YH - Delete SerializeFiled
-    private bool isSuccessState; // YH - Change public -> private
-    public bool eImageActivate;
+    private bool isFishing;
+    private bool isSuccessState;
     private int eCount = 0;
     // End Fishing
 
     private float timer = 0f;
-
-    
 
     #region Callback Methods
     private void Awake()
@@ -79,10 +77,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         GetInput();
         Aim();
+        SwitchWeaponPosition();
         Attack();
         Fishing();
         ECount();
-        SwitchWeaponPosition();
 
         if (isPressedSpace)
         {
