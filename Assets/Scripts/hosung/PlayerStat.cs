@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
@@ -30,6 +31,9 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     public int money;
 
     public bool isCold = false;
+    public float autoDamageValue = 1f;
+    float damagedTime = 3f;
+    float startTime = 0f;
 
     // Callback Methods
     void Awake()
@@ -57,11 +61,30 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
+        if (!photonView.IsMine) return;
 
+        startTime += Time.deltaTime;
+
+        if (startTime >= damagedTime)
+        {
+            photonView.RPC("AddHp", RpcTarget.All, -1f * autoDamageValue);
+            startTime = 0f;
+        }
+
+        if (hp < 0)
+        {
+            hp = 0;
+            status = Status.die;
+        }
+
+        float _hpValue = hp / 90f;
+        GameObject.Find("HPvalue").GetComponent<Image>().fillAmount = _hpValue;
     }
 
     // Public Methods
     // ����
+
+    [PunRPC]
     public void AddHp(float _hp)
     {
         hp += _hp;
