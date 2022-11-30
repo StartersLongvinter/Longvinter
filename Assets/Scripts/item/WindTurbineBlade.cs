@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class WindTurbineBlade : MonoBehaviour
 {
+    private float x;
     // Start is called before the first frame update
     void Start()
     {
-        
+        x = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(transform.position.x + Time.deltaTime, transform.position.y, transform.position.z);
+        x = Time.deltaTime * 200f;
+        
+        transform.Rotate(x , 0, 0);
     }
 }
