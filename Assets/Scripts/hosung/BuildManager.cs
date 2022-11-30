@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Linq;
+
 public enum BuildType
 {
     none = 0,
@@ -56,27 +58,29 @@ public class BuildManager : MonoBehaviourPun
             float _d = 1000f;
             foreach (GameObject _homeArea in myHomeAreas)
             {
-                float _thisHomeDistance = Vector3.Distance(PlayerStat.LocalPlayer.transform.position, _homeArea.transform.position);
+                float _thisHomeDistance = Vector3.Distance(_mousePosition, _homeArea.transform.position);
                 if (_d >= _thisHomeDistance)
                 {
                     _d = _thisHomeDistance;
                     myHomeArea = _homeArea;
                 }
             }
-            float _distance = Vector3.Distance(myHomeArea.transform.position, _mousePosition);
-            Debug.Log(_distance);
-            if (_distance > (myHomeArea.transform.lossyScale.x * 0.5f) - buildObject.transform.localScale.x * 0.5f)
+            // float _distance = Vector3.Distance(myHomeArea.transform.position, _mousePosition);
+            Debug.Log(_d);
+            if (_d > (myHomeArea.transform.lossyScale.x * 0.5f) - buildObject.transform.localScale.x * 0.5f)
             {
                 buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
             }
         }
-        if (buildType == BuildType.house && homeAreas.Count > 0)
+        else if (buildType == BuildType.house && homeAreas.Count > 0)
         {
             float _distance = 1000f;
             float homeAreaRadius = -1f;
-            foreach (GameObject home in homeAreas)
+            foreach (GameObject home in buildArea)
             {
+                if (home.TryGetComponent(out GroundTrigger groundTrigger) == false)
+                    continue;
                 if (homeAreaRadius == -1f) homeAreaRadius = home.transform.lossyScale.x;
                 float _d = Vector3.Distance(home.transform.position, _mousePosition);
                 if (_distance > _d)
