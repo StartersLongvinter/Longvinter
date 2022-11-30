@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Feather/HazelHenFeather.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Feather/HazelHenFeather.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Donghyun.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Donghyun.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/CapercaillieFeather.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/CapercaillieFeather.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/HazelHenFeather.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/HazelHenFeather.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/KiirunaFeather.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/KiirunaFeather.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/PeacockFeather.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/PeacockFeather.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/PristineCapercaillieFeather.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/PristineCapercaillieFeather.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/PristineHazelHenFeather.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/PristineHazelHenFeather.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/PristineKiirunaFeather.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/FeatherItemData/PristineKiirunaFeather.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +26,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/NotificationAnimations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerContorller_JDH.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/item/WindTurbineBlade.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/74/bd579409/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/96/5d2e749e/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
@@ -119,7 +107,7 @@
       <workItem from="1669016328246" duration="2114000" />
       <workItem from="1669077666497" duration="40492000" />
       <workItem from="1669193934992" duration="48243000" />
-      <workItem from="1669623427779" duration="1222000" />
+      <workItem from="1669623427779" duration="1834000" />
     </task>
     <servers />
   </component>
