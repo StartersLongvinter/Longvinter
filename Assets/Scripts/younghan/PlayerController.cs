@@ -9,16 +9,14 @@ using Unity.VisualScripting;
 public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 {
     public float moveSpeed;
-    public Transform leftHandIkTarget;
-    public Transform rightHandIkTarget;
-    public Vector3 AimLookPoint { get { return aimLookPoint; } }
-    public bool IsAiming { get { return isAiming; } }
-
-
+    public EquipmentData weaponData;
     public Transform bagEquipPoint;
     public Transform handEquipPoint;
-    public EquipmentData weaponData;
-
+    public Transform leftHandIkTarget;
+    public Transform rightHandIkTarget;
+    [HideInInspector] public bool isBuilding = false;
+    public Vector3 AimLookPoint { get { return aimLookPoint; } }
+    public bool IsAiming { get { return isAiming; } }
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
@@ -38,40 +36,21 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private float ikProgress;
     private float ikWeight;
 
-    [SerializeField] GameObject chatInput;
+    [SerializeField] private GameObject chatInput;
 
     // Fishing
+    [HideInInspector] public bool eImageActivate;
     private GameObject fish;
     [SerializeField] float maxInteractableDistance = 7;
-    private bool isFishing; // YH - Delete SerializeFiled
-    private bool isSuccessState; // YH - Change public -> private
-    public bool eImageActivate;
+    private bool isFishing;
+    private bool isSuccessState;
     private int eCount = 0;
     // End Fishing
 
     private float timer = 0f;
 
-    // hoseong
-    public bool isBuilding = false;
-
-
-    // 이거 합쳐야 함
-    public void GetEquipment(EquipmentData equipmentData)
-    {
-        if (weaponData != null)
-        {
-            if (isAiming)
-            {
-                bagEquipPoint.GetChild(equipmentData.emIndex).gameObject.SetActive(false);
-                handEquipPoint.GetChild(equipmentData.emIndex).gameObject.SetActive(true);
-            }
-            else
-            {
-                bagEquipPoint.GetChild(equipmentData.emIndex).gameObject.SetActive(true);
-                handEquipPoint.GetChild(equipmentData.emIndex).gameObject.SetActive(false);
-            }
-        }
-    }
+    // for test
+    public bool testBool;
 
     #region Callback Methods
     private void Awake()
@@ -101,6 +80,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         GetInput();
         Aim();
+        SwitchWeaponPosition();
         Attack();
         Fishing();
         ECount();
@@ -116,7 +96,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             isPressedSpace = false;
         }
 
-        GetEquipment(weaponData);
     }
 
     private void FixedUpdate()
@@ -246,7 +225,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         verticalAxis = Input.GetAxisRaw("Vertical");
         photonView.RPC("SetIsAiming", RpcTarget.Others, isAiming);
 
-        if (weaponData != null && !isBuilding)
+        if (weaponData && !isBuilding)
         {
             isAiming = Input.GetButton("Fire2");
         }
@@ -256,39 +235,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isPressedSpace = true;
-        }
-    }
-
-    //raycast 이용 특정 object와 hit 되면 fishing 함수 호출
-    private void Fishing()
-    {
-        if (moveDirection != Vector3.zero || isFishing) return;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //AI collider와 부딪혀서 체크가 안되는 현상 발생함 raycastall으로 검출
-        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
-        foreach (var raycasthit in raycastHits)
-        {
-            float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
-            if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
-            {
-                Debug.Log("Fishing");
-                //낚시할때 fishingpoint를 바라보고 있어야 함
-                transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
-                playerAnimator.SetTrigger("doFish");
-                fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
-                StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
-            }
-        }
-    }
-
-    private void ECount()
-    {
-        if (eImageActivate)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                eCount++;
-            }
         }
     }
 
@@ -330,9 +276,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weaponData == null) return;
 
-
         Weapon weapon = handEquipPoint.GetChild(weaponData.emIndex).gameObject.GetComponent<Weapon>();
-
 
         attackDelay += Time.deltaTime;
         isAttackReady = weapon.attackRate < attackDelay;
@@ -359,7 +303,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (weaponData == null) return;
 
         Weapon.Type weaponType = weaponData.emPrefab.GetComponent<Weapon>().type;
-
+        //if(testBool)
         if (isAiming && weaponType == Weapon.Type.Melee1)
         {
             playerAnimator.SetBool("isMeleeAttackAim", true);
@@ -372,14 +316,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void AnimateAim()
     {
-        if (weaponData == null | isFishing) return;
-
-        float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
-
-
+        if (weaponData == null || isFishing) return;
 
         Weapon.Type weaponType = weaponData.emPrefab.GetComponent<Weapon>().type;
-        
+
+        float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
+        //if(testBool)
         //if (isAiming && weaponData.emAnim == EquipmentData.EquipmentAnim.Forward)
         if (isAiming && weaponType == Weapon.Type.Range || weaponType == Weapon.Type.Melee2)
         {
@@ -411,7 +353,56 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         isAiming = _isAiming;
     }
 
-    IEnumerator CatchFish(FishingPoint point)
+    private void SwitchWeaponPosition()
+    {
+        if (weaponData == null) return;
+        
+        if (isAiming)
+        {
+            bagEquipPoint.GetChild(weaponData.emIndex).gameObject.SetActive(false);
+            handEquipPoint.GetChild(weaponData.emIndex).gameObject.SetActive(true);
+        }
+        else
+        {
+            bagEquipPoint.GetChild(weaponData.emIndex).gameObject.SetActive(true);
+            handEquipPoint.GetChild(weaponData.emIndex).gameObject.SetActive(false);
+        }
+    }
+
+    //raycast 이용 특정 object와 hit 되면 fishing 함수 호출
+    private void Fishing()
+    {
+        if (moveDirection != Vector3.zero || isFishing) return;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //AI collider와 부딪혀서 체크가 안되는 현상 발생함 raycastall으로 검출
+        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
+        foreach (var raycasthit in raycastHits)
+        {
+            float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
+            if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
+            {
+                Debug.Log("Fishing");
+                //낚시할때 fishingpoint를 바라보고 있어야 함
+                transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
+                playerAnimator.SetTrigger("doFish");
+                fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
+                StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
+            }
+        }
+    }
+
+    private void ECount()
+    {
+        if (eImageActivate)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                eCount++;
+            }
+        }
+    }
+
+    private IEnumerator CatchFish(FishingPoint point)
     {
         isFishing = true;
         playerAnimator.SetBool("isFishing", true);
