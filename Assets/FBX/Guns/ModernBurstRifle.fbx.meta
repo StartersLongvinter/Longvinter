@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ea4ddaeda73d60c4dbe8920436e66a98
+guid: b32a6939f5bd083418f8691ee528e5af
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,28 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MI_BackpackBadge04.003
-    second: {fileID: 2100000, guid: 72e40177740cfe146a4e714fef4b4d2c, type: 2}
+      name: MI_RifleMetal.002
+    second: {fileID: 2100000, guid: b9abdccbcf6bca940833f11794537858, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MI_BackpackBedRoll.005
-    second: {fileID: 2100000, guid: 08fd8eed4a955854a80e0209d509197f, type: 2}
+      name: MI_RifleMetal.003
+    second: {fileID: 2100000, guid: b9abdccbcf6bca940833f11794537858, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MI_BackpackMain02.003
-    second: {fileID: 2100000, guid: 56cdeceec085f9c4f82b6f104fca8da5, type: 2}
+      name: MI_RifleMetalDark.001
+    second: {fileID: 2100000, guid: fe013a672e6179e44a6493f80b5bfe1e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MI_BackpackPockets02.003
-    second: {fileID: 2100000, guid: 3811c3dd0476f9c489c6258bbfc8ca65, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MI_BackpackTop02.003
-    second: {fileID: 2100000, guid: bbed1231bd24a764e942abc8d62a03d8, type: 2}
+      name: MI_SemiAutoRifleWood
+    second: {fileID: 2100000, guid: ad796cc75c180c442af0d8026932afe8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

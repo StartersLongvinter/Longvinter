@@ -3,7 +3,32 @@ guid: 2f7843052f2d15b44b32736f252381fe
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_BackpackBadge01.004
+    second: {fileID: 2100000, guid: c4d27ef223f7e0a46ac18aff97b631ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_BackpackBedRoll.007
+    second: {fileID: 2100000, guid: 08fd8eed4a955854a80e0209d509197f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_BackpackMain04.004
+    second: {fileID: 2100000, guid: 1cd2a60dc0965ee4ea20f497426b31cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_BackpackPockets04.004
+    second: {fileID: 2100000, guid: 61f8715139f37a0498a5e9b280d11ee5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_BackpackTop04.004
+    second: {fileID: 2100000, guid: d51a2f219c0d4de47a884650f2ced1c6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
