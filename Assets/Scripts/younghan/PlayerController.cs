@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private float timer = 0f;
 
+    // for test
+    public bool testBool;
+
     #region Callback Methods
     private void Awake()
     {
@@ -299,7 +302,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (weaponData == null) return;
 
         Weapon.Type weaponType = weaponData.emPrefab.GetComponent<Weapon>().type;
-
+        //if(testBool)
         if (isAiming && weaponType == Weapon.Type.Melee1)
         {
             playerAnimator.SetBool("isMeleeAttackAim", true);
@@ -317,7 +320,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         Weapon.Type weaponType = weaponData.emPrefab.GetComponent<Weapon>().type;
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
-        
+        //if(testBool)
         //if (isAiming && weaponData.emAnim == EquipmentData.EquipmentAnim.Forward)
         if (isAiming && weaponType == Weapon.Type.Range || weaponType == Weapon.Type.Melee2)
         {
