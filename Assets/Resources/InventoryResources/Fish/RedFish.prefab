@@ -94,6 +94,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bagInven: []
   equipInven: []
+  bag: {fileID: 0}
+  equipment: {fileID: 0}
 --- !u!225 &5223685251508337093
 CanvasGroup:
   m_ObjectHideFlags: 0

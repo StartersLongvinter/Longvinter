@@ -64,7 +64,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             //
             // index = player.GetComponent<PlayerInventory>().equipmentList.IndexOf(itemInEquip);
             // player.GetComponent<PlayerInventory>().equipmentList[index] = item;
-            
+
             player.GetComponent<PlayerInventory>().equipmentList.Remove(itemInEquip);
             player.GetComponent<PlayerInventory>().itemList.Add(itemInEquip);
 
@@ -98,7 +98,9 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().itemList.Remove(item);
             player.GetComponent<PlayerInventory>().equipmentList.Add(item);
 
-            player.GetComponent<PlayerController>().weaponData = gameObject.GetComponent<Item>().equipment;
+            // player.GetComponent<PlayerController>().weaponData = gameObject.GetComponent<Item>().equipment;
+            int _index = gameObject.GetComponent<Item>().equipment.emIndex;
+            player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, false, _index);
 
             for (int i = 0; i < equipInven.Length; i++)
             {
@@ -127,7 +129,8 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().itemList.Remove(gameObject);
             player.GetComponent<PlayerInventory>().equipmentList.Add(gameObject);
 
-            player.GetComponent<PlayerController>().weaponData = gameObject.GetComponent<Item>().equipment;
+            int _index = gameObject.GetComponent<Item>().equipment.emIndex;
+            player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, false, _index);
 
             for (int i = 0; i < equipInven.Length; i++)
             {
@@ -166,7 +169,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
         player.GetComponent<PlayerInventory>().itemList.Add(go);
 
         player.GetComponent<PlayerController>().bagEquipPoint.transform.GetChild(go.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
-        player.GetComponent<PlayerController>().weaponData = null;
+        player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, true, 0);
 
         player.GetComponent<PlayerInventory>().updateBagInventory();
         player.GetComponent<PlayerInventory>().updateEquipInventory();
@@ -196,9 +199,9 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
 
                     player.GetComponent<Ammo>().ammoText.text = currentAmmoCount.ToString();
                     player.GetComponent<PlayerInventory>().itemList.Remove(gameObject);
-                    
+
                     transform.SetParent(canvas.transform);
-                    
+
                     player.GetComponent<PlayerInventory>().updateBagInventory();
 
                     Destroy(gameObject);
