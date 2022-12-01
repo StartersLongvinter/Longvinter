@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Item/WindTurbine.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Item/WindTurbine.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/Boat/BoatEmissive.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/Boat/BoatEmissive.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/ChainSaw/NewSurfaceShader.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/ChainSaw/NewSurfaceShader.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/ChainSaw/T_ChainsawTooth.tga.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/ChainSaw/T_ChainsawTooth.tga.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/Pumkins/Carve/CarvePumkinMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/Pumkins/Carve/CarvePumkinMat.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/item/WindTurbineBlade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/item/WindTurbineBlade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +36,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/item/WindTurbineBlade.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Temp/Compiled-Standard.shader" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/74/bd579409/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/96/5d2e749e/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1fe4b731108247d3a7e57fad336611b9469000/ac/49128965/List`1.cs" root0="SKIP_HIGHLIGHTING" />
@@ -110,7 +116,8 @@
       <workItem from="1669016328246" duration="2114000" />
       <workItem from="1669077666497" duration="40492000" />
       <workItem from="1669193934992" duration="48243000" />
-      <workItem from="1669623427779" duration="2766000" />
+      <workItem from="1669623427779" duration="6195000" />
+      <workItem from="1669859668195" duration="900000" />
     </task>
     <servers />
   </component>
