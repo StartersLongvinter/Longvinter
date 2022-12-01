@@ -91,6 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fefe54e6a1048fa97fa990520bd655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bagInven: []
+  equipInven: []
+  bag: {fileID: 0}
+  equipment: {fileID: 0}
 --- !u!225 &5223685251508337093
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -116,3 +120,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: dbf9326b4dd614969b2405dabca05360, type: 2}
+  equipment: {fileID: 0}
