@@ -68,8 +68,9 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().equipmentList.Remove(itemInEquip);
             player.GetComponent<PlayerInventory>().itemList.Add(itemInEquip);
 
-            player.GetComponent<PlayerController>().bagEquipPoint.transform.GetChild(itemInEquip.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
-            player.GetComponent<PlayerController>().weaponData = null;
+            int _index = gameObject.GetComponent<Item>().equipment.emIndex;
+            player.GetComponent<PhotonView>().RPC("ActiveOffEquipment", RpcTarget.All, _index);
+            player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, true, 0);
 
             for (int i = 0; i < bagInven.Length; i++)
             {
@@ -99,7 +100,6 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().equipmentList.Add(item);
 
             // player.GetComponent<PlayerController>().weaponData = gameObject.GetComponent<Item>().equipment;
-            int _index = gameObject.GetComponent<Item>().equipment.emIndex;
             player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, false, _index);
 
             for (int i = 0; i < equipInven.Length; i++)
@@ -168,7 +168,8 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
         player.GetComponent<PlayerInventory>().equipmentList.Remove(go);
         player.GetComponent<PlayerInventory>().itemList.Add(go);
 
-        player.GetComponent<PlayerController>().bagEquipPoint.transform.GetChild(go.GetComponent<Item>().equipment.emIndex).gameObject.SetActive(false);
+        int _index = gameObject.GetComponent<Item>().equipment.emIndex;
+        player.GetComponent<PhotonView>().RPC("ActiveOffEquipment", RpcTarget.All, _index);
         player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, true, 0);
 
         player.GetComponent<PlayerInventory>().updateBagInventory();

@@ -65,21 +65,25 @@ public class Weapon : MonoBehaviourPun
             }
         }
 
+        // if (muzzleFlashVfxPrefab != null)
+        // {
+        //     GameObject muzzleFlashVfxInstance = Instantiate(muzzleFlashVfxPrefab, muzzleFlashPoint.position, muzzleFlashPoint.rotation);
+        //     ParticleSystem muzzleFlashParticle = muzzleFlashVfxInstance.GetComponent<ParticleSystem>();
+
+        //     if (muzzleFlashParticle != null)
+        //     {
+        //         Destroy(muzzleFlashVfxInstance, muzzleFlashParticle.main.duration);
+        //     }
+        //     else
+        //     {
+        //         ParticleSystem muzzleFlashParticleChild = muzzleFlashVfxInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
+
+        //         Destroy(muzzleFlashVfxInstance, muzzleFlashParticleChild.main.duration);
+        //     }
+        // }
         if (muzzleFlashVfxPrefab != null)
         {
-            GameObject muzzleFlashVfxInstance = Instantiate(muzzleFlashVfxPrefab, muzzleFlashPoint.position, muzzleFlashPoint.rotation);
-            ParticleSystem muzzleFlashParticle = muzzleFlashVfxInstance.GetComponent<ParticleSystem>();
-
-            if (muzzleFlashParticle != null)
-            {
-                Destroy(muzzleFlashVfxInstance, muzzleFlashParticle.main.duration);
-            }
-            else
-            {
-                ParticleSystem muzzleFlashParticleChild = muzzleFlashVfxInstance.transform.GetChild(0).GetComponent<ParticleSystem>();
-
-                Destroy(muzzleFlashVfxInstance, muzzleFlashParticleChild.main.duration);
-            }
+            var muzzleFlashVfxInstance = PhotonNetwork.Instantiate(muzzleFlashVfxPrefab.name, muzzleFlashPoint.position, muzzleFlashPoint.rotation);
         }
     }
 
