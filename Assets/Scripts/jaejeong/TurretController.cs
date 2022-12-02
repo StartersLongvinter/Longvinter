@@ -43,10 +43,11 @@ public class TurretController : Turret
     private void RepeatInvoke()
     {
         /*if (photonView.Owner == PhotonNetwork.LocalPlayer)
-            */InvokeRepeating("UpdateTarget", 0f, 0.5f);
+            */
+        InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
-    private void UpdateTarget() //Turret¹üÀ§
+    private void UpdateTarget() //Turretï¿½ï¿½ï¿½ï¿½
     {
         if (firePoint == null)
             return;
@@ -55,7 +56,7 @@ public class TurretController : Turret
         GameObject nearestPlayer = null;
         foreach (GameObject player in players)
         {
-            if (photonView.Owner.NickName == player.name||player.GetComponent<PlayerStat>().status==PlayerStat.Status.die)
+            if (photonView.Owner.NickName == player.name || player.GetComponent<PlayerStat>().status == PlayerStat.Status.die)
                 continue;
             float distanceToPlayer = Vector3.Distance(turretTransform.transform.position, player.transform.position);
             if (distanceToPlayer < shortestDistance)
@@ -66,7 +67,7 @@ public class TurretController : Turret
         }
         if (shortestDistance > range)
             trigger.inOtherHome = false;
-        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged) //ÁýÅÍ »ó°üx, Æ÷Å¾ »ç°Å¸® ¾È, ¹«±â »ó°ü x
+        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged) //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½x, ï¿½ï¿½Å¾ ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ x
         {
             photonView.RPC("ChangeTarget", RpcTarget.All, nearestPlayer.GetComponent<PhotonView>().Owner.ActorNumber);
             Enemy.originalColor = nearestPlayer.GetComponentInChildren<SkinnedMeshRenderer>().material.color;
@@ -77,7 +78,7 @@ public class TurretController : Turret
 
     private void Update()
     {
-        if (target == null||firePoint==null)
+        if (target == null || firePoint == null)
             return;
 
         attack = target.GetComponent<PlayerController>().IsAiming;
@@ -86,14 +87,14 @@ public class TurretController : Turret
             return;
 
         if (photonView.IsMine)
-            photonView.RPC("LockOnTarget", RpcTarget.All, target.position.x, rotatePart.position.y,target.position.z);
+            photonView.RPC("LockOnTarget", RpcTarget.All, target.position.x, rotatePart.position.y, target.position.z);
 
-        if (fireTimeLimit <= 0f && trigger.inOtherHome || fireTimeLimit <= 0f&&attack&&!trigger.inOtherHome)
+        if (fireTimeLimit <= 0f && trigger.inOtherHome || fireTimeLimit <= 0f && attack && !trigger.inOtherHome)
         {
             if (photonView.IsMine)
             {
                 var firedBullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 90, 0)));
-                firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.right.x, firePoint.right.y, firePoint.right.z);
+                firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.right.x, firePoint.right.y, firePoint.right.z, 10f, 0f, 0f, 0f);
             }
             fireTimeLimit = 1f / fireRate;
         }
@@ -122,6 +123,6 @@ public class TurretController : Turret
         Gizmos.DrawWireSphere(transform.position, range);
     }
 }
-//Æ÷Å¾ »ç°Å¸® ¾È && ÁýÅÍ ¿¡ ÀÖÀ¸¸é ¹«±â »ó°ü ¾øÀÌ °ø°Ý °¡´É
-//Áý ÅÍ ¹Û && Æ÷Å¾ »ç°Å¸® ¾È && ¹«±â µé¸é °ø°Ý °¡´É
-//Turret ¹üÀ§ ¾È¿¡¼­ ÃÑ¾Èµé¸é °ø°Ýx
+//ï¿½ï¿½Å¾ ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ && ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ && ï¿½ï¿½Å¾ ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ && ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//Turret ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ï¿½ï¿½ ï¿½Ñ¾Èµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½x

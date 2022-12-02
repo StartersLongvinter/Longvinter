@@ -100,6 +100,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    [PunRPC]
+    private void ActiveOffEquipment(int _index)
+    {
+        bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
+    }
+
     private void Start()
     {
 
@@ -126,7 +132,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             isPressedSpace = false;
         }
 
-        if (weaponData != null) GetEquipment(weaponData.emIndex);
+        if (weaponData != null) photonView.RPC("GetEquipment", RpcTarget.All, weaponData.emIndex);
     }
 
     private void FixedUpdate()
