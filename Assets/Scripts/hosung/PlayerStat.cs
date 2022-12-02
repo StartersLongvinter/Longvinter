@@ -27,12 +27,17 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     public Status status;
 
     public float hp;
-    public float maxHp = 90f;
+    public float maxHp = 100f;
     public int money;
 
+    public bool isFight = false;
     public bool isCold = false;
-    public float autoDamageValue = 1f;
-    float damagedTime = 3f;
+    public bool inWater = false;
+    public float autoDamageValue = 0.15f;
+    [SerializeField] float damagedTime = 1f;
+    [SerializeField] float damagePercentInSnowField = 3.3f;
+    [SerializeField] float damagePercentWhileWalk = 5.5f;
+    [SerializeField] float damagePercentInWater = 13.3f;
     float startTime = 0f;
     [SerializeField]
     private Color normalColor;
@@ -54,12 +59,18 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    public void ChangeStatus(int _index)
+    {
+        status = (Status)_index;
+    }
+
     [PunRPC]
     void AddPlayerStatAndCharacter()
     {
         PlayerList.Instance.playerStats.Add(this);
         PlayerList.Instance.playerCharacters.Add(this.gameObject);
         PlayerList.Instance.playersWithActorNumber.Add(photonView.Owner.ActorNumber, this.gameObject);
+        status = Status.idle;
 
         foreach (GameObject player in PlayerList.Instance.playersWithActorNumber.Values)
         {
@@ -67,26 +78,48 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    void Update()
+    void LoseStamina()
     {
         if (!photonView.IsMine) return;
 
         startTime += Time.deltaTime;
 
-        if (startTime >= damagedTime)
+        float _targetDamage = autoDamageValue;
+        if (isCold)
         {
-            photonView.RPC("AddHp", RpcTarget.All, -1f * autoDamageValue);
-            startTime = 0f;
+            if (status == Status.walk) _targetDamage = autoDamageValue * damagePercentWhileWalk;
+            else _targetDamage = autoDamageValue * damagePercentInSnowField;
         }
 
-        if (hp < 30)
+        if (inWater) _targetDamage = autoDamageValue * damagePercentInWater;
+
+        if (startTime >= damagedTime)
+        {
+            if (hp <= (maxHp / 9f) && !isCold && !inWater)
+            {
+                startTime = 0f;
+            }
+            else
+            {
+                Debug.Log((_targetDamage));
+                photonView.RPC("ChangeHp", RpcTarget.AllViaServer, -1f * _targetDamage);
+                startTime = 0f;
+            }
+        }
+
+        if (hp <= (maxHp / 9f) * 3f)
         {
             currentHPImage.color = warningColor;
         }
         else
             currentHPImage.color = normalColor;
+    }
 
-        float _hpValue = hp / 90f;
+    void Update()
+    {
+        LoseStamina();
+
+        float _hpValue = hp / maxHp;
         currentHPImage.fillAmount = _hpValue;
     }
 
@@ -94,18 +127,18 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     // ����
 
     [PunRPC]
-    public void AddHp(float _hp)
+    public void ChangeHp(float _hp)
     {
         hp += _hp;
         if (hp < 0)
         {
             hp = 0;
-            status = Status.die;
+            ChangeStatus((int)Status.die);
         }
     }
 
     // ����
-    public void AddMoney(int _money)
+    public void ChangeMoney(int _money)
     {
         money += _money;
     }
@@ -119,6 +152,9 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(maxHp);
             stream.SendNext(money);
             stream.SendNext((int)status);
+            stream.SendNext((bool)isFight);
+            stream.SendNext((bool)isCold);
+            stream.SendNext((bool)inWater);
         }
         else
         {
@@ -126,6 +162,9 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
             maxHp = (float)stream.ReceiveNext();
             money = (int)stream.ReceiveNext();
             status = (Status)(int)stream.ReceiveNext();
+            isFight = (bool)stream.ReceiveNext();
+            isCold = (bool)stream.ReceiveNext();
+            inWater = (bool)stream.ReceiveNext();
         }
     }
 }

@@ -15150,8 +15150,14 @@ MonoBehaviour:
   hp: 0
   maxHp: 90
   money: 0
+  isFight: 0
   isCold: 0
-  autoDamageValue: 1
+  inWater: 0
+  autoDamageValue: 0.15
+  damagedTime: 1
+  damagePercentInSnowField: 3.3
+  damagePercentWhileWalk: 5.5
+  damagePercentInWater: 13.3
   normalColor: {r: 1, g: 0.8520418, b: 0, a: 1}
   warningColor: {r: 1, g: 0, b: 0, a: 1}
   currentHPAnimator: {fileID: 0}
@@ -15330,7 +15336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 1
+  m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &-2713289005664936501
 MonoBehaviour:
