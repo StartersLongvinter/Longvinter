@@ -48,6 +48,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void Awake()
     {
         currentVersion = Application.version;
+        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         if (NetworkManager.instance != null) Destroy(this.gameObject);
     }
 
