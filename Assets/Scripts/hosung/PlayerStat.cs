@@ -57,6 +57,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
             localPlayer = this;
             photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
         }
+        JsonManager.Instance.LoadDate();
     }
 
     public void ChangeStatus(int _index)
