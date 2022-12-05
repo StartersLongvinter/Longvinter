@@ -427,6 +427,7 @@ MonoBehaviour:
   nearPlayer: {fileID: 0}
   nearAnimals: []
   isAttacked: 0
+  bulletDir: {x: 0, y: 0, z: 0}
   target:
   - {fileID: 0}
   - {fileID: 0}
@@ -435,7 +436,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   nearDistance: 4
-  moveAmount: 4
+  moveAmount: 10
 --- !u!195 &1263332010884662287
 NavMeshAgent:
   m_ObjectHideFlags: 0

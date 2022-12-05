@@ -10,6 +10,8 @@ TagManager:
   - Equipment
   - Area
   - InstalledObject
+  - LivingEntity
+  - Bullet
   layers:
   - Default
   - TransparentFX

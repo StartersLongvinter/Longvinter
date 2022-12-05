@@ -183,14 +183,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.IsMessageQueueRunning = true;
         isLobby = false;
         bool _sameName = false;
+
         foreach (Player _player in PhotonNetwork.PlayerList)
         {
-            if (nickName == _player.NickName)
+            if (nickName == _player.NickName && _player != PhotonNetwork.LocalPlayer)
             {
                 _sameName = true;
                 break;
             }
         }
+
         if (_sameName) PhotonNetwork.LocalPlayer.NickName = nickName + "2";
         else PhotonNetwork.LocalPlayer.NickName = nickName;
         //GameObject.Find("PasswordPanel").SetActive(false);

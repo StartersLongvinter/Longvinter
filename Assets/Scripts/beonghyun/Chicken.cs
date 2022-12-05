@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
 public class Chicken : LivingEntity
 {
@@ -16,18 +17,14 @@ public class Chicken : LivingEntity
 
     bool isCoroutine;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
-        SetDestination();
-        AnimParams();
+        if (photonView.IsMine)
+        {
+            SetDestination();
+            AnimParams();
+        }
     }
 
     void AnimParams()
@@ -55,18 +52,18 @@ public class Chicken : LivingEntity
 
     void SetDestination()
     {
-        if (isStopped())
-        {
-            SetRandomTarget();
-        }
-
         if (nearPlayer==null)
         {
+            if (isAttacked)
+            {
+                agent.speed = 4.5f;
+                agent.destination = transform.position + bulletDir.normalized * moveAmount;
+                return;
+            }
+
             if (isCoroutine) return;
 
             agent.speed = 1.5f;
-
-            //nextPos = target[targetNumber].position;
 
             float _distance = Vector3.Distance(transform.position, nextPos);
 
@@ -74,10 +71,6 @@ public class Chicken : LivingEntity
 
             if (_distance < 1)
             {
-                //int newTargetNumber = Random.Range(0, target.Length);
-
-                //targetNumber = newTargetNumber;
-
                 SetRandomTarget();
 
                 string[] states = { "Eat", "Turn Head" };
@@ -93,10 +86,10 @@ public class Chicken : LivingEntity
 
         float distance = Vector3.Distance(nearPlayer.transform.position, transform.position);
 
-        if (distance < nearDistance)
+        if (distance < nearDistance || isAttacked)
         {
             //사람이 있던 곳으로 다시 돌아가는 것 방지
-            //targetNumber = Random.Range(0, target.Length);
+           
             SetRandomTarget();
 
             agent.speed = 4.5f;
@@ -113,18 +106,12 @@ public class Chicken : LivingEntity
 
             agent.speed = 1.5f;
 
-            //nextPos = target[targetNumber].position;
-
             float _distance = Vector3.Distance(transform.position, nextPos);
 
             agent.destination = nextPos;
 
             if (_distance < 1)
             {
-                //int newTargetNumber = Random.Range(0, target.Length);
-
-                //targetNumber = newTargetNumber;
-
                 SetRandomTarget();
 
                 string[] states = { "Eat", "Turn Head" };
