@@ -3646,7 +3646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15299,6 +15299,13 @@ MonoBehaviour:
   encyclopediaInventory: {fileID: 317712997}
   toolTip: {fileID: 2135308564}
   inventoryCloseBtn: {fileID: 1851531554}
+  bagToEquipmentBtn: {fileID: 2084496756}
+  bagToEncyclopediaBtn: {fileID: 421417532}
+  equipmentToBagBtn: {fileID: 1968604451}
+  equipmentToEncyclopediaBtn: {fileID: 89946685}
+  bagPanel: {fileID: 189727976}
+  equipmentPanel: {fileID: 486655372}
+  encyclopediaPanel: {fileID: 317712997}
   pressEImage: {fileID: 1228521184}
   fishName: {fileID: 1439386944}
   fishImage: {fileID: 1898632760}
