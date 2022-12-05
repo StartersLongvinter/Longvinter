@@ -20,9 +20,10 @@ MonoBehaviour:
     50%"
   itemType: 0
   itemClassify: 0
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 5223685251508337091, guid: a661a290fabf243968360d22833d65fc, type: 3}
   itemImage: {fileID: 0}
   isItemUsable: 1
-  itemEffect: 0
+  itemEffect: 1
   expireTime: 200
+  increaseHealth: 40
   applyPercentage: 50

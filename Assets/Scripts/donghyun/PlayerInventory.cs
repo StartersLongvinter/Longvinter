@@ -127,6 +127,12 @@ public class PlayerInventory : MonoBehaviourPun
 
     public void ItemUse(GameObject go)
     {
+        if (go.GetComponent<ItemData>().itUsable 
+            && go.GetComponent<ItemData>().itEffect == ItemData.ItemEffect.Health)
+        {
+            
+        }
+        
         itemList.Remove(go);
         
         updateBagInventory();

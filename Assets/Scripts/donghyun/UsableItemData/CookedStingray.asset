@@ -19,9 +19,10 @@ MonoBehaviour:
     \uBA39\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4"
   itemType: 0
   itemClassify: 0
-  itemPrefab: {fileID: 0}
-  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 5223685251508337091, guid: 2b6089434d07f4fcca152845b3ac3781, type: 3}
+  itemImage: {fileID: 21300000, guid: 8e8a60243e8c3464a8c09cab0ee9f5f4, type: 3}
   isItemUsable: 1
   itemEffect: 0
   expireTime: 20
+  increaseHealth: 50
   applyPercentage: 0

@@ -30,6 +30,7 @@ public class ItemData : ScriptableObject
     [SerializeField] private bool isItemUsable;
     [SerializeField] private ItemEffect itemEffect;
     [SerializeField] private int expireTime;
+    [SerializeField] private int increaseHealth;
     [SerializeField] private int applyPercentage;
     
 
@@ -51,4 +52,6 @@ public class ItemData : ScriptableObject
     public int itApplyPercentage => applyPercentage;
 
     public ItemEffect itEffect => itemEffect;
+
+    public int itIncreaseHealth => increaseHealth;
 }

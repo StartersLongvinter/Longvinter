@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
-  m_Name: CookedMistyGroupe
+  m_Name: CookedMistyGrouper
   m_EditorClassIdentifier: 
-  itemName: CookedMistyGroupe
+  itemName: CookedMistyGrouper
   itemKorName: "\uC870\uB9AC\uB41C \uC7BF\uBE5B \uCC38\uBC14\uB9AC"
   itemExplain: "\uC560\uB9E4\uD558\uAC8C \uB2E8\uCCB4 \uD65C\uB3D9\uC744 \uC990\uAE30\uB294
     \uBB3C\uACE0\uAE30\uB2E4\_ \uD6A8\uACFC : \uC18C\uD654\uAC00 \uB05D\uB098\uAE30
     \uC804\uC5D4 \uB354\uC774\uC0C1 \uBA39\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
   itemType: 0
   itemClassify: 0
-  itemPrefab: {fileID: 0}
-  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 5223685251508337091, guid: a7c27275d69b042769cd3b829e130758, type: 3}
+  itemImage: {fileID: 21300000, guid: 02d2f2709b0c64681aa6501785062c24, type: 3}
   isItemUsable: 1
   itemEffect: 0
   expireTime: 60
+  increaseHealth: 80
   applyPercentage: 0

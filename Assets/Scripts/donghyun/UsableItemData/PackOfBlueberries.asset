@@ -19,9 +19,10 @@ MonoBehaviour:
     \uB192\uC5EC\uC90D\uB2C8\uB2E4 10%"
   itemType: 0
   itemClassify: 0
-  itemPrefab: {fileID: 0}
-  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 5223685251508337091, guid: 24c701ff86a744c42a9c8dacfd3ddb7d, type: 3}
+  itemImage: {fileID: 21300000, guid: 902788be48a0641268c815bccafe1ae8, type: 3}
   isItemUsable: 1
-  itemEffect: 0
+  itemEffect: 3
   expireTime: 250
+  increaseHealth: 0
   applyPercentage: 10
