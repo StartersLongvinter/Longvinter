@@ -18,26 +18,11 @@ public class Enemy : MonoBehaviourPun
         renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         if (photonView.IsMine)
         {
+            Debug.Log(photonView.Owner.NickName);
             PlayerStat.LocalPlayer.currentHPAnimator.SetTrigger("isDamaged");
-            TakeDamage(damage);
+            PlayerStat.LocalPlayer.ChangeHp(-1f * damage);
         }
         StartCoroutine(ResetColor());
-    }
-
-    public void TakeDamage(float amount)
-    {
-        PlayerStat.LocalPlayer.hp -= amount;
-
-        if (PlayerStat.LocalPlayer.hp <= 0 && PlayerStat.LocalPlayer.status != PlayerStat.Status.die)
-            photonView.RPC("Die", RpcTarget.All);
-    }
-
-    [PunRPC]
-    void Die()
-    {
-        GetComponent<PlayerStat>().status = PlayerStat.Status.die;
-        this.gameObject.layer = 8;
-        Debug.Log("Dead");
     }
 
     IEnumerator ResetColor()
