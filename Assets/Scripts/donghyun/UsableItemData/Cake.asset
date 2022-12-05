@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
+  m_Name: Cake
+  m_EditorClassIdentifier: 
+  itemName: Cake
+  itemKorName: "\uCF00\uC774\uD06C"
+  itemExplain: "\uB204\uAC00 \uCF00\uC774\uD06C\uB97C \uC2EB\uC5B4\uD558\uACA0\uC5B4\uC694\_
+    \uD6A8\uACFC : \uC18C\uD654\uAC00 \uB05D\uB098\uAE30 \uC804\uC5D4 \uB354\uC774\uC0C1
+    \uBA39\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4"
+  itemType: 0
+  itemClassify: 0
+  itemPrefab: {fileID: 5223685251508337091, guid: 6a8fc82b5b423454b8488710e639578a, type: 3}
+  itemImage: {fileID: 21300000, guid: 6c9d2dd984d6b4244b5af6575ebfaab1, type: 3}
+  isItemUsable: 1
+  canOverlap: 0
+  itemEffect: 0
+  expireTime: 60
+  increaseHealth: 75
+  applyPercentage: 0
+  effectPrefab: {fileID: 3863927418828158173, guid: 95fd3f68f1e284d99ba0f60c0b803ddb, type: 3}
