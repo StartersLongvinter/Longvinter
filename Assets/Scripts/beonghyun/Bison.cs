@@ -27,10 +27,10 @@ public class Bison : LivingEntity
         SetDestination();
         AnimParams();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            HitByPlayer();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    HitByPlayer();
+        //}
     }
 
     void AnimParams()
@@ -59,7 +59,7 @@ public class Bison : LivingEntity
         {
             agent.speed = 1.5f;
 
-            nextPos = target[targetNumber].position;
+            //nextPos = target[targetNumber].position;
 
             float _distance = Vector3.Distance(transform.position, nextPos);
 
@@ -67,11 +67,11 @@ public class Bison : LivingEntity
 
             if (_distance < 1)
             {
-                int newTargetNumber = Random.Range(0, target.Length);
+                SetRandomTarget();
 
                 foreach (var bison in nearAnimals)
                 {
-                    bison.GetComponent<Bison>().targetNumber = newTargetNumber;
+                    bison.GetComponent<LivingEntity>().agent.destination = nextPos;
                 }
 
             }
@@ -89,7 +89,6 @@ public class Bison : LivingEntity
                 bison.GetComponent<LivingEntity>().agent.speed = 10f;
                 bison.GetComponent<LivingEntity>().agent.destination = nearPlayer.transform.position;
             }
-            
         }
 
         //공격안받고 player가 가까이 다가갔을 때 도주
@@ -98,7 +97,7 @@ public class Bison : LivingEntity
         {
 
             //사람이 있던 곳으로 다시 돌아가는 것 방지
-            targetNumber = Random.Range(0, target.Length);
+            SetRandomTarget();
 
             agent.speed = 6f;
 
@@ -112,10 +111,7 @@ public class Bison : LivingEntity
         //평소 조건 현재위치와 nextPos 거리가 ~~보다 작다면 nextPos 바꿔줌 
         else
         {
-
             agent.speed = 1.5f;
-
-            nextPos = target[targetNumber].position;
 
             float _distance = Vector3.Distance(transform.position, nextPos);
 
@@ -123,13 +119,13 @@ public class Bison : LivingEntity
 
             if (_distance < 1)
             {
-                int newTargetNumber = Random.Range(0, target.Length);
+                //int newTargetNumber = Random.Range(0, target.Length);
+                SetRandomTarget();
 
                 foreach (var bison in nearAnimals)
                 {
-                    bison.GetComponent<Bison>().targetNumber = newTargetNumber;
+                    bison.GetComponent<LivingEntity>().agent.destination = nextPos;
                 }
-                
             }
         }
     }

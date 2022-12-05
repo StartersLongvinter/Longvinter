@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
-public class LivingEntity : MonoBehaviour
+public class LivingEntity : MonoBehaviourPun, IPunObservable
 {
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
@@ -24,14 +25,18 @@ public class LivingEntity : MonoBehaviour
     Vector3 currentPosition;
     Vector3 latePosition;
 
+    //Bullet_BH 변수
+    Bullet_BH bullet;
+    public Vector3 bulletDir;
+
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
 
-        maxHealth = 100;
-        currentHealth = 100;
+        //maxHealth = 100;
+        //currentHealth = 100;
         mesh = GetComponentInChildren<SkinnedMeshRenderer>();
         startMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
         
@@ -49,22 +54,22 @@ public class LivingEntity : MonoBehaviour
     //    latePosition = transform.position;
     //}
 
-    public bool isStopped()
-    {
-        float timer = 0;
+    //public bool isStopped()
+    //{
+    //    float timer = 0;
 
-        while (currentPosition==latePosition)
-        {
-            timer += Time.deltaTime;
+    //    while (currentPosition==latePosition)
+    //    {
+    //        timer += Time.deltaTime;
 
-            if (timer>5)
-            {
-                return true;
-            }
-        }
+    //        if (timer>5)
+    //        {
+    //            return true;
+    //        }
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
     //제일 가까이 있는 player를 nearPlayer로 지정
 
@@ -111,21 +116,42 @@ public class LivingEntity : MonoBehaviour
         }
     }
 
-    public void HitByPlayer()
+    private void OnCollisionEnter(Collision collision)
     {
-        StartCoroutine(OnDamage());
+        if (collision.gameObject.tag=="Bullet")
+        {
+            bullet = collision.gameObject.GetComponent<Bullet_BH>();
+            bulletDir = transform.position - bullet.transform.position;
+        }
     }
 
-    IEnumerator OnDamage()
+    public void HitByPlayer(float damage)
+    {
+        StartCoroutine(OnDamageEffect());
+        OnDamage(damage);
+    }
+
+    void OnDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth<0 && photonView.IsMine)
+        {
+            PhotonNetwork.Destroy(this.gameObject);
+        }
+    }
+
+    IEnumerator OnDamageEffect()
     {
         isAttacked = true;
+
         mesh.material = hitEffect1; 
-        transform.localScale += new Vector3(0.1f,0.1f,0.1f);
+        transform.localScale += new Vector3(0.01f,0.01f,0.01f);
 
         yield return new WaitForSeconds(0.1f);
 
         mesh.material = hitEffect2;
-        transform.localScale -= new Vector3(0.1f,0.1f,0.1f);
+        transform.localScale -= new Vector3(0.01f,0.01f,0.01f);
 
         yield return new WaitForSeconds(0.1f);
 
@@ -133,11 +159,21 @@ public class LivingEntity : MonoBehaviour
         {
             mesh.material = startMat;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
         yield return new WaitForSeconds(4f);
         isAttacked = false;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth);
+        }
+
+        else
+        {
+            currentHealth = (float)stream.ReceiveNext();
+        }
     }
 }

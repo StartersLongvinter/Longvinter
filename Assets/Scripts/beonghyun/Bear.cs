@@ -3,34 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
 public class Bear : LivingEntity
 {
-    [SerializeField] Transform[] target;
-
     Vector3 nextPos;
 
     [SerializeField] float nearDistance;
     [SerializeField] float moveAmount;
-    int targetNumber;
 
     bool isCoroutine;
     bool isCoroutine2;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
-
-        targetNumber = 0;
+        base.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetDestination();
-        AnimParams();
+        if (photonView.IsMine)
+        {
+            SetDestination();
+            AnimParams();
+        }
     }
 
     void AnimParams()
@@ -59,18 +57,20 @@ public class Bear : LivingEntity
     
     void SetDestination()
     {
-        if (isStopped())
-        {
-            SetRandomTarget();
-        }
+      
 
-        if (nearPlayer==null)
+        if (nearPlayer == null)
         {
+            if (isAttacked)
+            {
+                agent.speed = 6f;
+                agent.destination = transform.position + bulletDir.normalized * (-moveAmount);
+                return;
+            }
+
             if (isCoroutine) return;
 
             agent.speed = 1.5f;
-
-            //nextPos = target[targetNumber].position;
 
             float _distance = Vector3.Distance(transform.position, nextPos);
 
@@ -78,10 +78,6 @@ public class Bear : LivingEntity
 
             if (_distance < 1)
             {
-                //int newTargetNumber = Random.Range(0, target.Length);
-
-                //targetNumber = newTargetNumber;
-
                 SetRandomTarget();
 
                 string[] states = { "Eat", "Sit", "Sleep" };
@@ -94,62 +90,54 @@ public class Bear : LivingEntity
             return;
         }
 
-        float distance = Vector3.Distance(nearPlayer.transform.position, transform.position);
-
-        if (distance < nearDistance)
-        {
-
-            SetRandomTarget();
-
-            if (isCoroutine2) return;
-
-            if (distance < 4)
-            {
-                agent.speed = 0;
-                string[] states = { "Attack1", "Attack2", "Attack3", "Attack5" };
-                int i = Random.Range(0, 4);
-                StartCoroutine(AttackState(states[i]));
-                return;
-            }
-
-            agent.speed = 6f;
-
-            agent.destination = nearPlayer.transform.position; 
-
-        }
-
-        //평소 조건 현재위치와 nextPos 거리가 ~~보다 작다면 nextPos 바꿔줌 
         else
         {
-            if (isCoroutine) return;
+                float _distance = Vector3.Distance(nearPlayer.transform.position, transform.position);
 
-            agent.speed = 1.5f;
+                if (_distance < nearDistance || isAttacked)
+                {
 
-            //nextPos = target[targetNumber].position;
+                    SetRandomTarget();
 
-            float _distance = Vector3.Distance(transform.position, nextPos);
+                    if (isCoroutine2) return;
 
-            agent.destination = nextPos;
+                    if (_distance < 4)
+                    {
+                        agent.speed = 0;
+                        string[] states = { "Attack1", "Attack2", "Attack3", "Attack5" };
+                        int i = Random.Range(0, 4);
+                        StartCoroutine(AttackState(states[i]));
+                        return;
+                    }
 
-            if (_distance < 1)
-            {
-                //int newTargetNumber = Random.Range(0, target.Length);
+                    agent.speed = 6f;
 
-                //targetNumber = newTargetNumber;
+                    agent.destination = nearPlayer.transform.position;
 
-                SetRandomTarget();
-
-                string[] states = { "Eat","Sit","Sleep"};
-
-                int i = Random.Range(0, 3);
-
-                StartCoroutine(IdleState(states[i]));
             }
-        }
+            
+            //평소 조건 현재위치와 nextPos 거리가 ~~보다 작다면 nextPos 바꿔줌 
+            else
+            {
+                if (isCoroutine) return;
 
-        if (true)
-        {
+                agent.speed = 1.5f;
 
+                float distance = Vector3.Distance(transform.position, nextPos);
+
+                agent.destination = nextPos;
+
+                if (distance < 1)
+                {
+                    SetRandomTarget();
+
+                    string[] states = { "Eat", "Sit", "Sleep" };
+
+                    int i = Random.Range(0, 3);
+
+                    StartCoroutine(IdleState(states[i]));
+                }
+            }
         }
     }
 
@@ -171,7 +159,6 @@ public class Bear : LivingEntity
         anim.SetBool(state, false);
 
         isCoroutine = false;
-        //StopAllCoroutines();
     }
 
     IEnumerator AttackState(string state)
