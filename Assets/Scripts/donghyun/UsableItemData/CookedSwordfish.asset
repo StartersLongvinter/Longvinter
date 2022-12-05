@@ -22,7 +22,9 @@ MonoBehaviour:
   itemPrefab: {fileID: 5223685251508337091, guid: a8adff203f9c1406bb1c31f1bd1936c4, type: 3}
   itemImage: {fileID: 21300000, guid: 10af31c249a9b4558a6bd9a0ed4c572a, type: 3}
   isItemUsable: 1
+  canOverlap: 0
   itemEffect: 0
   expireTime: 45
   increaseHealth: 70
   applyPercentage: 0
+  effectPrefab: {fileID: 3863927418828158173, guid: 95fd3f68f1e284d99ba0f60c0b803ddb, type: 3}

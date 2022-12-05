@@ -17,7 +17,7 @@ public class ItemData : ScriptableObject
     
     public enum ItemEffect
     {
-        Health, ColdDamageReduction, IncreaseMovementSpeed, IncreaseFishingSpeed
+        Health, ColdDamageReduction, IncreaseMovementSpeed, IncreaseFishingSpeed, GetHardAmor
     }
     
     [SerializeField] private string itemName; //아이템 이름
@@ -28,10 +28,12 @@ public class ItemData : ScriptableObject
     [SerializeField] private GameObject itemPrefab; //아이템 프리펩
     [SerializeField] private Sprite itemImage; //아이템 사진
     [SerializeField] private bool isItemUsable;
+    [SerializeField] private bool canOverlap;
     [SerializeField] private ItemEffect itemEffect;
     [SerializeField] private int expireTime;
     [SerializeField] private int increaseHealth;
     [SerializeField] private int applyPercentage;
+    [SerializeField] private GameObject effectPrefab;
     
 
     public string itName => itemName;
@@ -47,11 +49,15 @@ public class ItemData : ScriptableObject
 
     public bool itUsable => isItemUsable;
 
+    public bool itCanOverlap => canOverlap;
+
     public int itExpireTime => expireTime;
 
     public int itApplyPercentage => applyPercentage;
 
     public ItemEffect itEffect => itemEffect;
-
+    
     public int itIncreaseHealth => increaseHealth;
+
+    public GameObject itEffectPrefab => effectPrefab;
 }

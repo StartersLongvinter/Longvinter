@@ -222,7 +222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 416944e92e32945bbad961375673bc7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e0851a5087a5e45858b388312b8be29b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 3863927418828158168}
   - component: {fileID: 3863927418828158175}
   m_Layer: 5
-  m_Name: ItemEffect
+  m_Name: AmorEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
