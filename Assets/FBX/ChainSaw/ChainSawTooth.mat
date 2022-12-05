@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ChainSawTooth
+  m_Name: ChainsawTooth
   m_Shader: {fileID: 4800000, guid: 7bff2ef1f4e1b401ca8046f919cb47fe, type: 3}
   m_ValidKeywords:
   - _ALPHATEST_ON
