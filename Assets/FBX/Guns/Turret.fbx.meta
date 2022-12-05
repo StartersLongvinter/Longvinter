@@ -3,7 +3,47 @@ guid: e705954279c230d41a02e86e4e86de95
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_Antenna.001
+    second: {fileID: 2100000, guid: b9abdccbcf6bca940833f11794537858, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ContainerTop01.003
+    second: {fileID: 2100000, guid: b9abdccbcf6bca940833f11794537858, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ContainerTop01.004
+    second: {fileID: 2100000, guid: b9abdccbcf6bca940833f11794537858, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_ContainerTop01.005
+    second: {fileID: 2100000, guid: b9abdccbcf6bca940833f11794537858, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_Container_05.003
+    second: {fileID: 2100000, guid: ad796cc75c180c442af0d8026932afe8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_Container_05.004
+    second: {fileID: 2100000, guid: ad796cc75c180c442af0d8026932afe8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_Container_05.005
+    second: {fileID: 2100000, guid: ad796cc75c180c442af0d8026932afe8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_TurretLight.001
+    second: {fileID: 2100000, guid: eafdbc4b2ea56b8499d773ff95000ea5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
