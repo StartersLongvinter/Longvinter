@@ -8,17 +8,17 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public float moveSpeed;
-    public Transform leftHandIkTarget;
-    public Transform rightHandIkTarget;
     public Vector3 AimLookPoint { get { return aimLookPoint; } }
     public bool IsAiming { get { return isAiming; } }
 
-
-    public Transform bagEquipPoint;
-    public Transform handEquipPoint;
+    public float moveSpeed;
     public EquipmentData weaponData;
     public EquipmentData[] weaponDatas;
+    public Transform leftHandIkTarget;
+    public Transform rightHandIkTarget;
+    public Transform bagEquipPoint;
+    public Transform handEquipPoint;
+    [HideInInspector] public bool isBuilding = false;
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
@@ -39,37 +39,16 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private float ikWeight;
 
     [SerializeField] GameObject chatInput;
+    private float timer = 0f;
 
     // Fishing
     private GameObject fish;
     [SerializeField] float maxInteractableDistance = 7;
-    private bool isFishing; // YH - Delete SerializeFiled
-    private bool isSuccessState; // YH - Change public -> private
+    private bool isFishing;
+    private bool isSuccessState;
     public bool eImageActivate;
     private int eCount = 0;
     // End Fishing
-
-    private float timer = 0f;
-
-    // hoseong
-    public bool isBuilding = false;
-
-
-    // 이거 합쳐야 함
-    [PunRPC]
-    public void GetEquipment(int _emIndex)
-    {
-        if (isAiming)
-        {
-            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
-            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
-        }
-        else
-        {
-            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
-            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
-        }
-    }
 
     #region Callback Methods
     private void Awake()
@@ -133,7 +112,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             isPressedSpace = false;
         }
 
-        if (weaponData != null) photonView.RPC("GetEquipment", RpcTarget.All, weaponData.emIndex);
+        if (weaponData != null) photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.emIndex);
     }
 
     private void FixedUpdate()
@@ -240,9 +219,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
-    #endregion
 
-    #region Public Methods
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -252,6 +229,24 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         else
         {
             isAiming = (bool)stream.ReceiveNext();
+        }
+    }
+    #endregion
+
+    #region Public Methods
+    // 이거 합쳐야 함
+    [PunRPC]
+    public void SwitchWeaponPosition(int _emIndex)
+    {
+        if (isAiming)
+        {
+            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
+            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
+        }
+        else
+        {
+            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
+            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
         }
     }
     #endregion
@@ -352,9 +347,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weaponData == null) return;
 
-
         Weapon weapon = handEquipPoint.GetChild(weaponData.emIndex).gameObject.GetComponent<Weapon>();
-
 
         attackDelay += Time.deltaTime;
         isAttackReady = weapon.attackRate < attackDelay;
@@ -396,11 +389,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weaponData == null | isFishing) return;
 
-        float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
-
-
-
         Weapon.Type weaponType = weaponData.emPrefab.GetComponent<Weapon>().type;
+
+        float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
 
         //if (isAiming && weaponData.emAnim == EquipmentData.EquipmentAnim.Forward)
         if (isAiming && weaponType == Weapon.Type.Range || weaponType == Weapon.Type.Melee2)

@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 1868926851304549380}
   - component: {fileID: 4470724609018337486}
   - component: {fileID: -8950169296150377778}
+  - component: {fileID: 7571960478905046018}
+  - component: {fileID: -2046505816185107262}
   m_Layer: 0
-  m_Name: ChainSaw
+  m_Name: Chainsaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,3 +103,39 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7029531919713087591, guid: fbe9d0af3991547c0888d566629ef982, type: 3}
+--- !u!114 &7571960478905046018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669447280008706331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb87228843632b47bd45cb27a759823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  damage: 16
+  attackRate: 0.5
+  accuracy: 100
+  bulletCountPerFire: 1
+  firePoint: {fileID: 0}
+  muzzleFlashPoint: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  muzzleFlashVfxPrefab: {fileID: 0}
+--- !u!114 &-2046505816185107262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669447280008706331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9952638096f346cbaebe2ce2caa3cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  equipment: {fileID: 11400000, guid: e7196702b68264bbc8b05ab54d009729, type: 2}
+  weaponIndex: 1
