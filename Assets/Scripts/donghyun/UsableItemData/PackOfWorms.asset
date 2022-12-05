@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
+  m_Name: PackOfWorms
+  m_EditorClassIdentifier: 
+  itemName: PackOfWorms
+  itemKorName: "\uC9C0\uB801\uC774 \uD329"
+  itemExplain: "\uBAA8\uB4E0 \uC5B4\uBD80\uC5D0\uAC8C \uD3B8\uB9AC\uD569\uB2C8\uB2E4\_
+    \uD6A8\uACFC : \uB354 \uC88B\uC740 \uBB3C\uACE0\uAE30\uB97C \uC7A1\uC744 \uD655\uB960\uC744
+    \uB192\uC5EC\uC90D\uB2C8\uB2E4 25%"
+  itemType: 0
+  itemClassify: 0
+  itemPrefab: {fileID: 0}
+  itemImage: {fileID: 0}
+  isItemUsable: 1
+  itemEffect: 0
+  expireTime: 300
+  applyPercentage: 25

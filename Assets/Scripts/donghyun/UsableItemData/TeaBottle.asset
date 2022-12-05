@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
+  m_Name: TeaBottle
+  m_EditorClassIdentifier: 
+  itemName: Tea Bottle
+  itemKorName: "\uCC28\uAC00 \uB4E4\uC5B4\uC788\uB294 \uBCD1"
+  itemExplain: "\uC12D\uCDE8\uD574\uC11C \uB530\uB73B\uD568\uC744 \uC720\uC9C0\uD558\uC138\uC694.\_
+    \uD6A8\uACFC : \uCD94\uC704\uB85C \uC778\uD55C \uD53C\uD574\uB97C \uAC10\uC18C\uD560
+    \uC218 \uC788\uC5B4\uC69460%"
+  itemType: 0
+  itemClassify: 0
+  itemPrefab: {fileID: 0}
+  itemImage: {fileID: 0}
+  isItemUsable: 1
+  itemEffect: 0
+  expireTime: 500
+  applyPercentage: 60

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
+  m_Name: CloudberryJam
+  m_EditorClassIdentifier: 
+  itemName: CloudberryJam
+  itemKorName: "\uD074\uB77C\uC6B0\uB4DC\uBCA0\uB9AC \uC7BC"
+  itemExplain: "\uCD94\uC704\uC800\uD56D\uC744 \uC0C1\uC2B9\uC2DC\uCF1C\uC8FC\uB294
+    \uD669\uAE08\uBE5B \uC7BC\uC774\uB2E4\_ \uD6A8\uACFC : \uB2F9\uC2E0\uC744 \uB530\uB4EF\uD558\uAC8C
+    \uB9CC\uB4E4\uC5B4 \uC90D\uB2C8\uB2E4. \uCD94\uC704 \uD53C\uD574 \uAC10\uC18C
+    50%"
+  itemType: 0
+  itemClassify: 0
+  itemPrefab: {fileID: 0}
+  itemImage: {fileID: 0}
+  isItemUsable: 1
+  itemEffect: 0
+  expireTime: 200
+  applyPercentage: 50

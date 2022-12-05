@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
+  m_Name: EnergyDrinkMild
+  m_EditorClassIdentifier: 
+  itemName: EnergyDrinkMild
+  itemKorName: "\uC5D0\uB108\uC9C0 \uB4DC\uB9C1\uD06C : \uC21C\uD55C\uB9DB"
+  itemExplain: "\uC288\uD37C\uB9E8\uCC98\uB7FC \uB2EC\uB9B4 \uC218 \uC788\uC5B4\uC694!
+    \uD6A8\uACFC : \uC57D\uAC04\uC758 \uC18D\uB3C4\uB97C \uC5BB\uC5C8\uC2B5\uB2C8\uB2E4.
+    \uC774\uB3D9\uC18D\uB3C4 \uD5A5\uC0C15%"
+  itemType: 0
+  itemClassify: 0
+  itemPrefab: {fileID: 0}
+  itemImage: {fileID: 0}
+  isItemUsable: 1
+  itemEffect: 0
+  expireTime: 300
+  applyPercentage: 5

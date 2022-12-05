@@ -506,6 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: 915fdfdecab054fd7bfa624196c742e1, type: 2}
+  weaponIndex: 0
 --- !u!54 &67566226
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4165,6 +4166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: 98dfcb0e13587463ab843bc7803f31b7, type: 2}
+  weaponIndex: 0
 --- !u!54 &685320136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7640,6 +7642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: e7196702b68264bbc8b05ab54d009729, type: 2}
+  weaponIndex: 0
 --- !u!54 &1446705776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8026,6 +8029,10 @@ PrefabInstance:
       propertyPath: toolTip
       value: 
       objectReference: {fileID: 2135308564}
+    - target: {fileID: 449537475182467946, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
+      propertyPath: sceneViewId
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 4983998215243612754, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
       propertyPath: sceneViewId
       value: 1
