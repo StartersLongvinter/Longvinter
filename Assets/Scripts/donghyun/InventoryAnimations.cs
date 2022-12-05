@@ -15,11 +15,16 @@ public class InventoryAnimations : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        transform.localScale = new Vector3(0, 0, 0);
+    }
+
     private void Start()
     {
         initDot = DOTween.Sequence();
 
-        transform.localScale = new Vector3(0, 0, 0);
+        //transform.localScale = new Vector3(0, 0, 0);
         
         initDot
             .SetAutoKill(false)
@@ -27,5 +32,10 @@ public class InventoryAnimations : MonoBehaviour
             .Append(transform.DOLocalMove(Vector3.right * -100f, 0.5f))
             .Join(transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f))
             .Join(transform.DOLocalMove(Vector3.right * 500f, 0.5f));
+    }
+
+    private void OnDisable()
+    {
+        transform.localScale = new Vector3(0, 0, 0);
     }
 }

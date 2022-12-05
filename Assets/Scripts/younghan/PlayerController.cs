@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             Camera.main.GetComponent<CameraController>().Player = this.transform;
             Camera.main.GetComponent<CameraController>().PlayerController = this;
+            Camera.main.GetComponent<CameraController>().PlayerController = this;
         }
 
         playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;

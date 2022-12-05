@@ -26,8 +26,19 @@ public class UIManager : MonoBehaviourPun
     [SerializeField] private GameObject toolTip;
     [SerializeField] private Button inventoryCloseBtn;
     
+    [SerializeField] private GameObject bagToEquipmentBtn;
+    [SerializeField] private GameObject bagToEncyclopediaBtn;
+    [SerializeField] private GameObject equipmentToBagBtn;
+    [SerializeField] private GameObject equipmentToEncyclopediaBtn;
+
+    [SerializeField] private GameObject bagPanel;
+    [SerializeField] private GameObject equipmentPanel;
+    [SerializeField] private GameObject encyclopediaPanel;
+    
     private bool isTabPressed;
     private bool inventoryState;
+    private int currentOpenInven = 0;
+
     
     //Fishing
     [SerializeField] GameObject pressEImage;
@@ -47,6 +58,42 @@ public class UIManager : MonoBehaviourPun
             equipmentInventory.SetActive(false);
             encyclopediaInventory.SetActive(false);
             pressEImage.SetActive(false);
+        }));
+        
+        bagToEquipmentBtn.GetComponent<Button>().onClick.AddListener((() =>
+        {
+            bagPanel.SetActive(false);
+            equipmentPanel.SetActive(true);
+
+            currentOpenInven = 1;
+        }));
+        
+        bagToEncyclopediaBtn.GetComponent<Button>().onClick.AddListener((() =>
+        {
+            bagPanel.SetActive(false);
+            equipmentPanel.SetActive(false);
+            encyclopediaPanel.SetActive(true);
+
+            inventoryState = false;
+            currentOpenInven = 0;
+        }));
+        
+        equipmentToBagBtn.GetComponent<Button>().onClick.AddListener((() =>
+        {
+            bagPanel.SetActive(true);
+            equipmentPanel.SetActive(false);
+
+            currentOpenInven = 0;
+        }));
+        
+        equipmentToEncyclopediaBtn.GetComponent<Button>().onClick.AddListener((() =>
+        {
+            bagPanel.SetActive(false);
+            equipmentPanel.SetActive(false);
+            encyclopediaPanel.SetActive(true);
+
+            inventoryState = false;
+            currentOpenInven = 1;
         }));
     }
 
@@ -74,19 +121,60 @@ public class UIManager : MonoBehaviourPun
         {
             isTabPressed = false;
 
-            if (inventoryState)
+            if (!encyclopediaPanel.activeSelf)
             {
-                bag.SetActive(false);
-                equipment.SetActive(false);
-                toolTip.SetActive(false);
+                if (inventoryState)
+                {
+                    bag.SetActive(false);
+                    equipment.SetActive(false);
+                    toolTip.SetActive(false);
+                }
+                else
+                {
+                    switch (currentOpenInven)
+                    {
+                        case 0:
+                            bagPanel.SetActive(true);
+                            break;
+            
+                        case 1:
+                            equipmentPanel.SetActive(true);
+                            break;
+                    }
+                }
             }
             else
             {
-                bag.SetActive(true);
+                encyclopediaPanel.SetActive(false);
+                
+                if (inventoryState)
+                {
+                    bag.SetActive(false);
+                    equipment.SetActive(false);
+                    toolTip.SetActive(false);
+                }
+                else
+                {
+                    switch (currentOpenInven)
+                    {
+                        case 0:
+                            bagPanel.SetActive(true);
+                            break;
+            
+                        case 1:
+                            equipmentPanel.SetActive(true);
+                            break;
+                    }
+                }
             }
             
             inventoryState = !inventoryState;
         }
+    }
+
+    private void CheckInventoryState()
+    {
+        
     }
     
     void OpenEImage()

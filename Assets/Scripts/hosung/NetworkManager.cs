@@ -41,6 +41,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     bool returnLobby = false;
     public string playerPrefabName;
     public string currentVersion = "";
+    public string currentConnectionStatus;
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
     [SerializeField] GameObject roomPrefab;
@@ -59,6 +60,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             playerPrefabName = _playerName;
             roomPrefab = _roomPrefab;
             DontDestroyOnLoad(this.gameObject);
+            currentConnectionStatus = "서버에 연결중입니다...";
             PhotonNetwork.ConnectUsingSettings();
         }
         isLobby = false;
@@ -141,6 +143,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        currentConnectionStatus = "서버에 연결되었습니다...";
         if (returnLobby)
         {
             isLobby = true;
