@@ -133,7 +133,15 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void ChangeHp(float _hp)
     {
-        hp += _hp;
+        if (hp + _hp > 100)
+        {
+            hp = maxHp;
+        }
+        else
+        {
+            hp += _hp;
+        }
+        
         if (hp < 0)
         {
             hp = 0;

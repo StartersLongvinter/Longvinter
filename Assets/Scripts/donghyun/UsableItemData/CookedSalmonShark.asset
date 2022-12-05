@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
+  m_Name: CookedSalmonShark
+  m_EditorClassIdentifier: 
+  itemName: CookedSalmonShark
+  itemKorName: "\uC870\uB9AC\uB41C \uC545\uC0C1\uC5B4"
+  itemExplain: "\uC791\uACE0 \uADC0\uC5EC\uC6B4 \uC0C1\uC5B4, \uC544\uB2C8 \uC5F0\uC5B4\uB2E4.
+    \uD6A8\uACFC : \uC18C\uD654\uAC00 \uB05D\uB098\uAE30 \uC804\uC5D4 \uB354\uC774\uC0C1
+    \uBA39\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
+  itemType: 0
+  itemClassify: 0
+  itemPrefab: {fileID: 5223685251508337091, guid: d89808922ca88432383e8b2693c5330c, type: 3}
+  itemImage: {fileID: 21300000, guid: 9f4b0bdd89bb2477985fde89d0342e26, type: 3}
+  isItemUsable: 1
+  canOverlap: 0
+  itemEffect: 0
+  expireTime: 60
+  increaseHealth: 90
+  applyPercentage: 0
+  effectPrefab: {fileID: 3863927418828158173, guid: 95fd3f68f1e284d99ba0f60c0b803ddb, type: 3}

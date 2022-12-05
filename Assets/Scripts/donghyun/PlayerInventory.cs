@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,10 +15,14 @@ public class PlayerInventory : MonoBehaviourPun
 
     public List<GameObject> itemList = new List<GameObject>();
     public List<GameObject> equipmentList = new List<GameObject>();
-
+    public List<GameObject> currentUseItem = new List<GameObject>();
+        
     public int inventoryCount = 0;
 
+    public Transform NoOverlapEffectNotificationPos; 
+
     private bool isItemUpdated;
+    private bool isStuffed;
 
 
     // Start is called before the first frame update
@@ -29,7 +34,15 @@ public class PlayerInventory : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
+        if (isStuffed)
+        {
+            StartCoroutine(WaitForTimer());
+        }
+    }
 
+    IEnumerator WaitForTimer()
+    {
+        yield return null;
     }
 
     public void AddItem(GameObject go, bool isGroundItem = true)
@@ -127,6 +140,50 @@ public class PlayerInventory : MonoBehaviourPun
 
     public void ItemUse(GameObject go)
     {
+        //현재 사용하려고 하는 아이템의 종류가 사용중 아이템리스트에 있는지 확인(배부름있으면 배부름 효과있는 아이템 먹지 못하도록)
+        if (currentUseItem.Any(x => x.GetComponent<Item>().item.itEffect == go.GetComponent<Item>().item.itEffect))
+        {
+            Debug.Log("현재 적용된 아이템입니다.");
+            
+            itemList.Remove(go);
+        
+            updateBagInventory();
+        
+            Destroy(go);
+            
+            return;
+        }
+        
+        //사용할 수 있는 아이템인지 확인
+        if (go.GetComponent<Item>().item.itUsable)
+        {
+            //아이템이 중복으로 사용할 수 없는 아이템이라면 currentUseItem에 저장
+            if (!go.GetComponent<Item>().item.itCanOverlap)
+            {
+
+                GameObject temp = Instantiate(go);
+                currentUseItem.Add(temp);
+                
+                //아이템에서 hp감소 증가 옵션이 있다면
+                if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
+                {
+                    PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
+
+                    GameObject effect = Instantiate(go.GetComponent<Item>().item.itEffectPrefab);
+                    effect.transform.SetParent(NoOverlapEffectNotificationPos);
+                }
+            }
+            else
+            {
+                //아이템에서 hp감소 증가 옵션이 있다면
+                if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
+                {
+                    PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
+                }
+            }
+        }
+        
+        
         itemList.Remove(go);
 
         updateBagInventory();
