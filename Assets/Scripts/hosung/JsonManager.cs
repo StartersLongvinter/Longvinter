@@ -2,6 +2,7 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using Photon.Pun;
 
 public class SaveInformations
@@ -10,8 +11,8 @@ public class SaveInformations
     public float curHP;
     public int curMoney;
     public Vector3 playerPosition;
-    public List<GameObject> playerItems;
-    public List<GameObject> playerEquipments;
+    public List<string> playerItems;
+    public List<string> playerEquipments;
 }
 
 public class JsonManager : MonoBehaviour
@@ -56,8 +57,18 @@ public class JsonManager : MonoBehaviour
         saveInformations.curHP = _hp;
         saveInformations.curMoney = _money;
         saveInformations.playerPosition = PlayerStat.LocalPlayer.gameObject.transform.position;
-        saveInformations.playerItems = PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().itemList;
-        saveInformations.playerEquipments = PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().equipmentList;
+        // saveInformations.playerItems = PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().itemList;
+        foreach (GameObject item in PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().itemList)
+        {
+            string _itemPath = AssetDatabase.GetAssetPath(item).ToString();
+            Debug.Log(_itemPath);
+            saveInformations.playerItems.Add(_itemPath);
+        }
+        foreach (GameObject equipment in PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().equipmentList)
+        {
+            string _equipmentPath = AssetDatabase.GetAssetPath(equipment);
+            saveInformations.playerEquipments.Add(_equipmentPath);
+        }
 
         string json = JsonUtility.ToJson(saveInformations);
         Debug.Log(json);
@@ -82,8 +93,18 @@ public class JsonManager : MonoBehaviour
             PlayerStat.LocalPlayer.transform.position = myInformation.playerPosition;
             PlayerStat.LocalPlayer.hp = myInformation.curHP;
             PlayerStat.LocalPlayer.money = myInformation.curMoney;
-            PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().itemList = myInformation.playerItems;
-            PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().equipmentList = myInformation.playerEquipments;
+            foreach (string _itemPath in myInformation.playerItems)
+            {
+                GameObject go = Resources.Load<GameObject>(_itemPath);
+
+                PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().AddItem(go);
+            }
+            foreach (string _equipmentPath in myInformation.playerEquipments)
+            {
+                GameObject go = Resources.Load<GameObject>(_equipmentPath);
+
+                PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().AddItem(go);
+            }
         }
     }
 
