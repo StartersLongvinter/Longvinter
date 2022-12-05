@@ -491,16 +491,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mousePosition: {x: 0, y: 0, z: 0}
   buildObjectPrefab:
-  - {fileID: 1000012174300454, guid: 0ac2006ff1d5f5448a07f4660dce772a, type: 3}
-  - {fileID: 1000012174300454, guid: 0ac2006ff1d5f5448a07f4660dce772a, type: 3}
-  - {fileID: 1000012174300454, guid: 0ac2006ff1d5f5448a07f4660dce772a, type: 3}
+  - {fileID: 7532932385310278473, guid: eda7f9fe8bb060d4ab37e68cc97a595e, type: 3}
+  - {fileID: 7532932385310278473, guid: eda7f9fe8bb060d4ab37e68cc97a595e, type: 3}
+  - {fileID: 7532932385310278473, guid: eda7f9fe8bb060d4ab37e68cc97a595e, type: 3}
   canBuild: 1
   buildObjectColors:
   - {r: 0.5387133, g: 1, b: 0.21226418, a: 0.5019608}
   - {r: 1, g: 0, b: 0, a: 0.5019608}
   buildPrefabNameList:
   - 
-  - Turret_private
+  - Turret
+  homeAreaPrefabName: 
 --- !u!4 &896197726
 Transform:
   m_ObjectHideFlags: 0
@@ -1539,6 +1540,10 @@ PrefabInstance:
     - target: {fileID: 7119310427086860373, guid: ba594eb4ef47f834e9a260fcf1915872, type: 3}
       propertyPath: m_Name
       value: Turret_public
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119310427086860373, guid: ba594eb4ef47f834e9a260fcf1915872, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7120000366766637515, guid: ba594eb4ef47f834e9a260fcf1915872, type: 3}
       propertyPath: sceneViewId

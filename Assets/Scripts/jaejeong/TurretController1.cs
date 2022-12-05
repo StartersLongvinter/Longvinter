@@ -38,11 +38,16 @@ public class TurretController1 : Turret
                     playerList.Remove(i);
                     continue;
                 }
-                if (i.GetComponent<PlayerController>().IsAiming)
+/*                if (i.GetComponent<PlayerController>().IsAiming)
                 {
                     Enemy enemy = i.GetComponent<Enemy>();
                     if (i.GetComponent<PhotonView>().IsMine)
                         i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
+                }*/
+                if (i.GetComponent<PlayerController>().IsAiming && i.GetComponent<PhotonView>().IsMine)
+                {
+                    Enemy enemy = i.GetComponent<Enemy>();
+                    i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
                 }
             }
             isfire=false;

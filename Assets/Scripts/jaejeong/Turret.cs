@@ -25,7 +25,7 @@ public class Turret : MonoBehaviourPun
         {
             for (float time = 0; time < duration; time += Time.fixedDeltaTime)
             {
-                rotatePart.transform.Rotate(Vector3.up, speed * Time.fixedDeltaTime);
+                rotatePart.transform.Rotate(Vector3.forward, speed * Time.fixedDeltaTime);
                 yield return null;
             }
             yield return new WaitForSeconds(0.5f);

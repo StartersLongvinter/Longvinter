@@ -93,7 +93,9 @@ public class TurretController : Turret
         {
             if (photonView.IsMine)
             {
-                var firedBullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 90, 0)));
+                //var firedBullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 90, 0)));
+                var firedBullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 0, 0)));
+                //firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.right.x, firePoint.right.y, firePoint.right.z, 10f, 0f, 0f, 0f);
                 firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.right.x, firePoint.right.y, firePoint.right.z, 10f, 0f, 0f, 0f);
             }
             fireTimeLimit = 1f / fireRate;
@@ -107,7 +109,8 @@ public class TurretController : Turret
         StopCoroutine(RotateTurret());
         Vector3 position = new Vector3(x, y, z);
         rotatePart.transform.LookAt(position);
-        rotatePart.transform.Rotate(0, -90, 0);
+        //rotatePart.transform.Rotate(0, -90, 0);
+        rotatePart.transform.Rotate(-90, 90, 0);
     }
 
     [PunRPC]
@@ -123,6 +126,3 @@ public class TurretController : Turret
         Gizmos.DrawWireSphere(transform.position, range);
     }
 }
-//��ž ��Ÿ� �� && ���� �� ������ ���� ��� ���� ���� ����
-//�� �� �� && ��ž ��Ÿ� �� && ���� ��� ���� ����
-//Turret ���� �ȿ��� �Ѿȵ�� ����x
