@@ -10,11 +10,15 @@ public class TurretController1 : Turret
 
     private void Update()
     {
-        if (playerList.Count==0)
+        base.Update();
+        if (playerList.Count == 0)
             return;
-        if (fireTimeLimit <= 0f&&!isfire)
+        if (fireTimeLimit <= 0f && !isfire)
         {
-            isfire=true;
+            isfire = true;
+            Enemy enemy=target.GetComponent<Enemy>();
+            target.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
+
             fireTimeLimit = 1f / fireRate;
         }
         fireTimeLimit -= Time.deltaTime;
@@ -38,19 +42,20 @@ public class TurretController1 : Turret
                     playerList.Remove(i);
                     continue;
                 }
-/*                if (i.GetComponent<PlayerController>().IsAiming)
-                {
-                    Enemy enemy = i.GetComponent<Enemy>();
-                    if (i.GetComponent<PhotonView>().IsMine)
-                        i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
-                }*/
-                if (i.GetComponent<PlayerController>().IsAiming && i.GetComponent<PhotonView>().IsMine)
-                {
-                    Enemy enemy = i.GetComponent<Enemy>();
-                    i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
-                }
+                /*                if (i.GetComponent<PlayerController>().IsAiming)
+                                {
+                                    Enemy enemy = i.GetComponent<Enemy>();
+                                    if (i.GetComponent<PhotonView>().IsMine)
+                                        i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
+                                }*/
+                /*                if (i.GetComponent<PlayerController>().IsAiming && i.GetComponent<PhotonView>().IsMine)
+                                {
+                                    Enemy enemy = i.GetComponent<Enemy>();
+                                    i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
+                                }*/
             }
-            isfire=false;
+            UpdateTargetFunc(playerList.ToArray());
+            isfire =false;
         }
     }
     private void OnTriggerExit(Collider other)

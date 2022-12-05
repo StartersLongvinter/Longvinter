@@ -6,19 +6,17 @@ using Photon.Pun;
 public class TurretController : Turret
 {
     public GameObject bulletPrefab;
-    public Transform firePoint;
-    public Transform turretTransform;
-    public GroundTrigger trigger;
+    //public Transform firePoint;
+    //public Transform turretTransform;
+    //public GroundTrigger trigger;
 
-    [SerializeField] private float range = 30f;
+    //[SerializeField] private float range = 30f;
 
     private string playerTag = "Player";
-
-    private Transform target;
-    private Enemy targetEnemy;
-
     private string turretOwner = "";
 
+    //private Transform target;
+    private Enemy targetEnemy;
 
     protected override void Start()
     {
@@ -34,7 +32,6 @@ public class TurretController : Turret
         trigger = GameObject.Find(photonView.Owner.NickName + "HomeArea").GetComponent<GroundTrigger>();
         trigger.myTurret = this;
 
-        //InvokeRepeating("UpdateTarget", 0f, 0.5f);
         if (photonView.Owner == PhotonNetwork.LocalPlayer)
             photonView.RPC("RepeatInvoke", RpcTarget.All);
     }
@@ -42,19 +39,18 @@ public class TurretController : Turret
     [PunRPC]
     private void RepeatInvoke()
     {
-        /*if (photonView.Owner == PhotonNetwork.LocalPlayer)
-            */
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
-    private void UpdateTarget() //Turret����
+    private void UpdateTarget()
     {
         if (firePoint == null)
             return;
         GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestPlayer = null;
-        foreach (GameObject player in players)
+        /*float shortestDistance = Mathf.Infinity;
+        GameObject nearestPlayer = null;*/
+        UpdateTargetFunc(players);
+        /*foreach (GameObject player in players)
         {
             if (photonView.Owner.NickName == player.name || player.GetComponent<PlayerStat>().status == PlayerStat.Status.die)
                 continue;
@@ -64,21 +60,22 @@ public class TurretController : Turret
                 shortestDistance = distanceToPlayer;
                 nearestPlayer = player;
             }
-        }
-        if (shortestDistance > range)
+        }*/
+        /*if (shortestDistance > range)
             trigger.inOtherHome = false;
-        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged) //���� ���x, ��ž ��Ÿ� ��, ���� ��� x
+        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged)
         {
             photonView.RPC("ChangeTarget", RpcTarget.All, nearestPlayer.GetComponent<PhotonView>().Owner.ActorNumber);
             Enemy.originalColor = nearestPlayer.GetComponentInChildren<SkinnedMeshRenderer>().material.color;
         }
         else
-            target = null;
+            target = null;*/
     }
 
     private void Update()
     {
-        if (target == null || firePoint == null)
+        base.Update();
+        /*if (target == null || firePoint == null)
             return;
 
         attack = target.GetComponent<PlayerController>().IsAiming;
@@ -88,14 +85,12 @@ public class TurretController : Turret
 
         if (photonView.IsMine)
             photonView.RPC("LockOnTarget", RpcTarget.All, target.position.x, rotatePart.position.y, target.position.z);
-
+        */
         if (fireTimeLimit <= 0f && trigger.inOtherHome || fireTimeLimit <= 0f && attack && !trigger.inOtherHome)
         {
             if (photonView.IsMine)
             {
-                //var firedBullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 90, 0)));
                 var firedBullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 0, 0)));
-                //firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.right.x, firePoint.right.y, firePoint.right.z, 10f, 0f, 0f, 0f);
                 firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.right.x, firePoint.right.y, firePoint.right.z, 10f, 0f, 0f, 0f);
             }
             fireTimeLimit = 1f / fireRate;
@@ -103,13 +98,12 @@ public class TurretController : Turret
         fireTimeLimit -= Time.deltaTime;
     }
 
-    [PunRPC]
-    void LockOnTarget(float x, float y, float z)
+        [PunRPC]
+    public void LockOnTarget(float x, float y, float z)
     {
         StopCoroutine(RotateTurret());
         Vector3 position = new Vector3(x, y, z);
         rotatePart.transform.LookAt(position);
-        //rotatePart.transform.Rotate(0, -90, 0);
         rotatePart.transform.Rotate(-90, 90, 0);
     }
 

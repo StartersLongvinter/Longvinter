@@ -1481,9 +1481,17 @@ PrefabInstance:
       value: Turret
       objectReference: {fileID: 0}
     - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: trigger
+      value: 
+      objectReference: {fileID: 1690833288}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: turretTransform
+      value: 
+      objectReference: {fileID: 1846314592}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
 --- !u!4 &184312795 stripped
@@ -2456,16 +2464,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411465911}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27dd82fe7144ef947ae9072a17f6a416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotatePart: {fileID: 184312795}
+  turretTransform: {fileID: 0}
+  trigger: {fileID: 0}
   fireRate: 1
   fireTimeLimit: 0
   isfire: 0
   attack: 0
+  target: {fileID: 0}
+  range: 10
 --- !u!135 &411465914
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9524,6 +9536,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1690833288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2147309542480517499, guid: 714e08b9940f04cfa871f5da61687c3d, type: 3}
+  m_PrefabInstance: {fileID: 2147309541965199988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157246f5a6ec22f44b947e580757cb45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1698336778
 GameObject:
   m_ObjectHideFlags: 0
@@ -10115,6 +10138,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 349034690, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
   m_PrefabInstance: {fileID: 1469294769}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1846314592 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+  m_PrefabInstance: {fileID: 184312794}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1876018449
 GameObject:

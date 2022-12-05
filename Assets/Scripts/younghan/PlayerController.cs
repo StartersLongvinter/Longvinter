@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public Transform rightHandIkTarget;
     public Vector3 AimLookPoint { get { return aimLookPoint; } }
     public bool IsAiming { get { return isAiming; } }
+    public bool IsPrivate { get { return isPrivate; } }
 
 
     public Transform bagEquipPoint;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool isAttackReady;
     private bool isAiming;
     private bool isPressedSpace;
+    private bool isPrivate;
 
     private float ikProgress;
     private float ikWeight;
@@ -121,6 +123,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         Attack();
         Fishing();
         ECount();
+        //ChangeTurretMode();
 
         if (isPressedSpace)
         {
@@ -295,6 +298,18 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
                 StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
             }
+        }
+    }
+
+    private void ChangeTurretMode()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
+        foreach (var raycasthit in raycastHits)
+        {
+            float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
+            if (raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance && raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName==PhotonNetwork.LocalPlayer.NickName)
+                isPrivate = !isPrivate;
         }
     }
 
