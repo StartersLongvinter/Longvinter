@@ -8,7 +8,8 @@ public class Item : MonoBehaviour
 {
     public ItemData item;
     public EquipmentData equipment;
-    
+    public int weaponIndex;
+
     public void CallDestroyGameObject()
     {
         GetComponent<PhotonView>().RPC("DestroyGameObject", RpcTarget.All);

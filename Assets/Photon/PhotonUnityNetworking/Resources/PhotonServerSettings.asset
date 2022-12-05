@@ -69,6 +69,11 @@ MonoBehaviour:
   - HasDamage
   - Die
   - AddHp
+  - GetEquipment
+  - SetActiveOffBagItem
+  - SetWeaponData
+  - ActiveOffEquipment
+  - ChangeHp
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

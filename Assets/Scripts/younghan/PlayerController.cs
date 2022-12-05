@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public Transform bagEquipPoint;
     public Transform handEquipPoint;
     public EquipmentData weaponData;
-
+    public EquipmentData[] weaponDatas;
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
@@ -56,20 +56,18 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
 
     // 이거 합쳐야 함
-    public void GetEquipment(EquipmentData equipmentData)
+    [PunRPC]
+    public void GetEquipment(int _emIndex)
     {
-        if (weaponData != null)
+        if (isAiming)
         {
-            if (isAiming)
-            {
-                bagEquipPoint.GetChild(equipmentData.emIndex).gameObject.SetActive(false);
-                handEquipPoint.GetChild(equipmentData.emIndex).gameObject.SetActive(true);
-            }
-            else
-            {
-                bagEquipPoint.GetChild(equipmentData.emIndex).gameObject.SetActive(true);
-                handEquipPoint.GetChild(equipmentData.emIndex).gameObject.SetActive(false);
-            }
+            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
+            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
+        }
+        else
+        {
+            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
+            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
         }
     }
 
@@ -85,9 +83,28 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             Camera.main.GetComponent<CameraController>().Player = this.transform;
             Camera.main.GetComponent<CameraController>().PlayerController = this;
+            Camera.main.GetComponent<CameraController>().PlayerController = this;
         }
 
         playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
+    }
+
+    [PunRPC]
+    private void SetWeaponData(bool isNull = true, int _index = 0)
+    {
+        Debug.Log("Set " + _index);
+        if (isNull)
+            weaponData = null;
+        else
+        {
+            weaponData = weaponDatas[_index];
+        }
+    }
+
+    [PunRPC]
+    private void ActiveOffEquipment(int _index)
+    {
+        bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
     }
 
     private void Start()
@@ -116,7 +133,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             isPressedSpace = false;
         }
 
-        GetEquipment(weaponData);
+        if (weaponData != null) photonView.RPC("GetEquipment", RpcTarget.All, weaponData.emIndex);
     }
 
     private void FixedUpdate()
@@ -250,7 +267,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             isAiming = Input.GetButton("Fire2");
         }
-        
+
         doAttack = Input.GetButtonDown("Fire1");
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -301,6 +318,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
             playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
         }
+
+        if (moveDirection != Vector3.zero)
+            playerStat.ChangeStatus((int)PlayerStat.Status.walk);
+        else
+            playerStat.ChangeStatus((int)PlayerStat.Status.idle);
     }
 
     private void Rotate()
@@ -379,7 +401,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
 
         Weapon.Type weaponType = weaponData.emPrefab.GetComponent<Weapon>().type;
-        
+
         //if (isAiming && weaponData.emAnim == EquipmentData.EquipmentAnim.Forward)
         if (isAiming && weaponType == Weapon.Type.Range || weaponType == Weapon.Type.Melee2)
         {

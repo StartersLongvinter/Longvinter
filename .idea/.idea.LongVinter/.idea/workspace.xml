@@ -3,9 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Item/WindTurbine.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Item/WindTurbine.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/JDH.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/item/WindTurbineBlade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/item/WindTurbineBlade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Loading.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Loading.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LoginScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LoginScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/InventoryAnimations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/InventoryAnimations.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/Title.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/Title.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/younghan/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/younghan/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +117,9 @@
       <workItem from="1669016328246" duration="2114000" />
       <workItem from="1669077666497" duration="40492000" />
       <workItem from="1669193934992" duration="48243000" />
-      <workItem from="1669623427779" duration="2766000" />
+      <workItem from="1669623427779" duration="6195000" />
+      <workItem from="1669859668195" duration="900000" />
+      <workItem from="1670202681654" duration="3558000" />
     </task>
     <servers />
   </component>
