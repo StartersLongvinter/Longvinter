@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviourPun
 {
@@ -17,41 +18,18 @@ public class PlayerInventory : MonoBehaviourPun
     public int inventoryCount = 0;
 
     private bool isItemUpdated;
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        // currentEquipListCount = equipmentList.Count;
-        //
-        // inventoryCount = currentItemListCount + currentEquipListCount;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
-
-        // if (currentEquipListCount < equipmentList.Count && equipmentList.Count <= MAXITEM && !isItemUpdated)
-        // {
-        //     isItemUpdated = true;
-        //     currentEquipListCount++;
-        //     inventoryCount += currentEquipListCount;
-        //
-        //     GameObject item;
-        //     
-        //     for (int i = 0; i < bagInventory.Length; i++)
-        //     {
-        //         if (bagInventory[i].transform.childCount == 0)
-        //         {
-        //             item = Instantiate(equipmentList[equipmentList.Count - 1].itPrefab, bagInventory[i].transform);
-        //             item.transform.localScale = new Vector3(1, 1, 1);
-        //             item.GetComponent<RectTransform>().sizeDelta = new Vector2(90, 90);
-        //             item.GetComponent<RectTransform>().anchoredPosition = new Vector3(45, 45, 0);
-        //
-        //             break;
-        //         }
-        //     }
-        //     isItemUpdated = false;
-        // }
     }
 
     public void AddItem(GameObject go)

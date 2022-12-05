@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             Camera.main.GetComponent<CameraController>().Player = this.transform;
             Camera.main.GetComponent<CameraController>().PlayerController = this;
+            Camera.main.GetComponent<CameraController>().PlayerController = this;
         }
 
         playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
@@ -317,6 +318,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
             playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
         }
+
+        if (moveDirection != Vector3.zero)
+            playerStat.ChangeStatus((int)PlayerStat.Status.walk);
+        else
+            playerStat.ChangeStatus((int)PlayerStat.Status.idle);
     }
 
     private void Rotate()
