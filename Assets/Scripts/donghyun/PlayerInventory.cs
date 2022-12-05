@@ -34,15 +34,20 @@ public class PlayerInventory : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        if (isStuffed)
-        {
-            StartCoroutine(WaitForTimer());
-        }
+        
     }
 
-    IEnumerator WaitForTimer()
+    IEnumerator WaitForTimer(float time, int idx, GameObject go)
     {
-        yield return null;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            go.GetComponentInChildren<Text>().text = Mathf.Ceil(time).ToString();
+            yield return null;
+        }
+
+        Destroy(go);
+        currentUseItem.RemoveAt(idx);
     }
 
     public void AddItem(GameObject go, bool isGroundItem = true)
@@ -144,13 +149,7 @@ public class PlayerInventory : MonoBehaviourPun
         if (currentUseItem.Any(x => x.GetComponent<Item>().item.itEffect == go.GetComponent<Item>().item.itEffect))
         {
             Debug.Log("현재 적용된 아이템입니다.");
-            
-            itemList.Remove(go);
-        
-            updateBagInventory();
-        
-            Destroy(go);
-            
+
             return;
         }
         
@@ -162,15 +161,21 @@ public class PlayerInventory : MonoBehaviourPun
             {
 
                 GameObject temp = Instantiate(go);
+                temp.name = go.GetComponent<Item>().item.itName;
                 currentUseItem.Add(temp);
+                
+                GameObject effect = Instantiate(go.GetComponent<Item>().item.itEffectPrefab);
+                effect.transform.SetParent(NoOverlapEffectNotificationPos);
+
+                StartCoroutine(WaitForTimer(temp.GetComponent<Item>().item.itExpireTime
+                    , currentUseItem.IndexOf(temp)
+                    , effect));
                 
                 //아이템에서 hp감소 증가 옵션이 있다면
                 if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
                 {
                     PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
-
-                    GameObject effect = Instantiate(go.GetComponent<Item>().item.itEffectPrefab);
-                    effect.transform.SetParent(NoOverlapEffectNotificationPos);
+                    
                 }
             }
             else

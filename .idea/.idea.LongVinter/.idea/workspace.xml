@@ -4,7 +4,6 @@
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets123's room_123_saveFile.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets123's room_123_saveFile.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +112,7 @@
       <workItem from="1669193934992" duration="48243000" />
       <workItem from="1669623427779" duration="6195000" />
       <workItem from="1669859668195" duration="900000" />
-      <workItem from="1670202681654" duration="20356000" />
+      <workItem from="1670202681654" duration="20858000" />
     </task>
     <servers />
   </component>
