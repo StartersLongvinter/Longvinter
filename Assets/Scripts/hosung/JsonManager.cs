@@ -11,8 +11,8 @@ public class SaveInformations
     public float curHP;
     public int curMoney;
     public Vector3 playerPosition;
-    public List<string> playerItems;
-    public List<string> playerEquipments;
+    public List<string> playerItems = new List<string>();
+    public List<string> playerEquipments = new List<string>();
 }
 
 public class JsonManager : MonoBehaviour
@@ -46,9 +46,11 @@ public class JsonManager : MonoBehaviour
     private float saveTime = 30f;
     public SaveInformations myInformation;
 
+    public List<GameObject> itemObjects = new List<GameObject>();
+
     void Awake()
     {
-
+        instance = this;
     }
 
     public void SaveData(float _hp, int _money)
@@ -58,16 +60,14 @@ public class JsonManager : MonoBehaviour
         saveInformations.curMoney = _money;
         saveInformations.playerPosition = PlayerStat.LocalPlayer.gameObject.transform.position;
         // saveInformations.playerItems = PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().itemList;
+
         foreach (GameObject item in PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().itemList)
         {
-            string _itemPath = AssetDatabase.GetAssetPath(item).ToString();
-            Debug.Log(_itemPath);
-            saveInformations.playerItems.Add(_itemPath);
+            saveInformations.playerItems.Add(item.name.Replace("(Clone)", ""));
         }
         foreach (GameObject equipment in PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().equipmentList)
         {
-            string _equipmentPath = AssetDatabase.GetAssetPath(equipment);
-            saveInformations.playerEquipments.Add(_equipmentPath);
+            saveInformations.playerEquipments.Add(equipment.name.Replace("(Clone)", ""));
         }
 
         string json = JsonUtility.ToJson(saveInformations);
@@ -93,17 +93,28 @@ public class JsonManager : MonoBehaviour
             PlayerStat.LocalPlayer.transform.position = myInformation.playerPosition;
             PlayerStat.LocalPlayer.hp = myInformation.curHP;
             PlayerStat.LocalPlayer.money = myInformation.curMoney;
-            foreach (string _itemPath in myInformation.playerItems)
-            {
-                GameObject go = Resources.Load<GameObject>(_itemPath);
 
-                PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().AddItem(go);
+            foreach (string itemName in myInformation.playerItems)
+            {
+                foreach (GameObject _item in itemObjects)
+                {
+                    if (_item.name == itemName)
+                    {
+                        PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().AddItem(_item, false);
+                        break;
+                    }
+                }
             }
-            foreach (string _equipmentPath in myInformation.playerEquipments)
+            foreach (string _equipmentName in myInformation.playerEquipments)
             {
-                GameObject go = Resources.Load<GameObject>(_equipmentPath);
-
-                PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().AddItem(go);
+                foreach (GameObject _item in itemObjects)
+                {
+                    if (_item.name == _equipmentName)
+                    {
+                        PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().AddItem(_item, false);
+                        break;
+                    }
+                }
             }
         }
     }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviourPun
 {
     public int MAXITEM = 16;
-    
+
     [SerializeField] private GameObject[] bagInventory;
     [SerializeField] private GameObject[] equipmentInventory;
     [SerializeField] private GameObject[] encyclopedia;
@@ -19,27 +19,27 @@ public class PlayerInventory : MonoBehaviourPun
 
     private bool isItemUpdated;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void AddItem(GameObject go)
+    public void AddItem(GameObject go, bool isGroundItem = true)
     {
         if (itemList.Count <= MAXITEM)
         {
             if (go.GetComponent<Item>().item != null)
             {
                 GameObject item;
-                
+
                 for (int i = 0; i < bagInventory.Length; i++)
                 {
                     if (bagInventory[i].transform.childCount == 0)
@@ -56,7 +56,7 @@ public class PlayerInventory : MonoBehaviourPun
             else if (go.GetComponent<Item>().equipment != null)
             {
                 GameObject item;
-            
+
                 for (int i = 0; i < bagInventory.Length; i++)
                 {
                     if (bagInventory[i].transform.childCount == 0)
@@ -72,8 +72,8 @@ public class PlayerInventory : MonoBehaviourPun
             }
             inventoryCount = itemList.Count;
         }
-        
-        go.GetComponent<Item>().CallDestroyGameObject();
+
+        if (isGroundItem) go.GetComponent<Item>().CallDestroyGameObject();
     }
 
     //가방에서 장비를 눌렀을 경우 장비창으로 장비가 넘어가게 되는데 이때 가방속 아이템들을 위치를 당겨주는 함수
@@ -83,11 +83,11 @@ public class PlayerInventory : MonoBehaviourPun
         {
             for (int i = 0; i < bagInventory.Length; i++)
             {
-                if(itemList[itemIndex].transform.parent.Equals(bagInventory[i].transform))
+                if (itemList[itemIndex].transform.parent.Equals(bagInventory[i].transform))
                 {
                     break;
                 }
-                
+
                 if (bagInventory[i].transform.childCount == 0)
                 {
                     itemList[itemIndex].transform.SetParent(bagInventory[i].transform);
@@ -108,11 +108,11 @@ public class PlayerInventory : MonoBehaviourPun
         {
             for (int i = 0; i < equipmentInventory.Length; i++)
             {
-                if(equipmentList[itemIndex].transform.parent.Equals(equipmentInventory[i].transform))
+                if (equipmentList[itemIndex].transform.parent.Equals(equipmentInventory[i].transform))
                 {
                     break;
                 }
-                
+
                 if (equipmentInventory[i].transform.childCount == 0)
                 {
                     equipmentList[itemIndex].transform.SetParent(equipmentInventory[i].transform);
@@ -128,9 +128,9 @@ public class PlayerInventory : MonoBehaviourPun
     public void ItemUse(GameObject go)
     {
         itemList.Remove(go);
-        
+
         updateBagInventory();
-        
+
         Destroy(go);
     }
 }
