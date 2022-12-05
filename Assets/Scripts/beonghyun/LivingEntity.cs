@@ -11,6 +11,8 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
     
     [SerializeField] Material hitEffect1;
     [SerializeField] Material hitEffect2;
+
+    //[SerializeField] GameObject defaultItem;
    
     Material startMat;
     public NavMeshAgent agent;
@@ -137,7 +139,9 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
 
         if (currentHealth<0 && photonView.IsMine)
         {
+            PhotonNetwork.Instantiate("DefaultItem", this.gameObject.transform.position, Quaternion.identity);
             PhotonNetwork.Destroy(this.gameObject);
+           
         }
     }
 
