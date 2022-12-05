@@ -52,12 +52,13 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         currentHPImage = GameObject.Find("HPvalue").GetComponent<Image>();
         currentHPAnimator = GameObject.Find("MaskImage").GetComponent<Animator>();
         hp = maxHp;
-        if (photonView.IsMine)
+        if (photonView.IsMine && LocalPlayer == null)
         {
             localPlayer = this;
             photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
+            JsonManager.Instance.LoadDate();
         }
-        JsonManager.Instance.LoadDate();
+
     }
 
     public void ChangeStatus(int _index)
@@ -81,7 +82,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
 
     void LoseStamina()
     {
-        if (!photonView.IsMine) return;
+        if (!photonView.IsMine || status == Status.die) return;
 
         startTime += Time.deltaTime;
 
@@ -102,7 +103,6 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
             }
             else
             {
-                Debug.Log((_targetDamage));
                 photonView.RPC("ChangeHp", RpcTarget.AllViaServer, -1f * _targetDamage);
                 startTime = 0f;
             }
@@ -120,8 +120,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     {
         LoseStamina();
 
-        float _hpValue = hp / maxHp;
-        currentHPImage.fillAmount = _hpValue;
+        if (photonView.IsMine)
+        {
+            float _hpValue = hp / maxHp;
+            currentHPImage.fillAmount = _hpValue;
+        }
     }
 
     // Public Methods
@@ -135,6 +138,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         {
             hp = 0;
             ChangeStatus((int)Status.die);
+            this.gameObject.layer = 8;
         }
     }
 

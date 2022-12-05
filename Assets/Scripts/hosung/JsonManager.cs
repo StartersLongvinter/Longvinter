@@ -10,6 +10,8 @@ public class SaveInformations
     public float curHP;
     public int curMoney;
     public Vector3 playerPosition;
+    public List<GameObject> playerItems;
+    public List<GameObject> playerEquipments;
 }
 
 public class JsonManager : MonoBehaviour
@@ -54,12 +56,14 @@ public class JsonManager : MonoBehaviour
         saveInformations.curHP = _hp;
         saveInformations.curMoney = _money;
         saveInformations.playerPosition = PlayerStat.LocalPlayer.gameObject.transform.position;
+        saveInformations.playerItems = PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().itemList;
+        saveInformations.playerEquipments = PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().equipmentList;
 
         string json = JsonUtility.ToJson(saveInformations);
         Debug.Log(json);
 
         string _fileName = PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
-        string _path = Application.dataPath + "/SaveFiles/" + _fileName + ".json";
+        string _path = Application.dataPath + _fileName + ".json";
 
         File.WriteAllText(_path, json);
     }
@@ -67,7 +71,7 @@ public class JsonManager : MonoBehaviour
     public void LoadDate()
     {
         string _fileName = PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
-        string _path = Application.dataPath + "/SaveFiles/" + _fileName + ".json";
+        string _path = Application.dataPath + _fileName + ".json";
 
         if (File.Exists(_path))
         {
@@ -78,6 +82,8 @@ public class JsonManager : MonoBehaviour
             PlayerStat.LocalPlayer.transform.position = myInformation.playerPosition;
             PlayerStat.LocalPlayer.hp = myInformation.curHP;
             PlayerStat.LocalPlayer.money = myInformation.curMoney;
+            PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().itemList = myInformation.playerItems;
+            PlayerStat.LocalPlayer.GetComponent<PlayerInventory>().equipmentList = myInformation.playerEquipments;
         }
     }
 
