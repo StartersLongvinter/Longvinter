@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviourPun
 {
     public int MAXITEM = 16;
-    
+
     [SerializeField] private GameObject[] bagInventory;
     [SerializeField] private GameObject[] equipmentInventory;
     [SerializeField] private GameObject[] encyclopedia;
@@ -16,33 +16,36 @@ public class PlayerInventory : MonoBehaviourPun
     public List<GameObject> itemList = new List<GameObject>();
     public List<GameObject> equipmentList = new List<GameObject>();
     public List<GameObject> currentUseItem = new List<GameObject>();
-        
+
     public int inventoryCount = 0;
 
-    public Transform NoOverlapEffectNotificationPos; 
+    public Transform NoOverlapEffectNotificationPos;
 
     private bool isItemUpdated;
     private bool isStuffed;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isStuffed)
-        {
-            StartCoroutine(WaitForTimer());
-        }
     }
 
-    IEnumerator WaitForTimer()
+    IEnumerator WaitForTimer(float time, int idx, GameObject go)
     {
-        yield return null;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            go.GetComponentInChildren<Text>().text = Mathf.Ceil(time).ToString();
+            yield return null;
+        }
+
+        Destroy(go);
+        currentUseItem.RemoveAt(idx);
     }
 
     public void AddItem(GameObject go)
@@ -52,7 +55,7 @@ public class PlayerInventory : MonoBehaviourPun
             if (go.GetComponent<Item>().item != null)
             {
                 GameObject item;
-                
+
                 for (int i = 0; i < bagInventory.Length; i++)
                 {
                     if (bagInventory[i].transform.childCount == 0)
@@ -69,7 +72,7 @@ public class PlayerInventory : MonoBehaviourPun
             else if (go.GetComponent<Item>().equipment != null)
             {
                 GameObject item;
-            
+
                 for (int i = 0; i < bagInventory.Length; i++)
                 {
                     if (bagInventory[i].transform.childCount == 0)
@@ -83,9 +86,10 @@ public class PlayerInventory : MonoBehaviourPun
                     }
                 }
             }
+
             inventoryCount = itemList.Count;
         }
-        
+
         go.GetComponent<Item>().CallDestroyGameObject();
     }
 
@@ -96,11 +100,11 @@ public class PlayerInventory : MonoBehaviourPun
         {
             for (int i = 0; i < bagInventory.Length; i++)
             {
-                if(itemList[itemIndex].transform.parent.Equals(bagInventory[i].transform))
+                if (itemList[itemIndex].transform.parent.Equals(bagInventory[i].transform))
                 {
                     break;
                 }
-                
+
                 if (bagInventory[i].transform.childCount == 0)
                 {
                     itemList[itemIndex].transform.SetParent(bagInventory[i].transform);
@@ -111,6 +115,7 @@ public class PlayerInventory : MonoBehaviourPun
                 }
             }
         }
+
         inventoryCount = itemList.Count;
     }
 
@@ -121,11 +126,11 @@ public class PlayerInventory : MonoBehaviourPun
         {
             for (int i = 0; i < equipmentInventory.Length; i++)
             {
-                if(equipmentList[itemIndex].transform.parent.Equals(equipmentInventory[i].transform))
+                if (equipmentList[itemIndex].transform.parent.Equals(equipmentInventory[i].transform))
                 {
                     break;
                 }
-                
+
                 if (equipmentInventory[i].transform.childCount == 0)
                 {
                     equipmentList[itemIndex].transform.SetParent(equipmentInventory[i].transform);
@@ -144,33 +149,33 @@ public class PlayerInventory : MonoBehaviourPun
         if (currentUseItem.Any(x => x.GetComponent<Item>().item.itEffect == go.GetComponent<Item>().item.itEffect))
         {
             Debug.Log("현재 적용된 아이템입니다.");
-            
-            itemList.Remove(go);
-        
-            updateBagInventory();
-        
-            Destroy(go);
-            
             return;
         }
-        
+
         //사용할 수 있는 아이템인지 확인
         if (go.GetComponent<Item>().item.itUsable)
         {
             //아이템이 중복으로 사용할 수 없는 아이템이라면 currentUseItem에 저장
             if (!go.GetComponent<Item>().item.itCanOverlap)
             {
-
                 GameObject temp = Instantiate(go);
+                temp.name = go.GetComponent<Item>().item.itName;
                 currentUseItem.Add(temp);
-                
+
+                GameObject effect = Instantiate(go.GetComponent<Item>().item.itEffectPrefab);
+                effect.transform.SetParent(NoOverlapEffectNotificationPos);
+
+                StartCoroutine(WaitForTimer(temp.GetComponent<Item>().item.itExpireTime
+                    , currentUseItem.IndexOf(temp)
+                    , effect));
+
                 //아이템에서 hp감소 증가 옵션이 있다면
                 if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
                 {
                     PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
 
-                    GameObject effect = Instantiate(go.GetComponent<Item>().item.itEffectPrefab);
-                    effect.transform.SetParent(NoOverlapEffectNotificationPos);
+                    // GameObject effect = Instantiate(go.GetComponent<Item>().item.itEffectPrefab);
+                    // effect.transform.SetParent(NoOverlapEffectNotificationPos);
                 }
             }
             else
@@ -182,12 +187,12 @@ public class PlayerInventory : MonoBehaviourPun
                 }
             }
         }
-        
-        
+
+
         itemList.Remove(go);
-        
+
         updateBagInventory();
-        
+
         Destroy(go);
     }
 }
