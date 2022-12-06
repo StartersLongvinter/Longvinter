@@ -33,11 +33,20 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     public bool isFight = false;
     public bool isCold = false;
     public bool inWater = false;
-    public float autoDamageValue = 0.15f;
+
+    // 데미지 입는 시간 간격 
     [SerializeField] float damagedTime = 1f;
-    [SerializeField] float damagePercentInSnowField = 3.3f;
-    [SerializeField] float damagePercentWhileWalk = 5.5f;
-    [SerializeField] float damagePercentInWater = 13.3f;
+
+    // 상황에 맞게 데미지 설정
+    [SerializeField] public float autoDamageValue = 0.15f;              // Defalut : 초원에서 걸어다니는 경우 
+    [SerializeField] float damagePercentInSnowField = 3.3f;             // 설원에서 서있는 경우
+    [SerializeField] float damagePercentWhileWalkInSnow = 5.5f;         // 설원에서 걸어다니는 경우
+    [SerializeField] float damagePercentInWater = 13.3f;                // 깊은 물 속에 있는 경우 
+
+    public ItemData.ItemEffect itemEffect = ItemData.ItemEffect.Health; // Item Effect
+    public int expireTime = 0;                                          // 효과 만료 시간
+    public float applyPercentage = 0;                                   // 효과 퍼센트
+
     float startTime = 0f;
     [SerializeField]
     private Color normalColor;
@@ -89,7 +98,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         float _targetDamage = autoDamageValue;
         if (isCold)
         {
-            if (status == Status.walk) _targetDamage = autoDamageValue * damagePercentWhileWalk;
+            if (status == Status.walk) _targetDamage = autoDamageValue * damagePercentWhileWalkInSnow;
             else _targetDamage = autoDamageValue * damagePercentInSnowField;
         }
 
@@ -141,7 +150,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         {
             hp += _hp;
         }
-        
+
         if (hp < 0)
         {
             hp = 0;
