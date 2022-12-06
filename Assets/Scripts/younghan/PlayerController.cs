@@ -10,8 +10,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Vector3 AimLookPoint { get { return aimLookPoint; } }
     public bool IsAiming { get { return isAiming; } }
-
-    public float moveSpeed;
     public EquipmentData weaponData;
     public EquipmentData[] weaponDatas;
     public Transform leftHandIkTarget;
@@ -309,7 +307,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (!isFishing)
         {
             moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
-            float currentMoveSpeed = isAiming ? moveSpeed * 0.4f : moveSpeed;
+            float currentMoveSpeed = isAiming ? playerStat.moveSpeed * 0.4f : playerStat.moveSpeed;
             playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
             playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
         }

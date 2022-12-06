@@ -29,6 +29,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     public float hp;
     public float maxHp = 100f;
     public int money;
+    public float moveSpeed;
 
     public bool isFight = false;
     public bool isCold = false;
@@ -43,10 +44,10 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] float damagePercentWhileWalkInSnow = 5.5f;         // 설원에서 걸어다니는 경우
     [SerializeField] float damagePercentInWater = 13.3f;                // 깊은 물 속에 있는 경우 
 
-    public float coldReductionPercentage = 0;                           // 추위 감소 효과 퍼센트
-    public float armorPercentage = 0;                                   // 아머 효과 퍼센트
-    public float increaseSpeedPercentage = 0;                           // 스피드 증가 효과 퍼센트
-    public float fishingPercentage = 0;                                 // 낚시 효과 퍼센트
+    float coldReductionPercentage = 0;                           // 추위 감소 효과 퍼센트
+    float armorPercentage = 0;                                   // 아머 효과 퍼센트
+    float increaseSpeedPercentage = 0;                           // 스피드 증가 효과 퍼센트
+    float fishingPercentage = 0;                                 // 낚시 효과 퍼센트
 
     float startTime = 0f;
     [SerializeField]
@@ -78,12 +79,40 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
 
     public void GetEffect(ItemData.ItemEffect effectType, float percent)
     {
-
+        switch (effectType)
+        {
+            case (ItemData.ItemEffect.ColdDamageReduction):
+                coldReductionPercentage = percent;
+                break;
+            case (ItemData.ItemEffect.GetHardAmor):
+                armorPercentage = percent;
+                break;
+            case (ItemData.ItemEffect.IncreaseMovementSpeed):
+                increaseSpeedPercentage = percent;
+                break;
+            case (ItemData.ItemEffect.IncreaseFishingSpeed):
+                fishingPercentage = percent;
+                break;
+        }
     }
 
     public void InitEffect(ItemData.ItemEffect effectType)
     {
-
+        switch (effectType)
+        {
+            case (ItemData.ItemEffect.ColdDamageReduction):
+                coldReductionPercentage = 0;
+                break;
+            case (ItemData.ItemEffect.GetHardAmor):
+                armorPercentage = 0;
+                break;
+            case (ItemData.ItemEffect.IncreaseMovementSpeed):
+                increaseSpeedPercentage = 0;
+                break;
+            case (ItemData.ItemEffect.IncreaseFishingSpeed):
+                fishingPercentage = 0;
+                break;
+        }
     }
 
     [PunRPC]
@@ -112,6 +141,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
             if (status == Status.walk) _targetDamage = autoDamageValue * damagePercentWhileWalkInSnow;
             else _targetDamage = autoDamageValue * damagePercentInSnowField;
         }
+
+        _targetDamage -= _targetDamage * coldReductionPercentage;
 
         if (inWater) _targetDamage = autoDamageValue * damagePercentInWater;
 
@@ -153,6 +184,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void ChangeHp(float _hp)
     {
+        if (status == Status.damaged && _hp < 0)
+        {
+            _hp -= _hp * armorPercentage;
+        }
+
         if (hp + _hp > 100)
         {
             hp = maxHp;
