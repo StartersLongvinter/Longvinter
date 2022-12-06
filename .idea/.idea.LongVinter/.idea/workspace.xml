@@ -3,35 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ItemEffect.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/ItemEffect.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene_DH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene_DH.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/Cake.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/Cake.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CloudberryJam.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CloudberryJam.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CoffeeBottle.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CoffeeBottle.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedArcticChar.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedArcticChar.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedBlackGrouper.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedBlackGrouper.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedMistyGrouper.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedMistyGrouper.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedRainbowTrout.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedRainbowTrout.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedRedfish.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedRedfish.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedSalmonShark.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedSalmonShark.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedStingray.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedStingray.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedSwordfish.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedSwordfish.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkMild.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkMild.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkRegular.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkRegular.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkShock.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkShock.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/HeatPack.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/HeatPack.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/PackOfBlueberries.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/PackOfBlueberries.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/PackOfWorms.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/PackOfWorms.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/RasberryJam.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/RasberryJam.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/TeaBottle.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/TeaBottle.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/PlayerStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/PlayerStat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets123's room_123_saveFile.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets123's room_123_saveFile.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +112,7 @@
       <workItem from="1669193934992" duration="48243000" />
       <workItem from="1669623427779" duration="6195000" />
       <workItem from="1669859668195" duration="900000" />
-      <workItem from="1670202681654" duration="15267000" />
+      <workItem from="1670202681654" duration="20858000" />
     </task>
     <servers />
   </component>

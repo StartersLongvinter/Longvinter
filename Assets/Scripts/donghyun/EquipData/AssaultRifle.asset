@@ -16,7 +16,7 @@ MonoBehaviour:
   equipmentArea: 1
   equipmentAnim: 1
   equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 86c72943111a24ac7b1f74b21e3fe272, type: 3}
-  equipmentPrefab: {fileID: 6842304810045061740, guid: 71e31974552183345a5037a3965d1701, type: 3}
+  equipmentPrefab: {fileID: 8288289608541482084, guid: 9d030a81643948d46b1e4d32cdfee101, type: 3}
   weaponDamage: 4
   weaponAttackRate: 0
   ammoCount: 0
