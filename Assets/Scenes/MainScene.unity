@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366753, g: 0.48427093, b: 0.5645238, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -506,6 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: 915fdfdecab054fd7bfa624196c742e1, type: 2}
+  weaponIndex: 0
 --- !u!54 &67566226
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1416,6 +1417,101 @@ MonoBehaviour:
   sceneViewId: 10
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1001 &184312794
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -9211507875356690715, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8989342727540275638, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: sceneViewId
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532932385310278473, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_Name
+      value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: trigger
+      value: 
+      objectReference: {fileID: 1690833288}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 184312796}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: turretTransform
+      value: 
+      objectReference: {fileID: 1846314592}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+--- !u!4 &184312795 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3387500465062260111, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+  m_PrefabInstance: {fileID: 184312794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &184312796 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4440326907571445116, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+  m_PrefabInstance: {fileID: 184312794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &205996723 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 922786315, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
@@ -2339,7 +2435,7 @@ Transform:
   m_Children:
   - {fileID: 411465912}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &411465911
 GameObject:
@@ -2386,11 +2482,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dd82fe7144ef947ae9072a17f6a416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotatePart: {fileID: 1635535049}
+  rotatePart: {fileID: 184312795}
   fireRate: 1
   fireTimeLimit: 0
   isfire: 0
   attack: 0
+  turretOwner: 
+  mat: []
 --- !u!135 &411465914
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4165,6 +4263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: 98dfcb0e13587463ab843bc7803f31b7, type: 2}
+  weaponIndex: 0
 --- !u!54 &685320136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5998,7 +6097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3077334239494186235, guid: fc7fa8493fc084fb29e428760d663a5d, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 3077334239494186235, guid: fc7fa8493fc084fb29e428760d663a5d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6415,7 +6514,7 @@ Transform:
   m_Children:
   - {fileID: 570417933}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1124670187
 GameObject:
@@ -6566,7 +6665,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7100322763472286982, guid: 870d9c83565a04ec4ba514b1765d7340, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 7100322763472286982, guid: 870d9c83565a04ec4ba514b1765d7340, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7640,6 +7739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: e7196702b68264bbc8b05ab54d009729, type: 2}
+  weaponIndex: 0
 --- !u!54 &1446705776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8480,6 +8580,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret_public
       objectReference: {fileID: 0}
+    - target: {fileID: 7119310427086860373, guid: ba594eb4ef47f834e9a260fcf1915872, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7120000366766637515, guid: ba594eb4ef47f834e9a260fcf1915872, type: 3}
       propertyPath: sceneViewId
       value: 3
@@ -8991,11 +9095,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &1635535049 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7116082552655472765, guid: ba594eb4ef47f834e9a260fcf1915872, type: 3}
-  m_PrefabInstance: {fileID: 1517895102}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1637827638
 GameObject:
   m_ObjectHideFlags: 0
@@ -9421,8 +9520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mousePosition: {x: 0, y: 0, z: 0}
   buildObjectPrefab:
-  - {fileID: 1000012174300454, guid: 0ac2006ff1d5f5448a07f4660dce772a, type: 3}
-  - {fileID: 1000012174300454, guid: 0ac2006ff1d5f5448a07f4660dce772a, type: 3}
+  - {fileID: 7532932385310278473, guid: eda7f9fe8bb060d4ab37e68cc97a595e, type: 3}
+  - {fileID: 7532932385310278473, guid: eda7f9fe8bb060d4ab37e68cc97a595e, type: 3}
   - {fileID: 6172680279255759998, guid: f075db17e78fc4a40ac49d61ef79e745, type: 3}
   canBuild: 1
   buildObjectColors:
@@ -9430,7 +9529,7 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 0.5019608}
   buildPrefabNameList:
   - 
-  - Turret_private
+  - Turret
   - House
   homeAreaPrefabName: HomeArea
 --- !u!4 &1688977629
@@ -9448,6 +9547,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1690833288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2147309542480517499, guid: 714e08b9940f04cfa871f5da61687c3d, type: 3}
+  m_PrefabInstance: {fileID: 2147309541965199988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157246f5a6ec22f44b947e580757cb45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1698336778
 GameObject:
   m_ObjectHideFlags: 0
@@ -10039,6 +10149,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 349034690, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
   m_PrefabInstance: {fileID: 1469294769}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1846314592 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7188179017194068467, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+  m_PrefabInstance: {fileID: 184312794}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1876018449
 GameObject:
@@ -11329,6 +11444,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1115630541}
     m_Modifications:
+    - target: {fileID: 2147309542480517477, guid: 714e08b9940f04cfa871f5da61687c3d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2147309542480517496, guid: 714e08b9940f04cfa871f5da61687c3d, type: 3}
       propertyPath: m_Name
       value: MyHomeArea
