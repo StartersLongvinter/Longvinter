@@ -45,6 +45,8 @@ public class PlayerInventory : MonoBehaviourPun
             go.GetComponentInChildren<Text>().text = Mathf.Ceil(time).ToString();
             yield return null;
         }
+        
+        PlayerStat.LocalPlayer.InitEffect();
 
         Destroy(go);
         currentUseItem.RemoveAt(idx);
@@ -170,12 +172,55 @@ public class PlayerInventory : MonoBehaviourPun
                 StartCoroutine(WaitForTimer(temp.GetComponent<Item>().item.itExpireTime
                     , currentUseItem.IndexOf(temp)
                     , effect));
-                
-                //아이템에서 hp감소 증가 옵션이 있다면
-                if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
+
+                switch (go.GetComponent<Item>().item.itEffect)
                 {
-                    PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
+                    case ItemData.ItemEffect.Health:
+                        //아이템에서 hp감소 증가 옵션이 있다면
+                        if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
+                        {
+                            PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
+                        }
+                        
+                        break;
                     
+                    case ItemData.ItemEffect.ColdDamageReduction:
+                        //아이템에서 hp감소 증가 옵션이 있다면
+                        if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
+                        {
+                            PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
+                        }
+
+                        PlayerStat.LocalPlayer.applyPercentage = go.GetComponent<Item>().item.itApplyPercentage / 100;
+                        
+                        break;
+                    
+                    case ItemData.ItemEffect.GetHardAmor:
+                        //아이템에서 hp감소 증가 옵션이 있다면
+                        if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
+                        {
+                            PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
+                        }
+                        
+                        break;
+                    
+                    case ItemData.ItemEffect.IncreaseFishingSpeed:
+                        //아이템에서 hp감소 증가 옵션이 있다면
+                        if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
+                        {
+                            PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
+                        }
+                        
+                        break;
+                    
+                    case ItemData.ItemEffect.IncreaseMovementSpeed:
+                        //아이템에서 hp감소 증가 옵션이 있다면
+                        if (go.GetComponent<Item>().item.itIncreaseHealth != 0)
+                        {
+                            PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
+                        }
+                        
+                        break;
                 }
             }
             else
