@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
 
-public class ItemTooltip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerMoveHandler, IPointerExitHandler
+public class ItemToolTip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerMoveHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject toolTip;
     [SerializeField] private Text itemNameText;
@@ -30,7 +30,7 @@ public class ItemTooltip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
         {
             toolTip.SetActive(true);
             explainBG.SetActive(true);
-            
+
             transform.GetChild(0).DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0f);
         }
     }
@@ -52,7 +52,7 @@ public class ItemTooltip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
                 if (vec.x + eventData.position.x >= Screen.width)
                 {
                     toolTip.GetComponent<RectTransform>().position =
-                        new Vector2(eventData.position.x, 
+                        new Vector2(eventData.position.x,
                             eventData.position.y + (vec.y));
                 }
                 else
@@ -75,7 +75,7 @@ public class ItemTooltip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
                 if (vec.x + eventData.position.x >= Screen.width)
                 {
                     toolTip.GetComponent<RectTransform>().position =
-                        new Vector2(eventData.position.x, 
+                        new Vector2(eventData.position.x,
                             eventData.position.y + (vec.y));
                 }
                 else
@@ -85,8 +85,8 @@ public class ItemTooltip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
                 }
             }
         }
-        
-        if (eventData.pointerCurrentRaycast.isValid 
+
+        if (eventData.pointerCurrentRaycast.isValid
             && eventData.pointerCurrentRaycast.gameObject.GetComponent<Item>())
         {
             itemExplainText.gameObject.SetActive(true);
@@ -98,13 +98,13 @@ public class ItemTooltip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
 
                 Vector2 vec = new Vector2(itemExplainText.preferredWidth + 30f,
                     itemExplainText.preferredHeight);
-                
+
                 explainBG.GetComponent<RectTransform>().sizeDelta = vec;
 
                 if (vec.x + eventData.position.x >= Screen.width)
                 {
                     explainBG.GetComponent<RectTransform>().position =
-                        new Vector2(eventData.position.x, 
+                        new Vector2(eventData.position.x,
                             eventData.position.y - (vec.y / 2));
                 }
                 else
@@ -127,7 +127,7 @@ public class ItemTooltip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
                 if (vec.x + eventData.position.x >= Screen.width)
                 {
                     explainBG.GetComponent<RectTransform>().position =
-                        new Vector2(eventData.position.x, 
+                        new Vector2(eventData.position.x,
                             eventData.position.y - (vec.y / 2));
                 }
                 else
@@ -143,7 +143,7 @@ public class ItemTooltip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
     {
         toolTip.SetActive(false);
         explainBG.SetActive(false);
-        
+
         itemExplainText.text = String.Empty;
 
         if (transform.childCount != 0)
