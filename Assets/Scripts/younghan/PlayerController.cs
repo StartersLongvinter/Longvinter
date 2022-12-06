@@ -39,14 +39,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] GameObject chatInput;
     private float timer = 0f;
 
-    // Fishing
     private GameObject fish;
     [SerializeField] float maxInteractableDistance = 7;
     private bool isFishing;
     private bool isSuccessState;
     public bool eImageActivate;
     private int eCount = 0;
-    // End Fishing
 
     private bool isAuto;
 
@@ -61,7 +59,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine)
         {
             Camera.main.GetComponent<CameraController>().Player = this.transform;
-            Camera.main.GetComponent<CameraController>().PlayerController = this;
             Camera.main.GetComponent<CameraController>().PlayerController = this;
         }
 
@@ -340,9 +337,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         if (moveDirection != Vector3.zero)
-            playerStat.ChangeStatus((int)PlayerStat.Status.walk);
+            playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
         else
-            playerStat.ChangeStatus((int)PlayerStat.Status.idle);
+            playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
     }
 
     private void Rotate()
@@ -379,11 +376,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         if (isAiming && isAttackReady && doAttack)
         {
-            if (weapon.type == Weapon.Type.Range)
+            if (weapon.type == Weapon.Type.OneHandRange || weapon.type == Weapon.Type.TwoHandRange)
             {
                 weapon.Fire();
             }
-            else if (weapon.type == Weapon.Type.Melee1)
+            else if (weapon.type == Weapon.Type.OneHandMelee)
             {
                 weapon.Swing();
 
@@ -398,9 +395,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weaponData == null) return;
 
-        Weapon.Type weaponType = weaponData.emPrefab.GetComponent<Weapon>().type;
-
-        if (isAiming && weaponType == Weapon.Type.Melee1)
+        if (isAiming && weaponData.emClassify == EquipmentData.EquipmentClassify.Melee && weaponData.emArea == EquipmentData.EquipmentPosition.OneHand)
         {
             playerAnimator.SetBool("isMeleeAttackAim", true);
         }
@@ -414,12 +409,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weaponData == null | isFishing) return;
 
-        Weapon.Type weaponType = weaponData.emPrefab.GetComponent<Weapon>().type;
-
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
-
-        if (isAiming && weaponData.emAnim == EquipmentData.EquipmentAnim.Forward)
-        //if (isAiming && weaponType == Weapon.Type.Range || weaponType == Weapon.Type.Melee2)
+        
+        if (isAiming && weaponData.emArea == EquipmentData.EquipmentPosition.TwoHand)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         }

@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e00f73891bbc47e983f251f87ccda19, type: 3}
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
-  equipmentClassify: 1
-  equipmentArea: 1
-  equipmentAnim: 1
+  equipmentClassify: 2
+  equipmentArea: 3
   equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 86c72943111a24ac7b1f74b21e3fe272, type: 3}
   equipmentPrefab: {fileID: 8288289608541482084, guid: 9d030a81643948d46b1e4d32cdfee101, type: 3}
   weaponDamage: 4
-  weaponAttackRate: 0
+  weaponAttackRate: 0.5
   ammoCount: 0
   equipmentKorName: "\uB3CC\uACA9\uC18C\uCD1D"
   isAuto: 1

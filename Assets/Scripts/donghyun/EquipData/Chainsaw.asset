@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e00f73891bbc47e983f251f87ccda19, type: 3}
   m_Name: Chainsaw
   m_EditorClassIdentifier: 
-  equipmentClassify: 0
-  equipmentArea: 1
-  equipmentAnim: 1
+  equipmentClassify: 1
+  equipmentArea: 3
   equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 3a2cedfe1f7ff4538a424abb4d2eb40e, type: 3}
   equipmentPrefab: {fileID: 2669447280008706331, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
   weaponDamage: 16
-  weaponAttackRate: 0
+  weaponAttackRate: 0.5
   ammoCount: 0
   equipmentKorName: "\uC804\uAE30\uD1B1"
   isAuto: 0

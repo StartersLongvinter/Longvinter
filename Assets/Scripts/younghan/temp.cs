@@ -18,8 +18,10 @@ public class temp : MonoBehaviour, IDamageable
         
     }
 
-    public void Damaged(float dmg)
+    public void ApplyDamage(float dmg)
     {
-        Debug.Log("Cube dmg");
+        hp -= dmg;
+
+        Debug.Log(dmg + "   " + hp);
     }
 }
