@@ -12,6 +12,10 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
     [SerializeField] Material hitEffect1;
     [SerializeField] Material hitEffect2;
 
+    [SerializeField] string itemName1;
+    [SerializeField] string itemName2;
+    [SerializeField] string[] itemGroup;
+
     //[SerializeField] GameObject defaultItem;
    
     Material startMat;
@@ -51,31 +55,11 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
         currentPosition = transform.position;
     }
 
-    //private void LateUpdate()
-    //{
-    //    latePosition = transform.position;
-    //}
-
-    //public bool isStopped()
-    //{
-    //    float timer = 0;
-
-    //    while (currentPosition==latePosition)
-    //    {
-    //        timer += Time.deltaTime;
-
-    //        if (timer>5)
-    //        {
-    //            return true;
-    //        }
-    //    }
-
-    //    return false;
-    //}
+   
 
     //제일 가까이 있는 player를 nearPlayer로 지정
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -137,13 +121,21 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
     {
         currentHealth -= damage;
 
-        if (currentHealth<0 && photonView.IsMine)
+        if (currentHealth<=0 && photonView.IsMine)
         {
-            PhotonNetwork.Instantiate("DefaultItem", this.gameObject.transform.position, Quaternion.identity);
+            DropItem();
             PhotonNetwork.Destroy(this.gameObject);
-           
         }
     }
+
+    void DropItem()
+    {
+        
+        PhotonNetwork.Instantiate(itemName1, this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
+        PhotonNetwork.Instantiate(itemGroup[Random.Range(0,itemGroup.Length)], this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
+        
+    }
+    
 
     IEnumerator OnDamageEffect()
     {
