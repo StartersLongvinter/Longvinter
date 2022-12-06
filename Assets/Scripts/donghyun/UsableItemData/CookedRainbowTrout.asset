@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: CookedRainbowTrout
   itemKorName: "\uC870\uB9AC\uB41C \uBB34\uC9C0\uAC1C \uC1A1\uC5B4"
-  itemExplain: "\uD76C\uADC0\uD55C \uBB3C\uACE0\uAE30\uB97C \uAD6C\uC6E0\uB2E4."
+  itemExplain: "\uD76C\uADC0\uD55C \uBB3C\uACE0\uAE30\uB97C \uAD6C\uC6E0\uB2E4.\n\n\uD6A8\uACFC
+    : \uC18C\uD654\uAC00 \uB05D\uB098\uAE30 \uC804\uC5D4 \uB354\n\uC774\uC0C1 \uBA39\uC744
+    \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
   itemType: 0
   itemClassify: 0
   itemPrefab: {fileID: 5223685251508337091, guid: 88766f5065df345ca8b1f31c550689d2, type: 3}

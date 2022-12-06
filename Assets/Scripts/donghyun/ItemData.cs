@@ -21,7 +21,9 @@ public class ItemData : ScriptableObject
     }
     
     [SerializeField] private string itemName; //아이템 이름
-    [SerializeField] private string itemKorName;
+    [SerializeField] string itemKorName;
+    
+    [TextArea]
     [SerializeField] private string itemExplain;
     [SerializeField] private ItemType itemType; //아이템 종류
     [SerializeField] private ItemClassify itemClassify; //아이템 분류
@@ -40,7 +42,6 @@ public class ItemData : ScriptableObject
     public string itName => itemName;
 
     public string itKorName => itemKorName;
-
     public string itExplan => itemExplain;
     public ItemType itType => itemType;
     public ItemClassify itClassify => itemClassify;

@@ -152,14 +152,6 @@ public class PlayerInventory : MonoBehaviourPun
 
     public void ItemUse(GameObject go)
     {
-        //현재 사용하려고 하는 아이템의 종류가 사용중 아이템리스트에 있는지 확인(배부름있으면 배부름 효과있는 아이템 먹지 못하도록)
-        if (currentUseItem.Any(x => x.GetComponent<Item>().item.itEffect == go.GetComponent<Item>().item.itEffect))
-        {
-            Debug.Log("현재 적용된 아이템입니다.");
-
-            return;
-        }
-
         //사용할 수 있는 아이템인지 확인
         if (go.GetComponent<Item>().item.itUsable)
         {
