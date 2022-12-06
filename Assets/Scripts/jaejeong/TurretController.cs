@@ -17,7 +17,7 @@ public class TurretController : Turret
     private Transform target;
     private Enemy targetEnemy;
 
-    private string turretOwner = "";
+    public string turretOwner = "";
 
 
     protected override void Start()

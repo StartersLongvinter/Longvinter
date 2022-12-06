@@ -135,7 +135,43 @@ public class JsonManager : MonoBehaviour
 
     public void SaveRoomData()
     {
-        
+        // 집 저장
+        SaveHouseInformations saveHouseInformations = new SaveHouseInformations();
+        if (GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[] != null)
+        {
+            foreach (GroundTrigger homeArea in GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[])
+            {
+                saveHouseInformations.housePositions.Add(homeArea.transform.position);
+                saveHouseInformations.houseOwnerNicknames.Add(homeArea.gameObject.name.Replace("HomeArea", ""));
+            }
+
+            string houseJson = JsonUtility.ToJson(saveHouseInformations);
+            Debug.Log(houseJson);
+
+            string _houseFileName = PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
+            string _housePath = Application.dataPath + _houseFileName + ".json";
+
+            File.WriteAllText(_housePath, houseJson);
+        }
+
+        // 터렛 저장 
+        SaveTurretInformations saveTurretInformations = new SaveTurretInformations();
+        if (GameObject.FindObjectsOfType(typeof(TurretController)) as TurretController[] != null)
+        {
+            foreach (TurretController turretArea in GameObject.FindObjectsOfType(typeof(TurretController)) as TurretController[])
+            {
+                saveTurretInformations.turretPositions.Add(turretArea.transform.position);
+                saveTurretInformations.turretOwnerNicknames.Add(turretArea.turretOwner);
+            }
+
+            string turretJson = JsonUtility.ToJson(saveTurretInformations);
+            Debug.Log(turretJson);
+
+            string _turretFileName = PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
+            string _turretPath = Application.dataPath + _turretFileName + ".json";
+
+            File.WriteAllText(_turretPath, turretJson);
+        }
     }
 
     public void LoadRoomData()
@@ -148,6 +184,7 @@ public class JsonManager : MonoBehaviour
         if (curTime >= saveTime)
         {
             SavePlayerData(PlayerStat.LocalPlayer.hp, PlayerStat.LocalPlayer.money);
+            if (PhotonNetwork.IsMasterClient) SaveRoomData();
             curTime = 0f;
         }
         curTime += Time.deltaTime;

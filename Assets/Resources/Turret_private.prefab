@@ -545,6 +545,7 @@ MonoBehaviour:
   turretTransform: {fileID: 2909241283207979408}
   trigger: {fileID: 0}
   range: 10
+  turretOwner: 
 --- !u!1 &2905397856255711920
 GameObject:
   m_ObjectHideFlags: 0
