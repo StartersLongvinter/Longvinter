@@ -46,7 +46,7 @@ public class PlayerInventory : MonoBehaviourPun
             yield return null;
         }
         
-        PlayerStat.LocalPlayer.InitEffect();
+        PlayerStat.LocalPlayer.InitEffect(go.GetComponent<Item>().item.itEffect);
 
         Destroy(go);
         currentUseItem.RemoveAt(idx);
@@ -190,8 +190,8 @@ public class PlayerInventory : MonoBehaviourPun
                         {
                             PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
                         }
-
-                        PlayerStat.LocalPlayer.applyPercentage = go.GetComponent<Item>().item.itApplyPercentage / 100;
+                        
+                        PlayerStat.LocalPlayer.GetEffect(go.GetComponent<Item>().item.itEffect, go.GetComponent<Item>().item.itApplyPercentage / 100);
                         
                         break;
                     
@@ -201,6 +201,8 @@ public class PlayerInventory : MonoBehaviourPun
                         {
                             PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
                         }
+
+                        PlayerStat.LocalPlayer.GetEffect(go.GetComponent<Item>().item.itEffect, go.GetComponent<Item>().item.itApplyPercentage / 100);
                         
                         break;
                     
@@ -211,6 +213,8 @@ public class PlayerInventory : MonoBehaviourPun
                             PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
                         }
                         
+                        PlayerStat.LocalPlayer.GetEffect(go.GetComponent<Item>().item.itEffect, go.GetComponent<Item>().item.itApplyPercentage / 100);
+                        
                         break;
                     
                     case ItemData.ItemEffect.IncreaseMovementSpeed:
@@ -220,6 +224,8 @@ public class PlayerInventory : MonoBehaviourPun
                             PlayerStat.LocalPlayer.ChangeHp(go.GetComponent<Item>().item.itIncreaseHealth);
                         }
                         
+                        PlayerStat.LocalPlayer.GetEffect(go.GetComponent<Item>().item.itEffect, go.GetComponent<Item>().item.itApplyPercentage / 100);
+
                         break;
                 }
             }
