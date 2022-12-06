@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e00f73891bbc47e983f251f87ccda19, type: 3}
   m_Name: SemiAutomatic
   m_EditorClassIdentifier: 
-  equipmentClassify: 1
-  equipmentArea: 1
-  equipmentAnim: 1
+  equipmentClassify: 2
+  equipmentArea: 3
   equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: cea04fcf434cc4505aafe1a2dd16dc21, type: 3}
   equipmentPrefab: {fileID: 5292066078330503074, guid: abe46d1b5af8047408a48888f10f1246, type: 3}
   weaponDamage: 8
-  weaponAttackRate: 0
+  weaponAttackRate: 0.5
   ammoCount: 0
   equipmentKorName: "\uBC18\uC790\uB3D9\uC18C\uCD1D"
   isAuto: 0

@@ -48,10 +48,18 @@ public class Bullet : MonoBehaviourPun
     [PunRPC]
     void HasDamage(int actorNumber)
     {
+        //Transform enemy = PlayerList.Instance.playersWithActorNumber[actorNumber].transform;
+        //Enemy e = enemy.GetComponent<Enemy>();
+        //if (e != null && enemy.GetComponent<PhotonView>().IsMine)
+        //    enemy.GetComponent<PhotonView>().RPC(nameof(e.ChangePlayersColor), RpcTarget.AllViaServer, damage);
+
         Transform enemy = PlayerList.Instance.playersWithActorNumber[actorNumber].transform;
-        Enemy e = enemy.GetComponent<Enemy>();
-        if (e != null && enemy.GetComponent<PhotonView>().IsMine)
-            enemy.GetComponent<PhotonView>().RPC(nameof(e.ChangePlayersColor), RpcTarget.AllViaServer, damage);
+        IDamageable damageable = enemy.GetComponent<IDamageable>();
+        if(damageable != null && enemy.GetComponent<PhotonView>().IsMine)
+        {
+            enemy.GetComponent<PhotonView>().RPC(nameof(damageable.ApplyDamage), RpcTarget.AllViaServer, damage);
+        }
+        
     }
 
     protected virtual void OnCollisionEnter(Collision collision)

@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e00f73891bbc47e983f251f87ccda19, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  equipmentClassify: 1
-  equipmentArea: 1
-  equipmentAnim: 1
+  equipmentClassify: 2
+  equipmentArea: 3
   equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 8b33bf1540da14bb7b6140c2fb3acb37, type: 3}
   equipmentPrefab: {fileID: 5613078461784678732, guid: 623873e675aeaf34ea981ac9faf247f9, type: 3}
   weaponDamage: 3
-  weaponAttackRate: 0
+  weaponAttackRate: 0.5
   ammoCount: 0
   equipmentKorName: "\uC0B0\uD0C4\uCD1D"
   isAuto: 0

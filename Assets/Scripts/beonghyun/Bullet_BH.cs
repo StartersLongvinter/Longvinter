@@ -50,8 +50,8 @@ public class Bullet_BH : MonoBehaviourPun
     {
         Transform enemy = PlayerList.Instance.playersWithActorNumber[actorNumber].transform;
         Enemy e = enemy.GetComponent<Enemy>();
-        if (e != null && enemy.GetComponent<PhotonView>().IsMine)
-            enemy.GetComponent<PhotonView>().RPC(nameof(e.ChangePlayersColor), RpcTarget.All, damage);
+        if (e != null && enemy.GetComponent<PhotonView>().IsMine) ;
+            //enemy.GetComponent<PhotonView>().RPC(nameof(e.ChangePlayersColor), RpcTarget.All, damage);
     }
 
     protected virtual void OnCollisionEnter(Collision collision)

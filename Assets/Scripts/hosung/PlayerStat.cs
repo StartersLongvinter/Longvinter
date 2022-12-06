@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
+public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
 {
     private static PlayerStat localPlayer;
     public static PlayerStat LocalPlayer
@@ -18,11 +18,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
 
     public enum Status
     {
-        idle = 1,
-        walk,
-        attack,
-        damaged,
-        die
+        Idle = 1,
+        Walk,
+        Attack,
+        Damaged,
+        Die
     }
     public Status status;
 
@@ -53,14 +53,15 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     float fishingPercentage = 0;                                 // 낚시 효과 퍼센트
 
     float startTime = 0f;
-    [SerializeField]
-    private Color normalColor;
-    [SerializeField]
-    private Color warningColor;
+    [SerializeField] private Color hpNormalColor;
+    [SerializeField] private Color hpWarningColor;
     private Image currentHPImage;
     public Animator currentHPAnimator;
 
-    // Callback Methods
+    public static Color playerOriginalColor;
+    private SkinnedMeshRenderer meshRenderer;
+    public bool isColorChanged = false;
+
     void Awake()
     {
         moveSpeed = originalSpeed;
@@ -76,9 +77,15 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void ChangeStatus(int _index)
+    void Update()
     {
-        status = (Status)_index;
+        LoseStamina();
+
+        if (photonView.IsMine)
+        {
+            float _hpValue = hp / maxHp;
+            currentHPImage.fillAmount = _hpValue;
+        }
     }
 
     public void GetEffect(ItemData.ItemEffect effectType, float percent)
@@ -129,7 +136,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         PlayerList.Instance.playerStats.Add(this);
         PlayerList.Instance.playerCharacters.Add(this.gameObject);
         PlayerList.Instance.playersWithActorNumber.Add(photonView.Owner.ActorNumber, this.gameObject);
-        status = Status.idle;
+        status = Status.Idle;
 
         foreach (GameObject player in PlayerList.Instance.playersWithActorNumber.Values)
         {
@@ -139,14 +146,14 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
 
     void LoseStamina()
     {
-        if (!photonView.IsMine || status == Status.die) return;
+        if (!photonView.IsMine || status == Status.Die) return;
 
         startTime += Time.deltaTime;
 
         float _targetDamage = autoDamageValue;
         if (isCold)
         {
-            if (status == Status.walk) _targetDamage = autoDamageValue * damagePercentWhileWalkInSnow;
+            if (status == Status.Walk) _targetDamage = autoDamageValue * damagePercentWhileWalkInSnow;
             else _targetDamage = autoDamageValue * damagePercentInSnowField;
         }
 
@@ -169,30 +176,29 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
 
         if (hp <= (maxHp / 9f) * 3f)
         {
-            currentHPImage.color = warningColor;
+            currentHPImage.color = hpWarningColor;
         }
         else
-            currentHPImage.color = normalColor;
+            currentHPImage.color = hpNormalColor;
     }
 
-    void Update()
+    [PunRPC]
+    public void ApplyDamage(float damage)
     {
-        LoseStamina();
-
-        if (photonView.IsMine)
-        {
-            float _hpValue = hp / maxHp;
-            currentHPImage.fillAmount = _hpValue;
-        }
+        ChangeHp(-1f * damage);
     }
 
-    // Public Methods
-    // ����
+    public void ChangeStatus(int _index)
+    {
+        if (_index == (int)Status.Die) return;
+
+        status = (Status)_index;
+    }
 
     [PunRPC]
     public void ChangeHp(float _hp)
     {
-        if (status == Status.damaged && _hp < 0)
+        if (status == Status.Damaged && _hp < 0)
         {
             _hp -= _hp * armorPercentage;
         }
@@ -209,15 +215,43 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         if (hp < 0)
         {
             hp = 0;
-            ChangeStatus((int)Status.die);
+            ChangeStatus((int)Status.Die);
             this.gameObject.layer = 8;
         }
     }
 
-    // ����
     public void ChangeMoney(int _money)
     {
         money += _money;
+    }
+
+    [PunRPC]
+    public void ChangePlayersColor(float damage)
+    {
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        if (photonView.IsMine)
+        {
+            Debug.Log(photonView.Owner.NickName);
+            currentHPAnimator.SetTrigger("isDamaged");
+            ApplyDamage(damage);
+            ChangeStatus((int)Status.Damaged);
+        }
+        StartCoroutine(ResetColor());
+    }
+
+    IEnumerator ResetColor()
+    {
+        if (meshRenderer.material.color != Color.red)
+        {
+            playerOriginalColor = meshRenderer.material.color;
+            isColorChanged = true;
+            meshRenderer.material.color = Color.red;
+            yield return new WaitForSeconds(0.08f);
+            meshRenderer.material.color = playerOriginalColor;
+            isColorChanged = false;
+            ChangeStatus((int)Status.Idle);
+        }
+        yield return null;
     }
 
     // 플레이어 자원 동기화

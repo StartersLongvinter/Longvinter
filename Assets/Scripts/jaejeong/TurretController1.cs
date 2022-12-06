@@ -40,9 +40,10 @@ public class TurretController1 : Turret
                 }
                 if (i.GetComponent<PlayerController>().IsAiming)
                 {
-                    Enemy enemy = i.GetComponent<Enemy>();
+                    //Enemy enemy = i.GetComponent<Enemy>();
+                    PlayerStat playerStat = i.GetComponent<PlayerStat>();
                     if (i.GetComponent<PhotonView>().IsMine)
-                        i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
+                        i.GetComponent<PhotonView>().RPC(nameof(playerStat.ApplyDamage), RpcTarget.All, damage);
                 }
             }
             isfire=false;

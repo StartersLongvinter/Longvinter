@@ -317,11 +317,12 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
 
         if (isAiming && isAttackReady && doAttack)
         {
-            if (weapon.type == Weapon.Type.Range)
+            if(true)
+            //if (weapon.type == Weapon.Type.Range)
             {
                 weapon.Fire();
             }
-            else if (weapon.type == Weapon.Type.Melee1)
+            else //if (weapon.type == Weapon.Type.Melee1)
             {
                 weapon.Swing();
 
@@ -335,8 +336,8 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
     private void Aim()
     {
         if (weapon == null) return;
-
-        if (isAiming && weapon.type == Weapon.Type.Melee1)
+        if(true)
+        //if (isAiming && weapon.type == Weapon.Type.)
         {
             playerAnimator.SetBool("isMeleeAttackAim", true);
         }
@@ -355,7 +356,8 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
 
         float progressSpeed = Mathf.Lerp(1f, 3f, ikProgress);
 
-        if (isAiming && weapon.type == Weapon.Type.Range || weapon.type == Weapon.Type.Melee2)
+        if(true)
+        //if (isAiming && weapon.type == Weapon.Type.Range || weapon.type == Weapon.Type.Melee2)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         }

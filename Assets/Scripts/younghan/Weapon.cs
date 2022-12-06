@@ -5,13 +5,10 @@ using Photon.Pun;
 
 public class Weapon : MonoBehaviourPun
 {
-    // Melee1 - Axe / Melee2 - Chain saw / Range - Gun
-    public enum Type { Melee1, Melee2, Range }
-    //public enum AttackMode { Single, Auto }
+    public enum Type { OneHandMelee, TwoHandMelee, OneHandRange, TwoHandRange }
 
     [Header("Common")]
     public Type type;
-    //public AttackMode attackMode;
     public float damage;
     public float attackRate;
 
@@ -62,8 +59,6 @@ public class Weapon : MonoBehaviourPun
                     }
                 }
 
-                // bulletInstance.GetComponent<Bullet>().Direction = firePoint.forward + bulletDirectionOffset;
-                // bulletInstance.GetComponent<Bullet>().Damage = this.damage;
                 if (photonView.IsMine)
                     bulletInstance.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.forward.x, firePoint.forward.y, firePoint.forward.z, this.damage, bulletDirectionOffset.x, bulletDirectionOffset.y, bulletDirectionOffset.z);
             }
@@ -95,11 +90,24 @@ public class Weapon : MonoBehaviourPun
     {
         Debug.Log("Swing");
 
-
+        StartCoroutine(ActivateAttackArea());
     }
 
-    //IEnumerable ActivateAttackArea()
-    //{
-    //    meleeAttackArea.
-    //}
+    IEnumerator ActivateAttackArea()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        meleeAttackArea.enabled = true;
+
+        yield return new WaitForSeconds(0.1f);
+
+        meleeAttackArea.enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<IDamageable>() == null && type != Type.OneHandMelee && type != Type.TwoHandMelee) return;
+
+        other.gameObject.GetComponent<IDamageable>().ApplyDamage(damage);
+    }
 }

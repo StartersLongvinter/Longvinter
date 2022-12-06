@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Ammo100
   m_EditorClassIdentifier: 
   equipmentClassify: 3
-  equipmentArea: 2
-  equipmentAnim: 2
+  equipmentArea: 0
   equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 6c903f204078d4bb0969cbe9996432e4, type: 3}
   equipmentPrefab: {fileID: 0}
   weaponDamage: 0
@@ -22,3 +21,4 @@ MonoBehaviour:
   ammoCount: 100
   equipmentKorName: "\uD0C4\uC57D [100]"
   isAuto: 0
+  equipmentIndex: 0

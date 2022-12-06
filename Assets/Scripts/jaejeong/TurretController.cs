@@ -56,7 +56,7 @@ public class TurretController : Turret
         GameObject nearestPlayer = null;
         foreach (GameObject player in players)
         {
-            if (photonView.Owner.NickName == player.name || player.GetComponent<PlayerStat>().status == PlayerStat.Status.die)
+            if (photonView.Owner.NickName == player.name || player.GetComponent<PlayerStat>().status == PlayerStat.Status.Die)
                 continue;
             float distanceToPlayer = Vector3.Distance(turretTransform.transform.position, player.transform.position);
             if (distanceToPlayer < shortestDistance)
@@ -67,10 +67,10 @@ public class TurretController : Turret
         }
         if (shortestDistance > range)
             trigger.inOtherHome = false;
-        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged) //���� ���x, ��ž ��Ÿ� ��, ���� ��� x
+        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<PlayerStat>().isColorChanged) // Edit - yh
         {
             photonView.RPC("ChangeTarget", RpcTarget.All, nearestPlayer.GetComponent<PhotonView>().Owner.ActorNumber);
-            Enemy.originalColor = nearestPlayer.GetComponentInChildren<SkinnedMeshRenderer>().material.color;
+            PlayerStat.playerOriginalColor = nearestPlayer.GetComponentInChildren<SkinnedMeshRenderer>().material.color; // Edit - yh
         }
         else
             target = null;
