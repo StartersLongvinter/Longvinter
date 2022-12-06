@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviourPun
         Bullet bullet = GetComponent<Bullet>();
         this.gameObject.name = photonView.Owner.NickName + "Bullet";
         Vector3 firePoint = new Vector3((float)x, (float)y, (float)z);
-        bullet.direction = -firePoint + new Vector3(_offsetX, _offsetY, _offsetZ);
+        bullet.direction = firePoint + new Vector3(_offsetX, _offsetY, _offsetZ);
         bullet.damage = _damage;
 
         Debug.Log(bullet.name);

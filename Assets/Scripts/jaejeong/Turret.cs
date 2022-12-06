@@ -6,18 +6,18 @@ using Photon.Pun;
 public class Turret : MonoBehaviourPun
 {
     public Transform rotatePart;
-    public Transform turretTransform;
-    public GroundTrigger trigger;
 
     public float fireRate = 1f;
     public float fireTimeLimit = 0f;
     public bool isfire = false;
     public bool attack;
 
-    public Transform firePoint;
-    public Transform target;
+    public string turretOwner = "";
 
-    public float range = 10f;
+    public bool IsAuto { get; set; }
+
+    [SerializeField] Material[] mat;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -38,43 +38,13 @@ public class Turret : MonoBehaviourPun
             yield return new WaitForSeconds(0.5f);
         }
     }
-
-    public void UpdateTargetFunc(GameObject[] players)
+    public void ChangeTurretModeColor(Turret turret, bool isAuto)
     {
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestPlayer = null;
-        foreach (GameObject player in players)
-        {
-            if (photonView.Owner.NickName == player.name || player.GetComponent<PlayerStat>().status == PlayerStat.Status.die)
-                continue;
-            float distanceToPlayer = Vector3.Distance(turretTransform.transform.position, player.transform.position);
-            if (distanceToPlayer < shortestDistance)
-            {
-                shortestDistance = distanceToPlayer;
-                nearestPlayer = player;
-            }
-        }
-        if (shortestDistance > range)
-            trigger.inOtherHome = false;
-        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged)
-        {
-            photonView.RPC(nameof(TurretController.ChangeTarget), RpcTarget.All, nearestPlayer.GetComponent<PhotonView>().Owner.ActorNumber);
-            Enemy.originalColor = nearestPlayer.GetComponentInChildren<SkinnedMeshRenderer>().material.color;
-        }
+        Material[] materials = turret.transform.GetChild(0).GetComponent<MeshRenderer>().materials;
+        if (isAuto)
+            materials[0] = mat[0];
         else
-            target = null;
-    }
-    protected virtual void Update()
-    {
-        if (target == null || firePoint == null)
-            return;
-
-        attack = target.GetComponent<PlayerController>().IsAiming;
-
-        if (!trigger.inOtherHome && !attack)
-            return;
-
-        if (photonView.IsMine)
-            photonView.RPC(nameof(TurretController.LockOnTarget), RpcTarget.All, target.position.x, rotatePart.position.y, target.position.z);
+            materials[0] = mat[1];
+        turret.transform.GetChild(0).GetComponent<MeshRenderer>().materials = materials;
     }
 }

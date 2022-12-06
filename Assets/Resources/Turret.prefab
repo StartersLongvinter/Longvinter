@@ -271,16 +271,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatePart: {fileID: 3387500465062260111}
-  turretTransform: {fileID: 7188179017194068467}
-  trigger: {fileID: 0}
   fireRate: 1
   fireTimeLimit: 0
   isfire: 0
   attack: 0
-  firePoint: {fileID: 4440326907571445116}
-  target: {fileID: 0}
-  range: 10
+  turretOwner: 
+  mat:
+  - {fileID: 2100000, guid: 4ec848bfbb768c4438255d9d08f1e568, type: 2}
+  - {fileID: 2100000, guid: eafdbc4b2ea56b8499d773ff95000ea5, type: 2}
   bulletPrefab: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
+  firePoint: {fileID: 4440326907571445116}
+  turretTransform: {fileID: 7188179017194068467}
+  trigger: {fileID: 0}
+  range: 10
 --- !u!114 &8355613450804420043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,15 +297,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotatePart: {fileID: 3387500465062260111}
-  turretTransform: {fileID: 0}
-  trigger: {fileID: 0}
   fireRate: 1
   fireTimeLimit: 0
   isfire: 0
   attack: 0
-  firePoint: {fileID: 0}
-  target: {fileID: 0}
-  range: 10
+  turretOwner: 
+  mat: []
 --- !u!114 &-8989342727540275638
 MonoBehaviour:
   m_ObjectHideFlags: 0

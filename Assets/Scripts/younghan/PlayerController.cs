@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Vector3 AimLookPoint { get { return aimLookPoint; } }
     public bool IsAiming { get { return isAiming; } }
-    public bool IsPrivate { get { return isPrivate; } }
 
     public float moveSpeed;
     public EquipmentData weaponData;
@@ -35,7 +34,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool isAttackReady;
     private bool isAiming;
     private bool isPressedSpace;
-    private bool isPrivate;
 
     private float ikProgress;
     private float ikWeight;
@@ -51,6 +49,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public bool eImageActivate;
     private int eCount = 0;
     // End Fishing
+
+    private bool isAuto;
 
     #region Callback Methods
     private void Awake()
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         Attack();
         Fishing();
         ECount();
-        //ChangeTurretMode();
+        ChangeTurretMode();
 
         if (isPressedSpace)
         {
@@ -302,9 +302,20 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
         foreach (var raycasthit in raycastHits)
         {
+            if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
+                continue;
+            Turret turret= raycasthit.collider.gameObject.GetComponent<Turret>();
+            if (turret.turretOwner == "")
+                return;
             float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
-            if (raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance && raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName==PhotonNetwork.LocalPlayer.NickName)
-                isPrivate = !isPrivate;
+            if (doAttack &&raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance && 
+                raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
+            {
+                isAuto = !raycasthit.collider.gameObject.GetComponent<Turret>().IsAuto;
+                Debug.Log(isAuto);
+                turret.IsAuto = isAuto;
+                turret.ChangeTurretModeColor(turret, isAuto);
+            }
         }
     }
 

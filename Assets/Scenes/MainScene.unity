@@ -1426,7 +1426,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -9211507875356690715, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8989342727540275638, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
       propertyPath: sceneViewId
@@ -1485,9 +1485,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1690833288}
     - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 184312796}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 8355613450804420043, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
       propertyPath: turretTransform
       value: 
@@ -1497,6 +1505,11 @@ PrefabInstance:
 --- !u!4 &184312795 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3387500465062260111, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
+  m_PrefabInstance: {fileID: 184312794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &184312796 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4440326907571445116, guid: 1185e98752d007b48b69ea524f4f9f77, type: 3}
   m_PrefabInstance: {fileID: 184312794}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &205996723 stripped
@@ -2464,20 +2477,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411465911}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27dd82fe7144ef947ae9072a17f6a416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotatePart: {fileID: 184312795}
-  turretTransform: {fileID: 0}
-  trigger: {fileID: 0}
   fireRate: 1
   fireTimeLimit: 0
   isfire: 0
   attack: 0
-  target: {fileID: 0}
-  range: 10
+  turretOwner: 
+  mat: []
 --- !u!135 &411465914
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11433,6 +11444,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1115630541}
     m_Modifications:
+    - target: {fileID: 2147309542480517477, guid: 714e08b9940f04cfa871f5da61687c3d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2147309542480517496, guid: 714e08b9940f04cfa871f5da61687c3d, type: 3}
       propertyPath: m_Name
       value: MyHomeArea
