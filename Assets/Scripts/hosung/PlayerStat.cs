@@ -44,7 +44,6 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] float damagePercentInWater = 13.3f;                // 깊은 물 속에 있는 경우 
 
     public ItemData.ItemEffect itemEffect = ItemData.ItemEffect.Health; // Item Effect
-    public int expireTime = 0;                                          // 효과 만료 시간
     public float applyPercentage = 0;                                   // 효과 퍼센트
 
     float startTime = 0f;
@@ -73,6 +72,12 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     public void ChangeStatus(int _index)
     {
         status = (Status)_index;
+    }
+
+    public void InitEffect()
+    {
+        itemEffect = ItemData.ItemEffect.Health;
+        applyPercentage = 0;
     }
 
     [PunRPC]
