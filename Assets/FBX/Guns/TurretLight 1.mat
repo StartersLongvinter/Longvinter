@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TurretLight
+  m_Name: TurretLight 1
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
   - _EMISSION
@@ -76,6 +76,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 0, a: 1}
-    - _EmissionColor: {r: 1024, g: 1024, b: 0, a: 1}
+    - _Color: {r: 0.04135754, g: 0.7830189, b: 0, a: 1}
+    - _EmissionColor: {r: 0.1254902, g: 18.44706, b: 0, a: 1}
   m_BuildTextureStacks: []

@@ -60,7 +60,7 @@ public class BuildManager : MonoBehaviourPun
         {
             if (myHomeAreas.Count <= 0 || Vector3.Distance(PlayerStat.LocalPlayer.gameObject.transform.position, _mousePosition) > 4f)
             {
-                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
+                buildObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
             }
             float _d = 1000f;
@@ -77,7 +77,7 @@ public class BuildManager : MonoBehaviourPun
             Debug.Log(_d);
             if (_d > (myHomeArea.transform.lossyScale.x * 0.5f) - buildObject.transform.localScale.x * 0.5f)
             {
-                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
+                buildObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
             }
         }
@@ -128,7 +128,7 @@ public class BuildManager : MonoBehaviourPun
         {
             if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
             {
-                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
+                buildObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 canBuild = false;
             }
             else
@@ -148,6 +148,7 @@ public class BuildManager : MonoBehaviourPun
             {
                 var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
                 newTurret.transform.SetParent(myHomeArea.transform);
+                newTurret.GetComponent<TurretController>().turretOwner = PhotonNetwork.LocalPlayer.NickName;
             }
 
             if (buildType == BuildType.house)

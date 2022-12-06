@@ -8,13 +8,20 @@ public class TurretController1 : Turret
     private List<GameObject> playerList = new List<GameObject>();
     private float damage = 10;
 
+    protected override void Start()
+    {
+        base.Start();
+        turretOwner = "";
+        //photonView.RPC(nameof(TurretController.RepeatInvoke), RpcTarget.All);
+    }
+
     private void Update()
     {
-        if (playerList.Count==0)
+        if (playerList.Count == 0)
             return;
-        if (fireTimeLimit <= 0f&&!isfire)
+        if (fireTimeLimit <= 0f && !isfire)
         {
-            isfire=true;
+            isfire = true;
             fireTimeLimit = 1f / fireRate;
         }
         fireTimeLimit -= Time.deltaTime;
@@ -38,14 +45,20 @@ public class TurretController1 : Turret
                     playerList.Remove(i);
                     continue;
                 }
-                if (i.GetComponent<PlayerController>().IsAiming)
+                /*                if (i.GetComponent<PlayerController>().IsAiming)
+                                {
+                                    Enemy enemy = i.GetComponent<Enemy>();
+                                    if (i.GetComponent<PhotonView>().IsMine)
+                                        i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
+                                    Debug.Log("?");
+                                }*/
+                if (i.GetComponent<PlayerController>().IsAiming && i.GetComponent<PhotonView>().IsMine)
                 {
                     Enemy enemy = i.GetComponent<Enemy>();
-                    if (i.GetComponent<PhotonView>().IsMine)
-                        i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
+                    i.GetComponent<PhotonView>().RPC(nameof(enemy.ChangePlayersColor), RpcTarget.All, damage);
                 }
             }
-            isfire=false;
+            isfire =false;
         }
     }
     private void OnTriggerExit(Collider other)

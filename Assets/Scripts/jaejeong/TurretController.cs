@@ -10,20 +10,19 @@ public class TurretController : Turret
     public Transform turretTransform;
     public GroundTrigger trigger;
 
-    [SerializeField] private float range = 30f;
+    [SerializeField] private float range = 10f;
 
     private string playerTag = "Player";
+    //private string turretOwner = "";
 
     private Transform target;
     private Enemy targetEnemy;
 
-    private string turretOwner = "";
-
-
     protected override void Start()
     {
         base.Start();
-        turretOwner = photonView.Owner.NickName;
+/*        if(turretOwner!="")
+            turretOwner = photonView.Owner.NickName;*/
 
         photonView.RPC("Init", RpcTarget.All);
     }
@@ -34,20 +33,17 @@ public class TurretController : Turret
         trigger = GameObject.Find(photonView.Owner.NickName + "HomeArea").GetComponent<GroundTrigger>();
         trigger.myTurret = this;
 
-        //InvokeRepeating("UpdateTarget", 0f, 0.5f);
         if (photonView.Owner == PhotonNetwork.LocalPlayer)
             photonView.RPC("RepeatInvoke", RpcTarget.All);
     }
 
     [PunRPC]
-    private void RepeatInvoke()
+    public void RepeatInvoke()
     {
-        /*if (photonView.Owner == PhotonNetwork.LocalPlayer)
-            */
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
-    private void UpdateTarget() //Turret����
+    private void UpdateTarget()
     {
         if (firePoint == null)
             return;
@@ -67,7 +63,7 @@ public class TurretController : Turret
         }
         if (shortestDistance > range)
             trigger.inOtherHome = false;
-        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged) //���� ���x, ��ž ��Ÿ� ��, ���� ��� x
+        if (nearestPlayer != null && shortestDistance <= range && !nearestPlayer.GetComponent<Enemy>().isChanged)
         {
             photonView.RPC("ChangeTarget", RpcTarget.All, nearestPlayer.GetComponent<PhotonView>().Owner.ActorNumber);
             Enemy.originalColor = nearestPlayer.GetComponentInChildren<SkinnedMeshRenderer>().material.color;
@@ -82,19 +78,19 @@ public class TurretController : Turret
             return;
 
         attack = target.GetComponent<PlayerController>().IsAiming;
-
         if (!trigger.inOtherHome && !attack)
             return;
 
         if (photonView.IsMine)
             photonView.RPC("LockOnTarget", RpcTarget.All, target.position.x, rotatePart.position.y, target.position.z);
 
-        if (fireTimeLimit <= 0f && trigger.inOtherHome || fireTimeLimit <= 0f && attack && !trigger.inOtherHome)
+        //if (fireTimeLimit <= 0f && trigger.inOtherHome&& IsAuto || fireTimeLimit <= 0f && attack && !trigger.inOtherHome)
+        if (fireTimeLimit <= 0f && turretOwner!=null&&(trigger.inOtherHome&&(IsAuto|| (attack &&!IsAuto))||(!trigger.inOtherHome && attack)))
         {
             if (photonView.IsMine)
             {
-                var firedBullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 90, 0)));
-                firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, firePoint.right.x, firePoint.right.y, firePoint.right.z, 10f, 0f, 0f, 0f);
+                var firedBullet = PhotonNetwork.Instantiate(bulletPrefab.name, firePoint.position, firePoint.rotation * Quaternion.Euler(new Vector3(0, 0, 0)));
+                firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, -firePoint.right.x, -firePoint.right.y, -firePoint.right.z, 10f, 0f, 0f, 0f);
             }
             fireTimeLimit = 1f / fireRate;
         }
@@ -102,12 +98,12 @@ public class TurretController : Turret
     }
 
     [PunRPC]
-    void LockOnTarget(float x, float y, float z)
+    public void LockOnTarget(float x, float y, float z)
     {
         StopCoroutine(RotateTurret());
         Vector3 position = new Vector3(x, y, z);
         rotatePart.transform.LookAt(position);
-        rotatePart.transform.Rotate(0, -90, 0);
+        rotatePart.transform.Rotate(-90, 90, 0);
     }
 
     [PunRPC]
@@ -123,6 +119,3 @@ public class TurretController : Turret
         Gizmos.DrawWireSphere(transform.position, range);
     }
 }
-//��ž ��Ÿ� �� && ���� �� ������ ���� ��� ���� ���� ����
-//�� �� �� && ��ž ��Ÿ� �� && ���� ��� ���� ����
-//Turret ���� �ȿ��� �Ѿȵ�� ����x

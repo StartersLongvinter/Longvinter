@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private int eCount = 0;
     // End Fishing
 
+    private bool isAuto;
+
     #region Callback Methods
     private void Awake()
     {
@@ -99,6 +101,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         Attack();
         Fishing();
         ECount();
+        ChangeTurretMode();
 
         if (isPressedSpace)
         {
@@ -288,6 +291,29 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 playerAnimator.SetTrigger("doFish");
                 fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
                 StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
+            }
+        }
+    }
+
+    private void ChangeTurretMode()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
+        foreach (var raycasthit in raycastHits)
+        {
+            if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
+                continue;
+            Turret turret= raycasthit.collider.gameObject.GetComponent<Turret>();
+            if (turret.turretOwner == "")
+                return;
+            float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
+            if (doAttack &&raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance && 
+                raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
+            {
+                isAuto = !raycasthit.collider.gameObject.GetComponent<Turret>().IsAuto;
+                Debug.Log(isAuto);
+                turret.IsAuto = isAuto;
+                turret.ChangeTurretModeColor(turret, isAuto);
             }
         }
     }
