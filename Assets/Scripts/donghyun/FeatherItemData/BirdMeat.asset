@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
-  m_Name: HazelHenScruffyFeather
+  m_Name: BirdMeat
   m_EditorClassIdentifier: 
-  itemName: HazelHenScruffyFeather
-  itemKorName: "\uAFE9 \uAE43\uD138"
-  itemExplain: 
+  itemName: BirdMeat
+  itemKorName: "\uC0C8\uACE0\uAE30"
+  itemExplain: "\uC800\uC9C0\uBC29, \uACE0\uB2E8\uBC31\uC785\uB2C8\uB2E4."
   itemType: 0
   itemClassify: 1
-  itemPrefab: {fileID: 5223685251508337091, guid: 56a3f209ce29d4ed3b036551c9f8f802, type: 3}
-  itemImage: {fileID: 21300000, guid: e1d7ed6458cd447a381d56e6dc1dc244, type: 3}
+  itemPrefab: {fileID: 5223685251508337091, guid: 16e725d31db12f142aa679b4d0c81a07, type: 3}
+  itemImage: {fileID: 21300000, guid: 8c725854c00cbbc4aa43a6883f4acf29, type: 3}
   isItemUsable: 0
   canOverlap: 0
   itemEffect: 0

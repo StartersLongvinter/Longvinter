@@ -542,7 +542,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 0
-  m_Acceleration: 1
+  m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 540
   m_StoppingDistance: 0
@@ -583,6 +583,11 @@ MonoBehaviour:
   currentHealth: 50
   hitEffect1: {fileID: 2100000, guid: 7ebb1886fb7d6ed4096b2afe154309ad, type: 2}
   hitEffect2: {fileID: 2100000, guid: de1d74c120cbfc043b2e2ccc96330826, type: 2}
+  itemName1: BirdMeatItem
+  itemName2: 
+  itemGroup:
+  - HazelHenScruffyFeatherItem
+  - PristineHazelHenScruffyFeatherItem
   agent: {fileID: 6296764728032190217}
   anim: {fileID: 6212225031969149325}
   nearPlayer: {fileID: 0}

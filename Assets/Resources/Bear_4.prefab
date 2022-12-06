@@ -1856,6 +1856,7 @@ GameObject:
   - component: {fileID: -5431004206367099892}
   - component: {fileID: -3165237619790474010}
   - component: {fileID: -8290989865891938145}
+  - component: {fileID: 637847791604457271}
   m_Layer: 0
   m_Name: Bear_4
   m_TagString: LivingEntity
@@ -1944,6 +1945,11 @@ MonoBehaviour:
   currentHealth: 500
   hitEffect1: {fileID: 2100000, guid: 7ebb1886fb7d6ed4096b2afe154309ad, type: 2}
   hitEffect2: {fileID: 2100000, guid: de1d74c120cbfc043b2e2ccc96330826, type: 2}
+  itemName1: AmmoItem
+  itemName2: 
+  itemGroup:
+  - AmmoItem
+  - AmmoItem
   agent: {fileID: 0}
   anim: {fileID: 0}
   nearPlayer: {fileID: 0}
@@ -1952,6 +1958,7 @@ MonoBehaviour:
   bulletDir: {x: 0, y: 0, z: 0}
   nearDistance: 8
   moveAmount: 15
+  attackArea: {fileID: 0}
 --- !u!195 &319114623287080710
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2034,7 +2041,7 @@ MonoBehaviour:
     SynchronizeType: 0
     Name: Idle
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Combat Idle
   - Type: 4
     SynchronizeType: 1
@@ -2144,6 +2151,19 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!65 &637847791604457271
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7643404080586978724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.78, z: 1.8}
 --- !u!1 &7738090386133088510
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class Bear : LivingEntity
     bool isCoroutine;
     bool isCoroutine2;
 
+    [SerializeField] GameObject attackArea;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -169,11 +171,22 @@ public class Bear : LivingEntity
         agent.speed = 0;
         anim.SetBool("Combat Idle", true);
         anim.SetTrigger(state);
+        attackArea.SetActive(true);
 
         yield return new WaitForSeconds(2f);
 
         anim.SetBool("Combat Idle", false);
         isCoroutine2 = false;
+        attackArea.SetActive(false);
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        if (other.gameObject.tag=="Player")
+        {
+            Debug.Log("attack player");
+        }
     }
 
 }
