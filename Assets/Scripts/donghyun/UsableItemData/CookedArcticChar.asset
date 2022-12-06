@@ -15,8 +15,8 @@ MonoBehaviour:
   itemName: CookedArcticChar
   itemKorName: "\uC775\uD78C \uBD81\uADF9 \uACE4\uB4E4\uB9E4\uAE30"
   itemExplain: "\uD55C\uB958\uC5D0\uC11C \uC790\uC8FC \uBCFC \uC218 \uC788\uB294
-    \uBB3C\uACE0\uAE30\uC785\uB2C8\uB2E4.\_ \uD6A8\uACFC : \uC18C\uD654\uAC00 \uB05D\uB098\uAE30
-    \uC804\uC5D4 \uB354 \uC774\uC0C1 \uBA39\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
+    \n\uBB3C\uACE0\uAE30\uC785\uB2C8\uB2E4.\_ \n\n\uD6A8\uACFC : \uC18C\uD654\uAC00
+    \uB05D\uB098\uAE30 \uC804\uC5D4 \uB354 \n\uC774\uC0C1 \uBA39\uC744 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
   itemType: 0
   itemClassify: 0
   itemPrefab: {fileID: 5223685251508337091, guid: 529893e7e45dc4314b34e7345bddc785, type: 3}
