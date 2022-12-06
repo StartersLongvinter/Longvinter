@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Photon.Pun;
+using Photon.Realtime;
+using System.Linq;
 
 public class SaveInformations
 {
@@ -29,7 +31,7 @@ public class SaveTurretInformations
     public List<string> turretOwnerNicknames = new List<string>();
 }
 
-public class JsonManager : MonoBehaviour
+public class JsonManager : MonoBehaviourPun
 {
     private static JsonManager instance;
     public static JsonManager Instance
@@ -59,6 +61,8 @@ public class JsonManager : MonoBehaviour
     private float curTime = 0f;
     private float saveTime = 30f;
     public SaveInformations myInformation;
+    public SaveHouseInformations myHouseInformation;
+    public SaveTurretInformations myTurretInformation;
 
     public List<GameObject> itemObjects = new List<GameObject>();
 
@@ -135,11 +139,12 @@ public class JsonManager : MonoBehaviour
 
     public void SaveRoomData()
     {
+        GroundTrigger[] _groundTriggers = GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[];
         // 집 저장
         SaveHouseInformations saveHouseInformations = new SaveHouseInformations();
         if (GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[] != null)
         {
-            foreach (GroundTrigger homeArea in GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[])
+            foreach (GroundTrigger homeArea in _groundTriggers)
             {
                 saveHouseInformations.housePositions.Add(homeArea.transform.position);
                 saveHouseInformations.houseOwnerNicknames.Add(homeArea.gameObject.name.Replace("HomeArea", ""));
@@ -158,10 +163,10 @@ public class JsonManager : MonoBehaviour
         SaveTurretInformations saveTurretInformations = new SaveTurretInformations();
         if (GameObject.FindObjectsOfType(typeof(TurretController)) as TurretController[] != null)
         {
-            foreach (TurretController turretArea in GameObject.FindObjectsOfType(typeof(TurretController)) as TurretController[])
+            foreach (TurretController turret in GameObject.FindObjectsOfType(typeof(TurretController)) as TurretController[])
             {
-                saveTurretInformations.turretPositions.Add(turretArea.transform.position);
-                saveTurretInformations.turretOwnerNicknames.Add(turretArea.turretOwner);
+                saveTurretInformations.turretPositions.Add(turret.transform.position);
+                saveTurretInformations.turretOwnerNicknames.Add(turret.turretOwner);
             }
 
             string turretJson = JsonUtility.ToJson(saveTurretInformations);
@@ -176,7 +181,56 @@ public class JsonManager : MonoBehaviour
 
     public void LoadRoomData()
     {
+        string _houseFileName = PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
+        string _housePath = Application.dataPath + _houseFileName + ".json";
 
+        GroundTrigger[] _groundTriggers = GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[];
+
+        if (File.Exists(_housePath))
+        {
+            string _fromJsonData = File.ReadAllText(_housePath);
+            myHouseInformation = JsonUtility.FromJson<SaveHouseInformations>(_fromJsonData);
+            Debug.Log("Success to load house data!");
+
+            for (int i = 0; i < myHouseInformation.housePositions.Count; i++)
+            {
+                BuildManager _buildManager = GameObject.Find("BuildManager").GetComponent<BuildManager>();
+                var newHouse = PhotonNetwork.Instantiate(BuildType.house.ToString(), myHouseInformation.housePositions[i], Quaternion.identity);
+
+                var newHomeArea = PhotonNetwork.Instantiate(_buildManager.homeAreaPrefabName, myHouseInformation.housePositions[i], Quaternion.identity);
+                newHomeArea.gameObject.name = myHouseInformation.houseOwnerNicknames[i] + "HomeArea";
+            }
+        }
+
+        string _turretFileName = PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
+        string _turretPath = Application.dataPath + _turretFileName + ".json";
+
+        if (File.Exists(_turretPath))
+        {
+            string _fromJsonData = File.ReadAllText(_turretPath);
+            myTurretInformation = JsonUtility.FromJson<SaveTurretInformations>(_fromJsonData);
+            Debug.Log("Success to load turret data!");
+
+            for (int i = 0; i < myTurretInformation.turretPositions.Count; i++)
+            {
+                BuildManager _buildManager = GameObject.Find("BuildManager").GetComponent<BuildManager>();
+                var newTurret = PhotonNetwork.Instantiate(_buildManager.buildPrefabNameList[(int)BuildType.turret], myTurretInformation.turretPositions[i], Quaternion.identity);
+                // newHouse.GetComponent<TurretController>().turretOwner = myTurretInformation.turretOwnerNicknames[i];
+                newTurret.GetComponent<TurretController>().turretOwner = myTurretInformation.turretOwnerNicknames[i];
+
+                float distance = 10000;
+                GroundTrigger _groundTrigger = new GroundTrigger();
+
+                foreach (GroundTrigger _triggerGround in _groundTriggers)
+                {
+                    if (Vector3.Distance(myTurretInformation.turretPositions[i], _triggerGround.transform.position) < distance)
+                    {
+                        _groundTrigger = _triggerGround;
+                    }
+                }
+                newTurret.GetComponent<TurretController>().trigger = _groundTrigger;
+            }
+        }
     }
 
     void Update()

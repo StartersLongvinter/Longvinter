@@ -51,7 +51,7 @@ public class RotateSun : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            float newTime = 0;
+            float newTime = curTime;
             float newSeconds = 0;
             newSeconds = curSeconds + Time.deltaTime;
             // curSeconds += Time.deltaTime;

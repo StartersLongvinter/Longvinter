@@ -25,9 +25,9 @@ public class BuildManager : MonoBehaviourPun
     List<GameObject> myHomeAreas = new List<GameObject>();
     GameObject myHomeArea;
     string buildPrefabName = "";
-    [SerializeField] string[] buildPrefabNameList;
+    [SerializeField] public string[] buildPrefabNameList;
     List<GameObject> homeAreas = new List<GameObject>();
-    [SerializeField] string homeAreaPrefabName;
+    [SerializeField] public string homeAreaPrefabName;
 
     void Awake()
     {
