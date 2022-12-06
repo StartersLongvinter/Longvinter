@@ -28,3 +28,4 @@ MonoBehaviour:
   increaseHealth: 70
   applyPercentage: 0
   effectPrefab: {fileID: 3863927418828158173, guid: 95fd3f68f1e284d99ba0f60c0b803ddb, type: 3}
+  afterExpireTimePrefab: {fileID: 2568643224711381518, guid: 55386fec16cd349d6812f03f74dbedef, type: 3}
