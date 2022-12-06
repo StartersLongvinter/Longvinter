@@ -29,7 +29,10 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     public float hp;
     public float maxHp = 100f;
     public int money;
+    [SerializeField] private float originalSpeed;
     public float moveSpeed;
+    [SerializeField] private float originalfishingSpeed = 5;
+    public float fishingSpeed;
 
     public bool isFight = false;
     public bool isCold = false;
@@ -60,6 +63,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     // Callback Methods
     void Awake()
     {
+        moveSpeed = originalSpeed;
+        fishingSpeed = originalfishingSpeed;
         currentHPImage = GameObject.Find("HPvalue").GetComponent<Image>();
         currentHPAnimator = GameObject.Find("MaskImage").GetComponent<Animator>();
         hp = maxHp;
@@ -69,7 +74,6 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
             JsonManager.Instance.LoadDate();
         }
-
     }
 
     public void ChangeStatus(int _index)
@@ -89,9 +93,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
                 break;
             case (ItemData.ItemEffect.IncreaseMovementSpeed):
                 increaseSpeedPercentage = percent;
+                moveSpeed += originalSpeed * increaseSpeedPercentage;
                 break;
             case (ItemData.ItemEffect.IncreaseFishingSpeed):
                 fishingPercentage = percent;
+                fishingSpeed -= originalfishingSpeed * fishingPercentage;
                 break;
         }
     }
@@ -108,9 +114,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
                 break;
             case (ItemData.ItemEffect.IncreaseMovementSpeed):
                 increaseSpeedPercentage = 0;
+                moveSpeed = originalSpeed;
                 break;
             case (ItemData.ItemEffect.IncreaseFishingSpeed):
                 fishingPercentage = 0;
+                fishingSpeed = originalfishingSpeed;
                 break;
         }
     }

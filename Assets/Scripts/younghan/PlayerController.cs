@@ -81,7 +81,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     private void ActiveOffEquipment(int _index)
     {
-        bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
+        if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.emIndex).gameObject.SetActive(false);
+        else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
     }
 
     private void Start()
@@ -427,7 +428,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         isFishing = true;
         playerAnimator.SetBool("isFishing", true);
         eCount = 0;
-        yield return new WaitForSeconds(Random.Range(5, 11));
+        yield return new WaitForSeconds(Random.Range(playerStat.fishingSpeed, playerStat.fishingSpeed * 2));
         eImageActivate = true;
         // E 키를 누르라는 UI 나오게 해야함 UIManager에서 실행
         Debug.Log("Press E!");

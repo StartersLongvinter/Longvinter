@@ -69,7 +69,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().itemList.Add(itemInEquip);
 
             int _index = gameObject.GetComponent<Item>().equipment.emIndex;
-            player.GetComponent<PhotonView>().RPC("ActiveOffEquipment", RpcTarget.All, _index);
+            player.GetComponent<PhotonView>().RPC("ActiveOffEquipment", RpcTarget.All, -1);
             player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, true, 0);
 
             for (int i = 0; i < bagInven.Length; i++)
