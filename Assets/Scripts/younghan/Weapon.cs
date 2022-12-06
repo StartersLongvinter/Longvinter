@@ -15,6 +15,9 @@ public class Weapon : MonoBehaviourPun
     public float damage;
     public float attackRate;
 
+    [Header("Melee")]
+    [SerializeField] private BoxCollider meleeAttackArea;
+
     [Header("Range")]
     [SerializeField][Range(0, 100)] private int accuracy = 100;
     [SerializeField] private int bulletCountPerFire = 1;
@@ -22,6 +25,7 @@ public class Weapon : MonoBehaviourPun
     [SerializeField] private Transform muzzleFlashPoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject muzzleFlashVfxPrefab;
+    [SerializeField] private BoxCollider doNotFireArea;
 
     public void Fire()
     {
@@ -90,5 +94,12 @@ public class Weapon : MonoBehaviourPun
     public void Swing()
     {
         Debug.Log("Swing");
+
+
     }
+
+    //IEnumerable ActivateAttackArea()
+    //{
+    //    meleeAttackArea.
+    //}
 }
