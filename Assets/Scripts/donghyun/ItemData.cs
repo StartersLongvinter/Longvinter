@@ -34,6 +34,7 @@ public class ItemData : ScriptableObject
     [SerializeField] private int increaseHealth;
     [SerializeField] private int applyPercentage;
     [SerializeField] private GameObject effectPrefab;
+    [SerializeField] private GameObject afterExpireTimePrefab;
     
 
     public string itName => itemName;
@@ -60,4 +61,6 @@ public class ItemData : ScriptableObject
     public int itIncreaseHealth => increaseHealth;
 
     public GameObject itEffectPrefab => effectPrefab;
+
+    public GameObject itAfterExpirePrefab => afterExpireTimePrefab;
 }

@@ -20,6 +20,7 @@ public class PlayerInventory : MonoBehaviourPun
     public int inventoryCount = 0;
 
     public Transform NoOverlapEffectNotificationPos;
+    public Transform AfterUseItemNotipos;
 
     private bool isItemUpdated;
     private bool isStuffed;
@@ -37,17 +38,21 @@ public class PlayerInventory : MonoBehaviourPun
 
     }
 
-    IEnumerator WaitForTimer(float time, int idx, GameObject go)
+    IEnumerator WaitForTimer(float time, int idx, GameObject go, GameObject effect)
     {
         while (time > 0)
         {
             time -= Time.deltaTime;
-            go.GetComponentInChildren<Text>().text = Mathf.Ceil(time).ToString();
+            effect.GetComponentInChildren<Text>().text = Mathf.Ceil(time).ToString();
             yield return null;
         }
 
         PlayerStat.LocalPlayer.InitEffect(go.GetComponent<Item>().item.itEffect);
 
+        GameObject afterEffect = Instantiate(go.GetComponent<Item>().item.itAfterExpirePrefab);
+        afterEffect.transform.SetParent(AfterUseItemNotipos);
+
+        Destroy(effect);
         Destroy(go);
         currentUseItem.RemoveAt(idx);
     }
@@ -171,6 +176,7 @@ public class PlayerInventory : MonoBehaviourPun
 
                 StartCoroutine(WaitForTimer(temp.GetComponent<Item>().item.itExpireTime
                     , currentUseItem.IndexOf(temp)
+                    , temp
                     , effect));
 
                 switch (go.GetComponent<Item>().item.itEffect)
