@@ -43,8 +43,10 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] float damagePercentWhileWalkInSnow = 5.5f;         // 설원에서 걸어다니는 경우
     [SerializeField] float damagePercentInWater = 13.3f;                // 깊은 물 속에 있는 경우 
 
-    public ItemData.ItemEffect itemEffect = ItemData.ItemEffect.Health; // Item Effect
-    public float applyPercentage = 0;                                   // 효과 퍼센트
+    public float coldReductionPercentage = 0;                           // 추위 감소 효과 퍼센트
+    public float armorPercentage = 0;                                   // 아머 효과 퍼센트
+    public float increaseSpeedPercentage = 0;                           // 스피드 증가 효과 퍼센트
+    public float fishingPercentage = 0;                                 // 낚시 효과 퍼센트
 
     float startTime = 0f;
     [SerializeField]
@@ -74,10 +76,14 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable
         status = (Status)_index;
     }
 
-    public void InitEffect()
+    public void GetEffect(ItemData.ItemEffect effectType, float percent)
     {
-        itemEffect = ItemData.ItemEffect.Health;
-        applyPercentage = 0;
+
+    }
+
+    public void InitEffect(ItemData.ItemEffect effectType)
+    {
+
     }
 
     [PunRPC]

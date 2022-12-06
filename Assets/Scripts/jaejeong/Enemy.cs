@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviourPun
             Debug.Log(photonView.Owner.NickName);
             PlayerStat.LocalPlayer.currentHPAnimator.SetTrigger("isDamaged");
             PlayerStat.LocalPlayer.ChangeHp(-1f * damage);
+            PlayerStat.LocalPlayer.ChangeStatus((int)PlayerStat.Status.damaged);
         }
         StartCoroutine(ResetColor());
     }
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviourPun
             yield return new WaitForSeconds(0.08f);
             renderer.material.color = originalColor;
             isChanged = false;
+            GetComponent<PlayerStat>().ChangeStatus((int)PlayerStat.Status.idle);
         }
         yield return null;
     }
