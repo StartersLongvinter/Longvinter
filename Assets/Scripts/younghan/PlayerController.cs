@@ -393,8 +393,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
 
-        //if (isAiming && weaponData.emAnim == EquipmentData.EquipmentAnim.Forward)
-        if (isAiming && weaponType == Weapon.Type.Range || weaponType == Weapon.Type.Melee2)
+        if (isAiming && weaponData.emAnim == EquipmentData.EquipmentAnim.Forward)
+        //if (isAiming && weaponType == Weapon.Type.Range || weaponType == Weapon.Type.Melee2)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         }
