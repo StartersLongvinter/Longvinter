@@ -15,6 +15,20 @@ public class SaveInformations
     public List<string> playerEquipments = new List<string>();
 }
 
+public class SaveHouseInformations
+{
+    // Have to add nickname at his house index!!
+    public List<Vector3> housePositions = new List<Vector3>();
+    public List<string> houseOwnerNicknames = new List<string>();
+}
+
+public class SaveTurretInformations
+{
+    // Have to add nickname at his turret index!!
+    public List<Vector3> turretPositions = new List<Vector3>();
+    public List<string> turretOwnerNicknames = new List<string>();
+}
+
 public class JsonManager : MonoBehaviour
 {
     private static JsonManager instance;
@@ -53,7 +67,7 @@ public class JsonManager : MonoBehaviour
         instance = this;
     }
 
-    public void SaveData(float _hp, int _money)
+    public void SavePlayerData(float _hp, int _money)
     {
         SaveInformations saveInformations = new SaveInformations();
         saveInformations.curHP = _hp;
@@ -79,7 +93,7 @@ public class JsonManager : MonoBehaviour
         File.WriteAllText(_path, json);
     }
 
-    public void LoadDate()
+    public void LoadPlayerDate()
     {
         string _fileName = PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
         string _path = Application.dataPath + _fileName + ".json";
@@ -119,11 +133,21 @@ public class JsonManager : MonoBehaviour
         }
     }
 
+    public void SaveRoomData()
+    {
+        
+    }
+
+    public void LoadRoomData()
+    {
+
+    }
+
     void Update()
     {
         if (curTime >= saveTime)
         {
-            SaveData(PlayerStat.LocalPlayer.hp, PlayerStat.LocalPlayer.money);
+            SavePlayerData(PlayerStat.LocalPlayer.hp, PlayerStat.LocalPlayer.money);
             curTime = 0f;
         }
         curTime += Time.deltaTime;
