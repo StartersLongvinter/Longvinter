@@ -14947,6 +14947,8 @@ MonoBehaviour:
   chatPrefab: {fileID: 6671883248550508411, guid: feebb38e7f7804d019f4e3f3161142da, type: 3}
   playerPosition: {fileID: 6005344780012494997}
   offset: {x: 0, y: 1, z: 10}
+  noticeFont: {fileID: 0}
+  badText: []
 --- !u!114 &4983998215243612754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16963,7 +16965,7 @@ PrefabInstance:
     - target: {fileID: 1124389447728399945, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 9078441727759166900, guid: c4fbd24d2de7f6a41840482026bc4166, type: 3}
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 1151178851078330101, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -17003,7 +17005,7 @@ PrefabInstance:
     - target: {fileID: 4418684235850968102, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 9078441727759166900, guid: c4fbd24d2de7f6a41840482026bc4166, type: 3}
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 5023987875499629561, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.012
@@ -17067,7 +17069,7 @@ PrefabInstance:
     - target: {fileID: 5330839939707178273, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 9078441727759166900, guid: c4fbd24d2de7f6a41840482026bc4166, type: 3}
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 5467026825859457279, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -17075,7 +17077,7 @@ PrefabInstance:
     - target: {fileID: 5603431476951211412, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 9078441727759166900, guid: c4fbd24d2de7f6a41840482026bc4166, type: 3}
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 6052722386084444247, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_Layer
       value: 8

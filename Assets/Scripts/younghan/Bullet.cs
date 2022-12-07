@@ -69,6 +69,11 @@ public class Bullet : MonoBehaviourPun
         //    collision.gameObject.GetComponent<LivingEntity>().HitByPlayer(damage);
         //}
 
+        if (collision.gameObject.GetComponent<IDamageable>() != null)
+        {
+            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(damage);
+        }
+
         if (collision.gameObject.tag == "Player" && (collision.gameObject.name + "Bullet" != this.gameObject.name))
         {
             if (collision.gameObject.GetComponent<PhotonView>().IsMine)
