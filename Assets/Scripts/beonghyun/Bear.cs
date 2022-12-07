@@ -17,6 +17,8 @@ public class Bear : LivingEntity
 
     [SerializeField] GameObject attackArea;
 
+    float damage = 10; 
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -173,20 +175,20 @@ public class Bear : LivingEntity
         anim.SetTrigger(state);
         attackArea.SetActive(true);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
         anim.SetBool("Combat Idle", false);
         isCoroutine2 = false;
         attackArea.SetActive(false);
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-        if (other.gameObject.tag=="Player")
-        {
-            Debug.Log("attack player");
-        }
-    }
+    //protected override void OnTriggerEnter(Collider other)
+    //{
+    //    base.OnTriggerEnter(other);
+    //    if (other.gameObject.tag=="Player")
+    //    {
+    //        Debug.Log("attack player");
+    //    }
+    //}
 
 }

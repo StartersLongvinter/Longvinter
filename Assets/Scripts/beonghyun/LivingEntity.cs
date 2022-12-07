@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
 
-public class LivingEntity : MonoBehaviourPun, IPunObservable
+public class LivingEntity : MonoBehaviourPun, IPunObservable, IDamageable
 {
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
@@ -110,24 +110,6 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
             bulletDir = transform.position - bullet.transform.position;
         }
     }
-
-    public void HitByPlayer(float damage)
-    {
-        StartCoroutine(OnDamageEffect());
-        OnDamage(damage);
-    }
-
-    void OnDamage(float damage)
-    {
-        currentHealth -= damage;
-
-        if (currentHealth<=0 && photonView.IsMine)
-        {
-            DropItem();
-            PhotonNetwork.Destroy(this.gameObject);
-        }
-    }
-
     void DropItem()
     {
         
@@ -170,6 +152,21 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
         else
         {
             currentHealth = (float)stream.ReceiveNext();
+        }
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        StartCoroutine(OnDamageEffect());
+
+        currentHealth -= damage;
+
+        Debug.Log(currentHealth + "    " + damage);
+
+        if (currentHealth <= 0 && photonView.IsMine)
+        {
+            DropItem();
+            PhotonNetwork.Destroy(this.gameObject);
         }
     }
 }

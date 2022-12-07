@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     //raycast 이용 특정 object와 hit 되면 fishing 함수 호출
     private void Fishing()
     {
-        if (moveDirection != Vector3.zero || isFishing) return;
+        if (moveDirection != Vector3.zero || isFishing || isAiming) return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         //AI collider와 부딪혀서 체크가 안되는 현상 발생함 raycastall으로 검출
         RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
@@ -328,16 +328,17 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Move()
     {
-        if (!isFishing)
-        {
-            moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
-            float currentMoveSpeed = isAiming ? playerStat.moveSpeed * 0.4f : playerStat.moveSpeed;
-            playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
-            playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
-        }
+        moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
+        float currentMoveSpeed = isAiming ? playerStat.moveSpeed * 0.4f : playerStat.moveSpeed;
+        playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
+        playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
 
         if (moveDirection != Vector3.zero)
+        {
+            //StopAllCoroutines();
             playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
+        }
+            
         else
             playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
     }
