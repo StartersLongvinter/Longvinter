@@ -7,6 +7,7 @@ using Photon.Pun;
 using TMPro;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.Linq;
+using UnityEngine.Android;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -45,12 +46,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
     [SerializeField] GameObject roomPrefab;
+    bool isCheckedPermission = false;
 
     void Awake()
     {
         currentVersion = Application.version;
         Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         if (NetworkManager.instance != null) Destroy(this.gameObject);
+#if UNITY_ANDROID
+        if (!isCheckedPermission)
+        {
+            if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
+                Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite);
+            if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead))
+                Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead);
+            isCheckedPermission = true;
+        }
+#endif
     }
 
     public void Init(string _playerName, GameObject _roomPrefab)
