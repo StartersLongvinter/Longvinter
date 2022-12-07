@@ -15304,7 +15304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerPlayerActorNumber: 0
   status: 0
-  hp: 0
+  hp: 90
   maxHp: 90
   money: 0
   originalSpeed: 5
@@ -15319,8 +15319,8 @@ MonoBehaviour:
   damagePercentInSnowField: 3.3
   damagePercentWhileWalkInSnow: 5.5
   damagePercentInWater: 13.3
-  hpNormalColor: {r: 0, g: 0, b: 0, a: 0}
-  hpWarningColor: {r: 0, g: 0, b: 0, a: 0}
+  hpNormalColor: {r: 0.945946, g: 1, b: 0, a: 1}
+  hpWarningColor: {r: 1, g: 0, b: 0, a: 1}
   currentHPAnimator: {fileID: 0}
   isColorChanged: 0
 --- !u!114 &1388196506
@@ -15538,6 +15538,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: doMeleeAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: cancelFish
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

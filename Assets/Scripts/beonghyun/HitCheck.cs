@@ -5,14 +5,17 @@ using Photon.Pun;
 
 public class HitCheck : MonoBehaviourPunCallbacks
 {
-    PhotonView pv;
+    Bear bear;
+    private void Start()
+    {
+        bear = GetComponentInParent<Bear>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag=="Player")
         {
-            //pv = other.GetComponent<PhotonView>();
-            other.gameObject.GetComponent<IDamageable>().ApplyDamage(10);
-            //Debug.Log()
+            other.gameObject.GetComponent<IDamageable>().ApplyDamage(bear.damage);
         }
     }
 }

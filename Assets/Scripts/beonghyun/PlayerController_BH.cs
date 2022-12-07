@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
+public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Vector3 AimLookPoint { get { return aimLookPoint; } }
     public bool IsAiming { get { return isAiming; } }
@@ -45,8 +45,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool isSuccessState;
     public bool eImageActivate;
     private int eCount = 0;
-    IEnumerator fishingCoroutine;
-    FishingPoint currentFishingPoint;
 
     private bool isAuto;
 
@@ -61,7 +59,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine)
         {
             Camera.main.GetComponent<CameraController>().Player = this.transform;
-            Camera.main.GetComponent<CameraController>().PlayerController = this;
+            //Camera.main.GetComponent<CameraController>().PlayerController = this;
         }
 
         playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
@@ -284,23 +282,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
             if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
             {
-                currentFishingPoint = raycasthit.collider.GetComponent<FishingPoint>();
-
-                if (currentFishingPoint.isWait)
-                {
-                    Debug.Log("Fish are surprised by sudden movement. Cannot use fishingpoint");
-                    return;
-                }
                 Debug.Log("Fishing");
-               
                 //낚시할때 fishingpoint를 바라보고 있어야 함
                 transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
                 playerAnimator.SetTrigger("doFish");
                 fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
-                
-                fishingCoroutine = CatchFish(raycasthit.collider.GetComponent<FishingPoint>());
-                //StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
-                StartCoroutine(fishingCoroutine);
+                StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
             }
         }
     }
@@ -348,10 +335,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         if (moveDirection != Vector3.zero)
         {
-            CancelFish();
-            
+            //StopAllCoroutines();
             playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
         }
+
             
         else
             playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
@@ -454,17 +441,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private void SetIsAiming(bool _isAiming)
     {
         isAiming = _isAiming;
-    }
-
-    void CancelFish()
-    {
-        if (isFishing)
-        {
-            StopCoroutine(fishingCoroutine);
-            isFishing = false;
-            playerAnimator.SetTrigger("cancelFish");
-            currentFishingPoint.WaitPoint();
-        }
     }
 
     IEnumerator CatchFish(FishingPoint point)

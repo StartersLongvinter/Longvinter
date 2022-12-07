@@ -17,7 +17,7 @@ public class Bear : LivingEntity
 
     [SerializeField] GameObject attackArea;
 
-    float damage = 10; 
+    public float damage = 15; 
 
     // Start is called before the first frame update
     protected override void Start()
@@ -173,6 +173,9 @@ public class Bear : LivingEntity
         agent.speed = 0;
         anim.SetBool("Combat Idle", true);
         anim.SetTrigger(state);
+
+        yield return new WaitForSeconds(0.3f);
+
         attackArea.SetActive(true);
 
         yield return new WaitForSeconds(1.5f);
