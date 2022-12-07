@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     private void ActiveOffEquipment(int _index)
     {
-        if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.emIndex).gameObject.SetActive(false);
+        if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.eqIndex).gameObject.SetActive(false);
         else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
     }
 
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             isPressedSpace = false;
         }
 
-        if (weaponData != null) photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.emIndex);
+        if (weaponData != null) photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
     }
 
     private void FixedUpdate()
@@ -371,7 +371,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weaponData == null) return;
 
-        Weapon weapon = handEquipPoint.GetChild(weaponData.emIndex).gameObject.GetComponent<Weapon>();
+        Weapon weapon = handEquipPoint.GetChild(weaponData.eqIndex).gameObject.GetComponent<Weapon>();
 
         attackDelay += Time.deltaTime;
         isAttackReady = weapon.attackRate < attackDelay;
@@ -397,7 +397,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (weaponData == null) return;
 
-        if (isAiming && weaponData.emClassify == EquipmentData.EquipmentClassify.Melee && weaponData.emArea == EquipmentData.EquipmentPosition.OneHand)
+        if (isAiming && weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.OneHand)
         {
             playerAnimator.SetBool("isMeleeAttackAim", true);
         }
@@ -413,7 +413,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
         
-        if (isAiming && weaponData.emArea == EquipmentData.EquipmentPosition.TwoHand)
+        if (isAiming && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         }

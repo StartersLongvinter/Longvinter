@@ -86,7 +86,7 @@ public class PlayerInventory : MonoBehaviourPun
                 {
                     if (bagInventory[i].transform.childCount == 0)
                     {
-                        item = Instantiate(go.GetComponent<Item>().equipment.itPrefab, bagInventory[i].transform);
+                        item = Instantiate(go.GetComponent<Item>().equipment.eqCanvasPrefab, bagInventory[i].transform);
                         item.transform.localScale = new Vector3(1, 1, 1);
                         item.GetComponent<RectTransform>().sizeDelta = new Vector2(90, 90);
                         item.GetComponent<RectTransform>().anchoredPosition = new Vector3(45, 45, 0);
