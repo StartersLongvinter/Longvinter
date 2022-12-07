@@ -66,14 +66,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             DontDestroyOnLoad(this.gameObject);
             currentConnectionStatus = "서버에 연결중입니다...";
             PhotonNetwork.ConnectUsingSettings();
-            UpdateBadTexts();
         }
         isLobby = false;
     }
 
     void UpdateBadTexts()
     {
-        badText = File.ReadAllText(Application.dataPath + "/Resources/BadWords.txt", System.Text.Encoding.UTF8).Split("\n").ToList();
+        Debug.Log(File.Exists(Application.streamingAssetsPath + "/BadWords.txt"));
+        Debug.Log(Application.streamingAssetsPath + "/BadWords.txt");
+        if (File.Exists(Application.streamingAssetsPath + "/BadWords.txt"))
+        {
+            badText = File.ReadAllText(Application.streamingAssetsPath + "/BadWords.txt", System.Text.Encoding.UTF8).Split("\n").ToList();
+        }
     }
 
     public void SendWarningText(string message)
@@ -153,6 +157,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        UpdateBadTexts();
         currentConnectionStatus = "서버에 연결되었습니다...";
         if (returnLobby)
         {
