@@ -310,7 +310,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 isAuto = !raycasthit.collider.gameObject.GetComponent<Turret>().IsAuto;
                 Debug.Log(isAuto);
                 turret.IsAuto = isAuto;
-                turret.ChangeTurretModeColor(turret, isAuto);
+                turret.gameObject.GetComponent<PhotonView>().RPC(nameof(TurretController.IsAutoFunc), RpcTarget.All, isAuto);
+                return;
+                //turret.ChangeTurretModeColor(turret, isAuto);
             }
         }
     }

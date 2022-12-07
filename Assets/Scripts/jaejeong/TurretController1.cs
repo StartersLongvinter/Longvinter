@@ -12,7 +12,6 @@ public class TurretController1 : Turret
     {
         base.Start();
         turretOwner = "";
-        //photonView.RPC(nameof(TurretController.RepeatInvoke), RpcTarget.All);
     }
 
     private void Update()

@@ -38,13 +38,21 @@ public class Turret : MonoBehaviourPun
             yield return new WaitForSeconds(0.5f);
         }
     }
-    public void ChangeTurretModeColor(Turret turret, bool isAuto)
+
+    public void ChangeTurretModeColor()
     {
-        Material[] materials = turret.transform.GetChild(0).GetComponent<MeshRenderer>().materials;
-        if (isAuto)
+        Material[] materials = this.transform.GetChild(0).GetComponent<MeshRenderer>().materials;
+
+        if (IsAuto)
             materials[0] = mat[0];
         else
             materials[0] = mat[1];
-        turret.transform.GetChild(0).GetComponent<MeshRenderer>().materials = materials;
+        this.transform.GetChild(0).GetComponent<MeshRenderer>().materials = materials;
+    }
+
+    [PunRPC]
+    public void IsAutoFunc(bool isAuto)
+    {
+        this.IsAuto = isAuto;
     }
 }

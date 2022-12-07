@@ -18,6 +18,8 @@ public class TurretController : Turret
     private Transform target;
     private Enemy targetEnemy;
 
+    private float damage;
+
     protected override void Start()
     {
         base.Start();
@@ -25,6 +27,8 @@ public class TurretController : Turret
                     turretOwner = photonView.Owner.NickName;*/
 
         photonView.RPC("Init", RpcTarget.All);
+        if (turretOwner == null)
+            damage = 10;
     }
 
     [PunRPC]
@@ -74,6 +78,7 @@ public class TurretController : Turret
 
     private void Update()
     {
+        ChangeTurretModeColor();
         if (target == null || firePoint == null)
             return;
 
@@ -93,8 +98,16 @@ public class TurretController : Turret
                 firedBullet.GetComponent<PhotonView>().RPC("Shoot", RpcTarget.All, -firePoint.right.x, -firePoint.right.y, -firePoint.right.z, 10f, 0f, 0f, 0f);
             }
             fireTimeLimit = 1f / fireRate;
+        }else if(fireTimeLimit <= 0f && turretOwner == null && attack)
+        {
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            if (damageable != null && target.GetComponent<PhotonView>().IsMine)
+            {
+                target.GetComponent<PhotonView>().RPC(nameof(damageable.ApplyDamage), RpcTarget.AllViaServer, damage);
+            }
+            fireTimeLimit = 1f / fireRate;
         }
-        fireTimeLimit -= Time.deltaTime;
+            fireTimeLimit -= Time.deltaTime;
     }
 
     [PunRPC]
