@@ -47,7 +47,7 @@ public class CreateRoomBtn : MonoBehaviour
         inputPassword.interactable = lockToggle.isOn;
         maxPlayerValue.text = Mathf.RoundToInt(maxPlayerSlider.value).ToString();
 
-        if (PhotonNetwork.InRoom && (int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"] != 1)
+        if (PhotonNetwork.InRoom && (int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"] > 1)
         {
             multiplayButton.gameObject.SetActive(false);
             playerListButton.gameObject.SetActive(true);

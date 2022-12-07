@@ -21,7 +21,6 @@ public class ChatManager : MonoBehaviourPunCallbacks
     GameObject nicknameText;
     GameObject chattingSign;
     [SerializeField] Font noticeFont;
-    [SerializeField] string[] badText;
 
     float noticeTime = 0;
 
@@ -67,7 +66,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        foreach (string _badText in badText)
+        foreach (string _badText in NetworkManager.Instance.badText)
         {
             if (_message.Contains(_badText))
             {
@@ -185,7 +184,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
             chatInput.Select();
         }
 
-        if (Input.GetKeyDown(KeyCode.N) && photonView.IsMine)
+        if (Input.GetKeyDown(KeyCode.N) && photonView.IsMine && !chatInput.gameObject.activeSelf)
         {
             ActivateNickname(3.0f);
         }

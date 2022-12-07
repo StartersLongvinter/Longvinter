@@ -14949,23 +14949,6 @@ MonoBehaviour:
   playerPosition: {fileID: 6005344780012494997}
   offset: {x: 0, y: 1, z: 10}
   noticeFont: {fileID: 12800000, guid: 0cad82273acb14461bab04d36e4ff4cd, type: 3}
-  badText:
-  - "\u3157"
-  - "\uC2DC\uBC1C"
-  - "\uC874\uB098"
-  - "\uBCD1\uC2E0"
-  - "\u3145\u3142"
-  - "\u3142\u3145"
-  - "\uBBF8\uCE5C"
-  - "\u3141\u314A"
-  - "\u3145\u314D"
-  - "\u3148\u3134"
-  - fuck
-  - "\uBC14\uBCF4"
-  - "\uBA4D\uCCAD\uC774"
-  - "\uBA38\uC800\uB9AC"
-  - "\uB188"
-  - "\uB144"
 --- !u!114 &4983998215243612754
 MonoBehaviour:
   m_ObjectHideFlags: 0
