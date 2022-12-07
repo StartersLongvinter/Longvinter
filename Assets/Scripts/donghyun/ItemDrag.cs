@@ -48,12 +48,12 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
 
         //장비탭에 현재 넣으려는 장비와 같은 분류를 가지는 장비가 있는지 확인
         if (player.GetComponent<PlayerInventory>().equipmentList.Any(
-                x => x.GetComponent<Item>().equipment.emArea == item.GetComponent<Item>().equipment.emArea))
+                x => x.GetComponent<Item>().equipment.eqPosition == item.GetComponent<Item>().equipment.eqPosition))
         {
             //장비탭에 현재 가방에서 클릭한 같은 장비 타입의 게임오브젝트를 찾기
             itemInEquip = player.GetComponent<PlayerInventory>()
                 .equipmentList.Find(x =>
-                    x.GetComponent<Item>().equipment.emArea == item.GetComponent<Item>().equipment.emArea);
+                    x.GetComponent<Item>().equipment.eqPosition == item.GetComponent<Item>().equipment.eqPosition);
 
 
             #region 장비에 같은 타입이 있을 경우 해당 장비를 가방에 넣고 가방에있는 장비를 장비에 넣는 과정
@@ -68,7 +68,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().equipmentList.Remove(itemInEquip);
             player.GetComponent<PlayerInventory>().itemList.Add(itemInEquip);
 
-            int _index = gameObject.GetComponent<Item>().equipment.emIndex;
+            int _index = gameObject.GetComponent<Item>().equipment.eqIndex;
             player.GetComponent<PhotonView>().RPC("ActiveOffEquipment", RpcTarget.All, -1);
             player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, true, 0);
 
@@ -88,7 +88,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().updateEquipInventory();
             player.GetComponent<PlayerInventory>().updateBagInventory();
 
-            Debug.Log(gameObject.GetComponent<Item>().equipment.emKorName + " 장비에서 빠져서 가방으로 이동함");
+            Debug.Log(gameObject.GetComponent<Item>().equipment.eqKorName + " 장비에서 빠져서 가방으로 이동함");
 
             #endregion
 
@@ -117,7 +117,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().updateBagInventory();
             player.GetComponent<PlayerInventory>().updateEquipInventory();
 
-            Debug.Log(gameObject.GetComponent<Item>().equipment.emKorName + " 가방에서 빠져서 장비로 이동함");
+            Debug.Log(gameObject.GetComponent<Item>().equipment.eqKorName + " 가방에서 빠져서 장비로 이동함");
 
             #endregion
         }
@@ -129,7 +129,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             player.GetComponent<PlayerInventory>().itemList.Remove(gameObject);
             player.GetComponent<PlayerInventory>().equipmentList.Add(gameObject);
 
-            int _index = gameObject.GetComponent<Item>().equipment.emIndex;
+            int _index = gameObject.GetComponent<Item>().equipment.eqIndex;
             player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, false, _index);
 
             for (int i = 0; i < equipInven.Length; i++)
@@ -146,7 +146,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
 
             player.GetComponent<PlayerInventory>().updateBagInventory();
 
-            Debug.Log(gameObject.GetComponent<Item>().equipment.emKorName + "사용함");
+            Debug.Log(gameObject.GetComponent<Item>().equipment.eqKorName + "사용함");
         }
     }
 
@@ -168,14 +168,14 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
         player.GetComponent<PlayerInventory>().equipmentList.Remove(go);
         player.GetComponent<PlayerInventory>().itemList.Add(go);
 
-        int _index = gameObject.GetComponent<Item>().equipment.emIndex;
+        int _index = gameObject.GetComponent<Item>().equipment.eqIndex;
         player.GetComponent<PhotonView>().RPC("ActiveOffEquipment", RpcTarget.All, _index);
         player.GetComponent<PhotonView>().RPC("SetWeaponData", RpcTarget.All, true, 0);
 
         player.GetComponent<PlayerInventory>().updateBagInventory();
         player.GetComponent<PlayerInventory>().updateEquipInventory();
 
-        Debug.Log(gameObject.GetComponent<Item>().equipment.emKorName + "사용함");
+        Debug.Log(gameObject.GetComponent<Item>().equipment.eqKorName + "사용함");
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -199,7 +199,7 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
             else if (gameObject.GetComponent<Item>().equipment != null)
             {
                 //ammo를 인벤토리에서 클릭 했을 경우 장비에 들어가는게 아니라 플레이어의 ammo에 채워져야함
-                if (gameObject.GetComponent<Item>().equipment.emClassify == EquipmentData.EquipmentClassify.Ammo)
+                if (gameObject.GetComponent<Item>().equipment.eqClassify == EquipmentData.EquipmentClassify.Ammo)
                 {
                     int currentAmmoCount = int.Parse(player.GetComponent<Ammo>().ammoText.text);
 

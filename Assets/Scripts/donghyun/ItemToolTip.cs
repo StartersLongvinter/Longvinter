@@ -65,7 +65,7 @@ public class ItemToolTip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
             if (eventData.pointerCurrentRaycast.gameObject.GetComponent<Item>().equipment != null)
             {
                 itemNameText.text = eventData.pointerCurrentRaycast.gameObject
-                    .GetComponent<Item>().equipment.emKorName;
+                    .GetComponent<Item>().equipment.eqKorName;
 
                 Vector2 vec = new Vector2(itemNameText.preferredWidth + 30f,
                     itemNameText.preferredHeight);
@@ -117,7 +117,7 @@ public class ItemToolTip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
             if (eventData.pointerCurrentRaycast.gameObject.GetComponent<Item>().equipment != null)
             {
                 itemExplainText.text = eventData.pointerCurrentRaycast.gameObject
-                    .GetComponent<Item>().equipment.emKorName;
+                    .GetComponent<Item>().equipment.eqKorName;
 
                 Vector2 vec = new Vector2(itemExplainText.preferredWidth + 30f,
                     itemExplainText.preferredHeight);

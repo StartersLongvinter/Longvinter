@@ -7,35 +7,37 @@ public class EquipmentData : ScriptableObject
 {
     public enum EquipmentClassify
     {
-        Default, Melee, Range, Ammo
+        Default, MeleeWeapon, RangeWeapon, Ammo
     }
-    
     public enum EquipmentPosition
     {
-        Default, Head, OneHand, TwoHand
+        Default, OneHand, TwoHand, Head, Back
     }
-    
+
+    [TextArea]
+    [SerializeField] private string equipmentExplain;
     [SerializeField] private EquipmentClassify equipmentClassify;
-    [SerializeField] private EquipmentPosition equipmentArea;
-    [SerializeField] private GameObject equipmentCanvasPrefab; //아이템 프리펩
+    [SerializeField] private EquipmentPosition equipmentPosition;
+    [SerializeField] private GameObject equipmentCanvasPrefab;
     [SerializeField] private GameObject equipmentPrefab;
-    //[SerializeField] private Sprite equipmentImage; //아이템 사진
     [SerializeField] private float weaponDamage;
     [SerializeField] private float weaponAttackRate;
-    [SerializeField] private int ammoCount;
+    [SerializeField] private int ammoCount; // Player 이동 예정
     [SerializeField] private string equipmentKorName;
     [SerializeField] private bool isAuto;
     [SerializeField] private int equipmentIndex;
-    
-    public EquipmentClassify emClassify => equipmentClassify;
-    public EquipmentPosition emArea => equipmentArea;
-    public GameObject itPrefab => equipmentCanvasPrefab;
-    public GameObject emPrefab => equipmentPrefab;
-    //public Sprite itImage => equipmentImage;
+
+    public string eqExplain => equipmentExplain;
+    public EquipmentClassify eqClassify => equipmentClassify;
+    public EquipmentPosition eqPosition => equipmentPosition;
+    public GameObject eqCanvasPrefab => equipmentCanvasPrefab;
+    public GameObject eqPrefab => equipmentPrefab;
+
+    //public Vector2 wpMinMaxDamage => weaponMinMaxDamage;
     public float wpDamage => weaponDamage;
     public float wpAttackRate => weaponAttackRate;
     public int amCount => ammoCount;
-    public string emKorName => equipmentKorName;
+    public string eqKorName => equipmentKorName;
     public bool auto => isAuto;
-    public int emIndex => equipmentIndex;
+    public int eqIndex => equipmentIndex;
 }

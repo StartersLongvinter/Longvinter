@@ -187,6 +187,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
     public void ApplyDamage(float damage)
     {
         ChangeHp(-1f * damage);
+        ChangePlayersColor();
     }
 
     public void ChangeStatus(int _index)
@@ -227,14 +228,14 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
     }
 
     [PunRPC]
-    public void ChangePlayersColor(float damage)
+    public void ChangePlayersColor()
     {
         meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         if (photonView.IsMine)
         {
             Debug.Log(photonView.Owner.NickName);
             currentHPAnimator.SetTrigger("isDamaged");
-            ApplyDamage(damage);
+            //ApplyDamage(damage);
             ChangeStatus((int)Status.Damaged);
         }
         StartCoroutine(ResetColor());
