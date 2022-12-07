@@ -58,9 +58,17 @@ public class Bullet_BH : MonoBehaviourPun
     {
         if (collision.gameObject.tag == "LivingEntity" || collision.gameObject.tag=="Bison")
         {
-            Debug.Log("Collided");
-            collision.gameObject.GetComponent<LivingEntity>().HitByPlayer(damage);
+            //Debug.Log("Collided");
+            //collision.gameObject.GetComponent<LivingEntity>().HitByPlayer(damage);
+
         }
+
+        
+        if (collision.gameObject.GetComponent<IDamageable>() != null)
+        {
+            collision.gameObject.GetComponent<IDamageable>().ApplyDamage(damage);
+        }
+        
 
         if (collision.gameObject.tag == "Player" && (collision.gameObject.name + "Bullet" != this.gameObject.name))
         {

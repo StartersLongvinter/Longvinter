@@ -63,6 +63,12 @@ public class Bullet : MonoBehaviourPun
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        //if (collision.gameObject.tag == "LivingEntity" || collision.gameObject.tag == "Bison")
+        //{
+        //    //Debug.Log("Collided");
+        //    collision.gameObject.GetComponent<LivingEntity>().HitByPlayer(damage);
+        //}
+
         if (collision.gameObject.tag == "Player" && (collision.gameObject.name + "Bullet" != this.gameObject.name))
         {
             if (collision.gameObject.GetComponent<PhotonView>().IsMine)
