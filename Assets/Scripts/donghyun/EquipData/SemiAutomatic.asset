@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e00f73891bbc47e983f251f87ccda19, type: 3}
   m_Name: SemiAutomatic
   m_EditorClassIdentifier: 
+  equipmentExplain: 
   equipmentClassify: 2
-  equipmentArea: 3
+  equipmentPosition: 2
   equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: cea04fcf434cc4505aafe1a2dd16dc21, type: 3}
   equipmentPrefab: {fileID: 5292066078330503074, guid: abe46d1b5af8047408a48888f10f1246, type: 3}
   weaponDamage: 8
