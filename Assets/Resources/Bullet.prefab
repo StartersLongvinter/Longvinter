@@ -4926,7 +4926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   ImpactVfxPrefab: {fileID: 3213101676908087617, guid: c24712fe9b4e34e43a6601f53ffe48de, type: 3}
-  speed: 10
+  speed: 50
 --- !u!114 &375484658926922868
 MonoBehaviour:
   m_ObjectHideFlags: 0

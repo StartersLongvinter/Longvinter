@@ -9,7 +9,7 @@ public class FishingPoint : MonoBehaviourPun
 {
     public GameObject[] fishList;
 
-    public bool isOccupied;
+    public bool isWait;
 
     int fishCount;
 
@@ -19,7 +19,7 @@ public class FishingPoint : MonoBehaviourPun
 
     private void Start()
     {
-        fishCount = /*Random.Range(1, 10)*/1;
+        fishCount = Random.Range(1, 10);
         effect = transform.GetChild(0).gameObject;
         sphereCollider = GetComponent<SphereCollider>();
     }
@@ -58,12 +58,18 @@ public class FishingPoint : MonoBehaviourPun
             StartCoroutine(PointSwitcher());
         }
     }
+    //public void IsWait()
+    //{
+    //    GetComponent<PhotonView>().RPC("WaitPoint", RpcTarget.All);
+    //}
 
     //[PunRPC]
-    //public void ActivatePoint()
-    //{
-    //    gameObject.SetActive(true);
-    //}
+    public void WaitPoint()
+    {
+        Debug.Log("Fish are surprised by sudden movement. Cannot use fishingpoint");
+        StartCoroutine(Wait());
+    }
+
 
     IEnumerator PointSwitcher()
     {
@@ -77,9 +83,19 @@ public class FishingPoint : MonoBehaviourPun
         sphereCollider.enabled = true;
         effect.SetActive(true);
 
-        fishCount = 2;
+        fishCount = Random.Range(1,10);
     }
 
+    IEnumerator Wait()
+    {
+        //sphereCollider.enabled = false;
+        isWait = true;
+
+        yield return new WaitForSeconds(10);
+
+        //sphereCollider.enabled = true;
+        isWait = false;
+    }
     //[PunRPC]
     //public void NotUsePoint()
     //{

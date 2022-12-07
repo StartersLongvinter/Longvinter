@@ -8,21 +8,18 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(Animator))]
 public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public float moveSpeed;
-    public Weapon weapon;
+    public Vector3 AimLookPoint { get { return aimLookPoint; } }
+    public bool IsAiming { get { return isAiming; } }
+    public EquipmentData weaponData;
+    public EquipmentData[] weaponDatas;
     public Transform leftHandIkTarget;
     public Transform rightHandIkTarget;
-    public Vector3 AimLookPoint
-    {
-        get { return aimLookPoint; }
-    }
-    public bool IsAiming
-    {
-        get { return isAiming; }
-    }
+    public Transform bagEquipPoint;
+    public Transform handEquipPoint;
+    [HideInInspector] public bool isBuilding = false;
 
-    [SerializeField] private Rigidbody playerRigidbody;
-    [SerializeField] private Animator playerAnimator;
+    private Rigidbody playerRigidbody;
+    private Animator playerAnimator;
     private PlayerStat playerStat;
 
     private float horizontalAxis;
@@ -36,24 +33,20 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
     private bool isAiming;
     private bool isPressedSpace;
 
-
     private float ikProgress;
     private float ikWeight;
 
     [SerializeField] GameObject chatInput;
-
-    //≥¨Ω√∞¸∑√ ∫Øºˆ
-    [SerializeField] float maxInteractableDistance = 7;
-    [SerializeField]
-    bool isFishing;
-    public bool eImageActivate;
-    public bool isSuccessState;
-    int eCount = 0;
-
-    GameObject fish;
-
     private float timer = 0f;
 
+    private GameObject fish;
+    [SerializeField] float maxInteractableDistance = 7;
+    private bool isFishing;
+    private bool isSuccessState;
+    public bool eImageActivate;
+    private int eCount = 0;
+
+    private bool isAuto;
 
     #region Callback Methods
     private void Awake()
@@ -72,6 +65,25 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
         playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
     }
 
+    [PunRPC]
+    private void SetWeaponData(bool isNull = true, int _index = 0)
+    {
+        Debug.Log("Set " + _index);
+        if (isNull)
+            weaponData = null;
+        else
+        {
+            weaponData = weaponDatas[_index];
+        }
+    }
+
+    [PunRPC]
+    private void ActiveOffEquipment(int _index)
+    {
+        if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.eqIndex).gameObject.SetActive(false);
+        else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
+    }
+
     private void Start()
     {
 
@@ -86,6 +98,7 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
         Attack();
         Fishing();
         ECount();
+        ChangeTurretMode();
 
         if (isPressedSpace)
         {
@@ -97,6 +110,8 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
             timer = 0f;
             isPressedSpace = false;
         }
+
+        if (weaponData != null) photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
     }
 
     private void FixedUpdate()
@@ -129,7 +144,7 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 else
                 {
-                    Debug.Log("¿Œ∫•≈‰∏Æ ∞°µÊ¬¸");
+                    Debug.Log("Ïù∏Î≤§ÌÜ†Î¶¨ Í∞ÄÎìùÏ∞∏");
                 }
             }
             else if (doAttack)
@@ -155,7 +170,7 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
                         }
                         else
                         {
-                            Debug.Log("¿Œ∫•≈‰∏Æ ∞°µÊ¬¸");
+                            Debug.Log("Ïù∏Î≤§ÌÜ†Î¶¨ Í∞ÄÎìùÏ∞∏");
                         }
                     }
                 }
@@ -172,7 +187,7 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 else
                 {
-                    Debug.Log("¿Œ∫•≈‰∏Æ ∞°µÊ¬¸");
+                    Debug.Log("Ïù∏Î≤§ÌÜ†Î¶¨ Í∞ÄÎìùÏ∞∏");
                 }
             }
 
@@ -196,16 +211,14 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
                         }
                         else
                         {
-                            Debug.Log("¿Œ∫•≈‰∏Æ ∞°µÊ¬¸");
+                            Debug.Log("Ïù∏Î≤§ÌÜ†Î¶¨ Í∞ÄÎìùÏ∞∏");
                         }
                     }
                 }
             }
         }
     }
-    #endregion
 
-    #region Public Methods
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -219,13 +232,36 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
     }
     #endregion
 
+    #region Public Methods
+    // Ïù¥Í±∞ Ìï©Ï≥êÏïº Ìï®
+    [PunRPC]
+    public void SwitchWeaponPosition(int _emIndex)
+    {
+        if (isAiming)
+        {
+            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
+            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
+        }
+        else
+        {
+            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
+            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
+        }
+    }
+    #endregion
+
     #region Private Methods
     private void GetInput()
     {
         horizontalAxis = Input.GetAxisRaw("Horizontal");
         verticalAxis = Input.GetAxisRaw("Vertical");
-        isAiming = Input.GetButton("Fire2");
         photonView.RPC("SetIsAiming", RpcTarget.Others, isAiming);
+
+        if (weaponData != null && !isBuilding)
+        {
+            isAiming = Input.GetButton("Fire2");
+        }
+
         doAttack = Input.GetButtonDown("Fire1");
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -234,36 +270,52 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    //raycast ¿ÃøÎ ∆Ø¡§ objectøÕ hit µ«∏È fishing «‘ºˆ »£√‚
+    //raycast Ïù¥Ïö© ÌäπÏ†ï objectÏôÄ hit ÎêòÎ©¥ fishing Ìï®Ïàò Ìò∏Ï∂ú
     private void Fishing()
     {
-        if (moveDirection != Vector3.zero || isFishing) return;
+        if (moveDirection != Vector3.zero || isFishing || isAiming) return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //AI colliderøÕ ∫Œµ˙«Ùº≠ √º≈©∞° æ»µ«¥¬ «ˆªÛ πﬂª˝«‘ raycastall¿∏∑Œ ∞À√‚
+        //AI colliderÏôÄ Î∂ÄÎî™ÌòÄÏÑú Ï≤¥ÌÅ¨Í∞Ä ÏïàÎêòÎäî ÌòÑÏÉÅ Î∞úÏÉùÌï® raycastallÏúºÎ°ú Í≤ÄÏ∂ú
         RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
         foreach (var raycasthit in raycastHits)
         {
             float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
             if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
             {
-                //if (raycasthit.collider.GetComponent<FishingPoint>().isOccupied)
-                //{
-                //    Debug.Log("¥Ÿ∏•ªÁ∂˜¿Ã ≥¨Ω√¡ﬂ¿‘¥œ¥Ÿ.");
-                //}
-                //else
-                //{
-                    Debug.Log("Fishing");
-                    //≥¨Ω√«“∂ß fishingpoint∏¶ πŸ∂Û∫∏∞Ì ¿÷æÓæﬂ «‘
-                    transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
-                    playerAnimator.SetTrigger("doFish");
-                    fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
-                    StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
-                //}
+                Debug.Log("Fishing");
+                //ÎÇöÏãúÌï†Îïå fishingpointÎ•º Î∞îÎùºÎ≥¥Í≥† ÏûàÏñ¥Ïïº Ìï®
+                transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
+                playerAnimator.SetTrigger("doFish");
+                fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
+                StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
             }
         }
     }
 
-    void ECount()
+    private void ChangeTurretMode()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
+        foreach (var raycasthit in raycastHits)
+        {
+            if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
+                continue;
+            Turret turret= raycasthit.collider.gameObject.GetComponent<Turret>();
+            if (turret.turretOwner == "")
+                return;
+            float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
+            if (doAttack &&raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance && 
+                raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
+            {
+                isAuto = !raycasthit.collider.gameObject.GetComponent<Turret>().IsAuto;
+                Debug.Log(isAuto);
+                turret.IsAuto = isAuto;
+                turret.ChangeTurretModeColor(turret, isAuto);
+            }
+        }
+    }
+
+    private void ECount()
     {
         if (eImageActivate)
         {
@@ -276,13 +328,20 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Move()
     {
-        if (!isFishing)
+        moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
+        float currentMoveSpeed = isAiming ? playerStat.moveSpeed * 0.4f : playerStat.moveSpeed;
+        playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
+        playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
+
+        if (moveDirection != Vector3.zero)
         {
-            moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
-            float currentMoveSpeed = isAiming ? moveSpeed * 0.4f : moveSpeed;
-            playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
-            playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
+            //StopAllCoroutines();
+            playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
         }
+
+            
+        else
+            playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
     }
 
     private void Rotate()
@@ -310,19 +369,20 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Attack()
     {
-        if (weapon == null) return;
+        if (weaponData == null) return;
+
+        Weapon weapon = handEquipPoint.GetChild(weaponData.eqIndex).gameObject.GetComponent<Weapon>();
 
         attackDelay += Time.deltaTime;
         isAttackReady = weapon.attackRate < attackDelay;
 
         if (isAiming && isAttackReady && doAttack)
         {
-            if(true)
-            //if (weapon.type == Weapon.Type.Range)
+            if (weapon.type == Weapon.Type.OneHandRange || weapon.type == Weapon.Type.TwoHandRange)
             {
                 weapon.Fire();
             }
-            else //if (weapon.type == Weapon.Type.Melee1)
+            else if (weapon.type == Weapon.Type.OneHandMelee)
             {
                 weapon.Swing();
 
@@ -335,9 +395,9 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Aim()
     {
-        if (weapon == null) return;
-        if(true)
-        //if (isAiming && weapon.type == Weapon.Type.)
+        if (weaponData == null) return;
+
+        if (isAiming && weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.OneHand)
         {
             playerAnimator.SetBool("isMeleeAttackAim", true);
         }
@@ -349,15 +409,11 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
 
     private void AnimateAim()
     {
-        if (isFishing)
-        {
-            return;
-        }
+        if (weaponData == null | isFishing) return;
 
-        float progressSpeed = Mathf.Lerp(1f, 3f, ikProgress);
-
-        if(true)
-        //if (isAiming && weapon.type == Weapon.Type.Range || weapon.type == Weapon.Type.Melee2)
+        float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
+        
+        if (isAiming && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         }
@@ -386,34 +442,34 @@ public class PlayerController_BH : MonoBehaviourPunCallbacks, IPunObservable
     {
         isAiming = _isAiming;
     }
-    #endregion
 
     IEnumerator CatchFish(FishingPoint point)
     {
         isFishing = true;
         playerAnimator.SetBool("isFishing", true);
         eCount = 0;
-        yield return new WaitForSeconds(Random.Range(5, 11));
+        yield return new WaitForSeconds(Random.Range(playerStat.fishingSpeed, playerStat.fishingSpeed * 2));
         eImageActivate = true;
-        // E ≈∞∏¶ ¥©∏£∂Û¥¬ UI ≥™ø¿∞‘ «ÿæﬂ«‘ UIManagerø°º≠ Ω««‡
+        // E ÌÇ§Î•º ÎàÑÎ•¥ÎùºÎäî UI ÎÇòÏò§Í≤å Ìï¥ÏïºÌï® UIManagerÏóêÏÑú Ïã§Ìñâ
         Debug.Log("Press E!");
-        //2√  ¡ˆ≥™∏È ¿⁄µø¿∏∑Œ UI ∫Ò»∞º∫»≠ ∏∏æ‡ ±◊ ªÁ¿Ã 10π¯ ≥—∞‘ ≈¨∏Ø«ﬂ¥Ÿ∏È º∫∞¯
+        //2Ï¥à ÏßÄÎÇòÎ©¥ ÏûêÎèôÏúºÎ°ú UI ÎπÑÌôúÏÑ±Ìôî ÎßåÏïΩ Í∑∏ ÏÇ¨Ïù¥ 10Î≤à ÎÑòÍ≤å ÌÅ¥Î¶≠ÌñàÎã§Î©¥ ÏÑ±Í≥µ
         yield return new WaitForSeconds(2);
         eImageActivate = false;
         if (eCount >= 10)
         {
             isSuccessState = true;
-            UIManager_BH.instance.OpenSuccessImage(fish);
+            UIManager.instance.OpenSuccessImage(fish);
             point.IsFinished();
         }
         else
         {
             Debug.Log("Fail");
-            //point.IsFinished();
+            point.IsFinished();
         }
         playerAnimator.SetBool("isFishing", false);
         yield return new WaitForSeconds(3);
         isSuccessState = false;
         isFishing = false;
     }
+    #endregion
 }

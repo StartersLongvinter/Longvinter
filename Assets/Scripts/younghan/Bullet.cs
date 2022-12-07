@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class Bullet : MonoBehaviourPun
 {
@@ -10,16 +9,16 @@ public class Bullet : MonoBehaviourPun
     public Vector3 Direction { set { direction = value; } }
 
     protected Rigidbody bulletRigidbody;
-    [SerializeField] protected float damage;
+    [SerializeField] private float damage;
 
     [SerializeField] private GameObject ImpactVfxPrefab;
     [SerializeField] private float speed;
     private Vector3 direction;
     private bool isCollided;
 
-    Player hitplayer;
+    //Player hitplayer;
 
-    protected virtual void Start()
+    private void Start()
     {
         bulletRigidbody = GetComponent<Rigidbody>();
 
@@ -34,12 +33,12 @@ public class Bullet : MonoBehaviourPun
     }
 
     [PunRPC]
-    void Shoot(float x, float y, float z, float _damage = 10f, float _offsetX = 0f, float _offsetY = 0f, float _offsetZ = 0f)
+    void Shoot(float x, float y, float z, float _damage, float offsetX, float offsetY, float offsetZ)
     {
         Bullet bullet = GetComponent<Bullet>();
         this.gameObject.name = photonView.Owner.NickName + "Bullet";
         Vector3 firePoint = new Vector3((float)x, (float)y, (float)z);
-        bullet.direction = firePoint + new Vector3(_offsetX, _offsetY, _offsetZ);
+        bullet.direction = firePoint + new Vector3(offsetX, offsetY, offsetZ);
         bullet.damage = _damage;
 
         Debug.Log(bullet.name);
@@ -64,6 +63,12 @@ public class Bullet : MonoBehaviourPun
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        //if (collision.gameObject.tag == "LivingEntity" || collision.gameObject.tag == "Bison")
+        //{
+        //    //Debug.Log("Collided");
+        //    collision.gameObject.GetComponent<LivingEntity>().HitByPlayer(damage);
+        //}
+
         if (collision.gameObject.tag == "Player" && (collision.gameObject.name + "Bullet" != this.gameObject.name))
         {
             if (collision.gameObject.GetComponent<PhotonView>().IsMine)

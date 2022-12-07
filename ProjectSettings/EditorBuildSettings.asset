@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainScene_DH.unity
     guid: e4035d8ed2f844ea592caaeabfc787e3
+  - enabled: 0
+    path: Assets/Scenes/AIFishingScene.unity
+    guid: 1b98eb6528944a14892aab889485a267
   m_configObjects: {}

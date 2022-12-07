@@ -56,7 +56,7 @@ public class TurretController1 : Turret
                 {
                     //Enemy enemy = i.GetComponent<Enemy>();
                     PlayerStat playerStat = i.GetComponent<PlayerStat>();
-                    i.GetComponent<PhotonView>().RPC(nameof(playerStat.ChangePlayersColor), RpcTarget.All, damage);
+                    i.GetComponent<PhotonView>().RPC(nameof(playerStat.ChangePlayersColor), RpcTarget.All);
                 }
             }
             isfire =false;
