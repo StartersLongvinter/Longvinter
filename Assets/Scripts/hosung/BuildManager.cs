@@ -238,15 +238,40 @@ public class BuildManager : MonoBehaviourPun
         Debug.DrawRay(ray.origin - _offsetX + _offsetY, ray.direction * 500f, Color.red);
         Debug.DrawRay(ray.origin - _offsetX - _offsetY, ray.direction * 500f, Color.red);
         buildObject.transform.position = mousePosition + new Vector3(0, buildObject.transform.localScale.y * 0.5f, 0);
-        int _colorIndex = buildType == BuildType.turret ? 1 : 0;
 
         if (!canBuild)
         {
-            buildObject.transform.GetChild(_colorIndex).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
+            if (buildType == BuildType.turret)
+            {
+                foreach (Material mat in buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().materials)
+                {
+                    mat.color = buildObjectColors[1];
+                }
+
+                foreach (Material mat in buildObject.transform.GetChild(1).GetComponent<MeshRenderer>().materials)
+                {
+                    mat.color = buildObjectColors[1];
+                }
+            }
+            else
+                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
         }
         else
         {
-            buildObject.transform.GetChild(_colorIndex).GetComponent<MeshRenderer>().material.color = buildObjectColors[0];
+            if (buildType == BuildType.turret)
+            {
+                foreach (Material mat in buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().materials)
+                {
+                    mat.color = buildObjectColors[0];
+                }
+
+                foreach (Material mat in buildObject.transform.GetChild(1).GetComponent<MeshRenderer>().materials)
+                {
+                    mat.color = buildObjectColors[0];
+                }
+            }
+            else
+                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[0];
         }
     }
 
