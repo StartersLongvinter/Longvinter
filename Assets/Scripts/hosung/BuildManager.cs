@@ -60,7 +60,6 @@ public class BuildManager : MonoBehaviourPun
         {
             if (myHomeAreas.Count <= 0 || Vector3.Distance(PlayerStat.LocalPlayer.gameObject.transform.position, _mousePosition) > 4f)
             {
-                buildObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
             }
             float _d = 1000f;
@@ -77,7 +76,6 @@ public class BuildManager : MonoBehaviourPun
             Debug.Log(_d);
             if (_d > (myHomeArea.transform.lossyScale.x * 0.5f) - buildObject.transform.localScale.x * 0.5f)
             {
-                buildObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
             }
         }
@@ -85,7 +83,6 @@ public class BuildManager : MonoBehaviourPun
         {
             if (Vector3.Distance(PlayerStat.LocalPlayer.gameObject.transform.position, _mousePosition) > 4f)
             {
-                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
             }
             float _distance = 1000f;
@@ -102,20 +99,16 @@ public class BuildManager : MonoBehaviourPun
             Debug.Log(_distance);
             if (_distance <= homeAreaRadius)
             {
-                buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 return false;
             }
         }
-        buildObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = buildObjectColors[0];
         return true;
     }
-    void Update()
+
+    void CheckRayCast()
     {
-        GetInput();
         if (buildType == BuildType.none) return;
-        buildArea = GameObject.FindGameObjectsWithTag("Area");
-        foreach (GameObject area in buildArea) area.GetComponent<MeshRenderer>().enabled = true;
-        // mousePosition = GameObject.Find(��UICamera��).GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
+
         RaycastHit hit;
         Vector3 mouseVector = Input.mousePosition;
         mouseVector.z = Camera.main.farClipPlane;
@@ -124,11 +117,11 @@ public class BuildManager : MonoBehaviourPun
         Debug.DrawRay(ray.origin, ray.direction * 500f, Color.red);
         // int layerMask = 1 << LayerMask.NameToLayer(��Player��) | 1 << LayerMask.NameToLayer(��Area��);
         int layerMask = (-1) - (1 << LayerMask.NameToLayer("Area"));
+        // 정중앙 검출
         if (Physics.Raycast(Camera.main.transform.position, dir, out hit, 500f, layerMask))
         {
             if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
             {
-                buildObject.transform.GetChild(1).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
                 canBuild = false;
             }
             else
@@ -138,7 +131,133 @@ public class BuildManager : MonoBehaviourPun
             // if (hit.transform.gameObject != buildObject)
             mousePosition = hit.point;
         }
+        // 위 가운데
+        Vector3 _offsetY = new Vector3(0, 0, buildObject.transform.lossyScale.z * 0.5f);
+        if (canBuild && Physics.Raycast(Camera.main.transform.position + _offsetY, dir, out hit, 500f, layerMask))
+        {
+            if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+        }
+        // 아래 가운데 
+        if (canBuild && Physics.Raycast(Camera.main.transform.position - _offsetY, dir, out hit, 500f, layerMask))
+        {
+            if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+        }
+        // 왼쪽 가운데 
+        Vector3 _offsetX = new Vector3(buildObject.transform.lossyScale.x * 0.5f, 0, 0);
+        if (canBuild && Physics.Raycast(Camera.main.transform.position - _offsetX, dir, out hit, 500f, layerMask))
+        {
+            if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+        }
+        // 우측 가운데 
+        if (canBuild && Physics.Raycast(Camera.main.transform.position + _offsetX, dir, out hit, 500f, layerMask))
+        {
+            if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+        }
+        // 상단 좌측 
+        if (canBuild && Physics.Raycast(Camera.main.transform.position - _offsetX + _offsetY, dir, out hit, 500f, layerMask))
+        {
+            if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+        }
+        // 상단 우측
+        if (canBuild && Physics.Raycast(Camera.main.transform.position + _offsetX + _offsetY, dir, out hit, 500f, layerMask))
+        {
+            if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+        }
+        // 하단 좌측
+        if (canBuild && Physics.Raycast(Camera.main.transform.position - _offsetX - _offsetY, dir, out hit, 500f, layerMask))
+        {
+            if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+        }
+        // 하단 우측 
+        if (canBuild && Physics.Raycast(Camera.main.transform.position + _offsetX - _offsetY, dir, out hit, 500f, layerMask))
+        {
+            if (hit.transform.gameObject.tag == "Player" || hit.transform.gameObject.tag == "InstalledObject")
+            {
+                canBuild = false;
+            }
+            else
+            {
+                canBuild = true;
+            }
+        }
+        Debug.DrawRay(ray.origin + _offsetX, ray.direction * 500f, Color.red);
+        Debug.DrawRay(ray.origin - _offsetX, ray.direction * 500f, Color.red);
+        Debug.DrawRay(ray.origin + _offsetY, ray.direction * 500f, Color.red);
+        Debug.DrawRay(ray.origin - _offsetY, ray.direction * 500f, Color.red);
+        Debug.DrawRay(ray.origin + _offsetX + _offsetY, ray.direction * 500f, Color.red);
+        Debug.DrawRay(ray.origin + _offsetX - _offsetY, ray.direction * 500f, Color.red);
+        Debug.DrawRay(ray.origin - _offsetX + _offsetY, ray.direction * 500f, Color.red);
+        Debug.DrawRay(ray.origin - _offsetX - _offsetY, ray.direction * 500f, Color.red);
         buildObject.transform.position = mousePosition + new Vector3(0, buildObject.transform.localScale.y * 0.5f, 0);
+        int _colorIndex = buildType == BuildType.turret ? 1 : 0;
+
+        if (!canBuild)
+        {
+            buildObject.transform.GetChild(_colorIndex).GetComponent<MeshRenderer>().material.color = buildObjectColors[1];
+        }
+        else
+        {
+            buildObject.transform.GetChild(_colorIndex).GetComponent<MeshRenderer>().material.color = buildObjectColors[0];
+        }
+    }
+
+    void Update()
+    {
+        GetInput();
+        if (buildType == BuildType.none) return;
+        buildArea = GameObject.FindGameObjectsWithTag("Area");
+        foreach (GameObject area in buildArea) area.GetComponent<MeshRenderer>().enabled = true;
+
+        CheckRayCast();
     }
     private void GetInput()
     {
