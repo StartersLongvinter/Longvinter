@@ -15292,6 +15292,7 @@ MonoBehaviour:
   handEquipPoint: {fileID: 3591319954121043913}
   isBuilding: 0
   moveDirection: {x: 0, y: 0, z: 0}
+  isAttackReady: 0
   chatInput: {fileID: 346654853340184980}
   maxInteractableDistance: 7
   eImageActivate: 0

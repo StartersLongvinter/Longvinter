@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviourPun
 
     void Awake()
     {
-
+        NetworkManager.Instance.GetComponent<AudioSource>().Stop();
     }
 
     public void PlayPlayerSound(AudioClip _ac, int _actorNum, AudioClip _defaultAc = null)
@@ -58,7 +58,7 @@ public class SoundManager : MonoBehaviourPun
         if (_defaultAc == null)
         {
             otherAudioSource.clip = _ac;
-            otherAudioSource.Play();
+            if (_ac != null) otherAudioSource.Play();
         }
         else
         {
@@ -70,12 +70,12 @@ public class SoundManager : MonoBehaviourPun
             }
             else
             {
-                if (!otherAudioSource.isPlaying)
-                {
-                    otherAudioSource.clip = _defaultAc;
-                    otherAudioSource.Stop();
-                    otherAudioSource.PlayOneShot(_ac);
-                }
+                // if (!otherAudioSource.isPlaying)
+                // {
+                otherAudioSource.clip = _defaultAc;
+                otherAudioSource.Stop();
+                otherAudioSource.PlayOneShot(_ac);
+                // }
             }
         }
     }
@@ -114,17 +114,24 @@ public class SoundManager : MonoBehaviourPun
                 PlayToolSound(shotGunSounds[Random.Range(0, shotGunSounds.Length)], _actorNum, shotGunSounds[1]);
                 break;
             case ("rifle"):
-                PlayToolSound(rifleSounds[Random.Range(0, rifleSounds.Length)], _actorNum, rifleSounds[1]);
+                PlayToolSound(rifleSounds[Random.Range(0, rifleSounds.Length)], _actorNum, rifleSounds[0]);
                 break;
         }
     }
 
     [PunRPC]
-    void StopSounds(int _type = 2)
+    void StopSounds(int _actorNum, int _type = 2)
     {
         // 0 : stop gun sound 1 : stop player sound 2 : stop all sound
-        if (_type != 0) effectAudioSource.Stop();
-        if (_type != 1) otherAudioSource.Stop();
+        if (_type != 0)
+        {
+            effectAudioSource.Stop();
+        }
+        if (_type != 1)
+        {
+            otherAudioSource.Stop();
+            PlayToolSound(null, _actorNum, null);
+        }
     }
 
     void PlaySound()
@@ -150,7 +157,7 @@ public class SoundManager : MonoBehaviourPun
         }
         else readyChainsaw = false;
 
-        if (Input.GetButton("Fire1") && Input.GetButton("Fire2"))
+        if (Input.GetButtonDown("Fire1") && Input.GetButton("Fire2") && myCharacterController.isAttackReady)
         {
             if (myCharacterController.weaponData == myCharacterController.weaponDatas[2])
             {
@@ -162,16 +169,24 @@ public class SoundManager : MonoBehaviourPun
                 photonView.RPC("OnAttackGun", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber, "shotGun");
                 return;
             }
-            if (myCharacterController.weaponData == myCharacterController.weaponDatas[4])
+            if (myCharacterController.weaponData == myCharacterController.weaponDatas[4] || myCharacterController.weaponData == myCharacterController.weaponDatas[6])
             {
                 photonView.RPC("OnAttackGun", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber, "rifle");
+                return;
+            }
+        }
+        else if (Input.GetButton("Fire1") && Input.GetButton("Fire2"))
+        {
+            if (myCharacterController.weaponData == myCharacterController.weaponDatas[2])
+            {
+                photonView.RPC("OnAttackChainsaw", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber);
                 return;
             }
         }
         else if (Input.GetButtonUp("Fire1") || Input.GetButtonUp("Fire2"))
         {
             if (myCharacterController.weaponData == myCharacterController.weaponDatas[2])
-                photonView.RPC("StopSounds", RpcTarget.All, 0);
+                photonView.RPC("StopSounds", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber, 0);
         }
     }
 
