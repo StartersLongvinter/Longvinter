@@ -238,22 +238,18 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             //ApplyDamage(damage);
             ChangeStatus((int)Status.Damaged);
         }
+        StopCoroutine(ResetColor());
         StartCoroutine(ResetColor());
     }
 
     IEnumerator ResetColor()
     {
-        if (meshRenderer.material.color != Color.red)
-        {
-            playerOriginalColor = meshRenderer.material.color;
-            isColorChanged = true;
-            meshRenderer.material.color = Color.red;
-            yield return new WaitForSeconds(0.08f);
-            meshRenderer.material.color = playerOriginalColor;
-            isColorChanged = false;
-            ChangeStatus((int)Status.Idle);
-        }
-        yield return null;
+        isColorChanged = true;
+        meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.08f);
+        meshRenderer.material.color = Color.white;
+        isColorChanged = false;
+        ChangeStatus((int)Status.Idle);
     }
 
     // 플레이어 자원 동기화

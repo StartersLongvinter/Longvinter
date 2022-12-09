@@ -32,7 +32,7 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
     Vector3 latePosition;
 
     //Bullet_BH º¯¼ö
-    Bullet_BH bullet;
+    Bullet bullet;
     public Vector3 bulletDir;
 
     // Start is called before the first frame update
@@ -106,7 +106,7 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
     {
         if (collision.gameObject.tag=="Bullet")
         {
-            bullet = collision.gameObject.GetComponent<Bullet_BH>();
+            bullet = collision.gameObject.GetComponent<Bullet>();
             bulletDir = transform.position - bullet.transform.position;
         }
     }

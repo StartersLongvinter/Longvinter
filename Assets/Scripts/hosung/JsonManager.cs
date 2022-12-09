@@ -29,6 +29,7 @@ public class SaveTurretInformations
     // Have to add nickname at his turret index!!
     public List<Vector3> turretPositions = new List<Vector3>();
     public List<string> turretOwnerNicknames = new List<string>();
+    public List<bool> turretAuto = new List<bool>();
 }
 
 public class JsonManager : MonoBehaviourPun
@@ -65,6 +66,7 @@ public class JsonManager : MonoBehaviourPun
     public SaveTurretInformations myTurretInformation;
 
     public List<GameObject> itemObjects = new List<GameObject>();
+    public List<GameObject> turretObjects = new List<GameObject>();
 
     void Awake()
     {
@@ -165,8 +167,11 @@ public class JsonManager : MonoBehaviourPun
         {
             foreach (TurretController turret in GameObject.FindObjectsOfType(typeof(TurretController)) as TurretController[])
             {
+                if (turret.trigger==null) //if (turret.IsPublic)
+                    continue;
                 saveTurretInformations.turretPositions.Add(turret.transform.position);
                 saveTurretInformations.turretOwnerNicknames.Add(turret.turretOwner);
+                saveTurretInformations.turretAuto.Add(turret.IsAuto);
             }
 
             string turretJson = JsonUtility.ToJson(saveTurretInformations);
@@ -215,8 +220,9 @@ public class JsonManager : MonoBehaviourPun
             {
                 BuildManager _buildManager = GameObject.Find("BuildManager").GetComponent<BuildManager>();
                 var newTurret = PhotonNetwork.Instantiate(_buildManager.buildPrefabNameList[(int)BuildType.turret], myTurretInformation.turretPositions[i], Quaternion.identity);
-                // newHouse.GetComponent<TurretController>().turretOwner = myTurretInformation.turretOwnerNicknames[i];
                 newTurret.GetComponent<TurretController>().turretOwner = myTurretInformation.turretOwnerNicknames[i];
+                newTurret.GetComponent<TurretController>().IsAuto = myTurretInformation.turretAuto[i];
+                turretObjects.Add(newTurret.gameObject);
 
                 float distance = 10000;
                 GroundTrigger _groundTrigger = new GroundTrigger();
