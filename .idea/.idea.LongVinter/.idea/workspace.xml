@@ -4,54 +4,14 @@
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Loading.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Loading.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/ColdDamage/CloudberryJam.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/ColdDamage/CloudberryJam.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/ColdDamage/Coffee Bottle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/ColdDamage/Coffee Bottle.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/ColdDamage/Heat Pack.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/ColdDamage/Heat Pack.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/ColdDamage/Tea Bottle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/ColdDamage/Tea Bottle.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/Cooked Redfish.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/Cooked Redfish.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/Cooked Stingray.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/Cooked Stingray.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/Cooked Swordfish.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/Cooked Swordfish.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedArcticChar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedArcticChar.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedBlackGrouper.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedBlackGrouper.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedMistyGrouper.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedMistyGrouper.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedRainbowTrout.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedRainbowTrout.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedSalmonShark.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Fish/CookedSalmonShark.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/FishingSpeed/Pack Of Blueberries.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/FishingSpeed/Pack Of Blueberries.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/FishingSpeed/PackOfWorms.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/FishingSpeed/PackOfWorms.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Health/Cake.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Health/Cake.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Health/RasberryJam.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Health/RasberryJam.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Movement/EnergyDrinkMild.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Movement/EnergyDrinkMild.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Movement/EnergyDrinkRegular.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Movement/EnergyDrinkRegular.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Movement/EnergyDrinkShock.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InventoryResources/Usable/Movement/EnergyDrinkShock.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemDrag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemSlot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemSlot.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemToolTip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemToolTip.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemToolTip.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/ItemToolTip.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/Cake.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/Cake.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CloudberryJam.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CloudberryJam.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CoffeeBottle.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CoffeeBottle.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedArcticChar.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedArcticChar.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedBlackGrouper.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedBlackGrouper.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedMistyGrouper.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedMistyGrouper.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedRainbowTrout.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedRainbowTrout.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedRedfish.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedRedfish.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedSalmonShark.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedSalmonShark.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedStingray.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedStingray.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedSwordfish.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/CookedSwordfish.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkMild.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkMild.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkRegular.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkRegular.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkShock.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/EnergyDrinkShock.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/HeatPack.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/HeatPack.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/PackOfBlueberries.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/PackOfBlueberries.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/PackOfWorms.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/PackOfWorms.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/RasberryJam.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/RasberryJam.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/TeaBottle.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/UsableItemData/TeaBottle.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets123's room_123_saveFile.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets123's room_123_saveFile.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets333's room_333_saveFile.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets333's room_333_saveFile.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LoginScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LoginScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene_DH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene_DH.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/Title.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/Title.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,13 +19,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Desktop/Longvinter/Assets/Scripts/beonghyun/PlayerFishing.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Desktop/Longvinter/Assets/Scripts/beonghyun/UIManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Ammo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ButtonAnimations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/DotMove.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Encyclopedia.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/EncyclopediaAnimatinos.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/EquipmentData.cs" root0="FORCE_HIGHLIGHTING" />
@@ -78,10 +34,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/PlayerInventory.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/item/WindTurbineBlade.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/74/bd579409/Object.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/96/5d2e749e/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1fe4b731108247d3a7e57fad336611b9469000/ac/49128965/List`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5ddb5fa70dfe40d2818192400111b9ec2aa00/d9/0f67b62a/Tween.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -114,7 +66,7 @@
       <method v="2" />
     </configuration>
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2021.3.5f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity 2021.3.5f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath $PROJECT_DIR$ -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -131,10 +83,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="53490">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="53490" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -160,6 +112,10 @@
       <workItem from="1669623427779" duration="6195000" />
       <workItem from="1669859668195" duration="900000" />
       <workItem from="1670202681654" duration="48154000" />
+      <workItem from="1670460469777" duration="7850000" />
+      <workItem from="1670484278936" duration="1465000" />
+      <workItem from="1670489454437" duration="1240000" />
+      <workItem from="1670544020938" duration="5300000" />
     </task>
     <servers />
   </component>

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class ButtonAnimations : MonoBehaviour
 {
     [SerializeField] private Button button;
-    [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private Text inputField;
 
     private Color currentColor;
     private Sequence buttonSeq;

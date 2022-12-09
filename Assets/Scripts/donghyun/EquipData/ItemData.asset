@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae3fbb66d25145d881a531066f3ebf2, type: 3}
+  m_Name: ItemData
+  m_EditorClassIdentifier: 
+  itemName: 
+  itemKorName: 
+  itemExplain: 
+  itemType: 0
+  itemClassify: 0
+  itemPrefab: {fileID: 0}
+  itemImage: {fileID: 0}
+  isItemUsable: 0
+  canOverlap: 0
+  itemEffect: 1
+  expireTime: 0
+  increaseHealth: 0
+  applyPercentage: 0
+  effectPrefab: {fileID: 0}
+  afterExpireTimePrefab: {fileID: 0}
