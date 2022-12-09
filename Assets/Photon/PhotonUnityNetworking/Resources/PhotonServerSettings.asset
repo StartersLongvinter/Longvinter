@@ -81,6 +81,11 @@ MonoBehaviour:
   - IsAutoFunc
   - IspublicFunc
   - IsPublicFunc
+  - OnAimChainsaw
+  - OnAttackChainsaw
+  - OnWalking
+  - SendAnAnnouncement
+  - StopSounds
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
