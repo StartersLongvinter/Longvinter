@@ -64,7 +64,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             playerPrefabName = _playerName;
             roomPrefab = _roomPrefab;
             DontDestroyOnLoad(this.gameObject);
-            currentConnectionStatus = "서버에 연결중입니다...";
+            currentConnectionStatus = "서버에 연결중입니다";
             PhotonNetwork.ConnectUsingSettings();
         }
         isLobby = false;
@@ -90,7 +90,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void OnClickStart()
     {
-        nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
+        nickName = GameObject.Find("NickNameInput").transform.GetChild(0).GetChild(2).GetComponent<Text>().text;
         isLobby = false;
 
         PhotonNetwork.JoinLobby();
@@ -98,7 +98,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void OnClickServer()
     {
-        nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
+        nickName = GameObject.Find("NickNameInput").transform.GetChild(0).GetChild(2).GetComponent<Text>().text;
         isLobby = true;
         PhotonNetwork.JoinLobby();
     }
@@ -158,7 +158,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         UpdateBadTexts();
-        currentConnectionStatus = "서버에 연결되었습니다...";
+        currentConnectionStatus = "서버에 연결되었습니다";
         if (returnLobby)
         {
             isLobby = true;
