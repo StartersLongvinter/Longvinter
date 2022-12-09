@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private float horizontalAxis;
     private float verticalAxis;
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
     private Vector3 aimLookPoint;
     private float attackDelay;
 
@@ -84,11 +84,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.eqIndex).gameObject.SetActive(false);
         else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-
     }
 
     private void Update()
@@ -292,12 +287,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                     return;
                 }
                 Debug.Log("Fishing");
-               
+
                 //낚시할때 fishingpoint를 바라보고 있어야 함
                 transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
                 playerAnimator.SetTrigger("doFish");
                 fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
-                
+
                 fishingCoroutine = CatchFish(raycasthit.collider.GetComponent<FishingPoint>());
                 //StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
                 StartCoroutine(fishingCoroutine);
@@ -307,26 +302,30 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void ChangeTurretMode()
     {
+        if (isAiming)
+            return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
         foreach (var raycasthit in raycastHits)
         {
             if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
                 continue;
-            Turret turret= raycasthit.collider.gameObject.GetComponent<Turret>();
+            TurretController turret = raycasthit.collider.gameObject.GetComponent<TurretController>();
             if (turret.turretOwner == "")
                 return;
             float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
-            if (doAttack &&raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance && 
+            if (doAttack && raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance &&
                 raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
             {
-                isAuto = !raycasthit.collider.gameObject.GetComponent<Turret>().IsAuto;
-                Debug.Log(isAuto);
+                isAuto = !raycasthit.collider.gameObject.GetComponent<TurretController>().IsAuto;
                 turret.IsAuto = isAuto;
-                turret.ChangeTurretModeColor(turret, isAuto);
+                turret.ChangeTurretModeColor();
+                return;
             }
         }
     }
+
+
 
     private void ECount()
     {
@@ -349,10 +348,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (moveDirection != Vector3.zero)
         {
             CancelFish();
-            
+
             playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
         }
-            
+
         else
             playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
     }
@@ -425,7 +424,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (weaponData == null | isFishing) return;
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
-        
+
         if (isAiming && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);

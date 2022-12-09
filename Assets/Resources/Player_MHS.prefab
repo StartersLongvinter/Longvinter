@@ -15121,12 +15121,11 @@ GameObject:
   - component: {fileID: 1388196509}
   - component: {fileID: 1388196510}
   - component: {fileID: 2103775182863587402}
-  - component: {fileID: 606652212037703707}
-  - component: {fileID: 620971052199837303}
-  - component: {fileID: 3561456211196938491}
+  - component: {fileID: 62574148831556852}
+  - component: {fileID: 8211746577249054499}
   - component: {fileID: -2713289005664936501}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_MHS
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15501,20 +15500,7 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
---- !u!114 &606652212037703707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6349114427959441967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e7153274c4bfca4eb9c79a745e0f47d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadingPanel: {fileID: 7135681935701781313, guid: fb4b1715de4fa472ba99885d46e3a860, type: 3}
---- !u!82 &620971052199837303
+--- !u!82 &62574148831556852
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15528,11 +15514,11 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -15610,7 +15596,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &3561456211196938491
+--- !u!82 &8211746577249054499
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

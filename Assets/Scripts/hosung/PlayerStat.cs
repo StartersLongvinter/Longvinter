@@ -22,7 +22,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
         Walk,
         Attack,
         Damaged,
-        Die
+        Die,
+        Aim
     }
     public Status status;
 
@@ -75,6 +76,9 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
             JsonManager.Instance.LoadPlayerDate();
             if (PhotonNetwork.IsMasterClient) JsonManager.Instance.LoadRoomData();
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().myCharacterStat = this;
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().effectAudioSource = GetComponents<AudioSource>()[0];
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().otherAudioSource = GetComponents<AudioSource>()[1];
         }
     }
 
@@ -238,22 +242,18 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             //ApplyDamage(damage);
             ChangeStatus((int)Status.Damaged);
         }
+        StopCoroutine(ResetColor());
         StartCoroutine(ResetColor());
     }
 
     IEnumerator ResetColor()
     {
-        if (meshRenderer.material.color != Color.red)
-        {
-            playerOriginalColor = meshRenderer.material.color;
-            isColorChanged = true;
-            meshRenderer.material.color = Color.red;
-            yield return new WaitForSeconds(0.08f);
-            meshRenderer.material.color = playerOriginalColor;
-            isColorChanged = false;
-            ChangeStatus((int)Status.Idle);
-        }
-        yield return null;
+        isColorChanged = true;
+        meshRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.08f);
+        meshRenderer.material.color = Color.white;
+        isColorChanged = false;
+        ChangeStatus((int)Status.Idle);
     }
 
     // 플레이어 자원 동기화
