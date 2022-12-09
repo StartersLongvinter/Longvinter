@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366753, g: 0.48427093, b: 0.5645238, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6395,6 +6395,104 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1069436940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1069436943}
+  - component: {fileID: 1069436942}
+  - component: {fileID: 1069436941}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1069436941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069436940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 18
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1069436942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069436940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b70321e7ad89435c9434f4c370e9ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backGroundMusic:
+  - {fileID: 8300000, guid: bf7c0997f1beb4c46807e0571be931e1, type: 3}
+  - {fileID: 8300000, guid: 8d392e6fa1ccb423c8254f88312ec102, type: 3}
+  - {fileID: 8300000, guid: 5a718c6796b4b49c1bfbc86109bdcbb0, type: 3}
+  - {fileID: 8300000, guid: e551bb2fad2dd42998c0c82de5c93732, type: 3}
+  - {fileID: 8300000, guid: 6223e78f11ced475a9cd29ffeb96c8dc, type: 3}
+  - {fileID: 8300000, guid: a50b5525686444bbeb2198863d229d3f, type: 3}
+  - {fileID: 8300000, guid: a17528c337a324eff8838364a0f1b54d, type: 3}
+  - {fileID: 8300000, guid: ad76c406a807944d7b3d25f03d3a3c31, type: 3}
+  - {fileID: 8300000, guid: 53cd5a70199f541eca3f7be1a4c0d028, type: 3}
+  - {fileID: 8300000, guid: 582fce502619e4e13a42286081496b17, type: 3}
+  stepSounds:
+  - {fileID: 8300000, guid: 81c059e578e11475f996e0baa9289ecd, type: 3}
+  - {fileID: 8300000, guid: 8ccd01811fa1a4af596902d066bdbdd9, type: 3}
+  - {fileID: 8300000, guid: 019d4a6a14bd84cdba6d68572a983489, type: 3}
+  - {fileID: 8300000, guid: 7cbf6e6ede8b44ea68091135111b2788, type: 3}
+  chainsawSounds:
+  - {fileID: 8300000, guid: 5f933167a924b42c0ba5becd2d5139af, type: 3}
+  - {fileID: 8300000, guid: 5856ef26a8ff54f4c9311526e28476a9, type: 3}
+  shotGunSounds:
+  - {fileID: 8300000, guid: ceb18619fe6c748b6be79cb181b14996, type: 3}
+  - {fileID: 8300000, guid: b80121ee5b46f4f7a99568309a5de386, type: 3}
+  rifleSounds:
+  - {fileID: 8300000, guid: 9991a3b151c154f1abfb1513da22a55a, type: 3}
+  - {fileID: 8300000, guid: dbdb9e3d999e7448298b64e483bd7c42, type: 3}
+  gunAimSound: {fileID: 8300000, guid: a558c294a734a459682820fac5d8dbdb, type: 3}
+  notAmmoSound: {fileID: 8300000, guid: 26d8f0d3445764d9c96140eb7095f704, type: 3}
+  effectAudioSource: {fileID: 0}
+  otherAudioSource: {fileID: 0}
+  myCharacterStat: {fileID: 0}
+  myCharacterController: {fileID: 0}
+--- !u!4 &1069436943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069436940}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1110360696 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 734951476, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
