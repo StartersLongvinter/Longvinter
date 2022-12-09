@@ -20,6 +20,9 @@ public class ChatManager : MonoBehaviourPunCallbacks
     private Camera uiCamera;
     GameObject nicknameText;
     GameObject chattingSign;
+    [SerializeField] Font noticeFont;
+
+    float noticeTime = 0;
 
     void Awake()
     {
@@ -63,6 +66,15 @@ public class ChatManager : MonoBehaviourPunCallbacks
             return;
         }
 
+        foreach (string _badText in NetworkManager.Instance.badText)
+        {
+            if (_message.Contains(_badText))
+            {
+                _message = _message.Replace(_badText, "nice");
+                Debug.Log($"chat '{_badText}' is changed 'nice'");
+            }
+        }
+
         GameObject newChat = Instantiate(chatPrefab, chatBox.transform.position, Quaternion.Euler(0, 0, 0));
         newChat.transform.SetParent(chatBox.transform, false);
         // newChat.transform.position = new Vector3(newChat.transform.position.x, newChat.transform.position.y, 0);
@@ -74,6 +86,33 @@ public class ChatManager : MonoBehaviourPunCallbacks
         chatInput.text = "";
 
         if (nicknameText != null) nicknameText.transform.SetAsLastSibling();
+    }
+
+    [PunRPC]
+    public void SendAnAnnouncement(string _message, float _timeValue)
+    {
+        GameObject noticeObject = GameObject.Find("Notice");
+        if (noticeObject == null)
+        {
+            noticeObject = new GameObject("Notice");
+            noticeObject.AddComponent<Text>();
+            noticeObject.transform.SetParent(GameObject.Find("Canvas").transform);
+        }
+        Text noticeText = noticeObject.GetComponent<Text>();
+        noticeText.rectTransform.sizeDelta = new Vector2(1200, 100);
+        noticeText.rectTransform.anchorMin = new Vector2(0.5f, 1f);
+        noticeText.rectTransform.anchorMax = new Vector2(0.5f, 1f);
+        noticeText.rectTransform.pivot = new Vector2(0.5f, 1f);
+        noticeText.rectTransform.anchoredPosition = new Vector3(0, -100f, 0);
+        noticeText.font = noticeFont;
+        noticeText.fontStyle = FontStyle.Bold;
+        noticeText.alignment = TextAnchor.UpperCenter;
+
+        noticeText.text = string.IsNullOrEmpty(_message) ? "" : "<size=60><color=red>" + _message + "</color></size>";
+        if (PhotonNetwork.IsMasterClient) noticeTime = _timeValue;
+
+        chatInput.gameObject.SetActive(false);
+        chatInput.text = "";
     }
 
     [PunRPC]
@@ -98,6 +137,16 @@ public class ChatManager : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        if (noticeTime != 0)
+        {
+            noticeTime -= Time.deltaTime;
+            if (noticeTime <= 0)
+            {
+                photonView.RPC("SendAnAnnouncement", RpcTarget.AllViaServer, "", 0f);
+                noticeTime = 0;
+            }
+        }
+
         if (nicknameText == null)
         {
             nicknameText = Instantiate(nicknamePrefab, chatBox.transform.position, Quaternion.identity);
@@ -116,7 +165,14 @@ public class ChatManager : MonoBehaviourPunCallbacks
         {
             if (chatInput.gameObject.activeSelf)
             {
-                photonView.RPC("SendNewMessage", RpcTarget.All, chatInput.text);
+                if (chatInput.text.Length >= 3 && chatInput.text.Substring(0, 3) == "/nt" && PhotonNetwork.IsMasterClient)
+                {
+                    photonView.RPC("SendAnAnnouncement", RpcTarget.AllViaServer, chatInput.text.Substring(3), 3f);
+                }
+                else
+                {
+                    photonView.RPC("SendNewMessage", RpcTarget.All, chatInput.text);
+                }
                 photonView.RPC("CloseChattingSign", RpcTarget.Others);
             }
             else
@@ -128,7 +184,7 @@ public class ChatManager : MonoBehaviourPunCallbacks
             chatInput.Select();
         }
 
-        if (Input.GetKeyDown(KeyCode.N) && photonView.IsMine)
+        if (Input.GetKeyDown(KeyCode.N) && photonView.IsMine && !chatInput.gameObject.activeSelf)
         {
             ActivateNickname(3.0f);
         }

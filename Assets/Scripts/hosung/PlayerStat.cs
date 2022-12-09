@@ -22,7 +22,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
         Walk,
         Attack,
         Damaged,
-        Die
+        Die,
+        Aim
     }
     public Status status;
 
@@ -75,6 +76,9 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
             JsonManager.Instance.LoadPlayerDate();
             if (PhotonNetwork.IsMasterClient) JsonManager.Instance.LoadRoomData();
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().myCharacterStat = this;
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().effectAudioSource = GetComponents<AudioSource>()[0];
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().otherAudioSource = GetComponents<AudioSource>()[1];
         }
     }
 

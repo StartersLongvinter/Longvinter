@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
 
-public class LivingEntity : MonoBehaviourPun, IPunObservable
+public class LivingEntity : MonoBehaviourPun, IPunObservable, IDamageable
 {
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
@@ -35,6 +35,8 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
     Bullet bullet;
     public Vector3 bulletDir;
 
+    bool isDead;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -47,6 +49,7 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
         startMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
         
         nearAnimals.Add(this.gameObject);
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -110,27 +113,9 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
             bulletDir = transform.position - bullet.transform.position;
         }
     }
-
-    public void HitByPlayer(float damage)
-    {
-        StartCoroutine(OnDamageEffect());
-        OnDamage(damage);
-    }
-
-    void OnDamage(float damage)
-    {
-        currentHealth -= damage;
-
-        if (currentHealth<=0 && photonView.IsMine)
-        {
-            DropItem();
-            PhotonNetwork.Destroy(this.gameObject);
-        }
-    }
-
     void DropItem()
     {
-        
+        isDead = true;
         PhotonNetwork.Instantiate(itemName1, this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
         PhotonNetwork.Instantiate(itemGroup[Random.Range(0,itemGroup.Length)], this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
         
@@ -170,6 +155,23 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable
         else
         {
             currentHealth = (float)stream.ReceiveNext();
+        }
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        StartCoroutine(OnDamageEffect());
+
+        currentHealth -= damage;
+
+        Debug.Log(currentHealth + "    " + damage);
+
+        if (currentHealth <= 0 && photonView.IsMine)
+        {
+            Debug.Log("Drop");
+            if (isDead) return;
+            DropItem();
+            PhotonNetwork.Destroy(this.gameObject);
         }
     }
 }

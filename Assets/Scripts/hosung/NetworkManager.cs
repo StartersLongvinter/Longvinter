@@ -7,6 +7,8 @@ using Photon.Pun;
 using TMPro;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.Linq;
+using UnityEngine.Android;
+using System.IO;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -45,6 +47,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     Vector3 respawnPos = new Vector3(0, 0, 0);
     [SerializeField] GameObject roomPrefab;
+    bool isCheckedPermission = false;
+    public List<string> badText = new List<string>();
 
     void Awake()
     {
@@ -60,10 +64,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             playerPrefabName = _playerName;
             roomPrefab = _roomPrefab;
             DontDestroyOnLoad(this.gameObject);
-            currentConnectionStatus = "서버에 연결중입니다...";
+            currentConnectionStatus = "서버에 연결중입니다";
             PhotonNetwork.ConnectUsingSettings();
         }
         isLobby = false;
+    }
+
+    void UpdateBadTexts()
+    {
+        Debug.Log(File.Exists(Application.streamingAssetsPath + "/BadWords.txt"));
+        Debug.Log(Application.streamingAssetsPath + "/BadWords.txt");
+        if (File.Exists(Application.streamingAssetsPath + "/BadWords.txt"))
+        {
+            badText = File.ReadAllText(Application.streamingAssetsPath + "/BadWords.txt", System.Text.Encoding.UTF8).Split("\n").ToList();
+        }
     }
 
     public void SendWarningText(string message)
@@ -76,7 +90,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void OnClickStart()
     {
-        nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
+        nickName = GameObject.Find("NickNameInput").transform.GetChild(0).GetChild(2).GetComponent<Text>().text;
         isLobby = false;
 
         PhotonNetwork.JoinLobby();
@@ -84,7 +98,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void OnClickServer()
     {
-        nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
+        nickName = GameObject.Find("NickNameInput").transform.GetChild(0).GetChild(2).GetComponent<Text>().text;
         isLobby = true;
         PhotonNetwork.JoinLobby();
     }
@@ -143,7 +157,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        currentConnectionStatus = "서버에 연결되었습니다...";
+        UpdateBadTexts();
+        currentConnectionStatus = "서버에 연결되었습니다";
         if (returnLobby)
         {
             isLobby = true;
@@ -161,11 +176,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (!isLobby) CreateSinglePlayRoom(false, "");
     }
 
-    void CreateSinglePlayRoom(bool isPVP, string password)
+    void Renaming()
     {
+        foreach (string _badText in badText)
+        {
+            if (nickName.Contains(_badText))
+            {
+                nickName = nickName.Replace(_badText, "nice");
+                Debug.Log($"chat '{_badText}' is changed 'nice'");
+            }
+        }
+    }
+
+    void CreateSinglePlayRoom(bool isPVP, string password, int maxPlayers = 1, string roomName = "")
+    {
+        Renaming();
+
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 20;
-        roomOptions.CustomRoomProperties = new Hashtable() { { "maxPlayers", 1 }, { "roomName", nickName + "'s room" }, { "password", password }, { "curPlayer", 0 }, { "isPVP", isPVP }, { "version", currentVersion } };
+        roomOptions.CustomRoomProperties = new Hashtable() { { "maxPlayers", 1 }, { "roomName", roomName == "" ? nickName + "'s room" : roomName }, { "password", password }, { "curPlayer", 0 }, { "isPVP", isPVP }, { "version", currentVersion } };
         // 방이름, 비밀번호 값을 로비에서도 받을 수 있도록 함 
         string[] newPropertiesForLobby = new string[6];
         newPropertiesForLobby[0] = "roomName";
@@ -175,13 +204,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         newPropertiesForLobby[4] = "maxPlayers";
         newPropertiesForLobby[5] = "version";
         roomOptions.CustomRoomPropertiesForLobby = newPropertiesForLobby;
-        PhotonNetwork.CreateRoom(nickName + "'s room", roomOptions);
+
+        PhotonNetwork.CreateRoom(roomName == "" ? nickName + "'s room" : roomName, roomOptions);
     }
 
     public override void OnJoinedRoom()
     {
         PhotonNetwork.IsMessageQueueRunning = true;
         isLobby = false;
+
+        Renaming();
+
         bool _sameName = false;
 
         foreach (Player _player in PhotonNetwork.PlayerList)

@@ -17,6 +17,14 @@ public class SaveInformations
     public List<string> playerEquipments = new List<string>();
 }
 
+public class SaveRoomDatas
+{
+    public bool isPVP;
+    public string roomName;
+    public int maxPlayer;
+    public string password;
+}
+
 public class SaveHouseInformations
 {
     // Have to add nickname at his house index!!
@@ -64,6 +72,7 @@ public class JsonManager : MonoBehaviourPun
     public SaveInformations myInformation;
     public SaveHouseInformations myHouseInformation;
     public SaveTurretInformations myTurretInformation;
+    public SaveRoomDatas myRoomInformation;
 
     public List<GameObject> itemObjects = new List<GameObject>();
     public List<GameObject> turretObjects = new List<GameObject>();
@@ -141,8 +150,23 @@ public class JsonManager : MonoBehaviourPun
 
     public void SaveRoomData()
     {
-        GroundTrigger[] _groundTriggers = GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[];
+        // 방 설정 저장
+        SaveRoomDatas saveRoomDatas = new SaveRoomDatas();
+        saveRoomDatas.roomName = PhotonNetwork.CurrentRoom.Name;
+        saveRoomDatas.password = (string)PhotonNetwork.CurrentRoom.CustomProperties["password"];
+        saveRoomDatas.isPVP = (bool)PhotonNetwork.CurrentRoom.CustomProperties["isPVP"];
+        saveRoomDatas.maxPlayer = (int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"];
+
+        string roomJson = JsonUtility.ToJson(saveRoomDatas);
+        Debug.Log(roomJson);
+
+        string _roomDatasName = PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
+        string _roomPath = Application.dataPath + _roomDatasName + ".json";
+
+        File.WriteAllText(_roomPath, roomJson);
+
         // 집 저장
+        GroundTrigger[] _groundTriggers = GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[];
         SaveHouseInformations saveHouseInformations = new SaveHouseInformations();
         if (GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[] != null)
         {
@@ -186,6 +210,16 @@ public class JsonManager : MonoBehaviourPun
 
     public void LoadRoomData()
     {
+        string _roomName = PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
+        string _roomPath = Application.dataPath + _roomName + ".json";
+        if (File.Exists(_roomPath))
+        {
+            string _fromJsonData = File.ReadAllText(_roomPath);
+            myRoomInformation = JsonUtility.FromJson<SaveRoomDatas>(_fromJsonData);
+            NetworkManager.Instance.OnClickCreate(PhotonNetwork.LocalPlayer.NickName, myRoomInformation.maxPlayer, myRoomInformation.isPVP, myRoomInformation.password);
+        }
+
+        // 집 로드 
         string _houseFileName = PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
         string _housePath = Application.dataPath + _houseFileName + ".json";
 
@@ -207,6 +241,7 @@ public class JsonManager : MonoBehaviourPun
             }
         }
 
+        // 터렛 로드
         string _turretFileName = PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
         string _turretPath = Application.dataPath + _turretFileName + ".json";
 

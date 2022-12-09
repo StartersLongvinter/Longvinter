@@ -243,6 +243,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &68707142
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +412,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &89946685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,6 +1767,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &331192571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,6 +1936,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &352961826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2060,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &377307666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,6 +2306,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &421417532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,6 +2805,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &555029367
 GameObject:
   m_ObjectHideFlags: 0
@@ -3261,6 +3282,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &690712657
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3611,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &699561938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3753,6 +3780,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &762639491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3919,6 +3949,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &788749957
 GameObject:
   m_ObjectHideFlags: 0
@@ -4085,6 +4118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &797684624
 GameObject:
   m_ObjectHideFlags: 0
@@ -4403,6 +4439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &911551169
 GameObject:
   m_ObjectHideFlags: 0
@@ -4569,6 +4608,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &942195315
 GameObject:
   m_ObjectHideFlags: 0
@@ -5326,6 +5368,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1114735861
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,6 +5565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1184147889
 GameObject:
   m_ObjectHideFlags: 0
@@ -6429,6 +6477,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1299275745
 GameObject:
   m_ObjectHideFlags: 0
@@ -6519,6 +6570,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1305867005
 GameObject:
   m_ObjectHideFlags: 0
@@ -6924,6 +6978,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1376301249
 GameObject:
   m_ObjectHideFlags: 0
@@ -7014,6 +7071,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1389504769
 GameObject:
   m_ObjectHideFlags: 0
@@ -7820,6 +7880,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1471384325
 GameObject:
   m_ObjectHideFlags: 0
@@ -8335,6 +8398,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1523376093
 GameObject:
   m_ObjectHideFlags: 0
@@ -8585,6 +8651,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1556032677
 GameObject:
   m_ObjectHideFlags: 0
@@ -8752,6 +8821,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1569880961
 GameObject:
   m_ObjectHideFlags: 0
@@ -9214,6 +9286,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1641249000
 GameObject:
   m_ObjectHideFlags: 0
@@ -10364,6 +10439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1884119761
 GameObject:
   m_ObjectHideFlags: 0
@@ -10712,6 +10790,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &1968604451
 GameObject:
   m_ObjectHideFlags: 0
@@ -11104,6 +11185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &2004014537
 GameObject:
   m_ObjectHideFlags: 0
@@ -11194,6 +11278,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &2013896098
 GameObject:
   m_ObjectHideFlags: 0
@@ -11513,6 +11600,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &2064406178
 GameObject:
   m_ObjectHideFlags: 0
@@ -11704,6 +11794,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &2084496756
 GameObject:
   m_ObjectHideFlags: 0
@@ -12017,6 +12110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 2135308564}
+  itemNameText: {fileID: 0}
+  itemExplainText: {fileID: 0}
+  explainBG: {fileID: 0}
 --- !u!1 &2135308564
 GameObject:
   m_ObjectHideFlags: 0
@@ -14851,6 +14947,8 @@ MonoBehaviour:
   chatPrefab: {fileID: 6671883248550508411, guid: feebb38e7f7804d019f4e3f3161142da, type: 3}
   playerPosition: {fileID: 6005344780012494997}
   offset: {x: 0, y: 1, z: 10}
+  noticeFont: {fileID: 0}
+  badText: []
 --- !u!114 &4983998215243612754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15177,7 +15275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d4925ca32b1b5449afcaca53f02a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
   weaponData: {fileID: 11400000, guid: f39070e814136458ebd481e117bf6cfd, type: 2}
   weaponDatas:
   - {fileID: 0}
@@ -15209,9 +15306,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerPlayerActorNumber: 0
   status: 0
-  hp: 0
+  hp: 90
   maxHp: 90
   money: 0
+  originalSpeed: 5
+  moveSpeed: 5
+  originalfishingSpeed: 5
+  fishingSpeed: 0
   isFight: 0
   isCold: 0
   inWater: 0
@@ -15220,13 +15321,10 @@ MonoBehaviour:
   damagePercentInSnowField: 3.3
   damagePercentWhileWalkInSnow: 5.5
   damagePercentInWater: 13.3
-  coldReductionPercentage: 0
-  armorPercentage: 0
-  increaseSpeedPercentage: 0
-  fishingPercentage: 0
-  normalColor: {r: 1, g: 0.8520418, b: 0, a: 1}
-  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  hpNormalColor: {r: 0.945946, g: 1, b: 0, a: 1}
+  hpWarningColor: {r: 1, g: 0, b: 0, a: 1}
   currentHPAnimator: {fileID: 0}
+  isColorChanged: 0
 --- !u!114 &1388196506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15239,8 +15337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55dfaf1ff46f9645aeffc8fc66a0f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  isChanged: 0
 --- !u!114 &1388196507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15350,6 +15446,7 @@ MonoBehaviour:
   currentUseItem: []
   inventoryCount: 0
   NoOverlapEffectNotificationPos: {fileID: 3999196399027710944}
+  AfterUseItemNotipos: {fileID: 0}
 --- !u!114 &1388196509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15443,6 +15540,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: doMeleeAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: cancelFish
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -16865,7 +16965,7 @@ PrefabInstance:
     - target: {fileID: 1124389447728399945, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 9078441727759166900, guid: c4fbd24d2de7f6a41840482026bc4166, type: 3}
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 1151178851078330101, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -16905,7 +17005,7 @@ PrefabInstance:
     - target: {fileID: 4418684235850968102, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 9078441727759166900, guid: c4fbd24d2de7f6a41840482026bc4166, type: 3}
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 5023987875499629561, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.012
@@ -16969,7 +17069,7 @@ PrefabInstance:
     - target: {fileID: 5330839939707178273, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 9078441727759166900, guid: c4fbd24d2de7f6a41840482026bc4166, type: 3}
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 5467026825859457279, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -16977,7 +17077,7 @@ PrefabInstance:
     - target: {fileID: 5603431476951211412, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 9078441727759166900, guid: c4fbd24d2de7f6a41840482026bc4166, type: 3}
+      objectReference: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
     - target: {fileID: 6052722386084444247, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_Layer
       value: 8
