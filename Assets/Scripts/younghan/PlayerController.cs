@@ -94,7 +94,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (!photonView.IsMine || chatInput.activeSelf) return;
 
         GetInput();
-        Aim();
+        AimOneHandAttack();
+        if (weaponData != null) photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
         Attack();
         Fishing();
         ECount();
@@ -111,7 +112,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             isPressedSpace = false;
         }
 
-        if (weaponData != null) photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
     }
 
     private void FixedUpdate()
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void OnAnimatorIK()
     {
-        AnimateAim();
+        AimTwoHandAttack();
     }
 
     private void OnTriggerStay(Collider other)
@@ -374,24 +374,38 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         attackDelay += Time.deltaTime;
         isAttackReady = weapon.attackRate < attackDelay;
 
-        if (isAiming && isAttackReady && doAttack)
+        if (isAiming && isAttackReady)
         {
-            if (weapon.type == Weapon.Type.OneHandRange || weapon.type == Weapon.Type.TwoHandRange)
+            if (doAttack)
             {
-                weapon.Fire();
+                if (weapon.type == Weapon.Type.OneHandRange || weapon.type == Weapon.Type.TwoHandRange)
+                {
+                    weapon.Fire();
+
+                    attackDelay = 0;
+                }
+                else if (weapon.type == Weapon.Type.OneHandMelee)
+                {
+                    weapon.Slash();
+
+                    playerAnimator.SetTrigger("doMeleeAttack");
+
+                    attackDelay = 0;
+                }
             }
-            else if (weapon.type == Weapon.Type.OneHandMelee)
+            else
             {
-                weapon.Swing();
+                if (weapon.type == Weapon.Type.TwoHandMelee)
+                {
+                    weapon.Saw();
 
-                playerAnimator.SetTrigger("doMeleeAttack");
+                    attackDelay = 0;
+                }
             }
-
-            attackDelay = 0;
         }
     }
 
-    private void Aim()
+    private void AimOneHandAttack()
     {
         if (weaponData == null) return;
 
@@ -405,7 +419,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    private void AnimateAim()
+    private void AimTwoHandAttack()
     {
         if (weaponData == null | isFishing) return;
 

@@ -449,11 +449,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 14.9
       objectReference: {fileID: 0}
+    - target: {fileID: 5047451227844214492, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571960478905046018, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
+      propertyPath: meleeAttackArea
+      value: 
+      objectReference: {fileID: 7853751215266009394}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
 --- !u!4 &338367815424085071 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3332690683717575585, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
+  m_PrefabInstance: {fileID: 3094543834227044334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7853751215266009394 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5047451227844214492, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
   m_PrefabInstance: {fileID: 3094543834227044334}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6259655648899372919

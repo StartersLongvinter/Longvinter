@@ -13,22 +13,53 @@ public class CameraController : MonoBehaviour
         set { playerController = value; }
     }
 
-    [SerializeField] float aimMaxDistance;
+    [SerializeField] float maxDistance;
     [SerializeField] float smoothDampTime;
+    [SerializeField] float scrollSpeed = 2000f;
+
     private Transform player;
     private PlayerController playerController;
     private Vector3 targetPosition;
     private Vector3 offset;
     private Vector3 velocity;
 
+    public Vector3 originalPositionOffset;
+    public Vector3 targetPositionOffset;
+    public Vector3 originalRotationOffset;
+    public Vector3 targetRotationOffset;
+
+    public Vector2 yOffsetMinMax;
+    public Vector2 zOffsetMinMax;
+
+
     void Start()
     {
         offset = transform.position;
     }
 
+    void Update()
+    {
+        Zoom();
+    }
+
     void FixedUpdate()
     {
         Follow();
+    }
+
+    private void RotateTopView()
+    {
+
+    }
+
+
+
+    private void Zoom()
+    {
+        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        Vector3 cameraDirection = transform.localRotation * Vector3.forward;
+
+        offset += cameraDirection * scrollWheel * scrollSpeed * Time.deltaTime;
     }
 
     private void Follow()
@@ -43,7 +74,7 @@ public class CameraController : MonoBehaviour
             //smoothDampTime = Mathf.Lerp(0.2f, 0.1f, tempDistance / aimMaxDistance);
 
             float distance = Vector3.Distance(player.position, playerController.AimLookPoint);
-            float clampDistance = Mathf.Clamp(distance, 0f, aimMaxDistance);
+            float clampDistance = Mathf.Clamp(distance, 0f, maxDistance);
 
             Vector3 direction = (playerController.AimLookPoint - player.position).normalized;
             direction = new Vector3(direction.x, 0, direction.z);

@@ -86,28 +86,39 @@ public class Weapon : MonoBehaviourPun
         }
     }
 
-    public void Swing()
+    public void Slash()
     {
-        Debug.Log("Swing");
+        Debug.Log("Slash");
 
-        StartCoroutine(ActivateAttackArea());
+        StartCoroutine(ActivateAttackArea(0.1f, 0.1f));
     }
 
-    IEnumerator ActivateAttackArea()
+    public void Saw()
     {
-        yield return new WaitForSeconds(0.1f);
+        Debug.Log("Saw");
+
+        StartCoroutine(ActivateAttackArea(0f, 0.1f));
+    }
+
+    IEnumerator ActivateAttackArea(float onTime, float offTime)
+    {
+        yield return new WaitForSeconds(onTime);
 
         meleeAttackArea.enabled = true;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(offTime);
 
         meleeAttackArea.enabled = false;
     }
 
+
+
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<IDamageable>() == null && type != Type.OneHandMelee && type != Type.TwoHandMelee) return;
+        if (other.gameObject.GetComponent<IDamageable>() == null || (type != Type.OneHandMelee && type != Type.TwoHandMelee)) return;
 
+        Debug.Log(other.gameObject);
         other.gameObject.GetComponent<IDamageable>().ApplyDamage(damage);
     }
 }

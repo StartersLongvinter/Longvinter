@@ -2522,7 +2522,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 11, z: -6.5}
+  m_LocalPosition: {x: 0, y: 13, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2541,8 +2541,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bf5dc0f9d7c3b49839ad7d6533f22f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimMaxDistance: 2
+  maxDistance: 0
   smoothDampTime: 0.1
+  scrollSpeed: 2000
+  originalPositionOffset: {x: 0, y: 13, z: -8}
+  targetPositionOffset: {x: 0, y: 15, z: -2.5}
+  originalRotationOffset: {x: 60, y: 0, z: 0}
+  targetRotationOffset: {x: 80, y: 0, z: 0}
+  yOffsetMinMax: {x: 0, y: 0}
+  zOffsetMinMax: {x: 0, y: 0}
 --- !u!1 &1022913969
 GameObject:
   m_ObjectHideFlags: 0
@@ -3341,15 +3348,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3332690683717575585, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 3332690683717575585, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.852
+      value: 1.964
       objectReference: {fileID: 0}
     - target: {fileID: 3332690683717575585, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.17
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3332690683717575585, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4986,6 +4993,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatchet
       objectReference: {fileID: 0}
+    - target: {fileID: 6942194811212461645, guid: be3d198474f6546ff937c4e57dc79260, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7718168977449463031, guid: be3d198474f6546ff937c4e57dc79260, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -5097,7 +5108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6349114427959441967, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
