@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class GroundTrigger : MonoBehaviourPun, IPunObservable //��
+public class GroundTrigger : MonoBehaviourPun, IPunObservable
 {
-    //public TurretController myTurret;
-    public Turret myTurret;
+    public TurretController myTurret;
+    
     public bool inOtherHome = false; //private turret
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
