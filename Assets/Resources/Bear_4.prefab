@@ -1959,6 +1959,7 @@ MonoBehaviour:
   nearDistance: 8
   moveAmount: 15
   attackArea: {fileID: 9208375285525652143}
+  damage: 15
 --- !u!195 &319114623287080710
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2528,7 +2529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9208375285525652143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.85, z: 1.53}
+  m_LocalPosition: {x: 0, y: 0.85, z: 1.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -32,8 +32,10 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable, IDamageable
     Vector3 latePosition;
 
     //Bullet_BH º¯¼ö
-    Bullet_BH bullet;
+    Bullet bullet;
     public Vector3 bulletDir;
+
+    bool isDead;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -47,6 +49,7 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable, IDamageable
         startMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
         
         nearAnimals.Add(this.gameObject);
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -106,13 +109,13 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable, IDamageable
     {
         if (collision.gameObject.tag=="Bullet")
         {
-            bullet = collision.gameObject.GetComponent<Bullet_BH>();
+            bullet = collision.gameObject.GetComponent<Bullet>();
             bulletDir = transform.position - bullet.transform.position;
         }
     }
     void DropItem()
     {
-        
+        isDead = true;
         PhotonNetwork.Instantiate(itemName1, this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
         PhotonNetwork.Instantiate(itemGroup[Random.Range(0,itemGroup.Length)], this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
         
@@ -165,6 +168,8 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable, IDamageable
 
         if (currentHealth <= 0 && photonView.IsMine)
         {
+            Debug.Log("Drop");
+            if (isDead) return;
             DropItem();
             PhotonNetwork.Destroy(this.gameObject);
         }

@@ -6081,7 +6081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7643404080586978724, guid: e42fd4fae5b71cd4fabdf26cecf7acc2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e42fd4fae5b71cd4fabdf26cecf7acc2, type: 3}
@@ -10952,7 +10952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c299c311e9b17348a2a7fae39256161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabName: Player_BH
+  prefabName: Player
 --- !u!4 &2063435999
 Transform:
   m_ObjectHideFlags: 0
