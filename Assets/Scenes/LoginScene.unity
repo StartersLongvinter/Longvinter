@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dca34e493802444f8082d2eb1fe1b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefabName: Player
+  playerPrefabName: Player_MHS
   roomPrefab: {fileID: 5161857643047110011, guid: 8a53112d8bac945f7944e16bed2a5f3d, type: 3}
   networkManagerObject: {fileID: 35055597}
   loadingPanel: {fileID: 1903223170}
