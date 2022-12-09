@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private float horizontalAxis;
     private float verticalAxis;
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
     private Vector3 aimLookPoint;
     private float attackDelay;
 
@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool isSuccessState;
     public bool eImageActivate;
     private int eCount = 0;
+    IEnumerator fishingCoroutine;
+    FishingPoint currentFishingPoint;
 
     private bool isAuto;
 
@@ -273,7 +275,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     //raycast 이용 특정 object와 hit 되면 fishing 함수 호출
     private void Fishing()
     {
-        if (moveDirection != Vector3.zero || isFishing) return;
+        if (moveDirection != Vector3.zero || isFishing || isAiming) return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         //AI collider와 부딪혀서 체크가 안되는 현상 발생함 raycastall으로 검출
         RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
@@ -282,12 +284,23 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
             if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
             {
+                currentFishingPoint = raycasthit.collider.GetComponent<FishingPoint>();
+
+                if (currentFishingPoint.isWait)
+                {
+                    Debug.Log("Fish are surprised by sudden movement. Cannot use fishingpoint");
+                    return;
+                }
                 Debug.Log("Fishing");
+
                 //낚시할때 fishingpoint를 바라보고 있어야 함
                 transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
                 playerAnimator.SetTrigger("doFish");
                 fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
-                StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
+
+                fishingCoroutine = CatchFish(raycasthit.collider.GetComponent<FishingPoint>());
+                //StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
+                StartCoroutine(fishingCoroutine);
             }
         }
     }
@@ -300,11 +313,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
                 continue;
-            Turret turret= raycasthit.collider.gameObject.GetComponent<Turret>();
+            Turret turret = raycasthit.collider.gameObject.GetComponent<Turret>();
             if (turret.turretOwner == "")
                 return;
             float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
-            if (doAttack &&raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance && 
+            if (doAttack && raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance &&
                 raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
             {
                 isAuto = !raycasthit.collider.gameObject.GetComponent<Turret>().IsAuto;
@@ -328,16 +341,18 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Move()
     {
-        if (!isFishing)
-        {
-            moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
-            float currentMoveSpeed = isAiming ? playerStat.moveSpeed * 0.4f : playerStat.moveSpeed;
-            playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
-            playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
-        }
+        moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
+        float currentMoveSpeed = isAiming ? playerStat.moveSpeed * 0.4f : playerStat.moveSpeed;
+        playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
+        playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
 
         if (moveDirection != Vector3.zero)
+        {
+            CancelFish();
+
             playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
+        }
+
         else
             playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
     }
@@ -424,7 +439,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (weaponData == null | isFishing) return;
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
-        
+
         if (isAiming && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand)
         {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
@@ -453,6 +468,17 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private void SetIsAiming(bool _isAiming)
     {
         isAiming = _isAiming;
+    }
+
+    void CancelFish()
+    {
+        if (isFishing)
+        {
+            StopCoroutine(fishingCoroutine);
+            isFishing = false;
+            playerAnimator.SetTrigger("cancelFish");
+            currentFishingPoint.WaitPoint();
+        }
     }
 
     IEnumerator CatchFish(FishingPoint point)
