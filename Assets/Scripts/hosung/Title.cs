@@ -59,7 +59,6 @@ public class Title : MonoBehaviourPun
         while (timer < 1f)
         {
             timer += Time.deltaTime;
-            Debug.Log(timer);
             yield return null;
         }
 

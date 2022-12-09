@@ -24,10 +24,9 @@ public class SceneLoding : MonoBehaviour
     private void Start()
     {
         tween = DOTween.Sequence();
-    }
 
-    private void OnEnable()
-    {
+        tween.SetAutoKill(false);
+        
         DotPos.SetActive(true);
         
         loadingPanel.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = "캐릭터를 로딩중입니다";
@@ -44,9 +43,15 @@ public class SceneLoding : MonoBehaviour
         StartCoroutine(WaitTime());
     }
 
-    private void OnDestroy()
+    private void Update()
     {
-        tween.Kill();
+        if (timer >= 1f)
+        {
+            if (!tween.active)
+            {
+                loadingPanel.SetActive(false);
+            }
+        }
     }
 
     IEnumerator WaitTime()
@@ -54,15 +59,13 @@ public class SceneLoding : MonoBehaviour
         while (timer < 1f)
         {
             timer += Time.deltaTime;
-            Debug.Log(timer);
             yield return null;
         }
-        
+
         tween
-            .SetAutoKill(false)
             .Prepend(loadingPanel.GetComponent<CanvasGroup>().DOFade(0, 1)).AppendCallback((() =>
-        {
-            loadingPanel.SetActive(false);
-        }));
+            {
+                tween.Kill();
+            }));
     }
 }
