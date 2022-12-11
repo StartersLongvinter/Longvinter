@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private float attackDelay;
 
     private bool doAttack;
-    private bool isAttackReady;
+    public bool isAttackReady;
     private bool isAiming;
     private bool isPressedSpace;
 
