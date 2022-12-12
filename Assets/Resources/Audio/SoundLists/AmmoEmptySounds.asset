@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: AmmoEmptySounds
   m_EditorClassIdentifier: 
   listName: 
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 26d8f0d3445764d9c96140eb7095f704, type: 3}

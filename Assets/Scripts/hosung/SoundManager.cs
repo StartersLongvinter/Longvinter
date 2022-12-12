@@ -58,6 +58,12 @@ public class SoundManager : MonoBehaviourPun
         photonView.RPC("RPCPlayToolSound", RpcTarget.All, _playerIndex, _soundsName, _soundIdx, _isPlayOneShot, _isWaitDealy);
     }
 
+    public void StopSound(int _audioSourceIndex)
+    {
+        int _playerIndex = PlayerStat.LocalPlayer.ownerPlayerActorNumber;
+        photonView.RPC("RPCStopSound", RpcTarget.All, _playerIndex, _audioSourceIndex);
+    }
+
     public void PlaySoundOnObject(GameObject go, string _soundsName, int _soundIdx)
     {
         go.GetComponent<EffectSound>().PlaySound(_soundsName, _soundIdx);
@@ -106,7 +112,7 @@ public class SoundManager : MonoBehaviourPun
     public void RPCPlayToolSound(int _playerIndex, string _soundsName, int _soundIdx, bool _isPlayOneShot, bool _isWaitDealy)
     {
         EffectSound _effectSound = PlayerList.Instance.playersWithActorNumber[_playerIndex].GetComponent<EffectSound>();
-        AudioSource toolSoundSource = _effectSound.audioSource[0];
+        AudioSource toolSoundSource = _effectSound.audioSource[1];
         SoundList _soundList = _effectSound.soundLists.Find(t => t.name == _soundsName);
         AudioClip _ac = _soundList.clips[_soundIdx == -1 ? Random.Range(0, _soundList.clips.Length - 1) : _soundIdx];
 
@@ -121,7 +127,7 @@ public class SoundManager : MonoBehaviourPun
                 else toolSoundSource.PlayOneShot(_ac);
                 break;
             case false:
-                if (toolSoundSource.clip != _ac)
+                if (!toolSoundSource.isPlaying && toolSoundSource.clip != _ac)
                 {
                     toolSoundSource.Stop();
                     toolSoundSource.clip = _ac;
@@ -129,6 +135,14 @@ public class SoundManager : MonoBehaviourPun
                 }
                 break;
         }
+    }
+
+    [PunRPC]
+    public void RPCStopSound(int _playerIndex, int _audioSourceIndex)
+    {
+        EffectSound _effectSound = PlayerList.Instance.playersWithActorNumber[_playerIndex].GetComponent<EffectSound>();
+        AudioSource _soundSource = _effectSound.audioSource[_audioSourceIndex];
+        _soundSource.Stop();
     }
     #endregion
 }
