@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     FishingPoint currentFishingPoint;
 
     private bool isAuto;
+    //private bool isChangeMode;
 
     #region Callback Methods
     private void Awake()
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         Attack();
         Fishing();
         ECount();
-        ChangeTurretMode();
+        //ChangeTurretMode();
 
         if (isPressedSpace)
             timer += Time.deltaTime;
@@ -286,7 +287,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    private void ChangeTurretMode()
+    /*private void ChangeTurretMode()
     {
         if (isAiming)
             return;
@@ -299,17 +300,25 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             TurretController turret = raycasthit.collider.gameObject.GetComponent<TurretController>();
             if (turret.turretOwner == "")
                 return;
-            float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
-            if (doAttack && raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance &&
+            if (raycasthit.collider.gameObject.name.Contains("Turret") &&
                 raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
             {
-                isAuto = !raycasthit.collider.gameObject.GetComponent<TurretController>().IsAuto;
-                turret.IsAuto = isAuto;
-                turret.ChangeTurretModeColor();
+                *//*if (isChangeMode && !doAttack)
+                    return;*//*
+                //turret.ChangeTurretMode(true);
+
+                if (doAttack)
+                {
+                    isAuto = !raycasthit.collider.gameObject.GetComponent<TurretController>().IsAuto;
+                    turret.IsAuto = isAuto;
+                    turret.ChangeTurretModeColor();
+                }
+                Debug.Log("?");
                 return;
             }
+            Debug.Log("!");
         }
-    }
+    }*/
 
 
 
