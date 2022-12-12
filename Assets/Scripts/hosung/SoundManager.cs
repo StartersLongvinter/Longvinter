@@ -3,195 +3,132 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+[RequireComponent(typeof(PhotonView))]
 public class SoundManager : MonoBehaviourPun
 {
-    [SerializeField] AudioClip[] backGroundMusic;
-    [SerializeField] AudioClip[] stepSounds;
-    [SerializeField] AudioClip[] chainsawSounds;
-    [SerializeField] AudioClip[] shotGunSounds;
-    [SerializeField] AudioClip[] rifleSounds;
-    [SerializeField] AudioClip gunAimSound;
-    [SerializeField] AudioClip notAmmoSound;
-    public AudioSource effectAudioSource;
-    public AudioSource otherAudioSource;
-    public PlayerStat myCharacterStat;
-    public PlayerController myCharacterController;
-
-    bool readyChainsaw = false;
-
-    void Awake()
+    #region Create Singleton
+    private static SoundManager instance;
+    public static SoundManager Instance
     {
-        NetworkManager.Instance.GetComponent<AudioSource>().Stop();
-    }
-
-    public void PlayPlayerSound(AudioClip _ac, int _actorNum, AudioClip _defaultAc = null)
-    {
-        effectAudioSource = PlayerList.Instance.playersWithActorNumber[_actorNum].GetComponents<AudioSource>()[0];
-        if (_defaultAc == null)
+        get
         {
-            effectAudioSource.clip = _ac;
-            effectAudioSource.Play();
-        }
-        else
-        {
-            if (effectAudioSource.clip != _defaultAc)
+            if (instance == null)
             {
-                effectAudioSource.clip = _defaultAc;
-                effectAudioSource.Stop();
-                effectAudioSource.PlayOneShot(_ac);
-            }
-            else
-            {
-                if (!effectAudioSource.isPlaying)
+                GameObject obj;
+                obj = GameObject.Find("SoundManager");
+                if (obj == null)
                 {
-                    effectAudioSource.clip = _defaultAc;
-                    effectAudioSource.Stop();
-                    effectAudioSource.PlayOneShot(_ac);
+                    obj = new GameObject("SoundManager");
+                    obj.AddComponent<PhotonView>();
+                    instance = obj.AddComponent<SoundManager>();
+                }
+                else
+                {
+                    obj.AddComponent<SoundManager>();
+                    instance = obj.GetComponent<SoundManager>();
                 }
             }
+            return instance;
         }
     }
+    #endregion
 
-    public void PlayToolSound(AudioClip _ac, int _actorNum, AudioClip _defaultAc = null)
+    SoundList backgroundMusics;
+
+    #region Init
+    void Awake()
     {
-        otherAudioSource = PlayerList.Instance.playersWithActorNumber[_actorNum].GetComponents<AudioSource>()[1];
-        if (_defaultAc == null)
+        if (instance == null) instance = this;
+
+        NetworkManager.Instance.GetComponent<AudioSource>().Stop();
+        backgroundMusics = NetworkManager.Instance.backgroundMusics;
+    }
+    #endregion
+
+    #region Public call functions
+    public void PlayPlayerSound(string _soundsName, int _soundIdx, bool _isPlayOneShot = true, bool _isWaitDealy = false)
+    {
+        int _playerIndex = PlayerStat.LocalPlayer.ownerPlayerActorNumber;
+        photonView.RPC("RPCPlayPlayerSound", RpcTarget.All, _playerIndex, _soundsName, _soundIdx, _isPlayOneShot, _isWaitDealy);
+    }
+
+    public void PlayToolSound(string _soundsName, int _soundIdx, bool _isPlayOneShot = true, bool _isWaitDealy = false)
+    {
+        int _playerIndex = PlayerStat.LocalPlayer.ownerPlayerActorNumber;
+        photonView.RPC("RPCPlayToolSound", RpcTarget.All, _playerIndex, _soundsName, _soundIdx, _isPlayOneShot, _isWaitDealy);
+    }
+
+    public void PlaySoundOnObject(GameObject go, string _soundsName, int _soundIdx)
+    {
+        go.GetComponent<EffectSound>().PlaySound(_soundsName, _soundIdx);
+    }
+
+    public void PlayBackgroundMusic(int _bgmIndex)
+    {
+        AudioSource _audioSource = NetworkManager.Instance.GetComponent<AudioSource>();
+        _audioSource.Stop();
+        _audioSource.clip = backgroundMusics.clips[_bgmIndex];
+        _audioSource.Play();
+    }
+    #endregion
+
+    #region RPC functions
+    [PunRPC]
+    public void RPCPlayPlayerSound(int _playerIndex, string _soundsName, int _soundIdx, bool _isPlayOneShot, bool _isWaitDealy)
+    {
+        EffectSound _effectSound = PlayerList.Instance.playersWithActorNumber[_playerIndex].GetComponent<EffectSound>();
+        AudioSource playerSoundSource = _effectSound.audioSource[0];
+        SoundList _soundList = _effectSound.soundLists.Find(t => t.name == _soundsName);
+        AudioClip _ac = _soundList.clips[_soundIdx == -1 ? Random.Range(0, _soundList.clips.Length - 1) : _soundIdx];
+
+        switch (_isPlayOneShot)
         {
-            otherAudioSource.clip = _ac;
-            if (_ac != null) otherAudioSource.Play();
-        }
-        else
-        {
-            if (otherAudioSource.clip != _defaultAc)
-            {
-                otherAudioSource.clip = _defaultAc;
-                otherAudioSource.Stop();
-                otherAudioSource.PlayOneShot(_ac);
-            }
-            else
-            {
-                // if (!otherAudioSource.isPlaying)
-                // {
-                otherAudioSource.clip = _defaultAc;
-                otherAudioSource.Stop();
-                otherAudioSource.PlayOneShot(_ac);
-                // }
-            }
-        }
-    }
-
-    [PunRPC]
-    void OnWalking(int _actorNum)
-    {
-        PlayPlayerSound(stepSounds[Random.Range(0, stepSounds.Length)], _actorNum, stepSounds[0]);
-    }
-
-    [PunRPC]
-    void OnAimChainsaw(int _actorNum)
-    {
-        PlayToolSound(chainsawSounds[0], _actorNum, chainsawSounds[0]);
-    }
-
-    [PunRPC]
-    void OnAimGun(int _actorNum)
-    {
-        PlayToolSound(gunAimSound, _actorNum, gunAimSound);
-    }
-
-    [PunRPC]
-    void OnAttackChainsaw(int _actorNum)
-    {
-        if (otherAudioSource.isPlaying && otherAudioSource.clip == chainsawSounds[1]) return;
-        PlayToolSound(chainsawSounds[1], _actorNum);
-    }
-
-    [PunRPC]
-    void OnAttackGun(int _actorNum, string _gunType)
-    {
-        switch (_gunType)
-        {
-            case ("shotGun"):
-                PlayToolSound(shotGunSounds[Random.Range(0, shotGunSounds.Length)], _actorNum, shotGunSounds[1]);
+            case true:
+                if (_isWaitDealy)
+                {
+                    if (!playerSoundSource.isPlaying)
+                        playerSoundSource.PlayOneShot(_ac);
+                }
+                else playerSoundSource.PlayOneShot(_ac);
                 break;
-            case ("rifle"):
-                PlayToolSound(rifleSounds[Random.Range(0, rifleSounds.Length)], _actorNum, rifleSounds[0]);
+            case false:
+                if (playerSoundSource.clip != _ac)
+                {
+                    playerSoundSource.Stop();
+                    playerSoundSource.clip = _ac;
+                    playerSoundSource.Play();
+                }
                 break;
         }
     }
 
     [PunRPC]
-    void StopSounds(int _actorNum, int _type = 2)
+    public void RPCPlayToolSound(int _playerIndex, string _soundsName, int _soundIdx, bool _isPlayOneShot, bool _isWaitDealy)
     {
-        // 0 : stop gun sound 1 : stop player sound 2 : stop all sound
-        if (_type != 0)
+        EffectSound _effectSound = PlayerList.Instance.playersWithActorNumber[_playerIndex].GetComponent<EffectSound>();
+        AudioSource toolSoundSource = _effectSound.audioSource[0];
+        SoundList _soundList = _effectSound.soundLists.Find(t => t.name == _soundsName);
+        AudioClip _ac = _soundList.clips[_soundIdx == -1 ? Random.Range(0, _soundList.clips.Length - 1) : _soundIdx];
+
+        switch (_isPlayOneShot)
         {
-            effectAudioSource.Stop();
-        }
-        if (_type != 1)
-        {
-            otherAudioSource.Stop();
-            PlayToolSound(null, _actorNum, null);
+            case true:
+                if (_isWaitDealy)
+                {
+                    if (!toolSoundSource.isPlaying)
+                        toolSoundSource.PlayOneShot(_ac);
+                }
+                else toolSoundSource.PlayOneShot(_ac);
+                break;
+            case false:
+                if (toolSoundSource.clip != _ac)
+                {
+                    toolSoundSource.Stop();
+                    toolSoundSource.clip = _ac;
+                    toolSoundSource.Play();
+                }
+                break;
         }
     }
-
-    void PlaySound()
-    {
-        if (myCharacterStat == null) return;
-        if (myCharacterController == null) myCharacterController = myCharacterStat.GetComponent<PlayerController>();
-
-        if (myCharacterController.moveDirection != Vector3.zero)
-        {
-            photonView.RPC("OnWalking", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber);
-        }
-
-        if (Input.GetButtonDown("Fire2"))
-        {
-            if (myCharacterController.weaponData == myCharacterController.weaponDatas[2])
-            {
-                photonView.RPC("OnAimChainsaw", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber);
-            }
-            if (myCharacterController.weaponData != myCharacterController.weaponDatas[2])
-            {
-                photonView.RPC("OnAimGun", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber);
-            }
-        }
-        else readyChainsaw = false;
-
-        if (Input.GetButtonDown("Fire1") && Input.GetButton("Fire2") && myCharacterController.isAttackReady)
-        {
-            if (myCharacterController.weaponData == myCharacterController.weaponDatas[2])
-            {
-                photonView.RPC("OnAttackChainsaw", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber);
-                return;
-            }
-            if (myCharacterController.weaponData == myCharacterController.weaponDatas[3])
-            {
-                photonView.RPC("OnAttackGun", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber, "shotGun");
-                return;
-            }
-            if (myCharacterController.weaponData == myCharacterController.weaponDatas[4] || myCharacterController.weaponData == myCharacterController.weaponDatas[6])
-            {
-                photonView.RPC("OnAttackGun", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber, "rifle");
-                return;
-            }
-        }
-        else if (Input.GetButton("Fire1") && Input.GetButton("Fire2"))
-        {
-            if (myCharacterController.weaponData == myCharacterController.weaponDatas[2])
-            {
-                photonView.RPC("OnAttackChainsaw", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber);
-                return;
-            }
-        }
-        else if (Input.GetButtonUp("Fire1") || Input.GetButtonUp("Fire2"))
-        {
-            if (myCharacterController.weaponData == myCharacterController.weaponDatas[2])
-                photonView.RPC("StopSounds", RpcTarget.All, myCharacterStat.ownerPlayerActorNumber, 0);
-        }
-    }
-
-    void Update()
-    {
-        PlaySound();
-    }
+    #endregion
 }

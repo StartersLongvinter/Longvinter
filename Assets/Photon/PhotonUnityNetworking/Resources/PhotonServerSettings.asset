@@ -84,6 +84,9 @@ MonoBehaviour:
   - OnAimChainsaw
   - OnAttackGun
   - OnAimGun
+  - RPCPlayPlayerSound
+  - RPCPlayToolSound
+  - RPCPlaySound
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

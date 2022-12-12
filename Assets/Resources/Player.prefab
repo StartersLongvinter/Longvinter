@@ -15115,6 +15115,7 @@ GameObject:
   - component: {fileID: -1923840663785282116}
   - component: {fileID: 5444816142457934325}
   - component: {fileID: 5879694380349709949}
+  - component: {fileID: -616919874011592439}
   - component: {fileID: 7221896422927409961}
   - component: {fileID: 1388196507}
   - component: {fileID: 1388196508}
@@ -15296,6 +15297,23 @@ MonoBehaviour:
   chatInput: {fileID: 346654853340184980}
   maxInteractableDistance: 7
   eImageActivate: 0
+--- !u!114 &-616919874011592439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349114427959441967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ba033db4bf54052a8c3f587b2c9092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundLists:
+  - {fileID: 11400000, guid: 84765211eec004733bc1a7fcb024be77, type: 2}
+  - {fileID: 11400000, guid: 9997b4bca3bc2498c932d6ede710a9b6, type: 2}
+  - {fileID: 11400000, guid: 57823ccbc8508494097f8d688ab42d10, type: 2}
+  audioSource: []
 --- !u!114 &7221896422927409961
 MonoBehaviour:
   m_ObjectHideFlags: 0

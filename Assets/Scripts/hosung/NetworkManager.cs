@@ -49,6 +49,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject roomPrefab;
     bool isCheckedPermission = false;
     public List<string> badText = new List<string>();
+    public SoundList backgroundMusics;
 
     void Awake()
     {
@@ -57,12 +58,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (NetworkManager.instance != null) Destroy(this.gameObject);
     }
 
-    public void Init(string _playerName, GameObject _roomPrefab)
+    public void Init(string _playerName, GameObject _roomPrefab, SoundList _bgmList)
     {
         if (!isLobby)
         {
             playerPrefabName = _playerName;
             roomPrefab = _roomPrefab;
+            backgroundMusics = _bgmList;
             DontDestroyOnLoad(this.gameObject);
             currentConnectionStatus = "서버에 연결중입니다";
             PhotonNetwork.ConnectUsingSettings();

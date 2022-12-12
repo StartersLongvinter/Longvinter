@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e60abe09a6d04e43a852cd329c09a3b, type: 3}
+  m_Name: WaterStepSounds
+  m_EditorClassIdentifier: 
+  listName: WaterStepSounds
+  clips:
+  - {fileID: 8300000, guid: aa02776393f724e2491c46882b9592bf, type: 3}
+  - {fileID: 8300000, guid: 9fe12dccfa4724e8592250cf10c5823d, type: 3}
+  - {fileID: 8300000, guid: fdbc67918724b4cb994e480df20f3c40, type: 3}
+  - {fileID: 8300000, guid: d974380a98d354bf7828a49a5c26bae2, type: 3}
+  - {fileID: 8300000, guid: 0711f7c07644b4e3bbd3e8fad4d520dd, type: 3}
+  - {fileID: 8300000, guid: d6144a72f4fd449639dda170a5a1533e, type: 3}
+  - {fileID: 8300000, guid: 798ccd00e1914480c99ecee96a2a265a, type: 3}
+  - {fileID: 8300000, guid: ddbcb6b083b0a4b41b80ad71bfe6b555, type: 3}
+  - {fileID: 8300000, guid: 3d98b34e99ed04b0ca450bd324205834, type: 3}
+  - {fileID: 8300000, guid: 4b6ad7331fbeb4e42b2532fd73584759, type: 3}

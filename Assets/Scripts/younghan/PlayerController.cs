@@ -348,7 +348,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (moveDirection != Vector3.zero)
         {
             CancelFish();
-
+            SoundManager.Instance.PlayPlayerSound("GrassStepSounds", -1, true, true);
             playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
         }
 
@@ -392,6 +392,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (weapon.type == Weapon.Type.OneHandRange || weapon.type == Weapon.Type.TwoHandRange)
             {
+                if (weaponData.name == "SemiAutomatic") SoundManager.Instance.PlayPlayerSound("RifleSounds", -1);
+                else SoundManager.Instance.PlayToolSound("ShotSounds", -1);
                 weapon.Fire();
             }
             else if (weapon.type == Weapon.Type.OneHandMelee)

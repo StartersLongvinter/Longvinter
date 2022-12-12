@@ -374,6 +374,7 @@ MonoBehaviour:
   roomPrefab: {fileID: 5161857643047110011, guid: 8a53112d8bac945f7944e16bed2a5f3d, type: 3}
   networkManagerObject: {fileID: 35055597}
   loadingPanel: {fileID: 1903223170}
+  bgmClips: {fileID: 11400000, guid: 05e60460edb8b4866af8c4ab7deb6d37, type: 2}
 --- !u!4 &243231924
 Transform:
   m_ObjectHideFlags: 0
