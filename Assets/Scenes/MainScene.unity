@@ -1418,6 +1418,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 922786315, guid: e783f80d5c12d16478503bf5dfd7b77a, type: 3}
   m_PrefabInstance: {fileID: 1469294769}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &212686776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212686777}
+  m_Layer: 0
+  m_Name: jjj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &212686777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212686776}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 867.9901, y: 510.54193, z: -1.0157776}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &228977366
 GameObject:
   m_ObjectHideFlags: 0
@@ -3316,7 +3347,6 @@ MonoBehaviour:
   followTarget: {fileID: 1231882241}
   addDistance: 6
   mousePositionThreshold: 10
-  isBuilding: 0
 --- !u!114 &525490899
 MonoBehaviour:
   m_ObjectHideFlags: 0
