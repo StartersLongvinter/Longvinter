@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e00f73891bbc47e983f251f87ccda19, type: 3}
   m_Name: Hatchet
   m_EditorClassIdentifier: 
+  equipmentKorName: "\uC190\uB3C4\uB07C"
   equipmentExplain: 
   equipmentClassify: 1
   equipmentPosition: 1
   equipmentCanvasPrefab: {fileID: 5223685251508337091, guid: 28efce72b221a40629081c6dbab9d2ae, type: 3}
   equipmentPrefab: {fileID: 6942194811212461645, guid: be3d198474f6546ff937c4e57dc79260, type: 3}
-  weaponDamage: 4
-  weaponAttackRate: 0.5
-  ammoCount: 0
-  equipmentKorName: "\uC190\uB3C4\uB07C"
-  isAuto: 0
   equipmentIndex: 1
+  weaponDamage: 4
+  weaponAttackRate: 0.3
+  isAuto: 0
+  ammoCount: 0

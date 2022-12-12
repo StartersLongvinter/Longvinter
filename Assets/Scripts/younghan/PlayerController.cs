@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private float attackDelay;
 
     private bool doAttack;
+    private bool doGreet;
     public bool isAttackReady;
     private bool isAiming;
     private bool isPressedSpace;
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (weaponData != null)
             photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
         Attack();
+        Greet();
         Fishing();
         ECount();
         ChangeTurretMode();
@@ -246,6 +248,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         doAttack = Input.GetButtonDown("Fire1");
+        doGreet = Input.GetKeyDown(KeyCode.C);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -390,7 +393,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     weapon.Slash();
 
-                    playerAnimator.SetTrigger("doMeleeAttack");
+                    playerAnimator.SetTrigger("doSlash");
 
                     attackDelay = 0;
                 }
@@ -415,9 +418,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             return;
 
         if (isAiming && weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.OneHand)
-            playerAnimator.SetBool("isMeleeAttackAim", true);
+            playerAnimator.SetBool("isOneHandAim", true);
         else
-            playerAnimator.SetBool("isMeleeAttackAim", false);
+            playerAnimator.SetBool("isOneHandAim", false);
     }
 
     private void AnimateTwoHandAim()
@@ -445,6 +448,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         playerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandIkTarget.rotation);
         playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIkTarget.rotation);
+    }
+
+
+    private void Greet()
+    {
+        if (doGreet)
+            playerAnimator.SetTrigger("doGreet");
     }
 
     [PunRPC]
