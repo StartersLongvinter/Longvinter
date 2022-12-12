@@ -28,6 +28,7 @@ public class ItemToolTip : MonoBehaviour, IDropHandler, IPointerEnterHandler, IP
         if (eventData.pointerCurrentRaycast.isValid &&
             eventData.pointerCurrentRaycast.gameObject.GetComponent<Item>() != null)
         {
+            SoundManager.Instance.PlayToolSound("InventorySounds", 1);
             toolTip.SetActive(true);
             explainBG.SetActive(true);
 
