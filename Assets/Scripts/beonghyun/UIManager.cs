@@ -37,18 +37,36 @@ public class UIManager : MonoBehaviourPun
     
     private bool isTabPressed;
     private bool inventoryState;
+    private bool isPressedEsc;
     private int currentOpenInven = 0;
 
+    private GameObject pauseCanvas;
+    private GameObject mainCanvas;
+    private GameObject blurPanel;
+    
+    private CanvasGroup pauseCanvasGroup;
+    
     
     //Fishing
     [SerializeField] GameObject pressEImage;
     [SerializeField] Text fishName;
     [SerializeField] Image fishImage;
     PlayerController player;
- 
+
     void Start()
     {
         player = GetComponent<PlayerController>();
+        
+        pauseCanvas = GameObject.Find("PauseCanvas");
+        pauseCanvasGroup = pauseCanvas.GetComponent<CanvasGroup>();
+
+        mainCanvas = GameObject.Find("Canvas");
+        blurPanel = mainCanvas.transform.GetChild(10).gameObject;
+        
+        pauseCanvas.transform.GetChild(3).GetComponent<Button>().onClick.AddListener((() =>
+        {
+            NetworkManager.Instance.photonView.RPC("Kicked", RpcTarget.All, PlayerStat.LocalPlayer.ownerPlayerActorNumber);
+        }));
         
         inventoryCloseBtn.onClick.AddListener((() =>
         {
@@ -108,11 +126,36 @@ public class UIManager : MonoBehaviourPun
         OpenEImage();
         
         CloseInventory();
+        
+        OpenPauseCanvas();
     }
 
     void KeyInput()
     {
         isTabPressed = Input.GetKeyDown(KeyCode.Tab);
+        isPressedEsc = Input.GetKeyDown(KeyCode.Escape);
+    }
+
+    void OpenPauseCanvas()
+    {
+        if (isPressedEsc)
+        {
+            if (pauseCanvasGroup.alpha == 0)
+            {
+                Debug.Log("열림");
+                blurPanel.SetActive(true);
+                blurPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 100);
+                pauseCanvasGroup.DOFade(1, 0.1f);
+            }
+            else
+            {
+                Debug.Log("닫힘");
+                blurPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+                blurPanel.SetActive(false);
+                pauseCanvasGroup.DOFade(0, 0.1f);
+            }
+            isPressedEsc = false;
+        }
     }
 
     void Open(GameObject bag, GameObject equipment)

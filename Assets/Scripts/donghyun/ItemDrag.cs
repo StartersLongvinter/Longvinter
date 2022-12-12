@@ -182,10 +182,11 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
+            SoundManager.Instance.PlayToolSound("InventorySounds", 2);
             //장비가 아닌 아이템은 그냥 사용만 하면됨
             if (gameObject.GetComponent<Item>().item != null)
             {
-                if (player.GetComponent<PlayerInventory>().currentUseItem.Any(x => x.GetComponent<Item>().item.itEffect 
+                if (player.GetComponent<PlayerInventory>().currentUseItem.Any(x => x.GetComponent<Item>().item.itEffect
                         == gameObject.GetComponent<Item>().item.itEffect))
                 {
                     Debug.Log("현재 적용된 아이템입니다.");
@@ -193,10 +194,10 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
                     return;
                 }
                 Debug.Log(gameObject.GetComponent<Item>().item.itKorName + "사용함");
-                
+
                 transform.SetParent(canvas.transform);
                 transform.SetAsFirstSibling();
-                
+
                 player.GetComponent<PlayerInventory>().ItemUse(gameObject);
             }
             else if (gameObject.GetComponent<Item>().equipment != null)

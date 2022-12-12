@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e60abe09a6d04e43a852cd329c09a3b, type: 3}
-  m_Name: FishingSounds
+  m_Name: ChatSounds
   m_EditorClassIdentifier: 
-  listName: FishingSounds
+  listName: ChatSounds
   clips:
-  - {fileID: 8300000, guid: b2f17e1af02fa42a4b7d1c79757a1e53, type: 3}
-  - {fileID: 8300000, guid: 26645d66767b94533b4766d12d6f6b49, type: 3}
-  - {fileID: 8300000, guid: 53cc77fdac089402cbb197fb8c4641e4, type: 3}
+  - {fileID: 8300000, guid: eee782b31194d434aacb6da36ad2db3c, type: 3}
