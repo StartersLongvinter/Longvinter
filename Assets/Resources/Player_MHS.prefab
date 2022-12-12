@@ -15290,6 +15290,7 @@ MonoBehaviour:
   bagEquipPoint: {fileID: 1496061267110959833}
   handEquipPoint: {fileID: 3591319954121043913}
   isBuilding: 0
+  cameraController: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
   chatInput: {fileID: 346654853340184980}
   maxInteractableDistance: 7

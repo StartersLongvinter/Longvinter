@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3332690683717575585}
   - component: {fileID: 1868926851304549380}
   - component: {fileID: 4470724609018337486}
-  - component: {fileID: -8950169296150377778}
+  - component: {fileID: 5047451227844214492}
   - component: {fileID: 7571960478905046018}
   - component: {fileID: -2046505816185107262}
   m_Layer: 0
@@ -28,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2669447280008706331}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &1868926851304549380
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -89,20 +89,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-8950169296150377778
-MeshCollider:
+--- !u!65 &5047451227844214492
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2669447280008706331}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7029531919713087591, guid: fbe9d0af3991547c0888d566629ef982, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.01, y: 0.005, z: 0.006}
+  m_Center: {x: 0.007, y: 0.00045, z: -0.0029}
 --- !u!114 &7571960478905046018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,13 +116,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   damage: 16
-  attackRate: 0.5
+  attackRate: 1
+  meleeAttackArea: {fileID: 0}
   accuracy: 100
   bulletCountPerFire: 1
   firePoint: {fileID: 0}
   muzzleFlashPoint: {fileID: 0}
   bulletPrefab: {fileID: 0}
   muzzleFlashVfxPrefab: {fileID: 0}
+  doNotFireArea: {fileID: 0}
 --- !u!114 &-2046505816185107262
 MonoBehaviour:
   m_ObjectHideFlags: 0
