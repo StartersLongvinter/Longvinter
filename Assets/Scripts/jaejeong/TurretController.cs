@@ -85,16 +85,12 @@ public class TurretController : MonoBehaviour, IPunObservable
 
     private void UpdateTarget()
     {
-        Debug.Log("4");
+        //Debug.Log("4");
         if (firePoint == null)
             return;
         GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestPlayer = null;
-        foreach (GameObject player in players)
-        {
-            Debug.Log(player);
-        }
         foreach (GameObject player in players)
         {
             if (!IsPublic &&GetComponent<PhotonView>().Owner.NickName == player.name ||IsPublic&&!player.GetComponent<PlayerController>().IsAiming || player.GetComponent<PlayerStat>().status == PlayerStat.Status.Die)

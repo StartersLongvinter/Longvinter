@@ -293,6 +293,7 @@ public class BuildManager : MonoBehaviourPun
                 var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
                 newTurret.transform.SetParent(myHomeArea.transform);
                 newTurret.GetComponent<TurretController>().turretOwner = PhotonNetwork.LocalPlayer.NickName;
+                newTurret.transform.GetChild(2).LookAt(Camera.main.transform);
             }
 
             if (buildType == BuildType.house)
