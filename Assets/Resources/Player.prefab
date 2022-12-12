@@ -15796,7 +15796,7 @@ MonoBehaviour:
   sustainableItemUseNotificationPos: {fileID: 3999196399027710944}
   encyclopediaNotiPrefab: {fileID: 735556988226903498, guid: bcca95240b2ad4ddf8ab4a0b52fedeff, type: 3}
   newItemNotiPrefab: {fileID: 2568643224711381518, guid: cf3a4761f3478473dbacb95e654a3bdb, type: 3}
-  fishingNotiPrefab: {fileID: 0}
+  fishingNotiPrefab: {fileID: 735556988226903498, guid: bd117d8c182ee81408e7a2c7f8712098, type: 3}
 --- !u!1 &6365244325377983206
 GameObject:
   m_ObjectHideFlags: 0
