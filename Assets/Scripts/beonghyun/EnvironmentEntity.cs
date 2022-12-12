@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class temp : MonoBehaviour, IDamageable
+public class EnvironmentEntity : MonoBehaviourPun, IDamageable
 {
-    public float hp;
+    [SerializeField] string itemName1;
+    [SerializeField] string itemName2;
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +20,10 @@ public class temp : MonoBehaviour, IDamageable
         
     }
 
-    public void ApplyDamage(float dmg)
+    public void ApplyDamage(float damage)
     {
-        hp -= dmg;
 
-        Debug.Log(dmg + "   " + hp);
-    }
+    }    
 
     public void DropItem()
     {
