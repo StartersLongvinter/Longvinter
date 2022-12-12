@@ -13,6 +13,7 @@ public class NotificationManager : MonoBehaviour
     
     [SerializeField] private GameObject encyclopediaNotiPrefab;
     [SerializeField] private GameObject newItemNotiPrefab;
+    [SerializeField] GameObject fishingNotiPrefab;
 
     private void Awake()
     {
@@ -26,6 +27,12 @@ public class NotificationManager : MonoBehaviour
     public void FillEncyclopedia()
     {
         Instantiate(encyclopediaNotiPrefab, notificationPos);
+    }
+
+    public void WarningNotification()
+    {
+        GameObject noti = Instantiate(fishingNotiPrefab);
+        noti.transform.SetParent(notificationPos);
     }
 
     public void NewItemGainNotification(ItemData item)

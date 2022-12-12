@@ -15292,6 +15292,7 @@ MonoBehaviour:
   rightHandIkTarget: {fileID: 352961827}
   bagEquipPoint: {fileID: 1496061267110959833}
   handEquipPoint: {fileID: 3591319954121043913}
+  cameraFollowTarget: {fileID: 0}
   isBuilding: 0
   moveDirection: {x: 0, y: 0, z: 0}
   isAttackReady: 0
@@ -15760,9 +15761,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notificationPos: {fileID: 2064406179}
-  itemUseNotificationPos: {fileID: 3999196399027710944}
+  sustainableItemUseNotificationPos: {fileID: 0}
   encyclopediaNotiPrefab: {fileID: 735556988226903498, guid: bcca95240b2ad4ddf8ab4a0b52fedeff, type: 3}
   newItemNotiPrefab: {fileID: 2568643224711381518, guid: cf3a4761f3478473dbacb95e654a3bdb, type: 3}
+  fishingNotiPrefab: {fileID: 735556988226903498, guid: bd117d8c182ee81408e7a2c7f8712098, type: 3}
 --- !u!1 &6365244325377983206
 GameObject:
   m_ObjectHideFlags: 0
