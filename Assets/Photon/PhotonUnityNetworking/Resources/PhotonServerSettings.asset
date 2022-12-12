@@ -87,6 +87,7 @@ MonoBehaviour:
   - RPCPlayPlayerSound
   - RPCPlayToolSound
   - RPCPlaySound
+  - RPCStopSound
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
