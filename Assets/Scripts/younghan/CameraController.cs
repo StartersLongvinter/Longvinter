@@ -26,9 +26,6 @@ public class CameraController : MonoBehaviour
     private List<CinemachineComponentBase> componentBases = new List<CinemachineComponentBase>();
     private CinemachineBasicMultiChannelPerlin basicMultiChannelPerlin;
 
-    // test
-    public bool isBuilding;
-
     void Start()
     {
         for (int i = 0; i < virtualCameras.Length; i++)
@@ -61,7 +58,7 @@ public class CameraController : MonoBehaviour
         { 
             virtualCameras[(int)View.TopDown].Priority = 8;
 
-            if (isBuilding)
+            if (playerController.isBuilding)
                 virtualCameras[(int)View.Building].Priority = 11;
             else
                 virtualCameras[(int)View.Building].Priority = 9;

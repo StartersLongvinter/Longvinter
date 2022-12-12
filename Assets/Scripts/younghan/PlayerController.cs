@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public bool isAttackReady;
     private bool isAiming;
     private bool isPressedSpace;
+    private bool isGreeting;
 
     private float ikProgress;
     private float ikWeight;
@@ -450,11 +451,24 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIkTarget.rotation);
     }
 
-
     private void Greet()
     {
-        if (doGreet)
-            playerAnimator.SetTrigger("doGreet");
+        if (doGreet && !isGreeting)
+        {
+            if (photonView.IsMine && !chatInput.activeSelf)
+            {
+                chatInput.GetComponentInParent<ChatManager>().ActivateNickname(1.7f / 2f);
+                playerAnimator.SetTrigger("doGreet");
+
+                isGreeting = true;
+                Invoke("SetOffIsGreeting", 1.7f / 2f);
+            }
+        }
+    }
+
+    private void SetOffIsGreeting()
+    {
+        isGreeting = false;
     }
 
     [PunRPC]
