@@ -33,23 +33,14 @@ public class Encyclopedia : MonoBehaviour
                         Color newColor = fish[i].GetComponent<Image>().color;
                         fish[i].GetComponent<Image>().color = new Color(newColor.r, newColor.g, newColor.b, 1);
                         
-                        // //새로운 아이템을 찾았으므로 encyclopediaNotiPrefab, newItemNotiPrefab 둘다 켜져야함
-                        Instantiate(encyclopediaNotiPrefab, notificationPos);
-                        //     
-                        GameObject noti = Instantiate(newItemNotiPrefab);
-                        noti.transform.GetChild(0).GetComponent<Image>().sprite = itemData.itImage;
-                        noti.transform.GetChild(1).GetComponent<Text>().text = itemData.itKorName;
-                        noti.transform.GetChild(2).GetComponent<Text>().text = itemData.itExplan;
-                        noti.transform.SetParent(notificationPos);
+                        //새로운 아이템을 찾았으므로 encyclopediaNotiPrefab, newItemNotiPrefab 둘다 켜져야함
+                        NotificationManager.instance.FillEncyclopedia();
+                        NotificationManager.instance.NewItemGainNotification(itemData);
                     }
                     //도감의 알파값이 1이라면 도감이 채워진것이므로 newItemNotiPrefab만 켜주면됨
                     else
                     {
-                        GameObject noti = Instantiate(newItemNotiPrefab);
-                        noti.transform.GetChild(0).GetComponent<Image>().sprite = itemData.itImage;
-                        noti.transform.GetChild(1).GetComponent<Text>().text = itemData.itKorName;
-                        noti.transform.GetChild(2).GetComponent<Text>().text = itemData.itExplan;
-                        noti.transform.SetParent(notificationPos);
+                        NotificationManager.instance.NewItemGainNotification(itemData);
                     }
                 }
             }
@@ -66,22 +57,13 @@ public class Encyclopedia : MonoBehaviour
                         feathers[i].GetComponent<Image>().color = new Color(newColor.r, newColor.g, newColor.b, 1);
                             
                         //새로운 아이템을 찾았으므로 encyclopediaNotiPrefab, newItemNotiPrefab 둘다 켜져야함
-                        Instantiate(encyclopediaNotiPrefab, notificationPos);
-                            
-                        GameObject noti = Instantiate(newItemNotiPrefab);
-                        noti.transform.GetChild(0).GetComponent<Image>().sprite = itemData.itImage;
-                        noti.transform.GetChild(1).GetComponent<Text>().text = itemData.itKorName;
-                        noti.transform.GetChild(2).GetComponent<Text>().text = itemData.itExplan;
-                        noti.transform.SetParent(notificationPos);
+                        NotificationManager.instance.FillEncyclopedia();
+                        NotificationManager.instance.NewItemGainNotification(itemData);
                     }
                     //도감의 알파값이 1이라면 도감이 채워진것이므로 newItemNotiPrefab만 켜주면됨
                     else
                     {
-                        GameObject noti = Instantiate(newItemNotiPrefab);
-                        noti.transform.GetChild(0).GetComponent<Image>().sprite = itemData.itImage;
-                        noti.transform.GetChild(1).GetComponent<Text>().text = itemData.itKorName;
-                        noti.transform.GetChild(2).GetComponent<Text>().text = itemData.itExplan;
-                        noti.transform.SetParent(notificationPos);
+                        NotificationManager.instance.NewItemGainNotification(itemData);
                     }
                 }
             }
@@ -98,22 +80,13 @@ public class Encyclopedia : MonoBehaviour
                         plants[i].GetComponent<Image>().color = new Color(newColor.r, newColor.g, newColor.b, 1);
                             
                         //새로운 아이템을 찾았으므로 encyclopediaNotiPrefab, newItemNotiPrefab 둘다 켜져야함
-                        Instantiate(encyclopediaNotiPrefab, notificationPos);
-                            
-                        GameObject noti = Instantiate(newItemNotiPrefab);
-                        noti.transform.GetChild(0).GetComponent<Image>().sprite = itemData.itImage;
-                        noti.transform.GetChild(1).GetComponent<Text>().text = itemData.itKorName;
-                        noti.transform.GetChild(2).GetComponent<Text>().text = itemData.itExplan;
-                        noti.transform.SetParent(notificationPos);
+                        NotificationManager.instance.FillEncyclopedia();
+                        NotificationManager.instance.NewItemGainNotification(itemData);
                     }
                     //도감의 알파값이 1이라면 도감이 채워진것이므로 newItemNotiPrefab만 켜주면됨
                     else
                     {
-                        GameObject noti = Instantiate(newItemNotiPrefab);
-                        noti.transform.GetChild(0).GetComponent<Image>().sprite = itemData.itImage;
-                        noti.transform.GetChild(1).GetComponent<Text>().text = itemData.itKorName;
-                        noti.transform.GetChild(2).GetComponent<Text>().text = itemData.itExplan;
-                        noti.transform.SetParent(notificationPos);
+                        NotificationManager.instance.NewItemGainNotification(itemData);
                     }
                 }
             }
