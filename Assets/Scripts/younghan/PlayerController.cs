@@ -16,15 +16,16 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public Transform rightHandIkTarget;
     public Transform bagEquipPoint;
     public Transform handEquipPoint;
+    public Transform cameraFollowTarget;
     [HideInInspector] public bool isBuilding = false;
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
     private PlayerStat playerStat;
-
+    private CameraController cameraController;
     private float horizontalAxis;
     private float verticalAxis;
-    public Vector3 moveDirection;
+    [HideInInspector] public Vector3 moveDirection;
     private Vector3 aimLookPoint;
     private float attackDelay;
 
@@ -57,71 +58,49 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerStat = GetComponent<PlayerStat>();
+        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
 
         if (photonView.IsMine)
         {
-            Camera.main.GetComponent<CameraController>().Player = this.transform;
-            Camera.main.GetComponent<CameraController>().PlayerController = this;
+            cameraController = Camera.main.GetComponent<CameraController>();
+            cameraController.player = this.transform;
+            cameraController.playerController = this;
+            foreach (var virtualCamera in cameraController.virtualCameras)
+                virtualCamera.Follow = cameraFollowTarget;
         }
-
-        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
-    }
-
-    [PunRPC]
-    private void SetWeaponData(bool isNull = true, int _index = 0)
-    {
-        Debug.Log("Set " + _index);
-        if (isNull)
-            weaponData = null;
-        else
-        {
-            weaponData = weaponDatas[_index];
-        }
-    }
-
-    [PunRPC]
-    private void ActiveOffEquipment(int _index)
-    {
-        if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.eqIndex).gameObject.SetActive(false);
-        else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-
     }
 
     private void Update()
     {
-        if (!photonView.IsMine || chatInput.activeSelf) return;
+        if (!photonView.IsMine || chatInput.activeSelf)
+            return;
 
         GetInput();
+        Rotate();
         AimOneHandAttack();
-        if (weaponData != null) photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
+        if (weaponData != null)
+            photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
         Attack();
         Fishing();
         ECount();
         ChangeTurretMode();
 
         if (isPressedSpace)
-        {
             timer += Time.deltaTime;
-        }
 
         if (timer > 0.3f)
         {
             timer = 0f;
             isPressedSpace = false;
         }
-
     }
 
     private void FixedUpdate()
     {
-        if (!photonView.IsMine || chatInput.activeSelf) return;
+        if (!photonView.IsMine || chatInput.activeSelf)
+            return;
 
         Move();
-        Rotate();
     }
 
     private void OnAnimatorIK()
@@ -261,6 +240,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         if (weaponData != null && !isBuilding)
         {
+            if (Input.GetButtonDown("Fire2"))
+                attackDelay = weaponData.wpAttackRate * 0.5f;
+
             isAiming = Input.GetButton("Fire2");
         }
 
@@ -374,7 +356,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            if (moveDirection == Vector3.zero) return;
+            if (moveDirection == Vector3.zero)
+                return;
 
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
@@ -382,24 +365,29 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Attack()
     {
-        if (weaponData == null) return;
-
-        Weapon weapon = handEquipPoint.GetChild(weaponData.eqIndex).gameObject.GetComponent<Weapon>();
+        if (weaponData == null)
+            return;
 
         attackDelay += Time.deltaTime;
-        isAttackReady = weapon.attackRate < attackDelay;
+        isAttackReady = weaponData.wpAttackRate < attackDelay;
 
         if (isAiming && isAttackReady)
         {
+            Weapon weapon = handEquipPoint.GetChild(weaponData.eqIndex).gameObject.GetComponent<Weapon>();
+
             if (doAttack)
             {
-                if (weapon.type == Weapon.Type.OneHandRange || weapon.type == Weapon.Type.TwoHandRange)
+                if (weaponData.eqClassify == EquipmentData.EquipmentClassify.RangeWeapon)
+                //if (weapon.type == Weapon.Type.OneHandRange || weapon.type == Weapon.Type.TwoHandRange)
                 {
                     weapon.Fire();
 
+                    StartCoroutine(cameraController.Shake(3f, 15f, 0.05f));
+
                     attackDelay = 0;
                 }
-                else if (weapon.type == Weapon.Type.OneHandMelee)
+                else if (weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.OneHand)
+                //else if (weapon.type == Weapon.Type.OneHandMelee)
                 {
                     weapon.Slash();
 
@@ -410,9 +398,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             }
             else
             {
-                if (weapon.type == Weapon.Type.TwoHandMelee)
+                if ((weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand))
+                //if (weapon.type == Weapon.Type.TwoHandMelee)
                 {
                     weapon.Saw();
+
+                    StartCoroutine(cameraController.Shake(3f, 15f, 0.05f));
 
                     attackDelay = 0;
                 }
@@ -422,7 +413,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void AimOneHandAttack()
     {
-        if (weaponData == null) return;
+        if (weaponData == null)
+            return;
 
         if (isAiming && weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.OneHand)
         {
@@ -436,7 +428,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void AimTwoHandAttack()
     {
-        if (weaponData == null | isFishing) return;
+        if (weaponData == null | isFishing)
+            return;
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
 
@@ -470,7 +463,26 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         isAiming = _isAiming;
     }
 
-    void CancelFish()
+    [PunRPC]
+    private void SetWeaponData(bool isNull = true, int _index = 0)
+    {
+        Debug.Log("Set " + _index);
+        if (isNull)
+            weaponData = null;
+        else
+        {
+            weaponData = weaponDatas[_index];
+        }
+    }
+
+    [PunRPC]
+    private void ActiveOffEquipment(int _index)
+    {
+        if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.eqIndex).gameObject.SetActive(false);
+        else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
+    }
+
+    private void CancelFish()
     {
         if (isFishing)
         {
@@ -481,7 +493,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    IEnumerator CatchFish(FishingPoint point)
+    private IEnumerator CatchFish(FishingPoint point)
     {
         isFishing = true;
         playerAnimator.SetBool("isFishing", true);

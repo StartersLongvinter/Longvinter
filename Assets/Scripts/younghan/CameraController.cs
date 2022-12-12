@@ -1,93 +1,154 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform Player
-    {
-        set { player = value; }
-    }
-    public PlayerController PlayerController
-    {
-        set { playerController = value; }
-    }
+    public enum View { Default, Building, TopDown, Attack }
 
-    [SerializeField] float maxDistance;
-    [SerializeField] float smoothDampTime;
-    [SerializeField] float scrollSpeed = 2000f;
+    [HideInInspector] public Transform player;
+    [HideInInspector] public PlayerController playerController;
 
-    private Transform player;
-    private PlayerController playerController;
-    private Vector3 targetPosition;
-    private Vector3 offset;
-    private Vector3 velocity;
+    [Header("Camera")]
+    public CinemachineVirtualCamera[] virtualCameras;
+    [SerializeField] private CinemachineBrain brain;
 
-    public Vector3 originalPositionOffset;
-    public Vector3 targetPositionOffset;
-    public Vector3 originalRotationOffset;
-    public Vector3 targetRotationOffset;
+    [Header("Zoom")]
+    [SerializeField] private float speed = 1500f;
+    [SerializeField] private Vector2 distanceMinMax = new Vector2(11f, 19f);
 
-    public Vector2 yOffsetMinMax;
-    public Vector2 zOffsetMinMax;
+    [Header("Attack View")]
+    [SerializeField] private Transform followTarget;
+    [SerializeField] private float addDistance = 6f;
+    [SerializeField] private float mousePositionThreshold = 10f;
 
+    private List<CinemachineComponentBase> componentBases = new List<CinemachineComponentBase>();
+    private CinemachineBasicMultiChannelPerlin basicMultiChannelPerlin;
+
+    // test
+    public bool isBuilding;
 
     void Start()
     {
-        offset = transform.position;
+        for (int i = 0; i < virtualCameras.Length; i++)
+            componentBases.Add(virtualCameras[i].GetCinemachineComponent(CinemachineCore.Stage.Body));
+
+        basicMultiChannelPerlin = virtualCameras[(int)View.Attack].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     void Update()
     {
+        SwitchView();
         Zoom();
+        FollowMouse();
     }
 
-    void FixedUpdate()
+    public void SwitchView()
     {
-        Follow();
+        if (playerController == null)
+            return;
+
+        // Priority of 'Default' view camera - 10
+        if (playerController.IsAiming)
+            virtualCameras[(int)View.Attack].Priority = 13;
+        else
+            virtualCameras[(int)View.Attack].Priority = 7;
+
+        if (Input.GetKey(KeyCode.Q))
+            virtualCameras[(int)View.TopDown].Priority = 12;
+        else
+        { 
+            virtualCameras[(int)View.TopDown].Priority = 8;
+
+            if (isBuilding)
+                virtualCameras[(int)View.Building].Priority = 11;
+            else
+                virtualCameras[(int)View.Building].Priority = 9;
+        }
     }
 
-    private void RotateTopView()
+    public void Zoom()
     {
+        if (playerController == null)
+            return;
 
+        if (playerController.IsAiming)
+            return;
+
+        float cameraDistance = Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
+
+        for (int i = 0; i < componentBases.Count; i++)
+        {
+            if (componentBases[i] is CinemachineFramingTransposer)
+            {
+                var framingTransposer = componentBases[i] as CinemachineFramingTransposer;
+
+                framingTransposer.m_CameraDistance -= cameraDistance;
+
+                if (cameraDistance < 0)
+                {
+                    if (i == (int)View.Attack)
+                    {
+                        if (framingTransposer.m_CameraDistance > distanceMinMax.y + addDistance)
+                            framingTransposer.m_CameraDistance = distanceMinMax.y + addDistance;
+                    }
+                    else
+                    {
+                        if (framingTransposer.m_CameraDistance > distanceMinMax.y)
+                            framingTransposer.m_CameraDistance = distanceMinMax.y;
+                    }
+                }
+                else
+                {
+                    if (i == (int)View.Attack)
+                    {
+                        if (framingTransposer.m_CameraDistance < distanceMinMax.x + addDistance)
+                            framingTransposer.m_CameraDistance = distanceMinMax.x + addDistance;
+                    }
+                    else
+                    {
+                        if (framingTransposer.m_CameraDistance < distanceMinMax.x)
+                            framingTransposer.m_CameraDistance = distanceMinMax.x;
+                    }
+                }
+            }
+        }
     }
 
-
-
-    private void Zoom()
+    public void FollowMouse()
     {
-        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-        Vector3 cameraDirection = transform.localRotation * Vector3.forward;
-
-        offset += cameraDirection * scrollWheel * scrollSpeed * Time.deltaTime;
-    }
-
-    private void Follow()
-    {
-        if (player == null || playerController == null) return;
-
-        Vector3 tempVector3 = new Vector3(transform.position.x - offset.x, player.position.y, transform.position.z - offset.z);
-        float tempDistance = Vector3.Distance(player.position, tempVector3);
+        if (player == null || playerController == null)
+            return;
 
         if (playerController.IsAiming)
         {
-            //smoothDampTime = Mathf.Lerp(0.2f, 0.1f, tempDistance / aimMaxDistance);
+            if (playerController.weaponData.eqClassify == EquipmentData.EquipmentClassify.RangeWeapon)
+            {
+                Vector3 targetPosition = player.position + ((playerController.AimLookPoint - player.position) / 3f);
 
-            float distance = Vector3.Distance(player.position, playerController.AimLookPoint);
-            float clampDistance = Mathf.Clamp(distance, 0f, maxDistance);
+                targetPosition.x = Mathf.Clamp(targetPosition.x, player.position.x - mousePositionThreshold, player.position.x + mousePositionThreshold);
+                targetPosition.z = Mathf.Clamp(targetPosition.z, player.position.z - mousePositionThreshold, player.position.z + mousePositionThreshold);
 
-            Vector3 direction = (playerController.AimLookPoint - player.position).normalized;
-            direction = new Vector3(direction.x, 0, direction.z);
+                followTarget.position = targetPosition;
 
-            targetPosition = player.position + direction * clampDistance;
+                virtualCameras[(int)View.Attack].Follow = followTarget;
+            }
+            else
+                virtualCameras[(int)View.Attack].Follow = playerController.cameraFollowTarget;
         }
         else
-        {
-            //smoothDampTime = Mathf.Lerp(0.07f, 0.2f, tempDistance / aimMaxDistance);
+            virtualCameras[(int)View.Attack].Follow = null;
+    }
 
-            targetPosition = player.position;
-        }
+    public IEnumerator Shake(float amplitudeGain, float frequencyGain, float duration)
+    {
+        basicMultiChannelPerlin.m_AmplitudeGain = amplitudeGain;
+        basicMultiChannelPerlin.m_FrequencyGain = frequencyGain;
 
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition + offset, ref velocity, smoothDampTime);
+        yield return new WaitForSeconds(duration);
+
+        basicMultiChannelPerlin.m_AmplitudeGain = 0f;
+        basicMultiChannelPerlin.m_FrequencyGain = 0f;
     }
 }

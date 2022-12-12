@@ -10,7 +10,6 @@ public class Weapon : MonoBehaviourPun
     [Header("Common")]
     public Type type;
     public float damage;
-    public float attackRate;
 
     [Header("Melee")]
     [SerializeField] private BoxCollider meleeAttackArea;
@@ -97,7 +96,7 @@ public class Weapon : MonoBehaviourPun
     {
         Debug.Log("Saw");
 
-        StartCoroutine(ActivateAttackArea(0f, 0.1f));
+        StartCoroutine(ActivateAttackArea(0f, 0.05f));
     }
 
     IEnumerator ActivateAttackArea(float onTime, float offTime)
@@ -111,12 +110,10 @@ public class Weapon : MonoBehaviourPun
         meleeAttackArea.enabled = false;
     }
 
-
-
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<IDamageable>() == null || (type != Type.OneHandMelee && type != Type.TwoHandMelee)) return;
+        if (other.gameObject.GetComponent<IDamageable>() == null || (type != Type.OneHandMelee && type != Type.TwoHandMelee))
+            return;
 
         Debug.Log(other.gameObject);
         other.gameObject.GetComponent<IDamageable>().ApplyDamage(damage);
