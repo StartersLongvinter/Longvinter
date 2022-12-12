@@ -13,6 +13,7 @@ public class Title : MonoBehaviourPun
     [SerializeField] GameObject roomPrefab;
     [SerializeField] GameObject networkManagerObject;
     [SerializeField] private GameObject loadingPanel;
+    [SerializeField] SoundList bgmClips;
 
     private GameObject DotPos;
     private float timer;
@@ -23,7 +24,7 @@ public class Title : MonoBehaviourPun
     {
         if (!PhotonNetwork.InLobby && !PhotonNetwork.InRoom)
             networkManagerObject.SetActive(true);
-        NetworkManager.Instance.Init(playerPrefabName, roomPrefab);
+        NetworkManager.Instance.Init(playerPrefabName, roomPrefab, bgmClips);
 
         DotPos = loadingPanel.transform.GetChild(5).gameObject;
     }
@@ -39,13 +40,13 @@ public class Title : MonoBehaviourPun
 
         Vector2 vec = new Vector2(loadingPanel.transform.GetChild(4).GetChild(0).GetComponent<Text>().preferredWidth,
             loadingPanel.transform.GetChild(4).GetChild(0).GetComponent<Text>().preferredHeight);
-        
+
         loadingPanel.transform.GetChild(4).GetComponent<RectTransform>().sizeDelta = vec;
 
         DotPos.GetComponent<RectTransform>().pivot = new Vector2(0, 0.5f);
-        DotPos.GetComponent<RectTransform>().position = new Vector3( loadingPanel.transform.GetChild(4).position.x + 10 + vec.x / 2, DotPos.transform.position.y);
-        
-        
+        DotPos.GetComponent<RectTransform>().position = new Vector3(loadingPanel.transform.GetChild(4).position.x + 10 + vec.x / 2, DotPos.transform.position.y);
+
+
 
         if (loadingPanel.transform.GetChild(4).GetChild(0).GetComponent<Text>().text.Equals("서버에 연결되었습니다") && !isConnected)
         {
