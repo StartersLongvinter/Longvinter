@@ -142,7 +142,11 @@ public class SoundManager : MonoBehaviourPun
     {
         EffectSound _effectSound = PlayerList.Instance.playersWithActorNumber[_playerIndex].GetComponent<EffectSound>();
         AudioSource _soundSource = _effectSound.audioSource[_audioSourceIndex];
-        _soundSource.Stop();
+        if (_soundSource.isPlaying && _soundSource.clip != null)
+        {
+            _soundSource.clip = null;
+            _soundSource.Stop();
+        }
     }
     #endregion
 }

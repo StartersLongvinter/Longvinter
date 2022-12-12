@@ -86,6 +86,8 @@ public class ChatManager : MonoBehaviourPunCallbacks
         chatInput.text = "";
 
         if (nicknameText != null) nicknameText.transform.SetAsLastSibling();
+
+        SoundManager.Instance.PlayPlayerSound("ChatSounds", 0);
     }
 
     [PunRPC]

@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 isPressedSpace = false;
                 if (GetComponent<PlayerInventory>().inventoryCount <= GetComponent<PlayerInventory>().MAXITEM - 1)
                 {
+                    SoundManager.Instance.PlayToolSound("InventorySounds", 4);
                     GetComponent<PlayerInventory>().AddItem(other.gameObject);
                 }
                 else
@@ -246,7 +247,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 attackDelay = weaponData.wpAttackRate * 0.5f;
 
             isAiming = Input.GetButton("Fire2");
-            if (!isAiming)
+            if (!isAiming && isReadyToSaw)
             {
                 isReadyToSaw = false;
                 SoundManager.Instance.StopSound(1);
@@ -292,6 +293,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 fishingCoroutine = CatchFish(raycasthit.collider.GetComponent<FishingPoint>());
                 //StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
                 StartCoroutine(fishingCoroutine);
+
+                SoundManager.Instance.PlayToolSound("FishingSounds", 0);
             }
         }
     }
@@ -535,11 +538,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             UIManager.instance.OpenSuccessImage(fish);
             point.IsFinished();
+            SoundManager.Instance.PlayToolSound("FishingSounds", Random.Range(1, 3));
         }
         else
         {
             Debug.Log("Fail");
             point.IsFinished();
+            SoundManager.Instance.PlayToolSound("FishingSounds", 0);
         }
         isFishing = false;
         playerAnimator.SetBool("isFishing", false);
