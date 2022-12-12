@@ -35,7 +35,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/AIFishingScene.unity
     guid: 1b98eb6528944a14892aab889485a267
-  - enabled: 0
-    path: Assets/Scenes/YH 1.unity
-    guid: 42df533a3949a954380b48ab75910c5d
   m_configObjects: {}

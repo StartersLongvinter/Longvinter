@@ -375,6 +375,7 @@ MonoBehaviour:
     type: 3}
   networkManagerObject: {fileID: 35055597}
   loadingPanel: {fileID: 1903223170}
+  bgmClips: {fileID: 11400000, guid: 05e60460edb8b4866af8c4ab7deb6d37, type: 2}
 --- !u!4 &243231924
 Transform:
   m_ObjectHideFlags: 0
@@ -874,7 +875,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: [{fileID: 1388715178}]
+  m_Children:
+  - {fileID: 1388715178}
   m_Father: {fileID: 1539135989}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

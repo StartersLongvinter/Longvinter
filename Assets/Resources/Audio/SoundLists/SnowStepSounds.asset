@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e60abe09a6d04e43a852cd329c09a3b, type: 3}
+  m_Name: SnowStepSounds
+  m_EditorClassIdentifier: 
+  listName: SnowStepSounds
+  clips:
+  - {fileID: 8300000, guid: d87f315387da44212a97e7aad4246e5e, type: 3}
+  - {fileID: 8300000, guid: 9b2adf79542694e639819eae8f10be84, type: 3}
+  - {fileID: 8300000, guid: c9f58f2afbab74cd4b7296a8aafeb554, type: 3}
+  - {fileID: 8300000, guid: 1a0709a64c29b4717837d36ecd7b8b9e, type: 3}
+  - {fileID: 8300000, guid: b374e7cc8d93f411cb49637556cbbc3b, type: 3}
