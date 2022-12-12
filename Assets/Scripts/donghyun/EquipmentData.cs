@@ -14,30 +14,28 @@ public class EquipmentData : ScriptableObject
         Default, OneHand, TwoHand, Head, Back
     }
 
-    [TextArea]
-    [SerializeField] private string equipmentExplain;
+    [SerializeField] private string equipmentKorName;
+    [SerializeField][TextArea] private string equipmentExplain;
     [SerializeField] private EquipmentClassify equipmentClassify;
     [SerializeField] private EquipmentPosition equipmentPosition;
     [SerializeField] private GameObject equipmentCanvasPrefab;
     [SerializeField] private GameObject equipmentPrefab;
+    [SerializeField] private int equipmentIndex;
     [SerializeField] private float weaponDamage;
     [SerializeField] private float weaponAttackRate;
-    [SerializeField] private int ammoCount; // Player 이동 예정
-    [SerializeField] private string equipmentKorName;
     [SerializeField] private bool isAuto;
-    [SerializeField] private int equipmentIndex;
+    [SerializeField] private int ammoCount; // Player 이동 예정
 
+    public string eqKorName => equipmentKorName;
     public string eqExplain => equipmentExplain;
     public EquipmentClassify eqClassify => equipmentClassify;
     public EquipmentPosition eqPosition => equipmentPosition;
     public GameObject eqCanvasPrefab => equipmentCanvasPrefab;
     public GameObject eqPrefab => equipmentPrefab;
-
+    public int eqIndex => equipmentIndex;
     //public Vector2 wpMinMaxDamage => weaponMinMaxDamage;
     public float wpDamage => weaponDamage;
     public float wpAttackRate => weaponAttackRate;
-    public int amCount => ammoCount;
-    public string eqKorName => equipmentKorName;
     public bool auto => isAuto;
-    public int eqIndex => equipmentIndex;
+    public int amCount => ammoCount;
 }

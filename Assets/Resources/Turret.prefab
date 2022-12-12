@@ -231,7 +231,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7188179017194068467}
   - component: {fileID: -9211507875356690715}
-  - component: {fileID: 8355613450804420043}
   - component: {fileID: -8989342727540275638}
   - component: {fileID: 449731366350796126}
   m_Layer: 0
@@ -270,39 +269,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caef596b73514144690c7a2db0221ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotatePart: {fileID: 3387500465062260111}
-  fireRate: 1
-  fireTimeLimit: 0
-  isfire: 0
-  attack: 0
-  turretOwner: 
-  mat:
-  - {fileID: 2100000, guid: 4ec848bfbb768c4438255d9d08f1e568, type: 2}
-  - {fileID: 2100000, guid: eafdbc4b2ea56b8499d773ff95000ea5, type: 2}
   bulletPrefab: {fileID: 9078441727759166900, guid: bc93e427aae337b4eb9c6c1105163b83, type: 3}
   firePoint: {fileID: 4440326907571445116}
   turretTransform: {fileID: 7188179017194068467}
   trigger: {fileID: 0}
-  range: 10
---- !u!114 &8355613450804420043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7532932385310278473}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27dd82fe7144ef947ae9072a17f6a416, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   rotatePart: {fileID: 3387500465062260111}
   fireRate: 1
   fireTimeLimit: 0
   isfire: 0
   attack: 0
   turretOwner: 
-  mat: []
+  IsAuto: 0
+  IsPublic: 0
+  mat:
+  - {fileID: 2100000, guid: 4ec848bfbb768c4438255d9d08f1e568, type: 2}
+  - {fileID: 2100000, guid: eafdbc4b2ea56b8499d773ff95000ea5, type: 2}
+  range: 10
 --- !u!114 &-8989342727540275638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,9 +301,10 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
+  - {fileID: -9211507875356690715}
   - {fileID: 7828076714450455780}
   sceneViewId: 0
   InstantiationId: 0

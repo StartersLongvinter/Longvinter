@@ -162,10 +162,9 @@ public class PlayerInventory : MonoBehaviourPun
                 GameObject temp = Instantiate(go);
                 temp.name = go.GetComponent<Item>().item.itName;
                 currentUseItem.Add(temp);
-
-                GameObject effect = Instantiate(go.GetComponent<Item>().item.itEffectPrefab);
-                effect.transform.SetParent(NoOverlapEffectNotificationPos);
-
+                
+                GameObject effect = NotificationManager.instance.ItemUseNotification(go);
+                
                 StartCoroutine(WaitForTimer(temp.GetComponent<Item>().item.itExpireTime
                     , currentUseItem.IndexOf(temp)
                     , temp

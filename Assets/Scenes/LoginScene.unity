@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -188,7 +188,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a17528c337a324eff8838364a0f1b54d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 95fdada27424c4fb08da35ae38bacf31, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dca34e493802444f8082d2eb1fe1b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefabName: Player_MHS
+  playerPrefabName: Player
   roomPrefab: {fileID: 5161857643047110011, guid: 8a53112d8bac945f7944e16bed2a5f3d,
     type: 3}
   networkManagerObject: {fileID: 35055597}

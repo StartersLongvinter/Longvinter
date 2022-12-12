@@ -16,20 +16,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     public Transform rightHandIkTarget;
     public Transform bagEquipPoint;
     public Transform handEquipPoint;
+    public Transform cameraFollowTarget;
     [HideInInspector] public bool isBuilding = false;
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
     private PlayerStat playerStat;
+    private CameraController cameraController;
 
     private float horizontalAxis;
     private float verticalAxis;
-    public Vector3 moveDirection;
+    [HideInInspector] public Vector3 moveDirection;
     private Vector3 aimLookPoint;
     private float attackDelay;
 
     private bool doAttack;
-    private bool isAttackReady;
+    public bool isAttackReady;
     private bool isAiming;
     private bool isPressedSpace;
 
@@ -57,38 +59,16 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerStat = GetComponent<PlayerStat>();
+        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
 
         if (photonView.IsMine)
         {
-            Camera.main.GetComponent<CameraController>().Player = this.transform;
-            Camera.main.GetComponent<CameraController>().PlayerController = this;
+            cameraController = Camera.main.GetComponent<CameraController>();
+            cameraController.player = this.transform;
+            cameraController.playerController = this;
+            foreach (var virtualCamera in cameraController.virtualCameras)
+                virtualCamera.Follow = cameraFollowTarget;
         }
-
-        playerStat.ownerPlayerActorNumber = photonView.Owner.ActorNumber;
-    }
-
-    [PunRPC]
-    private void SetWeaponData(bool isNull = true, int _index = 0)
-    {
-        Debug.Log("Set " + _index);
-        if (isNull)
-            weaponData = null;
-        else
-        {
-            weaponData = weaponDatas[_index];
-        }
-    }
-
-    [PunRPC]
-    private void ActiveOffEquipment(int _index)
-    {
-        if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.eqIndex).gameObject.SetActive(false);
-        else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-
     }
 
     private void Update()
@@ -96,37 +76,36 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (!photonView.IsMine || chatInput.activeSelf) return;
 
         GetInput();
-        Aim();
+        Rotate();
+        AnimateOneHandAim();
+        if (weaponData != null)
+            photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
         Attack();
         Fishing();
         ECount();
         ChangeTurretMode();
 
         if (isPressedSpace)
-        {
             timer += Time.deltaTime;
-        }
 
         if (timer > 0.3f)
         {
             timer = 0f;
             isPressedSpace = false;
         }
-
-        if (weaponData != null) photonView.RPC("SwitchWeaponPosition", RpcTarget.All, weaponData.eqIndex);
     }
 
     private void FixedUpdate()
     {
-        if (!photonView.IsMine || chatInput.activeSelf) return;
+        if (!photonView.IsMine || chatInput.activeSelf)
+            return;
 
         Move();
-        Rotate();
     }
 
     private void OnAnimatorIK()
     {
-        AnimateAim();
+        AnimateTwoHandAim();
     }
 
     private void OnTriggerStay(Collider other)
@@ -235,7 +214,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region Public Methods
-    // 이거 합쳐야 함
     [PunRPC]
     public void SwitchWeaponPosition(int _emIndex)
     {
@@ -261,6 +239,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         if (weaponData != null && !isBuilding)
         {
+            if (Input.GetButtonDown("Fire2"))
+                attackDelay = weaponData.wpAttackRate * 0.5f;
+
             isAiming = Input.GetButton("Fire2");
         }
 
@@ -307,26 +288,30 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void ChangeTurretMode()
     {
+        if (isAiming)
+            return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
         foreach (var raycasthit in raycastHits)
         {
             if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
                 continue;
-            Turret turret = raycasthit.collider.gameObject.GetComponent<Turret>();
+            TurretController turret = raycasthit.collider.gameObject.GetComponent<TurretController>();
             if (turret.turretOwner == "")
                 return;
             float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
             if (doAttack && raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance &&
                 raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
             {
-                isAuto = !raycasthit.collider.gameObject.GetComponent<Turret>().IsAuto;
-                Debug.Log(isAuto);
+                isAuto = !raycasthit.collider.gameObject.GetComponent<TurretController>().IsAuto;
                 turret.IsAuto = isAuto;
-                turret.ChangeTurretModeColor(turret, isAuto);
+                turret.ChangeTurretModeColor();
+                return;
             }
         }
     }
+
+
 
     private void ECount()
     {
@@ -352,7 +337,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
             playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
         }
-
         else
             playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
     }
@@ -382,58 +366,71 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Attack()
     {
-        if (weaponData == null) return;
-
-        Weapon weapon = handEquipPoint.GetChild(weaponData.eqIndex).gameObject.GetComponent<Weapon>();
+        if (weaponData == null)
+            return;
 
         attackDelay += Time.deltaTime;
-        isAttackReady = weapon.attackRate < attackDelay;
+        isAttackReady = weaponData.wpAttackRate < attackDelay;
 
-        if (isAiming && isAttackReady && doAttack)
+        if (isAiming && isAttackReady)
         {
-            if (weapon.type == Weapon.Type.OneHandRange || weapon.type == Weapon.Type.TwoHandRange)
-            {
-                weapon.Fire();
-            }
-            else if (weapon.type == Weapon.Type.OneHandMelee)
-            {
-                weapon.Swing();
+            Weapon weapon = handEquipPoint.GetChild(weaponData.eqIndex).gameObject.GetComponent<Weapon>();
 
-                playerAnimator.SetTrigger("doMeleeAttack");
-            }
+            if (doAttack)
+            {
+                if (weaponData.eqClassify == EquipmentData.EquipmentClassify.RangeWeapon)
+                {
+                    weapon.Fire();
 
-            attackDelay = 0;
+                    StartCoroutine(cameraController.Shake(3f, 15f, 0.05f));
+
+                    attackDelay = 0;
+                }
+                else if (weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.OneHand)
+                {
+                    weapon.Slash();
+
+                    playerAnimator.SetTrigger("doMeleeAttack");
+
+                    attackDelay = 0;
+                }
+            }
+            else
+            {
+                if ((weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand))
+                {
+                    weapon.Saw();
+
+                    StartCoroutine(cameraController.Shake(3f, 15f, 0.05f));
+
+                    attackDelay = 0;
+                }
+            }
         }
     }
 
-    private void Aim()
+    private void AnimateOneHandAim()
     {
-        if (weaponData == null) return;
+        if (weaponData == null)
+            return;
 
         if (isAiming && weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.OneHand)
-        {
             playerAnimator.SetBool("isMeleeAttackAim", true);
-        }
         else
-        {
             playerAnimator.SetBool("isMeleeAttackAim", false);
-        }
     }
 
-    private void AnimateAim()
+    private void AnimateTwoHandAim()
     {
-        if (weaponData == null | isFishing) return;
+        if (weaponData == null | isFishing)
+            return;
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
 
         if (isAiming && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand)
-        {
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
-        }
         else
-        {
             ikProgress = Mathf.Clamp(ikProgress - Time.deltaTime * progressSpeed, 0f, 0.5f);
-        }
 
         ikWeight = Mathf.Lerp(0f, 1f, ikProgress);
 
@@ -454,6 +451,25 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private void SetIsAiming(bool _isAiming)
     {
         isAiming = _isAiming;
+    }
+
+    [PunRPC]
+    private void SetWeaponData(bool isNull = true, int _index = 0)
+    {
+        Debug.Log("Set " + _index);
+        if (isNull)
+            weaponData = null;
+        else
+        {
+            weaponData = weaponDatas[_index];
+        }
+    }
+
+    [PunRPC]
+    private void ActiveOffEquipment(int _index)
+    {
+        if (_index == -1) bagEquipPoint.transform.GetChild(weaponData.eqIndex).gameObject.SetActive(false);
+        else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
     }
 
     void CancelFish()
