@@ -20,6 +20,6 @@ MonoBehaviour:
   equipmentPrefab: {fileID: 2669447280008706331, guid: fb94f8f1fb9fa4afc87ca765f113d975, type: 3}
   equipmentIndex: 2
   weaponDamage: 16
-  weaponAttackRate: 1
+  weaponAttackRate: 0.7
   isAuto: 0
   ammoCount: 0
