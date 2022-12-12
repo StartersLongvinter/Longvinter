@@ -7,7 +7,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class TurretHandler : MonoBehaviourPun, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class TurretHandler : MonoBehaviour
 {
     TurretController TurretCollider;
     bool isAuto;
@@ -26,7 +26,7 @@ public class TurretHandler : MonoBehaviourPun, IPointerEnterHandler, IPointerExi
     {
         Debug.Log("???? Exit");
     }
-    public void OnPointerClick(PointerEventData eventData)
+/*    public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.pointerCurrentRaycast.gameObject.GetComponent<TurretController>() == null)
             return;
@@ -71,5 +71,5 @@ public class TurretHandler : MonoBehaviourPun, IPointerEnterHandler, IPointerExi
         TurretCollider = eventData.pointerCurrentRaycast.gameObject.GetComponent<TurretController>();
         TurretCollider.transform.GetChild(1).gameObject.SetActive(false);
         TurretCollider.transform.GetChild(4).gameObject.SetActive(false);
-    }
+    }*/
 }
