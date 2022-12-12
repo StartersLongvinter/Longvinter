@@ -15126,9 +15126,9 @@ GameObject:
   - component: {fileID: 620971052199837303}
   - component: {fileID: 3561456211196938491}
   - component: {fileID: -2713289005664936501}
-  - component: {fileID: 5981771061394236114}
+  - component: {fileID: 6036062784739525021}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_DH
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15747,7 +15747,7 @@ MonoBehaviour:
     LayerIndex: 0
   - SynchronizeType: 1
     LayerIndex: 1
---- !u!114 &5981771061394236114
+--- !u!114 &6036062784739525021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15760,7 +15760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notificationPos: {fileID: 2064406179}
-  sustainableItemUseNotificationPos: {fileID: 3999196399027710944}
+  itemUseNotificationPos: {fileID: 3999196399027710944}
   encyclopediaNotiPrefab: {fileID: 735556988226903498, guid: bcca95240b2ad4ddf8ab4a0b52fedeff, type: 3}
   newItemNotiPrefab: {fileID: 2568643224711381518, guid: cf3a4761f3478473dbacb95e654a3bdb, type: 3}
 --- !u!1 &6365244325377983206
@@ -17311,27 +17311,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1798431509970971767, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1798431509970971767, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1798431509970971767, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1798431509970971767, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 700
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1798431509970971767, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 750
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1798431509970971767, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -350
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1996890693867279988, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchorMax.y
@@ -17623,27 +17623,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6702239062611810539, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702239062611810539, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702239062611810539, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702239062611810539, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 700
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702239062611810539, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 250
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702239062611810539, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -350
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6820636832187572652, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_AnchorMax.y
@@ -18008,10 +18008,6 @@ PrefabInstance:
     - target: {fileID: 8307478925354530235, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_Name
       value: DeadBag
-      objectReference: {fileID: 0}
-    - target: {fileID: 8307478925354530235, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8307478925354530239, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
       propertyPath: m_Pivot.x

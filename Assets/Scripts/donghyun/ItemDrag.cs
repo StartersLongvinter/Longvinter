@@ -193,7 +193,10 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
                     return;
                 }
                 Debug.Log(gameObject.GetComponent<Item>().item.itKorName + "사용함");
+                
                 transform.SetParent(canvas.transform);
+                transform.SetAsFirstSibling();
+                
                 player.GetComponent<PlayerInventory>().ItemUse(gameObject);
             }
             else if (gameObject.GetComponent<Item>().equipment != null)
