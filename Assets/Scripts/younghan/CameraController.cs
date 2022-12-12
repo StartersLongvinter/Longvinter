@@ -55,7 +55,7 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
             virtualCameras[(int)View.TopDown].Priority = 12;
         else
-        { 
+        {
             virtualCameras[(int)View.TopDown].Priority = 8;
 
             if (playerController.isBuilding)

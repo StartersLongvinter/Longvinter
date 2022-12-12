@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     FishingPoint currentFishingPoint;
 
     private bool isAuto;
+    private bool isReadyToSaw = false;
 
     #region Callback Methods
     private void Awake()
@@ -246,6 +247,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 attackDelay = weaponData.wpAttackRate * 0.5f;
 
             isAiming = Input.GetButton("Fire2");
+            if (!isAiming)
+            {
+                isReadyToSaw = false;
+                SoundManager.Instance.StopSound(1);
+            }
         }
 
         doAttack = Input.GetButtonDown("Fire1");
@@ -338,7 +344,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (moveDirection != Vector3.zero)
         {
             CancelFish();
-
+            SoundManager.Instance.PlayPlayerSound("GrassStepSounds", -1, true, true);
             playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
         }
         else
@@ -386,6 +392,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     weapon.Fire();
 
+                    if (weaponData.name == "SemiAutomatic" || weaponData.name == "AssaultRifle") SoundManager.Instance.PlayToolSound("RifleSounds", -1);
+                    else SoundManager.Instance.PlayToolSound("ShotSounds", -1);
+
                     StartCoroutine(cameraController.Shake(3f, 15f, 0.05f));
 
                     attackDelay = 0;
@@ -404,6 +413,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 if ((weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand))
                 {
                     weapon.Saw();
+
+                    if (!isReadyToSaw)
+                    {
+                        SoundManager.Instance.PlayToolSound("ChainsawSounds", 0, true, true);
+                        isReadyToSaw = true;
+                    }
+                    else
+                        SoundManager.Instance.PlayToolSound("ChainsawSounds", 1, false);
 
                     StartCoroutine(cameraController.Shake(3f, 15f, 0.05f));
 
