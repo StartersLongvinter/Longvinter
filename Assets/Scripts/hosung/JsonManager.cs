@@ -76,7 +76,7 @@ public class JsonManager : MonoBehaviourPun
     }
 
     private float curTime = 0f;
-    private float saveTime = 30f;
+    [SerializeField] private float saveTime = 30f;
     public SaveInformations myInformation;
     public SaveHouseInformations myHouseInformation;
     public SaveTurretInformations myTurretInformation;
@@ -182,7 +182,7 @@ public class JsonManager : MonoBehaviourPun
         string roomJson = JsonUtility.ToJson(saveRoomDatas);
         Debug.Log(roomJson);
 
-        string _roomDatasName = PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
+        string _roomDatasName = "/" + PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
         string _roomPath = Application.streamingAssetsPath + _roomDatasName + ".json";
 
         File.WriteAllText(_roomPath, roomJson);
@@ -206,7 +206,7 @@ public class JsonManager : MonoBehaviourPun
 
             File.WriteAllText(_housePath, houseJson);
 
-            _path += "\n" + _roomPath + "\n" + _housePath;
+            _path += _roomPath + "\n" + _housePath;
         }
 
         // 터렛 저장 
