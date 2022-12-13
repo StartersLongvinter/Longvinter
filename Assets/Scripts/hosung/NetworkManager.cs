@@ -91,6 +91,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void OnClickStart()
     {
         nickName = GameObject.Find("NickNameInput").transform.GetChild(0).GetChild(2).GetComponent<Text>().text;
+        if (nickName == "") return;
         isLobby = false;
 
         PhotonNetwork.JoinLobby();
@@ -99,6 +100,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void OnClickServer()
     {
         nickName = GameObject.Find("NickNameInput").transform.GetChild(0).GetChild(2).GetComponent<Text>().text;
+        if (nickName == "") return;
         isLobby = true;
         PhotonNetwork.JoinLobby();
     }
