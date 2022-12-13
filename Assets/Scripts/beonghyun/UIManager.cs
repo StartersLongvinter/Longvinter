@@ -146,6 +146,7 @@ public class UIManager : MonoBehaviourPun
                 blurPanel.SetActive(true);
                 blurPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 100);
                 pauseCanvasGroup.DOFade(1, 0.1f);
+                pauseCanvasGroup.interactable = true;
             }
             else
             {
@@ -153,6 +154,7 @@ public class UIManager : MonoBehaviourPun
                 blurPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                 blurPanel.SetActive(false);
                 pauseCanvasGroup.DOFade(0, 0.1f);
+                pauseCanvasGroup.interactable = false;
             }
             isPressedEsc = false;
         }

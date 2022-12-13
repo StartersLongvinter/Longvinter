@@ -185,10 +185,5 @@ public class ChatManager : MonoBehaviourPunCallbacks
             chatInput.ActivateInputField();
             chatInput.Select();
         }
-
-        if (Input.GetKeyDown(KeyCode.N) && photonView.IsMine && !chatInput.gameObject.activeSelf)
-        {
-            ActivateNickname(3.0f);
-        }
     }
 }
