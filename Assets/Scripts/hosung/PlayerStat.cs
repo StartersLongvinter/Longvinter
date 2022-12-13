@@ -80,8 +80,6 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             JsonManager.Instance.LoadPlayerData();
             if (PhotonNetwork.IsMasterClient) JsonManager.Instance.LoadRoomData();
         }
-
-
     }
 
     void Update()
@@ -228,6 +226,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             hp = 0;
             ChangeStatus((int)Status.Die);
             this.gameObject.layer = 8;
+            if (currentWeapon == null)
+                return;
             DropItem();
         }
     }
