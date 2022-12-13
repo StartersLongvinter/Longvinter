@@ -235,7 +235,7 @@ public class BuildManager : MonoBehaviourPun
         Debug.DrawRay(ray.origin + _offsetX - _offsetY, ray.direction * 500f, Color.red);
         Debug.DrawRay(ray.origin - _offsetX + _offsetY, ray.direction * 500f, Color.red);
         Debug.DrawRay(ray.origin - _offsetX - _offsetY, ray.direction * 500f, Color.red);
-        buildObject.transform.position = mousePosition + new Vector3(0, buildObject.transform.localScale.y * 0.5f, 0);
+        buildObject.transform.position = mousePosition + new Vector3(0, (buildObject.transform.localScale.y * 0.5f) - ((buildType == BuildType.turret) ? 0.5f : 0), 0);
 
         if (!canBuild)
         {
@@ -288,8 +288,8 @@ public class BuildManager : MonoBehaviourPun
         {
             if (buildType == BuildType.turret)
             {
-                var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
-                newTurret.transform.SetParent(myHomeArea.transform);
+                var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, Quaternion.identity);//buildObject.transform.rotation);
+                //newTurret.transform.SetParent(myHomeArea.transform);
                 newTurret.GetComponent<TurretController>().turretOwner = PhotonNetwork.LocalPlayer.NickName;
             }
 
