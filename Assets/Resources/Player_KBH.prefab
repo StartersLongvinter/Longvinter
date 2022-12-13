@@ -15147,6 +15147,7 @@ GameObject:
   - component: {fileID: -1923840663785282116}
   - component: {fileID: 5444816142457934325}
   - component: {fileID: 5879694380349709949}
+  - component: {fileID: -616919874011592439}
   - component: {fileID: 7221896422927409961}
   - component: {fileID: 1388196507}
   - component: {fileID: 1388196508}
@@ -15156,8 +15157,8 @@ GameObject:
   - component: {fileID: 606652212037703707}
   - component: {fileID: 620971052199837303}
   - component: {fileID: 3561456211196938491}
-  - component: {fileID: -2713289005664936501}
   - component: {fileID: 5981771061394236114}
+  - component: {fileID: -2713289005664936501}
   m_Layer: 0
   m_Name: Player_KBH
   m_TagString: Player
@@ -15331,6 +15332,31 @@ MonoBehaviour:
   chatInput: {fileID: 346654853340184980}
   maxInteractableDistance: 7
   eImageActivate: 0
+--- !u!114 &-616919874011592439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349114427959441967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ba033db4bf54052a8c3f587b2c9092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundLists:
+  - {fileID: 11400000, guid: 84765211eec004733bc1a7fcb024be77, type: 2}
+  - {fileID: 11400000, guid: 9997b4bca3bc2498c932d6ede710a9b6, type: 2}
+  - {fileID: 11400000, guid: 57823ccbc8508494097f8d688ab42d10, type: 2}
+  - {fileID: 11400000, guid: 73af75f4d2e7e4875aaaf1135f114fd8, type: 2}
+  - {fileID: 11400000, guid: 8c67c9c0be903421a8fa7ab0e8822d65, type: 2}
+  - {fileID: 11400000, guid: fb2b27070440a432bbad60dba0809617, type: 2}
+  - {fileID: 11400000, guid: b1e2d984478a147afa96cd0f443669f1, type: 2}
+  - {fileID: 11400000, guid: b4fee6ca38543495ca2c1771b758f430, type: 2}
+  - {fileID: 11400000, guid: 1bc137788b8cd49599933b7dac594160, type: 2}
+  - {fileID: 11400000, guid: f7baf9b7e11a847b18bd3e39a75f277e, type: 2}
+  - {fileID: 11400000, guid: f2a75378947c145d9b7356aa10f839b8, type: 2}
+  audioSource: []
 --- !u!114 &7221896422927409961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15742,6 +15768,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5981771061394236114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349114427959441967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c0b518bc6971486f87d89f6846249ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notificationPos: {fileID: 2064406179}
+  sustainableItemUseNotificationPos: {fileID: 3999196399027710944}
+  encyclopediaNotiPrefab: {fileID: 735556988226903498, guid: bcca95240b2ad4ddf8ab4a0b52fedeff, type: 3}
+  newItemNotiPrefab: {fileID: 2568643224711381518, guid: cf3a4761f3478473dbacb95e654a3bdb, type: 3}
+  fishingNotiPrefab: {fileID: 735556988226903498, guid: bd117d8c182ee81408e7a2c7f8712098, type: 3}
 --- !u!114 &-2713289005664936501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15766,37 +15809,20 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isFishing
-  - Type: 4
+  - Type: 9
     SynchronizeType: 1
+    Name: cancelFish
+  - Type: 4
+    SynchronizeType: 0
     Name: isMeleeAttackAim
   - Type: 9
-    SynchronizeType: 1
-    Name: doMeleeAttack
-  - Type: 9
     SynchronizeType: 0
-    Name: cancelFish
+    Name: doMeleeAttack
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
   - SynchronizeType: 1
     LayerIndex: 1
---- !u!114 &5981771061394236114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6349114427959441967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c0b518bc6971486f87d89f6846249ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  notificationPos: {fileID: 2064406179}
-  sustainableItemUseNotificationPos: {fileID: 3999196399027710944}
-  encyclopediaNotiPrefab: {fileID: 735556988226903498, guid: bcca95240b2ad4ddf8ab4a0b52fedeff, type: 3}
-  newItemNotiPrefab: {fileID: 2568643224711381518, guid: cf3a4761f3478473dbacb95e654a3bdb, type: 3}
-  fishingNotiPrefab: {fileID: 735556988226903498, guid: bd117d8c182ee81408e7a2c7f8712098, type: 3}
 --- !u!1 &6365244325377983206
 GameObject:
   m_ObjectHideFlags: 0
@@ -18490,6 +18516,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 844714788351350602}
     m_Modifications:
+    - target: {fileID: 477600773864959068, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.206
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.084
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.131
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97770804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.13056749
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.09250669
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.13594723
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -16.288
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 8.712
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002921674667751142, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 14.583
+      objectReference: {fileID: 0}
     - target: {fileID: 5026881587130996168, guid: 8fe696efd0bdc5e4bb74b1b8398e1b3c, type: 3}
       propertyPath: m_RootOrder
       value: 1
