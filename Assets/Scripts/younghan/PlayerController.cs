@@ -279,6 +279,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
                 if (currentFishingPoint.isWait)
                 {
+                    NotificationManager.instance.WarningNotification();
                     Debug.Log("Fish are surprised by sudden movement. Cannot use fishingpoint");
                     return;
                 }
@@ -343,9 +344,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         playerRigidbody.velocity = new Vector3(moveDirection.x * currentMoveSpeed, playerRigidbody.velocity.y, moveDirection.z * currentMoveSpeed);
         playerAnimator.SetBool("isWalking", moveDirection != Vector3.zero);
 
-        if (moveDirection != Vector3.zero)
+        if (moveDirection != Vector3.zero && isFishing)
         {
             CancelFish();
+        }
+
+        if (moveDirection != Vector3.zero)
+        {
             SoundManager.Instance.PlayPlayerSound("GrassStepSounds", -1, true, true);
             playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
         }
@@ -504,13 +509,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     void CancelFish()
     {
-        if (isFishing)
-        {
-            StopCoroutine(fishingCoroutine);
-            isFishing = false;
-            playerAnimator.SetTrigger("cancelFish");
+       
+            
+        playerAnimator.SetTrigger("cancelFish");
+        isFishing = false;
+            //playerAnimator.SetBool("isFishing", false);
+            
             currentFishingPoint.WaitPoint();
-        }
+        StopCoroutine(fishingCoroutine);
+
     }
 
     IEnumerator CatchFish(FishingPoint point)
@@ -520,14 +527,17 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         eCount = 0;
         yield return new WaitForSeconds(Random.Range(playerStat.fishingSpeed, playerStat.fishingSpeed * 2));
         eImageActivate = true;
+
         // E 키를 누르라는 UI 나오게 해야함 UIManager에서 실행
+
         Debug.Log("Press E!");
         //2초 지나면 자동으로 UI 비활성화 만약 그 사이 10번 넘게 클릭했다면 성공
+
         yield return new WaitForSeconds(2);
+
         eImageActivate = false;
         if (eCount >= 10)
         {
-            isSuccessState = true;
             UIManager.instance.OpenSuccessImage(fish);
             point.IsFinished();
             SoundManager.Instance.PlayToolSound("FishingSounds", Random.Range(1, 3));
@@ -538,10 +548,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             point.IsFinished();
             SoundManager.Instance.PlayToolSound("FishingSounds", 0);
         }
-        playerAnimator.SetBool("isFishing", false);
-        yield return new WaitForSeconds(3);
-        isSuccessState = false;
         isFishing = false;
+        playerAnimator.SetBool("isFishing", false);
+        
     }
     #endregion
 }

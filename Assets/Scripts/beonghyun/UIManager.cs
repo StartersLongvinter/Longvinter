@@ -61,7 +61,19 @@ public class UIManager : MonoBehaviourPun
         pauseCanvasGroup = pauseCanvas.GetComponent<CanvasGroup>();
 
         mainCanvas = GameObject.Find("Canvas");
-        blurPanel = mainCanvas.transform.GetChild(10).gameObject;
+        blurPanel = mainCanvas.transform.Find("BlurPanel").gameObject;
+        
+        pauseCanvas.transform.GetChild(2).GetComponent<Button>().onClick.AddListener((() =>
+        {
+            if ((int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"] <= 1)
+            {
+                pauseCanvas.transform.GetChild(7).gameObject.SetActive(true);
+            }
+            else
+            {
+                pauseCanvas.transform.GetChild(8).gameObject.SetActive(true);
+            }
+        }));
         
         pauseCanvas.transform.GetChild(3).GetComponent<Button>().onClick.AddListener((() =>
         {

@@ -24,4 +24,9 @@ public class temp : MonoBehaviour, IDamageable
 
         Debug.Log(dmg + "   " + hp);
     }
+
+    public void DropItem()
+    {
+
+    }
 }

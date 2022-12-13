@@ -113,13 +113,7 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable, IDamageable
             bulletDir = transform.position - bullet.transform.position;
         }
     }
-    void DropItem()
-    {
-        isDead = true;
-        PhotonNetwork.Instantiate(itemName1, this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
-        PhotonNetwork.Instantiate(itemGroup[Random.Range(0,itemGroup.Length)], this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
-        
-    }
+   
     
 
     IEnumerator OnDamageEffect()
@@ -173,5 +167,15 @@ public class LivingEntity : MonoBehaviourPun, IPunObservable, IDamageable
             DropItem();
             PhotonNetwork.Destroy(this.gameObject);
         }
+    }
+
+    public void DropItem()
+    {
+        isDead = true;
+        PhotonNetwork.Instantiate("ItemPrefabs/"+itemName1, 
+            this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
+        PhotonNetwork.Instantiate("ItemPrefabs/"+itemGroup[Random.Range(0, itemGroup.Length)], 
+            this.gameObject.transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
+
     }
 }

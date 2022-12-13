@@ -17,7 +17,7 @@ public class SceneLoding : MonoBehaviour
 
     private void Awake()
     {
-        loadingPanel = GameObject.Find("Canvas").transform.GetChild(11).gameObject;
+        loadingPanel = GameObject.Find("Canvas").transform.Find("Loading").gameObject;
         DotPos = loadingPanel.transform.GetChild(5).gameObject;
     }
     
