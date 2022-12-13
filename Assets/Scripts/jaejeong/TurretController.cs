@@ -236,4 +236,12 @@ public class TurretController : MonoBehaviour, IPunObservable
                 GetComponent<PhotonView>().RequestOwnership();
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Ground"))
+        {
+            Destroy(GetComponent<Rigidbody>());
+        }
+    }
 }
