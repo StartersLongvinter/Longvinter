@@ -38,9 +38,9 @@ public class NotificationManager : MonoBehaviour
     public void NewItemGainNotification(ItemData item)
     {
         GameObject noti = Instantiate(newItemNotiPrefab);
-        noti.transform.GetChild(0).GetComponent<Image>().sprite = item.itImage;
-        noti.transform.GetChild(1).GetComponent<Text>().text = item.itKorName;
-        noti.transform.GetChild(2).GetComponent<Text>().text = item.itExplan;
+        noti.transform.GetChild(0).transform.GetChild(0).GetComponent<Image>().sprite = item.itImage;
+        noti.transform.GetChild(0).transform.GetChild(1).GetComponent<Text>().text = item.itKorName;
+        noti.transform.GetChild(0).transform.GetChild(2).GetComponent<Text>().text = item.itExplan;
         noti.transform.SetParent(notificationPos);
     }
 

@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         Greet();
         Fishing();
         ECount();
-        ChangeTurretMode();
+        //ChangeTurretMode();
 
         if (isPressedSpace)
             timer += Time.deltaTime;
@@ -258,6 +258,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             if (weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon || weaponData.eqClassify == EquipmentData.EquipmentClassify.RangeWeapon)
                 isAiming = Input.GetButton("Fire2");
 
+            if (isAiming) playerStat.ChangeStatus((int)PlayerStat.Status.Aim);
             if (!isAiming && isReadyToSaw)
             {
                 isReadyToSaw = false;
@@ -288,10 +289,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (moveDirection != Vector3.zero)
         {
             SoundManager.Instance.PlayPlayerSound("GrassStepSounds", -1, true, true);
-            playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
+            playerStat.ChangeStatus(PlayerStat.Status.Aim == playerStat.status ? (int)PlayerStat.Status.Aim : (int)PlayerStat.Status.Walk);
         }
         else
-            playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
+            playerStat.ChangeStatus(PlayerStat.Status.Aim == playerStat.status ? (int)PlayerStat.Status.Aim : (int)PlayerStat.Status.Idle);
     }
 
     private void Rotate()

@@ -105,9 +105,9 @@ namespace Photon.Pun.Demo.PunBasics
 		{
 			Debug.Log( "OnPlayerEnteredRoom() " + other.NickName); // not seen if you're the player connecting
 
-			if ( PhotonNetwork.IsMasterClient )
+			if ( PhotonNetwork.IsMasterClient)
 			{
-				Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
+				Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
 				LoadArena();
 			}
@@ -121,9 +121,9 @@ namespace Photon.Pun.Demo.PunBasics
 		{
 			Debug.Log( "OnPlayerLeftRoom() " + other.NickName ); // seen when other disconnects
 
-			if ( PhotonNetwork.IsMasterClient )
+			if ( PhotonNetwork.IsMasterClient)
 			{
-				Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient ); // called before OnPlayerLeftRoom
+				Debug.LogFormat( "OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
 				LoadArena(); 
 			}
@@ -157,7 +157,7 @@ namespace Photon.Pun.Demo.PunBasics
 
 		void LoadArena()
 		{
-			if ( ! PhotonNetwork.IsMasterClient )
+			if ( ! PhotonNetwork.IsMasterClient)
 			{
 				Debug.LogError( "PhotonNetwork : Trying to Load a level but we are not the master Client" );
 			}

@@ -73,7 +73,6 @@ public class BuildManager : MonoBehaviourPun
                 }
             }
             // float _distance = Vector3.Distance(myHomeArea.transform.position, _mousePosition);
-            Debug.Log(_d);
             if (_d > (myHomeArea.transform.lossyScale.x * 0.5f) - buildObject.transform.localScale.x * 0.5f)
             {
                 return false;
@@ -96,7 +95,6 @@ public class BuildManager : MonoBehaviourPun
                 if (_distance > _d)
                     _distance = _d;
             }
-            Debug.Log(_distance);
             if (_distance <= homeAreaRadius)
             {
                 return false;
@@ -237,7 +235,7 @@ public class BuildManager : MonoBehaviourPun
         Debug.DrawRay(ray.origin + _offsetX - _offsetY, ray.direction * 500f, Color.red);
         Debug.DrawRay(ray.origin - _offsetX + _offsetY, ray.direction * 500f, Color.red);
         Debug.DrawRay(ray.origin - _offsetX - _offsetY, ray.direction * 500f, Color.red);
-        buildObject.transform.position = mousePosition + new Vector3(0, buildObject.transform.localScale.y * 0.5f, 0);
+        buildObject.transform.position = mousePosition + new Vector3(0, (buildObject.transform.localScale.y * 0.5f) - ((buildType == BuildType.turret) ? 0.5f : 0), 0);
 
         if (!canBuild)
         {
@@ -290,8 +288,8 @@ public class BuildManager : MonoBehaviourPun
         {
             if (buildType == BuildType.turret)
             {
-                var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, buildObject.transform.rotation);
-                newTurret.transform.SetParent(myHomeArea.transform);
+                var newTurret = PhotonNetwork.Instantiate(buildPrefabName, buildObject.transform.position, Quaternion.identity);//buildObject.transform.rotation);
+                //newTurret.transform.SetParent(myHomeArea.transform);
                 newTurret.GetComponent<TurretController>().turretOwner = PhotonNetwork.LocalPlayer.NickName;
             }
 

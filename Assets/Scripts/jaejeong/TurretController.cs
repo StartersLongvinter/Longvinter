@@ -6,28 +6,28 @@ using Photon.Pun;
 public class TurretController : MonoBehaviour, IPunObservable
 {
     public GameObject bulletPrefab;
+    public GroundTrigger trigger;
     public Transform firePoint;
     public Transform turretTransform;
-    public GroundTrigger trigger;
-
     public Transform rotatePart;
 
     public float fireRate = 1f;
     public float fireTimeLimit = 0f;
-    public bool isfire = false;
-    public bool attack;
 
     public string turretOwner = "";
 
+    public bool attack;
+    public bool isfire = false;
     public bool IsAuto;
     public bool IsPublic;
 
     [SerializeField] Material[] mat;
     [SerializeField] private float range = 10f;
 
-    private string playerTag = "Player";
     private Transform target;
     private float damage;
+    private bool isMasterClientIn = false;
+    private string playerTag = "Player";
 
     private void Start()
     {
@@ -36,27 +36,29 @@ public class TurretController : MonoBehaviour, IPunObservable
         {
             IsPublic = true;
             damage = 10;
+
             StartCoroutine(IsMasterClientIn());
-/*            Invoke("GongYongAh", 3f);*/
         }
         else
-        {
             GetComponent<PhotonView>().RPC("Init", RpcTarget.All);
-        }
     }
 
     void GongYongAh()
     {
         if (PhotonNetwork.IsMasterClient)
+        {
+            isMasterClientIn = true;
             GetComponent<PhotonView>().RPC("RepeatInvoke", RpcTarget.All);
+        }
     }
 
     IEnumerator IsMasterClientIn()
     {
-        if (!PhotonNetwork.IsConnected)
-            yield return StartCoroutine(IsMasterClientIn());
-        GongYongAh();
-        yield return null;
+        while (!isMasterClientIn)
+        {
+            GongYongAh();
+            yield return null;
+        }
     }
 
     [PunRPC]
@@ -106,9 +108,6 @@ public class TurretController : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-/*        if (!IsPublic)
-            ChangeTurretModeColor();*/
-
         if (target == null || firePoint == null)
             return;
         attack = target.GetComponent<PlayerController>().IsAiming;
@@ -180,9 +179,9 @@ public class TurretController : MonoBehaviour, IPunObservable
         Material[] materials = this.transform.GetChild(0).GetComponent<MeshRenderer>().materials;
 
         if (IsAuto)
-            materials[0] = mat[0];
-        else
             materials[0] = mat[1];
+        else
+            materials[0] = mat[0];
         this.transform.GetChild(0).GetComponent<MeshRenderer>().materials = materials;
     }
 
@@ -201,6 +200,14 @@ public class TurretController : MonoBehaviour, IPunObservable
             ChangeTurretModeColor();
             if(turretOwner==PhotonNetwork.LocalPlayer.NickName)
                 GetComponent<PhotonView>().RequestOwnership();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Ground"))
+        {
+            Destroy(GetComponent<Rigidbody>());
         }
     }
 }
