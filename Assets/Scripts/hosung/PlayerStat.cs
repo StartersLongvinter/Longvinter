@@ -228,7 +228,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             hp = 0;
             ChangeStatus((int)Status.Die);
             this.gameObject.layer = 8;
-            if (currentWeapon == null) return;
+            if (currentWeapon == null)
+                return;
             DropItem();
         }
     }
