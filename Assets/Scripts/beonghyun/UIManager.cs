@@ -61,7 +61,19 @@ public class UIManager : MonoBehaviourPun
         pauseCanvasGroup = pauseCanvas.GetComponent<CanvasGroup>();
 
         mainCanvas = GameObject.Find("Canvas");
-        blurPanel = mainCanvas.transform.GetChild(10).gameObject;
+        blurPanel = mainCanvas.transform.Find("BlurPanel").gameObject;
+        
+        pauseCanvas.transform.GetChild(2).GetComponent<Button>().onClick.AddListener((() =>
+        {
+            if ((int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"] <= 1)
+            {
+                pauseCanvas.transform.GetChild(7).gameObject.SetActive(true);
+            }
+            else
+            {
+                pauseCanvas.transform.GetChild(8).gameObject.SetActive(true);
+            }
+        }));
         
         pauseCanvas.transform.GetChild(3).GetComponent<Button>().onClick.AddListener((() =>
         {
@@ -146,6 +158,7 @@ public class UIManager : MonoBehaviourPun
                 blurPanel.SetActive(true);
                 blurPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 100);
                 pauseCanvasGroup.DOFade(1, 0.1f);
+                pauseCanvasGroup.interactable = true;
             }
             else
             {
@@ -153,6 +166,7 @@ public class UIManager : MonoBehaviourPun
                 blurPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                 blurPanel.SetActive(false);
                 pauseCanvasGroup.DOFade(0, 0.1f);
+                pauseCanvasGroup.interactable = false;
             }
             isPressedEsc = false;
         }
@@ -235,7 +249,7 @@ public class UIManager : MonoBehaviourPun
 
             GameObject temp = Instantiate(fish);
             
-            GetComponent<PlayerInventory>().AddItem(temp);
+            GetComponent<PlayerInventory>().AddItem(temp, false);
         }
         else
         {

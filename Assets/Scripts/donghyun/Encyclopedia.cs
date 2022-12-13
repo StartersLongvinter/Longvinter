@@ -68,6 +68,7 @@ public class Encyclopedia : MonoBehaviour
                 }
             }
         }
+
         else
         {
             for (int i = 0; i < plants.Length; i++)

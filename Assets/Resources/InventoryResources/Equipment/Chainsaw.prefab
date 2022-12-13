@@ -93,8 +93,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bagInven: []
   equipInven: []
-  bag: {fileID: 0}
-  equipment: {fileID: 0}
 --- !u!225 &5223685251508337093
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -121,3 +119,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equipment: {fileID: 11400000, guid: e7196702b68264bbc8b05ab54d009729, type: 2}
+  weaponIndex: 0

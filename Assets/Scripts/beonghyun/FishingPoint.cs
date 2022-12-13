@@ -96,9 +96,5 @@ public class FishingPoint : MonoBehaviourPun
         //sphereCollider.enabled = true;
         isWait = false;
     }
-    //[PunRPC]
-    //public void NotUsePoint()
-    //{
-    //    isOccupied = false;
-    //}
+    
 }

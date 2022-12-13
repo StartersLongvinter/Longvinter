@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PauseCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/PauseCanvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/SceneLoding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/SceneLoding.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/CreateRoomBtn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/CreateRoomBtn.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +33,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/item/WindTurbineBlade.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/49cda88ba9b547e68fb808c33a0bfc2938400/4e/2b2f9cd8/0200003Epdb120.il" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/d2eac148208141d0b5efd594498697863c400/78/94e07837/02000048pdb130.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/bb/12110f54/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1fe4b731108247d3a7e57fad336611b9469000/24/263c27a5/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -50,7 +53,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -96,10 +99,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="16171">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="16171" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -133,6 +136,8 @@
       <workItem from="1670805202607" duration="316000" />
       <workItem from="1670805528755" duration="15007000" />
       <workItem from="1670832145403" duration="38000" />
+      <workItem from="1670889937646" duration="1517000" />
+      <workItem from="1670893141906" duration="2437000" />
     </task>
     <servers />
   </component>
@@ -154,7 +159,29 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs</url>
+          <line>186</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" initialLine="186" containingFunctionPresentation="method 'Renaming'">
+            <startOffsets>
+              <option value="6313" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6359" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

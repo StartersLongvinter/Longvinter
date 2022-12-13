@@ -74,8 +74,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void UpdateBadTexts()
     {
-        Debug.Log(File.Exists(Application.streamingAssetsPath + "/BadWords.txt"));
-        Debug.Log(Application.streamingAssetsPath + "/BadWords.txt");
         if (File.Exists(Application.streamingAssetsPath + "/BadWords.txt"))
         {
             badText = File.ReadAllText(Application.streamingAssetsPath + "/BadWords.txt", System.Text.Encoding.UTF8).Split("\n").ToList();
@@ -125,19 +123,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public bool OnClickJoinRoom(string roomName, string password, int _maxPlayers, string _realPassword)
     {
-        //nickName = GameObject.Find("NickNameInput").GetComponent<TMP_InputField>().text;
-        Debug.Log("checkInfo");
         if (!PhotonNetwork.InLobby) return false;
         foreach (RoomInfo room in rooms)
         {
-            // Debug.Log($"roomName : {roomName} / {(string)room.CustomProperties["roomName"]}");
-            // Debug.Log($"room Max : {(int)room.CustomProperties["maxPlayers"]}, cur : {(int)room.CustomProperties["curPlayer"]}");
             if (((string)room.CustomProperties["roomName"] == roomName) && (_maxPlayers > (int)room.CustomProperties["curPlayer"]))
             {
-                Debug.Log($"roomName : {password} / {(string)room.CustomProperties["password"]}");
                 if (currentVersion != (string)room.CustomProperties["version"])
                 {
-                    Debug.Log("[Error] version error!!");
                     SendWarningText("[Error] version error!!");
                     return false;
                 }
@@ -152,7 +144,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 else break;
             }
         }
-        Debug.Log("Can't enter " + roomName + " room");
         SendWarningText("[Error] Please check room info!");
         return false;
     }
@@ -173,7 +164,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.IsMessageQueueRunning = false;
         returnLobby = false;
-        Debug.Log("로비에 접속");
         LoadLevel(isLobby ? 1 : 2);
         if (!isLobby) CreateSinglePlayRoom(false, "");
     }
@@ -185,7 +175,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             if (nickName.Contains(_badText))
             {
                 nickName = nickName.Replace(_badText, "nice");
-                Debug.Log($"chat '{_badText}' is changed 'nice'");
             }
         }
     }
@@ -230,9 +219,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if (_sameName) PhotonNetwork.LocalPlayer.NickName = nickName + "2";
         else PhotonNetwork.LocalPlayer.NickName = nickName;
-        //GameObject.Find("PasswordPanel").SetActive(false);
         var player = PhotonNetwork.Instantiate(playerPrefabName, respawnPos, Quaternion.identity);
-        // PhotonNetwork.Instantiate("HomeArea", new Vector3(Random.Range(-100f, 100f), 0, Random.Range(-100f, 100f)), Quaternion.identity);
 
         int _actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
         photonView.RPC("RenewalPlayerList", RpcTarget.All, _actorNumber, true);
@@ -264,9 +251,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             PlayerList.Instance.players.Clear();
             PlayerList.Instance.players = PhotonNetwork.PlayerList.ToList();
-
-            foreach (Player p in PlayerList.Instance.players)
-                Debug.Log(p.NickName + " " + p.ActorNumber);
         }
         else
         {
@@ -280,10 +264,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            // Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
-            // cp["curPlayer"] = (int)cp["curPlayer"] + curPlayerNumber;
-            // PhotonNetwork.CurrentRoom.SetCustomProperties(cp);
-            // Debug.Log(cp["curPlayer"].ToString());
             Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
             cp["curPlayer"] = (int)cp["curPlayer"] + curPlayerNumber;
             PhotonNetwork.CurrentRoom.SetCustomProperties(cp);
@@ -304,7 +284,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         foreach (RoomInfo room in roomList)
         {
-            Debug.Log($"{room.CustomProperties["roomName"]}, {room.CustomProperties["curPlayer"]}, {room.CustomProperties["maxPlayers"]}, {room.CustomProperties["password"]}");
             if (room.CustomProperties["roomName"] == null) break;
             if (room.RemovedFromList)
             {
