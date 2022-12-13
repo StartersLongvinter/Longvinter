@@ -6,28 +6,28 @@ using Photon.Pun;
 public class TurretController : MonoBehaviour, IPunObservable
 {
     public GameObject bulletPrefab;
+    public GroundTrigger trigger;
     public Transform firePoint;
     public Transform turretTransform;
-    public GroundTrigger trigger;
-
     public Transform rotatePart;
 
     public float fireRate = 1f;
     public float fireTimeLimit = 0f;
-    public bool isfire = false;
-    public bool attack;
 
     public string turretOwner = "";
 
+    public bool attack;
+    public bool isfire = false;
     public bool IsAuto;
     public bool IsPublic;
 
     [SerializeField] Material[] mat;
     [SerializeField] private float range = 10f;
 
-    private string playerTag = "Player";
     private Transform target;
     private float damage;
+    private bool isMasterClientIn = false;
+    private string playerTag = "Player";
 
     private void Start()
     {
@@ -36,34 +36,29 @@ public class TurretController : MonoBehaviour, IPunObservable
         {
             IsPublic = true;
             damage = 10;
-            /*            StartCoroutine(IsMasterClientIn());;*/
-            Invoke("GongYongAh", 3f);
-            /*GongYongAh()*/
+
+            StartCoroutine(IsMasterClientIn());
         }
         else
-        {
             GetComponent<PhotonView>().RPC("Init", RpcTarget.All);
-        }
     }
 
     void GongYongAh()
     {
-        Debug.Log("1");
         if (PhotonNetwork.IsMasterClient)
         {
+            isMasterClientIn = true;
             GetComponent<PhotonView>().RPC("RepeatInvoke", RpcTarget.All);
-            Debug.Log("?");
         }
     }
 
     IEnumerator IsMasterClientIn()
     {
-        Debug.Log("¹¹Áö");
-        while (!PhotonNetwork.InRoom)
-            yield return IsMasterClientIn();
-        GongYongAh();
-        Debug.Log("2");
-        yield break;
+        while (!isMasterClientIn)
+        {
+            GongYongAh();
+            yield return null;
+        }
     }
 
     [PunRPC]
@@ -79,13 +74,11 @@ public class TurretController : MonoBehaviour, IPunObservable
     [PunRPC]
     public void RepeatInvoke()
     {
-        Debug.Log("3");
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
     private void UpdateTarget()
     {
-        //Debug.Log("4");
         if (firePoint == null)
             return;
         GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
@@ -94,7 +87,6 @@ public class TurretController : MonoBehaviour, IPunObservable
         foreach (GameObject player in players)
         {
             if (!IsPublic &&GetComponent<PhotonView>().Owner.NickName == player.name ||IsPublic&&!player.GetComponent<PlayerController>().IsAiming || player.GetComponent<PlayerStat>().status == PlayerStat.Status.Die)
-            //if(GetComponent<PhotonView>().Owner.NickName == player.name || player.GetComponent<PlayerStat>().status == PlayerStat.Status.Die)
                 continue;
             float distanceToPlayer = Vector3.Distance(turretTransform.transform.position, player.transform.position);
             if (distanceToPlayer < shortestDistance)
@@ -116,9 +108,6 @@ public class TurretController : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-/*        if (!IsPublic)
-            ChangeTurretModeColor();*/
-
         if (target == null || firePoint == null)
             return;
         attack = target.GetComponent<PlayerController>().IsAiming;
@@ -195,29 +184,6 @@ public class TurretController : MonoBehaviour, IPunObservable
             materials[0] = mat[0];
         this.transform.GetChild(0).GetComponent<MeshRenderer>().materials = materials;
     }
-
-    /*public void ChangeTurretMode(bool isChangeMode)
-    {
-        Transform ColliderTurret = this.transform.GetChild(2);
-        if (isChangeMode)
-        {
-            if (IsAuto)
-            {
-                ColliderTurret.GetChild(1).gameObject.SetActive(true);
-                ColliderTurret.GetChild(4).gameObject.SetActive(false);
-            }
-            else
-            {
-                ColliderTurret.GetChild(1).gameObject.SetActive(true);
-                ColliderTurret.GetChild(4).gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            ColliderTurret.GetChild(1).gameObject.SetActive(false);
-            ColliderTurret.GetChild(4).gameObject.SetActive(false);
-        }
-    }*/
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
