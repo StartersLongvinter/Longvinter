@@ -15330,6 +15330,7 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 0}
   isAttackReady: 0
   chatInput: {fileID: 346654853340184980}
+  uistinPrefab: {fileID: 8227837759273516426, guid: 93f243482b9178e4088868034b2368d1, type: 3}
   maxInteractableDistance: 7
   eImageActivate: 0
 --- !u!114 &-616919874011592439
