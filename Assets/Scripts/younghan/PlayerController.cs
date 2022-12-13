@@ -264,31 +264,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    private void ChangeTurretMode()
-    {
-        if (isAiming)
-            return;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
-        foreach (var raycasthit in raycastHits)
-        {
-            if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
-                continue;
-            TurretController turret = raycasthit.collider.gameObject.GetComponent<TurretController>();
-            if (turret.turretOwner == "")
-                return;
-            float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
-            if (doAttack && raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance &&
-                raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
-            {
-                isAuto = !raycasthit.collider.gameObject.GetComponent<TurretController>().IsAuto;
-                turret.IsAuto = isAuto;
-                turret.ChangeTurretModeColor();
-                return;
-            }
-        }
-    }
-
     private void Move()
     {
         moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
