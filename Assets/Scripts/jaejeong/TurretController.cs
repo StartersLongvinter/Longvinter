@@ -49,7 +49,7 @@ public class TurretController : MonoBehaviour, IPunObservable
     void GongYongAh()
     {
         Debug.Log("1");
-        if (PhotonNetwork.isMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             GetComponent<PhotonView>().RPC("RepeatInvoke", RpcTarget.All);
             Debug.Log("?");

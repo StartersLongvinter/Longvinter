@@ -77,6 +77,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
         {
             localPlayer = this;
             photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
+
             JsonManager.Instance.LoadPlayerData();
             if (PhotonNetwork.IsMasterClient) JsonManager.Instance.LoadRoomData();
         }
