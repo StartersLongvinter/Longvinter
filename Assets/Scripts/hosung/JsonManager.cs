@@ -7,6 +7,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Linq;
 
+public class SavesDatas
+{
+    public List<string> playerSavePaths = new List<string>();
+    public List<string> roomSavePaths = new List<string>();
+    public List<string> turretSavePaths = new List<string>();
+    public List<string> houseSavePaths = new List<string>();
+}
+
 public class SaveInformations
 {
     // Things to Save
@@ -77,12 +85,23 @@ public class JsonManager : MonoBehaviourPun
     public List<GameObject> itemObjects = new List<GameObject>();
     public List<GameObject> turretObjects = new List<GameObject>();
 
+    public SavesDatas savesDatas;
+    private string savesPath;
+
     void Awake()
     {
         instance = this;
+        savesPath = Application.streamingAssetsPath + "/saves.json";
+
+        if (File.Exists(savesPath))
+        {
+            string _fromJsonData = File.ReadAllText(savesPath);
+            savesDatas = JsonUtility.FromJson<SavesDatas>(_fromJsonData);
+        }
+        else savesDatas = new SavesDatas();
     }
 
-    public void SavePlayerData(float _hp, int _money)
+    public string SavePlayerData(float _hp, int _money)
     {
         SaveInformations saveInformations = new SaveInformations();
         saveInformations.curHP = _hp;
@@ -102,16 +121,18 @@ public class JsonManager : MonoBehaviourPun
         string json = JsonUtility.ToJson(saveInformations);
         Debug.Log(json);
 
-        string _fileName = PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
-        string _path = Application.dataPath + _fileName + ".json";
+        string _fileName = "/" + PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
+        string _path = Application.streamingAssetsPath + _fileName + ".json";
 
         File.WriteAllText(_path, json);
+
+        return _path;
     }
 
-    public void LoadPlayerDate()
+    public void LoadPlayerData()
     {
-        string _fileName = PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
-        string _path = Application.dataPath + _fileName + ".json";
+        string _fileName = "/" + PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
+        string _path = Application.streamingAssetsPath + _fileName + ".json";
 
         if (File.Exists(_path))
         {
@@ -148,8 +169,9 @@ public class JsonManager : MonoBehaviourPun
         }
     }
 
-    public void SaveRoomData()
+    public string SaveRoomData()
     {
+        string _path = "\n";
         // 방 설정 저장
         SaveRoomDatas saveRoomDatas = new SaveRoomDatas();
         saveRoomDatas.roomName = PhotonNetwork.CurrentRoom.Name;
@@ -161,7 +183,7 @@ public class JsonManager : MonoBehaviourPun
         Debug.Log(roomJson);
 
         string _roomDatasName = PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
-        string _roomPath = Application.dataPath + _roomDatasName + ".json";
+        string _roomPath = Application.streamingAssetsPath + _roomDatasName + ".json";
 
         File.WriteAllText(_roomPath, roomJson);
 
@@ -179,10 +201,12 @@ public class JsonManager : MonoBehaviourPun
             string houseJson = JsonUtility.ToJson(saveHouseInformations);
             Debug.Log(houseJson);
 
-            string _houseFileName = PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
-            string _housePath = Application.dataPath + _houseFileName + ".json";
+            string _houseFileName = "/" + PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
+            string _housePath = Application.streamingAssetsPath + _houseFileName + ".json";
 
             File.WriteAllText(_housePath, houseJson);
+
+            _path += "\n" + _roomPath + "\n" + _housePath;
         }
 
         // 터렛 저장 
@@ -191,7 +215,7 @@ public class JsonManager : MonoBehaviourPun
         {
             foreach (TurretController turret in GameObject.FindObjectsOfType(typeof(TurretController)) as TurretController[])
             {
-                if (turret.trigger==null) //if (turret.IsPublic)
+                if (turret.trigger == null) //if (turret.IsPublic)
                     continue;
                 saveTurretInformations.turretPositions.Add(turret.transform.position);
                 saveTurretInformations.turretOwnerNicknames.Add(turret.turretOwner);
@@ -201,17 +225,21 @@ public class JsonManager : MonoBehaviourPun
             string turretJson = JsonUtility.ToJson(saveTurretInformations);
             Debug.Log(turretJson);
 
-            string _turretFileName = PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
-            string _turretPath = Application.dataPath + _turretFileName + ".json";
+            string _turretFileName = "/" + PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
+            string _turretPath = Application.streamingAssetsPath + _turretFileName + ".json";
 
             File.WriteAllText(_turretPath, turretJson);
+
+            _path += "\n" + _turretPath;
         }
+
+        return _path;
     }
 
     public void LoadRoomData()
     {
         string _roomName = PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
-        string _roomPath = Application.dataPath + _roomName + ".json";
+        string _roomPath = Application.streamingAssetsPath + _roomName + ".json";
         if (File.Exists(_roomPath))
         {
             string _fromJsonData = File.ReadAllText(_roomPath);
@@ -220,8 +248,8 @@ public class JsonManager : MonoBehaviourPun
         }
 
         // 집 로드 
-        string _houseFileName = PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
-        string _housePath = Application.dataPath + _houseFileName + ".json";
+        string _houseFileName = "/" + PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
+        string _housePath = Application.streamingAssetsPath + _houseFileName + ".json";
 
         GroundTrigger[] _groundTriggers = GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[];
 
@@ -242,8 +270,8 @@ public class JsonManager : MonoBehaviourPun
         }
 
         // 터렛 로드
-        string _turretFileName = PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
-        string _turretPath = Application.dataPath + _turretFileName + ".json";
+        string _turretFileName = "/" + PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
+        string _turretPath = Application.streamingAssetsPath + _turretFileName + ".json";
 
         if (File.Exists(_turretPath))
         {
@@ -274,12 +302,77 @@ public class JsonManager : MonoBehaviourPun
         }
     }
 
+    void SaveAllData()
+    {
+        string saveStrings = SavePlayerData(PlayerStat.LocalPlayer.hp, PlayerStat.LocalPlayer.money);
+        if (PhotonNetwork.IsMasterClient) saveStrings += SaveRoomData();
+        string[] strings = saveStrings.Split("\n");
+
+        // check player dataList length and delete the oldest data
+        if (savesDatas.playerSavePaths != null && !savesDatas.playerSavePaths.Contains(strings[0]) && savesDatas.playerSavePaths.Count >= 4)
+        {
+            File.Delete(savesDatas.playerSavePaths[0]);
+            savesDatas.playerSavePaths.RemoveAt(0);
+        }
+
+        // save data
+        if (!savesDatas.playerSavePaths.Contains(strings[0])) savesDatas.playerSavePaths.Add(strings[0]);
+        else
+        {
+            int idx = savesDatas.playerSavePaths.IndexOf(strings[0]);
+            savesDatas.playerSavePaths[idx] = strings[0];
+        }
+
+        // if (isMaster)
+        if (strings.Length > 1)
+        {
+            // check dataLists length and delete the oldest datas
+            if (savesDatas.roomSavePaths != null && !savesDatas.roomSavePaths.Contains(strings[1]) && savesDatas.roomSavePaths.Count >= 4)
+            {
+                File.Delete(savesDatas.roomSavePaths[0]);
+                savesDatas.roomSavePaths.RemoveAt(0);
+            }
+            if (savesDatas.houseSavePaths != null && savesDatas.houseSavePaths.Count >= 4)
+            {
+                File.Delete(savesDatas.houseSavePaths[0]);
+                savesDatas.houseSavePaths.RemoveAt(0);
+            }
+            if (savesDatas.turretSavePaths != null && savesDatas.turretSavePaths.Count >= 4)
+            {
+                File.Delete(savesDatas.turretSavePaths[0]);
+                savesDatas.turretSavePaths.RemoveAt(0);
+            }
+
+            // save data
+            if (!savesDatas.roomSavePaths.Contains(strings[1])) savesDatas.roomSavePaths.Add(strings[1]);
+            else
+            {
+                int idx = savesDatas.roomSavePaths.IndexOf(strings[1]);
+                savesDatas.roomSavePaths[idx] = strings[1];
+            }
+            if (!savesDatas.houseSavePaths.Contains(strings[2])) savesDatas.houseSavePaths.Add(strings[2]);
+            else
+            {
+                int idx = savesDatas.houseSavePaths.IndexOf(strings[2]);
+                savesDatas.houseSavePaths[idx] = strings[2];
+            }
+            if (!savesDatas.turretSavePaths.Contains(strings[3])) savesDatas.turretSavePaths.Add(strings[3]);
+            else
+            {
+                int idx = savesDatas.turretSavePaths.IndexOf(strings[3]);
+                savesDatas.turretSavePaths[idx] = strings[3];
+            }
+        }
+        string json = JsonUtility.ToJson(savesDatas);
+        string _path = savesPath;
+        File.WriteAllText(_path, json);
+    }
+
     void Update()
     {
         if (curTime >= saveTime)
         {
-            SavePlayerData(PlayerStat.LocalPlayer.hp, PlayerStat.LocalPlayer.money);
-            if (PhotonNetwork.IsMasterClient) SaveRoomData();
+            SaveAllData();
             curTime = 0f;
         }
         curTime += Time.deltaTime;

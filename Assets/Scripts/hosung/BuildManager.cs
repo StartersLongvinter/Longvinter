@@ -73,7 +73,6 @@ public class BuildManager : MonoBehaviourPun
                 }
             }
             // float _distance = Vector3.Distance(myHomeArea.transform.position, _mousePosition);
-            Debug.Log(_d);
             if (_d > (myHomeArea.transform.lossyScale.x * 0.5f) - buildObject.transform.localScale.x * 0.5f)
             {
                 return false;
@@ -96,7 +95,6 @@ public class BuildManager : MonoBehaviourPun
                 if (_distance > _d)
                     _distance = _d;
             }
-            Debug.Log(_distance);
             if (_distance <= homeAreaRadius)
             {
                 return false;
