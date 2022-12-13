@@ -219,17 +219,17 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     #region Public Methods
     [PunRPC]
-    public void SwitchWeaponPosition(int _emIndex)
+    public void SwitchWeaponPosition(int eqIndex)
     {
-        if (isAiming)
+        if (isAiming || isFishing)
         {
-            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
-            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
+            bagEquipPoint.GetChild(eqIndex).gameObject.SetActive(false);
+            handEquipPoint.GetChild(eqIndex).gameObject.SetActive(true);
         }
         else
         {
-            bagEquipPoint.GetChild(_emIndex).gameObject.SetActive(true);
-            handEquipPoint.GetChild(_emIndex).gameObject.SetActive(false);
+            bagEquipPoint.GetChild(eqIndex).gameObject.SetActive(true);
+            handEquipPoint.GetChild(eqIndex).gameObject.SetActive(false);
         }
     }
     #endregion
@@ -262,78 +262,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             isPressedSpace = true;
         }
     }
-
-    //raycast 이용 특정 object와 hit 되면 fishing 함수 호출
-    private void Fishing()
-    {
-        if (moveDirection != Vector3.zero || isFishing || isAiming) return;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //AI collider와 부딪혀서 체크가 안되는 현상 발생함 raycastall으로 검출
-        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
-        foreach (var raycasthit in raycastHits)
-        {
-            float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
-            if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
-            {
-                currentFishingPoint = raycasthit.collider.GetComponent<FishingPoint>();
-
-                if (currentFishingPoint.isWait)
-                {
-                    Debug.Log("Fish are surprised by sudden movement. Cannot use fishingpoint");
-                    return;
-                }
-                Debug.Log("Fishing");
-
-                //낚시할때 fishingpoint를 바라보고 있어야 함
-                transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
-                playerAnimator.SetTrigger("doFish");
-                fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
-
-                fishingCoroutine = CatchFish(raycasthit.collider.GetComponent<FishingPoint>());
-                //StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
-                StartCoroutine(fishingCoroutine);
-            }
-        }
-    }
-
-    private void ChangeTurretMode()
-    {
-        if (isAiming)
-            return;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
-        foreach (var raycasthit in raycastHits)
-        {
-            if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
-                continue;
-            TurretController turret = raycasthit.collider.gameObject.GetComponent<TurretController>();
-            if (turret.turretOwner == "")
-                return;
-            float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
-            if (doAttack && raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance &&
-                raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
-            {
-                isAuto = !raycasthit.collider.gameObject.GetComponent<TurretController>().IsAuto;
-                turret.IsAuto = isAuto;
-                turret.ChangeTurretModeColor();
-                return;
-            }
-        }
-    }
-
-
-
-    private void ECount()
-    {
-        if (eImageActivate)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                eCount++;
-            }
-        }
-    }
-
     private void Move()
     {
         moveDirection = new Vector3(horizontalAxis, 0, verticalAxis).normalized;
@@ -443,12 +371,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void AnimateTwoHandAim()
     {
-        if (weaponData == null | isFishing)
+        if (weaponData == null)// | isFishing)
             return;
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
 
-        if (isAiming && weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand)
+        if (weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand && (isAiming || isFishing))
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         else
             ikProgress = Mathf.Clamp(ikProgress - Time.deltaTime * progressSpeed, 0f, 0.5f);
@@ -478,12 +406,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 playerAnimator.SetTrigger("doGreet");
 
                 isGreeting = true;
-                Invoke("SetOffIsGreeting", 1.7f / 2f);
+                Invoke("SetFalseIsGreeting", 1.7f / 2f);
             }
         }
     }
 
-    private void SetOffIsGreeting()
+    private void SetFalseIsGreeting()
     {
         isGreeting = false;
     }
@@ -501,9 +429,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (isNull)
             weaponData = null;
         else
-        {
             weaponData = weaponDatas[_index];
-        }
     }
 
     [PunRPC]
@@ -513,21 +439,96 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         else bagEquipPoint.transform.GetChild(_index).gameObject.SetActive(false);
     }
 
-    void CancelFish()
+    private void ChangeTurretMode()
+    {
+        if (isAiming)
+            return;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
+        foreach (var raycasthit in raycastHits)
+        {
+            if (raycasthit.collider.gameObject.GetComponent<TurretController>() == null)
+                continue;
+            TurretController turret = raycasthit.collider.gameObject.GetComponent<TurretController>();
+            if (turret.turretOwner == "")
+                return;
+            float Distance = Vector3.Distance(raycasthit.transform.position, transform.position);
+            if (doAttack && raycasthit.collider.gameObject.name.Contains("Turret") && Distance < maxInteractableDistance &&
+                raycasthit.collider.gameObject.GetComponent<PhotonView>().Owner.NickName == PhotonNetwork.LocalPlayer.NickName)
+            {
+                isAuto = !raycasthit.collider.gameObject.GetComponent<TurretController>().IsAuto;
+                turret.IsAuto = isAuto;
+                turret.ChangeTurretModeColor();
+                return;
+            }
+        }
+    }
+
+    //raycast 이용 특정 object와 hit 되면 fishing 함수 호출
+    private void Fishing()
+    {
+        if (weaponData == null)
+            return;
+
+        if (moveDirection != Vector3.zero || isFishing || isAiming
+            || (weaponData.eqClassify != EquipmentData.EquipmentClassify.Default || weaponData.eqPosition != EquipmentData.EquipmentPosition.TwoHand))
+            return;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //AI collider와 부딪혀서 체크가 안되는 현상 발생함 raycastall으로 검출
+        RaycastHit[] raycastHits = Physics.RaycastAll(ray, 100);
+        foreach (var raycasthit in raycastHits)
+        {
+            float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
+            if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
+            {
+                currentFishingPoint = raycasthit.collider.GetComponent<FishingPoint>();
+
+                if (currentFishingPoint.isWait)
+                {
+                    Debug.Log("Fish are surprised by sudden movement. Cannot use fishingpoint");
+                    return;
+                }
+                Debug.Log("Fishing");
+
+                //낚시할때 fishingpoint를 바라보고 있어야 함
+                transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
+                //playerAnimator.SetTrigger("doFish");
+                fish = raycasthit.collider.GetComponent<FishingPoint>().SelectRandomFish();
+
+                fishingCoroutine = CatchFish(raycasthit.collider.GetComponent<FishingPoint>());
+                //StartCoroutine(CatchFish(raycasthit.collider.GetComponent<FishingPoint>()));
+                StartCoroutine(fishingCoroutine);
+            }
+        }
+    }
+
+    private void ECount()
+    {
+        if (eImageActivate)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                eCount++;
+            }
+        }
+    }
+
+    private void CancelFish()
     {
         if (isFishing)
         {
             StopCoroutine(fishingCoroutine);
             isFishing = false;
-            playerAnimator.SetTrigger("cancelFish");
+            //playerAnimator.SetTrigger("cancelFish");
             currentFishingPoint.WaitPoint();
         }
     }
 
-    IEnumerator CatchFish(FishingPoint point)
+    private IEnumerator CatchFish(FishingPoint point)
     {
         isFishing = true;
-        playerAnimator.SetBool("isFishing", true);
+        //playerAnimator.SetBool("isFishing", true);
         eCount = 0;
         yield return new WaitForSeconds(Random.Range(playerStat.fishingSpeed, playerStat.fishingSpeed * 2));
         eImageActivate = true;
@@ -547,7 +548,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             Debug.Log("Fail");
             point.IsFinished();
         }
-        playerAnimator.SetBool("isFishing", false);
+        //playerAnimator.SetBool("isFishing", false);
         yield return new WaitForSeconds(3);
         isSuccessState = false;
         isFishing = false;

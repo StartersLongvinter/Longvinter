@@ -2677,7 +2677,6 @@ MonoBehaviour:
   followTarget: {fileID: 1315444907}
   addDistance: 6
   mousePositionThreshold: 10
-  isBuilding: 0
 --- !u!1 &1002926028
 GameObject:
   m_ObjectHideFlags: 3

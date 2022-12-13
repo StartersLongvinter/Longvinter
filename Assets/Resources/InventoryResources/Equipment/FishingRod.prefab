@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5223685251508337093}
   - component: {fileID: 324667985539753907}
   m_Layer: 5
-  m_Name: Chainsaw
+  m_Name: FishingRod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e192d0276be844506b9177fc754b0372, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b3048cc853f1f483180d5ce97598633f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  equipment: {fileID: 11400000, guid: e7196702b68264bbc8b05ab54d009729, type: 2}
+  equipment: {fileID: 11400000, guid: 15fee8203e060ef488abe6a3ae2ab625, type: 2}
   weaponIndex: 0
