@@ -510,12 +510,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     void CancelFish()
     {
        
-            StopCoroutine(fishingCoroutine);
-            isFishing = false;
-            playerAnimator.SetBool("isFishing", false);
-            playerAnimator.SetTrigger("cancelFish");
+            
+        playerAnimator.SetTrigger("cancelFish");
+        isFishing = false;
+            //playerAnimator.SetBool("isFishing", false);
+            
             currentFishingPoint.WaitPoint();
-        
+        StopCoroutine(fishingCoroutine);
+
     }
 
     IEnumerator CatchFish(FishingPoint point)

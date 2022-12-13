@@ -23,16 +23,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/YH_JJ.unity
     guid: 5fb38669e9b0d1a48a472085a3670774
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: a5d1e43a8f4fa481994d6e1407245625
   - enabled: 0
     path: Assets/Scenes/MainScene_HS.unity
     guid: 246b10876bc1a4cd1a1cb4ea4e9b5086
   - enabled: 0
-    path: Assets/Scenes/MainScene_DH.unity
-    guid: e4035d8ed2f844ea592caaeabfc787e3
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/AIFishingScene.unity
     guid: 1b98eb6528944a14892aab889485a267
   m_configObjects: {}
