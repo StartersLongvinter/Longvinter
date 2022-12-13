@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 5326623023658326607}
   - component: {fileID: 5326623023658326606}
   m_Layer: 0
-  m_Name: AmmoItem
-  m_TagString: Item
+  m_Name: AssaultRifle
+  m_TagString: Equipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  equipment: {fileID: 11400000, guid: eff7f6f39df8d454e8bafd91d36991e1, type: 2}
+  equipment: {fileID: 11400000, guid: 11320a8470b3143e788999bba4ab6abf, type: 2}
   weaponIndex: 0
 --- !u!114 &5326623023658326606
 MonoBehaviour:

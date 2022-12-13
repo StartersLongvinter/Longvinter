@@ -63,6 +63,9 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
     private SkinnedMeshRenderer meshRenderer;
     public bool isColorChanged = false;
 
+    // EquipmentData 변수 추가
+    EquipmentData currentWeapon;
+
     void Awake()
     {
         moveSpeed = originalSpeed;
@@ -77,6 +80,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             JsonManager.Instance.LoadPlayerDate();
             if (PhotonNetwork.IsMasterClient) JsonManager.Instance.LoadRoomData();
         }
+
+        
     }
 
     void Update()
@@ -183,6 +188,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
         else
             currentHPImage.color = hpNormalColor;
     }
+    
 
     [PunRPC]
     public void ApplyDamage(float damage)
@@ -210,6 +216,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
         {
             hp = maxHp;
         }
+
         else
         {
             hp += _hp;
@@ -217,9 +224,11 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
 
         if (hp <= 0)
         {
+            Debug.Log("Dead");
             hp = 0;
             ChangeStatus((int)Status.Die);
             this.gameObject.layer = 8;
+            DropItem();
         }
     }
 
@@ -266,6 +275,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             stream.SendNext((bool)isCold);
             stream.SendNext((bool)inWater);
         }
+
         else
         {
             hp = (float)stream.ReceiveNext();
@@ -276,5 +286,12 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             isCold = (bool)stream.ReceiveNext();
             inWater = (bool)stream.ReceiveNext();
         }
+    }
+
+    public void DropItem()
+    {
+        currentWeapon = this.gameObject.GetComponent<PlayerController>().weaponData;
+        PhotonNetwork.Instantiate("ItemPrefabs/" + currentWeapon.name, this.gameObject.
+            transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
     }
 }

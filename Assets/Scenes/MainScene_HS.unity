@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366753, g: 0.48427093, b: 0.5645238, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667564, g: 0.48427135, b: 0.56452316, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8886,8 +8886,10 @@ MonoBehaviour:
   chainsawSounds:
   - {fileID: 8300000, guid: 5f933167a924b42c0ba5becd2d5139af, type: 3}
   - {fileID: 8300000, guid: 5856ef26a8ff54f4c9311526e28476a9, type: 3}
-  audioSource: {fileID: 0}
+  effectAudioSource: {fileID: 0}
+  otherAudioSource: {fileID: 0}
   myCharacterStat: {fileID: 0}
+  myCharacterController: {fileID: 0}
 --- !u!114 &1577646968
 MonoBehaviour:
   m_ObjectHideFlags: 0
