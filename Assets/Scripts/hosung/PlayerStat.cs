@@ -77,7 +77,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
         {
             localPlayer = this;
             photonView.RPC("AddPlayerStatAndCharacter", RpcTarget.AllBuffered);
-            JsonManager.Instance.LoadPlayerDate();
+            JsonManager.Instance.LoadPlayerData();
             if (PhotonNetwork.IsMasterClient) JsonManager.Instance.LoadRoomData();
         }
     }
@@ -186,7 +186,7 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
         else
             currentHPImage.color = hpNormalColor;
     }
-    
+
 
     [PunRPC]
     public void ApplyDamage(float damage)
