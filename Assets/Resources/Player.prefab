@@ -11615,7 +11615,8 @@ GameObject:
   - component: {fileID: 2064406179}
   - component: {fileID: 2064406182}
   - component: {fileID: 2064406181}
-  - component: {fileID: 2064406180}
+  - component: {fileID: 5949891009349037293}
+  - component: {fileID: 2470491758562801995}
   m_Layer: 5
   m_Name: Notification
   m_TagString: Untagged
@@ -11641,7 +11642,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -746, y: 107}
-  m_SizeDelta: {x: 350, y: 800}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2064406182
 CanvasRenderer:
@@ -11681,7 +11682,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2064406180
+--- !u!114 &5949891009349037293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11690,7 +11691,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2064406178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: c6a99e10bebc44c98a510c2041297545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -11701,10 +11702,26 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 400, y: 150}
+  m_CellAlignment: 0
   m_Spacing: {x: 0, y: 10}
   m_Constraint: 0
-  m_ConstraintCount: 2
+  m_ConstraintCount: 10
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+--- !u!114 &2470491758562801995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064406178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!1 &2082752772
 GameObject:
   m_ObjectHideFlags: 0
@@ -15813,14 +15830,11 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: cancelFish
   - Type: 4
-    SynchronizeType: 1
-    Name: isOneHandAim
+    SynchronizeType: 0
+    Name: isMeleeAttackAim
   - Type: 9
-    SynchronizeType: 1
-    Name: doSlash
-  - Type: 9
-    SynchronizeType: 1
-    Name: doGreet
+    SynchronizeType: 0
+    Name: doMeleeAttack
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
