@@ -36,6 +36,6 @@ EditorBuildSettings:
     path: Assets/Scenes/AIFishingScene.unity
     guid: 1b98eb6528944a14892aab889485a267
   - enabled: 0
-    path: Assets/Scenes/MainScene_DH.unity
-    guid: 2f1363b91fa9f4fbd946b7f4bfaf42a9
+    path: Assets/Scenes/YH 1.unity
+    guid: 42df533a3949a954380b48ab75910c5d
   m_configObjects: {}
