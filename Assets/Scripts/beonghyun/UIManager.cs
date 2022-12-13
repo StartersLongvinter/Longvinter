@@ -249,7 +249,7 @@ public class UIManager : MonoBehaviourPun
 
             GameObject temp = Instantiate(fish);
             
-            GetComponent<PlayerInventory>().AddItem(temp);
+            GetComponent<PlayerInventory>().AddItem(temp,false);
         }
         else
         {
