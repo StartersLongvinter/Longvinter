@@ -80,8 +80,6 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             JsonManager.Instance.LoadPlayerDate();
             if (PhotonNetwork.IsMasterClient) JsonManager.Instance.LoadRoomData();
         }
-
-        
     }
 
     void Update()

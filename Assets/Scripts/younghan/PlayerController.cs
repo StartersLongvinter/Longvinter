@@ -247,7 +247,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetButtonDown("Fire2"))
                 attackDelay = weaponData.wpAttackRate * 0.5f;
 
-            isAiming = Input.GetButton("Fire2");
+            if (weaponData.eqClassify == EquipmentData.EquipmentClassify.MeleeWeapon || weaponData.eqClassify == EquipmentData.EquipmentClassify.RangeWeapon)
+                isAiming = Input.GetButton("Fire2");
+
             if (!isAiming && isReadyToSaw)
             {
                 isReadyToSaw = false;
