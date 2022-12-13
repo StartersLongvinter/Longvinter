@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1514235737949385881}
   - component: {fileID: -6487677266702463582}
   m_Layer: 0
-  m_Name: FishingPoint_Plain
+  m_Name: FishingPoint_Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
