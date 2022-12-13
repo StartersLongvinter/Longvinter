@@ -15314,7 +15314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 0}
   weaponDatas:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 15fee8203e060ef488abe6a3ae2ab625, type: 2}
   - {fileID: 11400000, guid: e2779e2c3b2494029b8e6b33d3e68f2c, type: 2}
   - {fileID: 11400000, guid: e7196702b68264bbc8b05ab54d009729, type: 2}
   - {fileID: 11400000, guid: 915fdfdecab054fd7bfa624196c742e1, type: 2}
@@ -15813,14 +15813,11 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: cancelFish
   - Type: 4
-    SynchronizeType: 1
-    Name: isOneHandAim
+    SynchronizeType: 0
+    Name: isMeleeAttackAim
   - Type: 9
-    SynchronizeType: 1
-    Name: doSlash
-  - Type: 9
-    SynchronizeType: 1
-    Name: doGreet
+    SynchronizeType: 0
+    Name: doMeleeAttack
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
