@@ -238,12 +238,13 @@ public class JsonManager : MonoBehaviourPun
 
     public void LoadRoomData()
     {
-        string _roomName = PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
-        string _roomPath = Application.streamingAssetsPath + _roomName + ".json";
+        string _roomDatasName = "/" + PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
+        string _roomPath = Application.streamingAssetsPath + _roomDatasName + ".json";
         if (File.Exists(_roomPath))
         {
             string _fromJsonData = File.ReadAllText(_roomPath);
             myRoomInformation = JsonUtility.FromJson<SaveRoomDatas>(_fromJsonData);
+            Debug.Log($"pvp : {myRoomInformation.isPVP}, max : {myRoomInformation.maxPlayer}, password : {myRoomInformation.password}");
             NetworkManager.Instance.OnClickCreate(PhotonNetwork.LocalPlayer.NickName, myRoomInformation.maxPlayer, myRoomInformation.isPVP, myRoomInformation.password);
         }
 

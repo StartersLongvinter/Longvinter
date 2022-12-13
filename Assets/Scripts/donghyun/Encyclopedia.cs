@@ -30,7 +30,7 @@ public class Encyclopedia : MonoBehaviour
                     Debug.Log(fish[i].GetComponent<Image>().color.a);
                     if (fish[i].GetComponent<Image>().color.a != 1) //도감의 알파값이 1이 아니라면 새로운 아이템을 찾은것
                     {
-                        Color newColor = fish[i].GetComponent<Image>().color;
+                        Color newColor = fish[i].GetComponent<Image>().color;  
                         fish[i].GetComponent<Image>().color = new Color(newColor.r, newColor.g, newColor.b, 1);
                         
                         //새로운 아이템을 찾았으므로 encyclopediaNotiPrefab, newItemNotiPrefab 둘다 켜져야함
