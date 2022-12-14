@@ -3,13 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="3902c914-97e1-4c0e-af00-f666c95be612" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LongVinter/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/EncyclopediaNoti.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/EncyclopediaNoti.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/FishingNoti.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/FishingNoti.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/NewItemNoti.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/NewItemNoti.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/Trees/PineTree.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/Trees/PineTree.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeAutumn.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeAutumn.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeTall.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeTall.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeTallAutumn.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeTallAutumn.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeTallWinter.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeTallWinter.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeWinter.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FBX/Trees/PineTreeWinter.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/AdminPanel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/AdminPanel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PauseCanvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/PauseCanvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player_DH.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player_DH.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LoginScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LoginScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/Encyclopedia.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/Encyclopedia.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/donghyun/NotificationManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/donghyun/NotificationManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainScene_DH.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainScene_DH.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/beonghyun/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/CreateRoomBtn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/CreateRoomBtn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/JsonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/JsonManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/NetworkManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/PlayerListPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/PlayerListPanel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/hosung/Room.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/hosung/Room.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/younghan/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/younghan/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +29,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/Ammo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/ButtonAnimations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/donghyun/DotMove.cs" root0="FORCE_HIGHLIGHTING" />
@@ -37,6 +50,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/49cda88ba9b547e68fb808c33a0bfc2938400/4e/2b2f9cd8/0200003Epdb120.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/d2eac148208141d0b5efd594498697863c400/78/94e07837/02000048pdb130.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/bb/12110f54/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/10cd1797aab44ffa84f234c1998893ad157800/f9/ecdadb48/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1fe4b731108247d3a7e57fad336611b9469000/24/263c27a5/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -101,10 +115,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="16171">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="25390">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="16171" />
+      <option name="pid" value="25390" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -139,7 +153,7 @@
       <workItem from="1670805528755" duration="15007000" />
       <workItem from="1670832145403" duration="38000" />
       <workItem from="1670889937646" duration="1517000" />
-      <workItem from="1670893141906" duration="7077000" />
+      <workItem from="1670893141906" duration="18923000" />
     </task>
     <servers />
   </component>
