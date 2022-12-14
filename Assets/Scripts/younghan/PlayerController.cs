@@ -251,6 +251,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 isAiming = Input.GetButton("Fire2");
 
             if (isAiming) playerStat.ChangeStatus((int)PlayerStat.Status.Aim);
+
             if (!isAiming && isReadyToSaw)
             {
                 isReadyToSaw = false;
