@@ -15734,18 +15734,15 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isFishing
+  - Type: 4
+    SynchronizeType: 1
+    Name: isMeleeAttackAim
+  - Type: 9
+    SynchronizeType: 1
+    Name: doMeleeAttack
   - Type: 9
     SynchronizeType: 0
     Name: cancelFish
-  - Type: 4
-    SynchronizeType: 0
-    Name: isOneHandAim
-  - Type: 9
-    SynchronizeType: 0
-    Name: doSlash
-  - Type: 9
-    SynchronizeType: 0
-    Name: doGreet
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

@@ -63,19 +63,17 @@ public class UIManager : MonoBehaviourPun
 
         mainCanvas = GameObject.Find("Canvas");
         blurPanel = mainCanvas.transform.Find("BlurPanel").gameObject;
-
-        pauseCanvas.transform.GetChild(2).GetComponent<Button>().interactable = PhotonNetwork.IsMasterClient;
-
+        
         pauseCanvas.transform.GetChild(2).GetComponent<Button>().onClick.AddListener((() =>
         {
             if ((int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"] <= 1)
             {
                 pauseCanvas.transform.GetChild(7).gameObject.SetActive(true);
             }
-            // else
-            // {
-            //     pauseCanvas.transform.GetChild(8).gameObject.SetActive(true);
-            // }
+            else
+            {
+                pauseCanvas.transform.GetChild(8).gameObject.SetActive(true);
+            }
         }));
         
         pauseCanvas.transform.GetChild(3).GetComponent<Button>().onClick.AddListener((() =>
@@ -157,6 +155,7 @@ public class UIManager : MonoBehaviourPun
         {
             if (pauseCanvasGroup.alpha == 0)
             {
+                Debug.Log("열림");
                 blurPanel.SetActive(true);
                 blurPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 100);
                 pauseCanvasGroup.DOFade(1, 0.1f);
@@ -165,6 +164,7 @@ public class UIManager : MonoBehaviourPun
 
             else
             {
+                Debug.Log("닫힘");
                 blurPanel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                 blurPanel.SetActive(false);
                 pauseCanvasGroup.DOFade(0, 0.1f);

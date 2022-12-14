@@ -110,20 +110,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel(i);
     }
 
-    public void OnClickCreate(string name, int maxPlayer, string password)
+    public void OnClickCreate(string name, int maxPlayer, bool isPVP, string password)
     {
-        rooms.RemoveAll(t => t.Name == PhotonNetwork.CurrentRoom.Name);
+        rooms.RemoveAll(t => (string)t.CustomProperties["roomName"] == name + "'s room");
 
         Hashtable cp = PhotonNetwork.CurrentRoom.CustomProperties;
         cp["maxPlayers"] = maxPlayer;
-        cp["roomName"] = name;
+        cp["isPVP"] = isPVP;
         cp["password"] = password;
         PhotonNetwork.CurrentRoom.SetCustomProperties(cp);
 
         rooms.Add(PhotonNetwork.CurrentRoom);
     }
 
-    public bool OnClickJoinRoom(string roomName, string password, int _maxPlayers, string _realPassword, string _roomName)
+    public bool OnClickJoinRoom(string roomName, string password, int _maxPlayers, string _realPassword)
     {
         if (!PhotonNetwork.InLobby) return false;
         foreach (RoomInfo room in rooms)
@@ -140,7 +140,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                     // PhotonNetwork.LocalPlayer.NickName = nickName;
                     SendWarningText($"Hello, {PhotonNetwork.LocalPlayer.NickName}!");
                     PhotonNetwork.LoadLevel(2);
-                    PhotonNetwork.JoinRoom(_roomName);
+                    PhotonNetwork.JoinRoom(roomName);
                     return true;
                 }
                 else break;
@@ -187,13 +187,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 20;
-        roomOptions.CustomRoomProperties = new Hashtable() { { "maxPlayers", 1 }, { "roomName", roomName == "" ? nickName + "'s room" : roomName }, { "password", password }, { "curPlayer", 0 }, { "id", Time.deltaTime.ToString() }, { "version", currentVersion } };
+        roomOptions.CustomRoomProperties = new Hashtable() { { "maxPlayers", 1 }, { "roomName", roomName == "" ? nickName + "'s room" : roomName }, { "password", password }, { "curPlayer", 0 }, { "isPVP", isPVP }, { "version", currentVersion } };
         // 방이름, 비밀번호 값을 로비에서도 받을 수 있도록 함 
         string[] newPropertiesForLobby = new string[6];
         newPropertiesForLobby[0] = "roomName";
         newPropertiesForLobby[1] = "password";
         newPropertiesForLobby[2] = "curPlayer";
-        newPropertiesForLobby[3] = "id";
+        newPropertiesForLobby[3] = "isPVP";
         newPropertiesForLobby[4] = "maxPlayers";
         newPropertiesForLobby[5] = "version";
         roomOptions.CustomRoomPropertiesForLobby = newPropertiesForLobby;
@@ -203,7 +203,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Join Room");
         PhotonNetwork.IsMessageQueueRunning = true;
         isLobby = false;
 
@@ -223,7 +222,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (_sameName) PhotonNetwork.LocalPlayer.NickName = nickName + "2";
         else PhotonNetwork.LocalPlayer.NickName = nickName;
         var player = PhotonNetwork.Instantiate(playerPrefabName, respawnPos, Quaternion.identity);
-        
+
         int _actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
         photonView.RPC("RenewalPlayerList", RpcTarget.All, _actorNumber, true);
         photonView.RPC("RenewalCurPlayers", RpcTarget.MasterClient, 1);
@@ -297,7 +296,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             }
             if (rooms.Contains(room))
             {
-                GameObject thisRoom = roomBox.Find(room.CustomProperties["id"].ToString()).gameObject;
+                GameObject thisRoom = roomBox.Find((string)room.CustomProperties["roomName"]).gameObject;
                 thisRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.CustomProperties["maxPlayers"], (string)room.CustomProperties["password"]);
                 break;
             }
@@ -306,8 +305,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 rooms.Add(room);
                 GameObject newRoom = Instantiate(roomPrefab, Vector3.zero, Quaternion.identity);
                 newRoom.GetComponent<Room>().RoomInit((string)room.CustomProperties["roomName"], (int)room.CustomProperties["curPlayer"], (int)room.CustomProperties["maxPlayers"], (string)room.CustomProperties["password"] == null ? "" : (string)room.CustomProperties["password"]);
-                newRoom.name = (string)room.CustomProperties["id"];
-                newRoom.GetComponent<Room>().RoomName = room.Name;
+                newRoom.name = (string)room.CustomProperties["roomName"];
                 newRoom.transform.parent = roomBox;
             }
         }

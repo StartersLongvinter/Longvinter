@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,18 +10,15 @@ using System.Linq;
 public class PlayerListPanel : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject playerListPrefab;
-    [SerializeField] Transform playerListPanel;
+    [SerializeField] TextMeshProUGUI playerCount;
+    [SerializeField] Slider maxPlayerSlider;
+    [SerializeField] Toggle PVPtoggle;
+    [SerializeField] TMP_InputField passwordInput;
+    [SerializeField] Transform playerlistBox;
+    [SerializeField] GameObject kickPlayerPanel;
+    [SerializeField] Button changeSettingButton;
 
     private int selectedPlayerNumber;
-    private Button playerKickBtn;
-
-
-    private void Awake()
-    {
-        //playerKickBtn = playerListPrefab.transform.GetChild(1).GetComponent<Button>();
-        
-        //playerKickBtn.onClick.AddListener(KickPlayer);
-    }
 
     public override void OnEnable()
     {
@@ -31,50 +27,63 @@ public class PlayerListPanel : MonoBehaviourPunCallbacks
 
     public void InitInformation()
     {
-        while (playerListPanel.childCount > 0)
+        while (playerlistBox.childCount > 0)
         {
-            GameObject _listChild = playerListPanel.GetChild(0).gameObject;
+            GameObject _listChild = playerlistBox.GetChild(0).gameObject;
             _listChild.transform.SetParent(null);
             Destroy(_listChild);
         }
-        
+
+        maxPlayerSlider.value = (int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"];
+        playerCount.text = $"{(int)PhotonNetwork.CurrentRoom.CustomProperties["curPlayer"]} / {maxPlayerSlider.value}";
+        PVPtoggle.isOn = (bool)PhotonNetwork.CurrentRoom.CustomProperties["isPVP"];
+        passwordInput.text = (string)PhotonNetwork.CurrentRoom.CustomProperties["password"];
+
+        maxPlayerSlider.interactable = (PhotonNetwork.IsMasterClient);
+        PVPtoggle.interactable = (PhotonNetwork.IsMasterClient);
+        passwordInput.interactable = (PhotonNetwork.IsMasterClient);
+        changeSettingButton.interactable = (PhotonNetwork.IsMasterClient);
+
         foreach (Player _player in PlayerList.Instance.players)
         {
             var playerList = Instantiate(playerListPrefab, playerListPrefab.transform.position, Quaternion.identity);
-
-            if (PhotonNetwork.MasterClient == _player)
+            playerList.transform.SetParent(playerlistBox, false);
+            playerList.GetComponentInChildren<Text>().text = _player.NickName;
+            playerList.GetComponent<Button>().onClick.AddListener(() =>
             {
-                Debug.Log("방장임");
-                playerList.transform.GetChild(1).gameObject.SetActive(false);
-                playerList.transform.SetParent(playerListPanel, false);
-                playerList.GetComponentInChildren<Text>().text = _player.NickName;
-            }
-            else
-            {
-                Debug.Log("유저임");
-                playerList.transform.SetParent(playerListPanel, false);
-                playerList.GetComponentInChildren<Text>().text = _player.NickName;
-                playerList.GetComponentInChildren<Button>().onClick.AddListener(() =>
-                {
-                    if (!PhotonNetwork.IsMasterClient) return;
-                    if (_player == PhotonNetwork.MasterClient) return;
-                    //playerListPanel.gameObject.SetActive(true);
-                    selectedPlayerNumber = _player.ActorNumber;
-                    KickPlayer();
-                });
-            }
+                if (!PhotonNetwork.IsMasterClient) return;
+                if (_player == PhotonNetwork.MasterClient) return;
+                kickPlayerPanel.SetActive(true);
+                selectedPlayerNumber = _player.ActorNumber;
+            });
         }
     }
 
-    public void UpdatePanel()
+    public void QuitKickPanel()
     {
-        InitInformation();
+        kickPlayerPanel.SetActive(false);
     }
 
     public void KickPlayer()
     {
         NetworkManager.Instance.photonView.RPC("Kicked", RpcTarget.All, selectedPlayerNumber);
         InitInformation();
-        UpdatePanel();
+        QuitKickPanel();
+        this.gameObject.SetActive(false);
+    }
+
+    public void ChangeRoomInfo()
+    {
+        string password = passwordInput.text;
+        int maxPlayercount = Mathf.RoundToInt(maxPlayerSlider.value);
+        bool isPVP = PVPtoggle.isOn;
+        NetworkManager.Instance.OnClickCreate(PhotonNetwork.LocalPlayer.NickName, maxPlayercount, isPVP, password);
+
+        this.gameObject.SetActive(false);
+    }
+
+    void Update()
+    {
+        playerCount.text = $"{(int)PhotonNetwork.CurrentRoom.CustomProperties["curPlayer"]} / {maxPlayerSlider.value}";
     }
 }
