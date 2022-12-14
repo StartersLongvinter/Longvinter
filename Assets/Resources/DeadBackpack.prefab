@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1142020849387814342}
   - component: {fileID: 7875426973542905001}
   - component: {fileID: 333968076312501820}
+  - component: {fileID: -1478987490079928234}
   m_Layer: 0
   m_Name: DeadBackpack
   m_TagString: DeadBag
@@ -125,6 +126,19 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-1478987490079928234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502436019020373011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27c2a5126d1bf2498588dfa7c21e1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadItems: []
 --- !u!1 &3677297135265355838
 GameObject:
   m_ObjectHideFlags: 0

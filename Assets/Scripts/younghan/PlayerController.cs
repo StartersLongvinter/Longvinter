@@ -55,6 +55,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool isAuto;
     private bool isReadyToSaw = false;
 
+    //deadbag 변수
+    public GameObject selectedDeadBag;
+
     #region Callback Methods
     private void Awake()
     {
@@ -236,6 +239,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                     }
                 }
             }
+
+            selectedDeadBag = other.gameObject;
         }
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
