@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviourPun
         bullet.direction = firePoint + new Vector3(offsetX, offsetY, offsetZ);
         bullet.damage = _damage;
 
-        Debug.Log(bullet.name);
+        //Debug.Log(bullet.name);
     }
 
     [PunRPC]

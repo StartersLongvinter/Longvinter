@@ -66,14 +66,21 @@ public class ChatManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        foreach (string _badText in NetworkManager.Instance.badText)
+        string[] _messageList = _message.Split();
+        string _newMessage = "";
+        for (int i = 0; i < _messageList.Length; i++)
         {
-            if (_message.Contains(_badText))
+            foreach (string _badText in NetworkManager.Instance.badText)
             {
-                _message = _message.Replace(_badText, "nice");
-                Debug.Log($"chat '{_badText}' is changed 'nice'");
+                if (_messageList[i].Contains(_badText))
+                {
+                    _messageList[i] = "nice";
+                    Debug.Log($"chat '{_badText}' is changed 'nice'");
+                }
             }
+            _newMessage += (_newMessage == "" ? _messageList[i] : " " + _messageList[i]);
         }
+        _message = _newMessage;
 
         GameObject newChat = Instantiate(chatPrefab, chatBox.transform.position, Quaternion.Euler(0, 0, 0));
         newChat.transform.SetParent(chatBox.transform, false);

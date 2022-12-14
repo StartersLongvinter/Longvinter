@@ -26,7 +26,11 @@ public class MultiPlayButton : MonoBehaviour
 
     void Update()
     {
-        if (this.gameObject.name == "MultiplayerListBtn") return;
-        if (PhotonNetwork.InRoom && !PhotonNetwork.IsMasterClient) this.gameObject.SetActive(false);
+        if (PhotonNetwork.InRoom && (int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"] > 1)
+        {
+            GetComponentInChildren<Text>().text = "방 설정";
+        }
+        // if (this.gameObject.name == "MultiplayerListBtn") return;
+        // if (PhotonNetwork.InRoom && !PhotonNetwork.IsMasterClient) this.gameObject.SetActive(false);
     }
 }

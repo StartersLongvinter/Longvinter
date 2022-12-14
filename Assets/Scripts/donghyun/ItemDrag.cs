@@ -46,9 +46,25 @@ public class ItemDrag : MonoBehaviour, IPointerClickHandler
     {
         GameObject itemInEquip;
 
+        //if (item.GetComponent<Item>().equipment.eqPosition == EquipmentData.EquipmentPosition.OneHand || item.GetComponent<Item>().equipment.eqPosition == EquipmentData.EquipmentPosition.TwoHand)
+        //{
+        //    if (player.GetComponent<PlayerInventory>().equipmentList.Any(
+        //        x => x.GetComponent<Item>().equipment.eqPosition == EquipmentData.EquipmentPosition.OneHand))
+        //    {
+        //        return;
+        //    }
+        //    if (player.GetComponent<PlayerInventory>().equipmentList.Any(
+        //        x => x.GetComponent<Item>().equipment.eqPosition == EquipmentData.EquipmentPosition.TwoHand))
+        //    {
+        //        return;
+        //    }
+        //}
+
         //장비탭에 현재 넣으려는 장비와 같은 분류를 가지는 장비가 있는지 확인
+        // x = 착용하고 있는 장비, item = 새로 착용할 장비
         if (player.GetComponent<PlayerInventory>().equipmentList.Any(
-                x => x.GetComponent<Item>().equipment.eqPosition == item.GetComponent<Item>().equipment.eqPosition))
+            x => (x.GetComponent<Item>().equipment.eqPosition == EquipmentData.EquipmentPosition.OneHand || x.GetComponent<Item>().equipment.eqPosition == EquipmentData.EquipmentPosition.TwoHand) &&
+            (item.GetComponent<Item>().equipment.eqPosition == EquipmentData.EquipmentPosition.OneHand || item.GetComponent<Item>().equipment.eqPosition == EquipmentData.EquipmentPosition.TwoHand)))
         {
             //장비탭에 현재 가방에서 클릭한 같은 장비 타입의 게임오브젝트를 찾기
             itemInEquip = player.GetComponent<PlayerInventory>()
