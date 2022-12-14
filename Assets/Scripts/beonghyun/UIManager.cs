@@ -34,7 +34,6 @@ public class UIManager : MonoBehaviourPun
     [SerializeField] private GameObject bagPanel;
     [SerializeField] private GameObject equipmentPanel;
     [SerializeField] private GameObject encyclopediaPanel;
-    [SerializeField] private GameObject deadBagPanel;
     
     private bool isTabPressed;
     private bool inventoryState;
@@ -161,7 +160,6 @@ public class UIManager : MonoBehaviourPun
                 pauseCanvasGroup.DOFade(1, 0.1f);
                 pauseCanvasGroup.interactable = true;
             }
-
             else
             {
                 Debug.Log("닫힘");
@@ -259,11 +257,6 @@ public class UIManager : MonoBehaviourPun
         }
     }
 
-    public void OpenDeadBagInventory()
-    {
-        deadBagPanel.SetActive(true);
-    }
-
     void CloseInventory()
     {
         if (Input.GetMouseButtonDown(0))
@@ -275,14 +268,7 @@ public class UIManager : MonoBehaviourPun
                 equipmentInventory.SetActive(false);
                 encyclopediaInventory.SetActive(false);
                 toolTip.SetActive(false);
-                deadBagPanel.SetActive(false);
             }
-
-            //if (!EventSystem.current.tag.Equals("DeadBag"))
-            //{
-            //    Debug.Log("click");
-            //    deadBagPanel.SetActive(false);
-            //}
         }
     }
 }

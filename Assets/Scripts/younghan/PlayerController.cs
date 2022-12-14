@@ -127,7 +127,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                     GetComponent<PlayerInventory>().AddItem(other.gameObject);
                     //GetComponent<PlayerInventory>().itemList.Add(other.gameObject);
                 }
-
                 else
                 {
                     Debug.Log("인벤토리 가득참");
@@ -154,7 +153,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                             GetComponent<Encyclopedia>().GainItem();
                             GetComponent<PlayerInventory>().AddItem(other.gameObject);
                         }
-
                         else
                         {
                             Debug.Log("인벤토리 가득참");
@@ -163,7 +161,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
-
         else if (other.tag.Equals("Equipment"))
         {
             if (isPressedSpace)
@@ -198,7 +195,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                         {
                             GetComponent<PlayerInventory>().AddItem(other.gameObject);
                         }
-
                         else
                         {
                             Debug.Log("인벤토리 가득참");
@@ -207,37 +203,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
-
-        //deadbag하고 상호작용
-        else if (other.tag.Equals("DeadBag"))
-        {
-            if (isPressedSpace)
-            {
-                isPressedSpace = false;
-                UIManager.instance.OpenDeadBagInventory();
-                //GetComponent<PlayerInventory>().AddItem(other.gameObject);
-            }
-
-            if (doAttack)
-            {
-                doAttack = false;
-                RaycastHit[] hits;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                hits = Physics.RaycastAll(ray);
-
-                var distinctHits = hits.DistinctBy(x => x.collider.name);
-
-                foreach (var hit in distinctHits)
-                {
-                    if (hit.collider.tag.Equals("DeadBag"))
-                    {
-                        UIManager.instance.OpenDeadBagInventory();
-                    }
-                }
-            }
-        }
     }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)

@@ -4189,12 +4189,11 @@ GameObject:
   - component: {fileID: 8307478925354530239}
   - component: {fileID: 8307478925354530232}
   - component: {fileID: 8307478925354530233}
+  - component: {fileID: 8307478925354530234}
   - component: {fileID: 2352661788729661271}
-  - component: {fileID: 5960605386746851073}
-  - component: {fileID: -4255887727464251414}
   m_Layer: 5
   m_Name: DeadBag
-  m_TagString: DeadBag
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4259,6 +4258,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8307478925354530234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307478925354530235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d28e26446c2f843bf968c8b4f1413247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2352661788729661271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4283,76 +4294,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 2
---- !u!114 &5960605386746851073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8307478925354530235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f6cf8a80448a6b469dd29f0642c7018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-4255887727464251414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8307478925354530235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cd7d2a7bd8d79447ae4958cb49e0c27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rightDeadBagInventory:
-  - {fileID: 5225735843808143811}
-  - {fileID: 913311107825521404}
-  - {fileID: 7871353989154658768}
-  - {fileID: 690362061302893081}
-  - {fileID: 606384570154635305}
-  - {fileID: 4322213254027607192}
-  - {fileID: 2033850632257361427}
-  - {fileID: 314961215806361372}
-  - {fileID: 5618393001111067331}
-  - {fileID: 8193031663561867664}
-  - {fileID: 3715152964804250629}
-  - {fileID: 8082295018079871503}
-  - {fileID: 5694962457288092497}
-  - {fileID: 7252922560195685874}
-  - {fileID: 3407609612739923194}
-  - {fileID: 7472687865038649712}
-  - {fileID: 5847660507732472662}
-  - {fileID: 7653467675953610890}
-  - {fileID: 4479607888106967349}
-  - {fileID: 4300211746360763423}
-  leftDeadBagInventory:
-  - {fileID: 8307478924159041938}
-  - {fileID: 8307478925755680416}
-  - {fileID: 8307478925911592119}
-  - {fileID: 8307478924515417453}
-  - {fileID: 8307478924618704026}
-  - {fileID: 8307478924627962694}
-  - {fileID: 8307478925941701410}
-  - {fileID: 8307478923975398479}
-  - {fileID: 8307478925466099359}
-  - {fileID: 8307478924530006103}
-  - {fileID: 8307478924175570377}
-  - {fileID: 8307478925823254772}
-  - {fileID: 8307478923995212874}
-  - {fileID: 8307478924558408615}
-  - {fileID: 8307478924248843533}
-  - {fileID: 8307478925483573163}
-  - {fileID: 6358535299733520965}
-  - {fileID: 1718203038520984983}
-  - {fileID: 1773263082661931024}
-  - {fileID: 2015551438610959846}
-  - {fileID: 5071934774440989888}
-  - {fileID: 112983107620373180}
-  - {fileID: 4222066323921231422}
-  - {fileID: 7912030790385023968}
 --- !u!1 &8307478925466099359
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,6 @@ TagManager:
   - InstalledObject
   - LivingEntity
   - Bullet
-  - Bison
-  - DeadBag
   layers:
   - Default
   - TransparentFX
