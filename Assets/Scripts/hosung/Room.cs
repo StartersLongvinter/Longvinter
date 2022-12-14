@@ -16,8 +16,10 @@ public class Room : MonoBehaviourPunCallbacks
 
     public string password = "";
     public int maxPlayers = 1;
+    public string RoomName = "";
 
     private string roomN = "";
+    
 
     void Awake()
     {
@@ -40,7 +42,7 @@ public class Room : MonoBehaviourPunCallbacks
     public void ClickEnterRoom()
     {
         Debug.Log("submit");
-        bool isConnect = NetworkManager.Instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text, maxPlayers, password);
+        bool isConnect = NetworkManager.Instance.OnClickJoinRoom(roomN, GameObject.Find("PasswordInput").GetComponent<TMP_InputField>().text, maxPlayers, password, RoomName);
 
         if (!isConnect)
         {

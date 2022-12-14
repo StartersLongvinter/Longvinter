@@ -7,41 +7,35 @@ using Photon.Pun;
 
 public class CreateRoomBtn : MonoBehaviour
 {
-    [SerializeField] Toggle pvpToggle;
+    [SerializeField] private GameObject adminPanel;
     [SerializeField] Slider maxPlayerSlider;
-    [SerializeField] TextMeshProUGUI maxPlayerValue;
-    [SerializeField] Toggle lockToggle;
-    [SerializeField] TMP_InputField inputPassword;
-    [SerializeField] GameObject multiplayPanel;
-    [SerializeField] Button createRoomButton;
-
-    private bool isChanged = false;
-
+    [SerializeField] Text maxPlayerValue;
+    [SerializeField] InputField inputPassword;
+    [SerializeField] InputField inputServerName;
+    [SerializeField] Button makeRoomBtn;
+    
     void Awake()
     {
-        maxPlayerSlider.onValueChanged.AddListener(delegate { isChanged = true; });
+        makeRoomBtn.onClick.AddListener((() =>
+        {
+            CreateRoom();
+            adminPanel.SetActive(false);
+        }));
     }
 
     private void OnEnable()
     {
-        isChanged = false;
     }
 
     public void CreateRoom()
     {
         string password = inputPassword.text;
         int maxPlayercount = Mathf.RoundToInt(maxPlayerSlider.value);
-        bool isPVP = pvpToggle.isOn;
-        NetworkManager.Instance.OnClickCreate(PhotonNetwork.LocalPlayer.NickName, maxPlayercount, isPVP, password);
-
-        multiplayPanel.SetActive(false);
+        NetworkManager.Instance.OnClickCreate(inputServerName.text, maxPlayercount, password);
     }
 
     void Update()
     {
-        createRoomButton.interactable = isChanged;
-
-        inputPassword.interactable = lockToggle.isOn;
         maxPlayerValue.text = Mathf.RoundToInt(maxPlayerSlider.value).ToString();
     }
 }

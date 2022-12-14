@@ -121,7 +121,7 @@ public class JsonManager : MonoBehaviourPun
         string json = JsonUtility.ToJson(saveInformations);
         Debug.Log(json);
 
-        string _fileName = "/" + PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
+        string _fileName = "/" + (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"] + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
         string _path = Application.streamingAssetsPath + _fileName + ".json";
 
         File.WriteAllText(_path, json);
@@ -131,7 +131,7 @@ public class JsonManager : MonoBehaviourPun
 
     public void LoadPlayerData()
     {
-        string _fileName = "/" + PhotonNetwork.CurrentRoom.Name + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
+        string _fileName = "/" + (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"] + "_" + PhotonNetwork.LocalPlayer.NickName + "_saveFile";
         string _path = Application.streamingAssetsPath + _fileName + ".json";
 
         if (File.Exists(_path))
@@ -174,7 +174,7 @@ public class JsonManager : MonoBehaviourPun
         string _path = "\n";
         // 방 설정 저장
         SaveRoomDatas saveRoomDatas = new SaveRoomDatas();
-        saveRoomDatas.roomName = PhotonNetwork.CurrentRoom.Name;
+        saveRoomDatas.roomName = (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"];
         saveRoomDatas.password = (string)PhotonNetwork.CurrentRoom.CustomProperties["password"];
         saveRoomDatas.isPVP = (bool)PhotonNetwork.CurrentRoom.CustomProperties["isPVP"];
         saveRoomDatas.maxPlayer = (int)PhotonNetwork.CurrentRoom.CustomProperties["maxPlayers"];
@@ -182,7 +182,7 @@ public class JsonManager : MonoBehaviourPun
         string roomJson = JsonUtility.ToJson(saveRoomDatas);
         Debug.Log(roomJson);
 
-        string _roomDatasName = "/" + PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
+        string _roomDatasName = "/" + (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"] + "_RoomDataFile";
         string _roomPath = Application.streamingAssetsPath + _roomDatasName + ".json";
 
         File.WriteAllText(_roomPath, roomJson);
@@ -201,7 +201,7 @@ public class JsonManager : MonoBehaviourPun
             string houseJson = JsonUtility.ToJson(saveHouseInformations);
             Debug.Log(houseJson);
 
-            string _houseFileName = "/" + PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
+            string _houseFileName = "/" + (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"] + "_HouseSaveFile";
             string _housePath = Application.streamingAssetsPath + _houseFileName + ".json";
 
             File.WriteAllText(_housePath, houseJson);
@@ -225,7 +225,7 @@ public class JsonManager : MonoBehaviourPun
             string turretJson = JsonUtility.ToJson(saveTurretInformations);
             Debug.Log(turretJson);
 
-            string _turretFileName = "/" + PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
+            string _turretFileName = "/" + (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"] + "_TurretSaveFile";
             string _turretPath = Application.streamingAssetsPath + _turretFileName + ".json";
 
             File.WriteAllText(_turretPath, turretJson);
@@ -238,18 +238,18 @@ public class JsonManager : MonoBehaviourPun
 
     public void LoadRoomData()
     {
-        string _roomDatasName = "/" + PhotonNetwork.CurrentRoom.Name + "_RoomDataFile";
+        string _roomDatasName = "/" + (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"] + "_RoomDataFile";
         string _roomPath = Application.streamingAssetsPath + _roomDatasName + ".json";
         if (File.Exists(_roomPath))
         {
             string _fromJsonData = File.ReadAllText(_roomPath);
             myRoomInformation = JsonUtility.FromJson<SaveRoomDatas>(_fromJsonData);
             Debug.Log($"pvp : {myRoomInformation.isPVP}, max : {myRoomInformation.maxPlayer}, password : {myRoomInformation.password}");
-            NetworkManager.Instance.OnClickCreate(PhotonNetwork.LocalPlayer.NickName, myRoomInformation.maxPlayer, myRoomInformation.isPVP, myRoomInformation.password);
+            NetworkManager.Instance.OnClickCreate(PhotonNetwork.LocalPlayer.NickName, myRoomInformation.maxPlayer, myRoomInformation.password);
         }
 
         // 집 로드 
-        string _houseFileName = "/" + PhotonNetwork.CurrentRoom.Name + "_HouseSaveFile";
+        string _houseFileName = "/" + (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"] + "_HouseSaveFile";
         string _housePath = Application.streamingAssetsPath + _houseFileName + ".json";
 
         GroundTrigger[] _groundTriggers = GameObject.FindObjectsOfType(typeof(GroundTrigger)) as GroundTrigger[];
@@ -271,7 +271,7 @@ public class JsonManager : MonoBehaviourPun
         }
 
         // 터렛 로드
-        string _turretFileName = "/" + PhotonNetwork.CurrentRoom.Name + "_TurretSaveFile";
+        string _turretFileName = "/" + (string)PhotonNetwork.CurrentRoom.CustomProperties["roomName"] + "_TurretSaveFile";
         string _turretPath = Application.streamingAssetsPath + _turretFileName + ".json";
 
         if (File.Exists(_turretPath))
