@@ -12,7 +12,7 @@ public class PlayerInventory : MonoBehaviourPun
     [SerializeField] private GameObject[] bagInventory;
     [SerializeField] private GameObject[] equipmentInventory;
     [SerializeField] private GameObject[] encyclopedia;
-
+    
     public List<GameObject> itemList = new List<GameObject>();
     public List<GameObject> equipmentList = new List<GameObject>();
     public List<GameObject> currentUseItem = new List<GameObject>();
