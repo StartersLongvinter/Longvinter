@@ -236,8 +236,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             ChangeStatus((int)Status.Die);
             this.gameObject.layer = 8;
             // conflict있던 부분
-            if (currentWeapon == null)
-                return;
+            // if (currentWeapon == null)
+            //     return;
 
             deadInventory = GetComponent<PlayerInventory>().itemList;
             currentWeapon = this.gameObject.GetComponent<PlayerController>().weaponData;

@@ -15543,7 +15543,7 @@ MonoBehaviour:
   bagPanel: {fileID: 189727976}
   equipmentPanel: {fileID: 486655372}
   encyclopediaPanel: {fileID: 317712997}
-  deadBagPanel: {fileID: 8307478925354530235, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
+  deadBagPanel: {fileID: 5391799940729163419}
   pressEImage: {fileID: 1228521184}
   fishName: {fileID: 1439386944}
   fishImage: {fileID: 1898632760}
@@ -18398,6 +18398,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
+--- !u!1 &5391799940729163419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8307478925354530235, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}
+  m_PrefabInstance: {fileID: 4150521618578193184}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5391799940729163423 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8307478925354530239, guid: ea2b7127ef942f14abf101e8fa2289af, type: 3}

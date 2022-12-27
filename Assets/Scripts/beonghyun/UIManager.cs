@@ -274,6 +274,7 @@ public class UIManager : MonoBehaviourPun
                 equipmentInventory.SetActive(false);
                 encyclopediaInventory.SetActive(false);
                 toolTip.SetActive(false);
+                deadBagPanel.SetActive(false);
             }
         }
     }
