@@ -66,6 +66,12 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
     // EquipmentData 변수 추가
     EquipmentData currentWeapon;
 
+    // playerInventory 변수 추가
+    public List<GameObject> deadInventory = new List<GameObject>();
+
+    //player 사망 bool 추가
+    bool isDead;
+
     void Awake()
     {
         moveSpeed = originalSpeed;
@@ -73,6 +79,8 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
         currentHPImage = GameObject.Find("HPvalue").GetComponent<Image>();
         currentHPAnimator = GameObject.Find("MaskImage").GetComponent<Animator>();
         hp = maxHp;
+        isDead = false;
+
         if (photonView.IsMine && LocalPlayer == null)
         {
             localPlayer = this;
@@ -227,8 +235,14 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
             hp = 0;
             ChangeStatus((int)Status.Die);
             this.gameObject.layer = 8;
+            // conflict있던 부분
             if (currentWeapon == null)
                 return;
+
+            deadInventory = GetComponent<PlayerInventory>().itemList;
+            currentWeapon = this.gameObject.GetComponent<PlayerController>().weaponData;
+            Debug.Log("Drop");
+            // 여기까지
             DropItem();
         }
     }
@@ -291,8 +305,28 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
 
     public void DropItem()
     {
+        // conflict start
         currentWeapon = this.gameObject.GetComponent<PlayerController>().weaponData;
         PhotonNetwork.Instantiate("ItemPrefabs/" + currentWeapon.name, this.gameObject.
             transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
+        // 
+        if (isDead) return;
+
+        var temp = PhotonNetwork.Instantiate("DeadBackpack", this.gameObject.
+           transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity * Quaternion.Euler(new Vector3(0, 90, -90)));
+        foreach (var item in deadInventory)
+        {
+            temp.GetComponent<DeadItemList>().deadItems.Add(item);
+        }
+
+
+        if (currentWeapon!=null)
+        {
+            PhotonNetwork.Instantiate("ItemPrefabs/" + currentWeapon.name, this.gameObject.
+            transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
+        }
+
+        isDead = true;
+        // end
     }
 }

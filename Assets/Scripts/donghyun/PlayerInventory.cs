@@ -152,13 +152,14 @@ public class PlayerInventory : MonoBehaviourPun
 
     public void ItemUse(GameObject go)
     {
+
         //사용할 수 있는 아이템인지 확인
         if (go.GetComponent<Item>().item.itUsable)
         {
+
             //아이템이 중복으로 사용할 수 없는 아이템이라면 currentUseItem에 저장
             if (!go.GetComponent<Item>().item.itCanOverlap)
             {
-
                 GameObject temp = Instantiate(go);
                 temp.name = go.GetComponent<Item>().item.itName;
                 currentUseItem.Add(temp);
@@ -226,6 +227,7 @@ public class PlayerInventory : MonoBehaviourPun
                         break;
                 }
             }
+
             else
             {
                 //아이템에서 hp감소 증가 옵션이 있다면

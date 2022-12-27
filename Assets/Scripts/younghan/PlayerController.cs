@@ -55,6 +55,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool isAuto;
     private bool isReadyToSaw = false;
 
+    //deadbag 변수
+    public GameObject selectedDeadBag;
+
     #region Callback Methods
     private void Awake()
     {
@@ -202,6 +205,38 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                     }
                 }
             }
+        }
+
+        //deadbag하고 상호작용
+        else if (other.tag.Equals("DeadBag"))
+        {
+            if (isPressedSpace)
+            {
+                isPressedSpace = false;
+                UIManager.instance.OpenDeadBagInventory();
+                //GetComponent<PlayerInventory>().AddItem(other.gameObject);
+            }
+
+            if (doAttack)
+            {
+                doAttack = false;
+                RaycastHit[] hits;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                hits = Physics.RaycastAll(ray);
+
+                var distinctHits = hits.DistinctBy(x => x.collider.name);
+
+                foreach (var hit in distinctHits)
+                {
+                    if (hit.collider.tag.Equals("DeadBag"))
+                    {
+                        UIManager.instance.OpenDeadBagInventory();
+                    }
+                }
+            }
+
+            selectedDeadBag = other.gameObject;
         }
     }
 
