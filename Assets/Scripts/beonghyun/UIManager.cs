@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviourPun
     [SerializeField] private GameObject bagPanel;
     [SerializeField] private GameObject equipmentPanel;
     [SerializeField] private GameObject encyclopediaPanel;
+    [SerializeField] private GameObject deadBagPanel;
     
     private bool isTabPressed;
     private bool inventoryState;
@@ -255,6 +256,11 @@ public class UIManager : MonoBehaviourPun
         {
             Debug.Log("인벤토리 가득참");
         }
+    }
+
+    public void OpenDeadBagInventory()
+    {
+        deadBagPanel.SetActive(true);
     }
 
     void CloseInventory()

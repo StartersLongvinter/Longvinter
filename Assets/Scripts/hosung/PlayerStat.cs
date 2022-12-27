@@ -306,9 +306,9 @@ public class PlayerStat : MonoBehaviourPunCallbacks, IPunObservable, IDamageable
     public void DropItem()
     {
         // conflict start
-        currentWeapon = this.gameObject.GetComponent<PlayerController>().weaponData;
-        PhotonNetwork.Instantiate("ItemPrefabs/" + currentWeapon.name, this.gameObject.
-            transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
+        // currentWeapon = this.gameObject.GetComponent<PlayerController>().weaponData;
+        // PhotonNetwork.Instantiate("ItemPrefabs/" + currentWeapon.name, this.gameObject.
+        //     transform.position + new Vector3(Random.Range(-1, 1f), 0.5f, Random.Range(-1, 1f)), Quaternion.identity);
         // 
         if (isDead) return;
 
