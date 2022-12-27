@@ -251,6 +251,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                 isAiming = Input.GetButton("Fire2");
 
             if (isAiming) playerStat.ChangeStatus((int)PlayerStat.Status.Aim);
+            else if (moveDirection != Vector3.zero)
+                playerStat.ChangeStatus((int)PlayerStat.Status.Walk);
+            else
+                playerStat.ChangeStatus((int)PlayerStat.Status.Idle);
 
             if (!isAiming && isReadyToSaw)
             {
