@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviourPun
     [SerializeField] private Transform muzzleFlashPoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject muzzleFlashVfxPrefab;
-    [SerializeField] private BoxCollider doNotFireArea;
+    [SerializeField] private BoxCollider notFireArea;
 
     public void Fire()
     {
@@ -87,15 +87,11 @@ public class Weapon : MonoBehaviourPun
 
     public void Slash()
     {
-        Debug.Log("Slash");
-
         StartCoroutine(ActivateAttackArea(0.1f, 0.1f));
     }
 
     public void Saw()
     {
-        Debug.Log("Saw");
-
         StartCoroutine(ActivateAttackArea(0f, 0.05f));
     }
 
@@ -115,7 +111,6 @@ public class Weapon : MonoBehaviourPun
         if (other.gameObject.GetComponent<IDamageable>() == null || (type != Type.OneHandMelee && type != Type.TwoHandMelee))
             return;
 
-        Debug.Log(other.gameObject);
         other.gameObject.GetComponent<IDamageable>().ApplyDamage(damage);
     }
 }

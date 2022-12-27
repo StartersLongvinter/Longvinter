@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private bool doAttack;
     private bool doGreet;
-    public bool isAttackReady;
+    [HideInInspector] public bool isAttackReady;
     private bool isAiming;
     private bool isPressedSpace;
     private bool isGreeting;
@@ -392,13 +392,16 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             return;
 
         float progressSpeed = Mathf.Lerp(1f, 10f, ikProgress);
-
+        
         if (weaponData.eqPosition == EquipmentData.EquipmentPosition.TwoHand && (isAiming || isFishing))
             ikProgress = Mathf.Clamp(ikProgress + Time.deltaTime * progressSpeed, 0f, 1f);
         else
             ikProgress = Mathf.Clamp(ikProgress - Time.deltaTime * progressSpeed, 0f, 0.5f);
 
-        ikWeight = Mathf.Lerp(0f, 1f, ikProgress);
+        if (isGreeting)
+            ikWeight = 0f;
+        else
+            ikWeight = Mathf.Lerp(0f, 1f, ikProgress);
 
         playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
         playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
@@ -415,15 +418,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Greet()
     {
-        if (doGreet && !isGreeting)
+        if (doGreet && !isGreeting && !isAiming)
         {
             if (photonView.IsMine && !chatInput.activeSelf)
             {
-                chatInput.GetComponentInParent<ChatManager>().ActivateNickname(1.7f / 2f);
-                playerAnimator.SetTrigger("doGreet");
-
                 isGreeting = true;
                 Invoke("SetFalseIsGreeting", 1.7f / 2f);
+
+                chatInput.GetComponentInParent<ChatManager>().ActivateNickname(1.7f / 2f);
+                playerAnimator.SetTrigger("doGreet");
             }
         }
     }
@@ -496,13 +499,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             float fishingDistance = Vector3.Distance(raycasthit.transform.position, transform.position);
             if (raycasthit.collider.gameObject.name == "FishingPoint" && fishingDistance < maxInteractableDistance && doAttack)
             {
-                Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Plane plane = new Plane(Vector3.up, Vector3.zero);
-                float rayDistance;
-
-                if (plane.Raycast(cameraRay, out rayDistance))
-                    uistinInstance = Instantiate(uistinPrefab, cameraRay.GetPoint(rayDistance) + new Vector3(0, 0.2f, 0), Quaternion.Euler(new Vector3(-90f, 0, 0)));
-
                 currentFishingPoint = raycasthit.collider.GetComponent<FishingPoint>();
 
                 if (currentFishingPoint.isWait)
@@ -510,6 +506,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                     NotificationManager.instance.WarningNotification();
                     return;
                 }
+
+                Vector3 uistinPostion = raycasthit.collider.transform.position;
+                Vector3 randomOffset = Random.onUnitSphere;
+
+                uistinPostion = uistinPostion + randomOffset;
+                uistinPostion.y = transform.position.y + 0.15f;
+
+                uistinInstance = Instantiate(uistinPrefab, uistinPostion, Quaternion.Euler(new Vector3(-90f, 0, 0)));
+
+                //Vector3 startRopePoint = handEquipPoint.GetChild(weaponData.eqIndex).GetChild(0).localPosition;
+                //Vector3 endRopePoint = uistinInstance.transform.position + uistinInstance.transform.GetChild(0).localPosition;
+
+
+
+
+
 
                 transform.LookAt(new Vector3(raycasthit.collider.transform.position.x, transform.position.y, raycasthit.collider.transform.position.z));
                 
@@ -545,8 +557,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     {
         isFishing = true;
         eCount = 0;
+
         yield return new WaitForSeconds(Random.Range(playerStat.fishingSpeed, playerStat.fishingSpeed * 2));
+        
         eImageActivate = true;
+        StartCoroutine(AnimateUistin());
 
         yield return new WaitForSeconds(2);
 
@@ -563,6 +578,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             SoundManager.Instance.PlayToolSound("FishingSounds", 0);
         }
         isFishing = false;
+    }
+
+    private IEnumerator AnimateUistin()
+    {
+        float progress = 0f;
+
+        while (progress < 0.1f)
+        {
+            //handEquipPoint.GetChild(weaponData.eqIndex).GetChild(0).localRotation;
+
+            uistinInstance.transform.position -= new Vector3(0f, 0.06f, 0f);
+
+            progress += 0.02f;
+
+            yield return new WaitForSeconds(0.01f);
+        }
     }
     #endregion
 }

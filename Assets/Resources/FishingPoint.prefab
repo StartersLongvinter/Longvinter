@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1514235737949385884}
   - component: {fileID: 1514235737949385885}
   - component: {fileID: 1514235737949385881}
-  - component: {fileID: -6487677266702463582}
+  - component: {fileID: 1480816665}
   m_Layer: 0
   m_Name: FishingPoint
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1514235737949386082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.51, z: 4.02}
-  m_LocalScale: {x: 1.9104, y: 1.9104, z: 1.9104}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1514235738408374712}
@@ -98,7 +98,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1514235737949385881
 MonoBehaviour:
@@ -130,8 +130,8 @@ MonoBehaviour:
   - {fileID: 5223685251508337091, guid: 1d00a7083988b4249bc7900ff8201639, type: 3}
   - {fileID: 5223685251508337091, guid: 24dae20c20f074469a599db5f4660551, type: 3}
   - {fileID: 5223685251508337091, guid: 0dd3b7e684bbd40268c9ec1a9627e4bf, type: 3}
-  isOccupied: 0
---- !u!114 &-6487677266702463582
+  isWait: 0
+--- !u!114 &1480816665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

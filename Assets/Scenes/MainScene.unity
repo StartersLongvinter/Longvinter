@@ -4083,7 +4083,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -6487677266702463582, guid: 09bc1d280404aa74aa3b0c9a12707cb4, type: 3}
+    - target: {fileID: 1480816665, guid: 09bc1d280404aa74aa3b0c9a12707cb4, type: 3}
       propertyPath: sceneViewId
       value: 4
       objectReference: {fileID: 0}
@@ -4135,36 +4135,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishingPoint
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: -6487677266702463582, guid: 09bc1d280404aa74aa3b0c9a12707cb4, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09bc1d280404aa74aa3b0c9a12707cb4, type: 3}
---- !u!1 &1480816664 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1514235737949386082, guid: 09bc1d280404aa74aa3b0c9a12707cb4, type: 3}
-  m_PrefabInstance: {fileID: 1480816663}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1480816665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480816664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 4
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &1497925492
 GameObject:
   m_ObjectHideFlags: 0
@@ -4194,6 +4166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78223fd5f00ae48c68b96ad7d206bdda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveTime: 30
   itemObjects:
   - {fileID: 5223685251508337091, guid: f5e93e82cd0d0413e9732f7b9186ddc5, type: 3}
   - {fileID: 5223685251508337091, guid: d05a56fd0b8ca4eefaee1840fc31eb7b, type: 3}
